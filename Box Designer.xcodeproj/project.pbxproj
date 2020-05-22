@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
+		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
+		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
+		C0E65E602478426E009D90F1 /* Box_DesignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E5F2478426E009D90F1 /* Box_DesignerTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C0E65E5C2478426E009D90F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0E65E432478426D009D90F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0E65E4A2478426D009D90F1;
+			remoteInfo = "Box Designer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C0E65E532478426E009D90F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C0E65E552478426E009D90F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0E65E562478426E009D90F1 /* Box_Designer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Box_Designer.entitlements; sourceTree = "<group>"; };
+		C0E65E5B2478426E009D90F1 /* Box DesignerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Box DesignerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0E65E5F2478426E009D90F1 /* Box_DesignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box_DesignerTests.swift; sourceTree = "<group>"; };
+		C0E65E612478426E009D90F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C0E65E482478426D009D90F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0E65E582478426E009D90F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C0E65E422478426D009D90F1 = {
+			isa = PBXGroup;
+			children = (
+				C0E65E4D2478426D009D90F1 /* Box Designer */,
+				C0E65E5E2478426E009D90F1 /* Box DesignerTests */,
+				C0E65E4C2478426D009D90F1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C0E65E4C2478426D009D90F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C0E65E4B2478426D009D90F1 /* Box Designer.app */,
+				C0E65E5B2478426E009D90F1 /* Box DesignerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C0E65E4D2478426D009D90F1 /* Box Designer */ = {
+			isa = PBXGroup;
+			children = (
+				C0E65E4E2478426D009D90F1 /* AppDelegate.swift */,
+				C0E65E502478426E009D90F1 /* Assets.xcassets */,
+				C0E65E522478426E009D90F1 /* MainMenu.xib */,
+				C0E65E552478426E009D90F1 /* Info.plist */,
+				C0E65E562478426E009D90F1 /* Box_Designer.entitlements */,
+			);
+			path = "Box Designer";
+			sourceTree = "<group>";
+		};
+		C0E65E5E2478426E009D90F1 /* Box DesignerTests */ = {
+			isa = PBXGroup;
+			children = (
+				C0E65E5F2478426E009D90F1 /* Box_DesignerTests.swift */,
+				C0E65E612478426E009D90F1 /* Info.plist */,
+			);
+			path = "Box DesignerTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C0E65E4A2478426D009D90F1 /* Box Designer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0E65E642478426E009D90F1 /* Build configuration list for PBXNativeTarget "Box Designer" */;
+			buildPhases = (
+				C0E65E472478426D009D90F1 /* Sources */,
+				C0E65E482478426D009D90F1 /* Frameworks */,
+				C0E65E492478426D009D90F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Box Designer";
+			productName = "Box Designer";
+			productReference = C0E65E4B2478426D009D90F1 /* Box Designer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C0E65E5A2478426E009D90F1 /* Box DesignerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0E65E672478426E009D90F1 /* Build configuration list for PBXNativeTarget "Box DesignerTests" */;
+			buildPhases = (
+				C0E65E572478426E009D90F1 /* Sources */,
+				C0E65E582478426E009D90F1 /* Frameworks */,
+				C0E65E592478426E009D90F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C0E65E5D2478426E009D90F1 /* PBXTargetDependency */,
+			);
+			name = "Box DesignerTests";
+			productName = "Box DesignerTests";
+			productReference = C0E65E5B2478426E009D90F1 /* Box DesignerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C0E65E432478426D009D90F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Hildreth Research Group";
+				TargetAttributes = {
+					C0E65E4A2478426D009D90F1 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					C0E65E5A2478426E009D90F1 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = C0E65E4A2478426D009D90F1;
+					};
+				};
+			};
+			buildConfigurationList = C0E65E462478426D009D90F1 /* Build configuration list for PBXProject "Box Designer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C0E65E422478426D009D90F1;
+			productRefGroup = C0E65E4C2478426D009D90F1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C0E65E4A2478426D009D90F1 /* Box Designer */,
+				C0E65E5A2478426E009D90F1 /* Box DesignerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C0E65E492478426D009D90F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */,
+				C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0E65E592478426E009D90F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C0E65E472478426D009D90F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0E65E572478426E009D90F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0E65E602478426E009D90F1 /* Box_DesignerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C0E65E5D2478426E009D90F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0E65E4A2478426D009D90F1 /* Box Designer */;
+			targetProxy = C0E65E5C2478426E009D90F1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C0E65E522478426E009D90F1 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0E65E532478426E009D90F1 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C0E65E622478426E009D90F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C0E65E632478426E009D90F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		C0E65E652478426E009D90F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Box Designer/Box_Designer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Box Designer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HRG.Box-Designer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C0E65E662478426E009D90F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Box Designer/Box_Designer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Box Designer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HRG.Box-Designer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C0E65E682478426E009D90F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Box DesignerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HRG.Box-DesignerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Box Designer.app/Contents/MacOS/Box Designer";
+			};
+			name = Debug;
+		};
+		C0E65E692478426E009D90F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Box DesignerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HRG.Box-DesignerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Box Designer.app/Contents/MacOS/Box Designer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C0E65E462478426D009D90F1 /* Build configuration list for PBXProject "Box Designer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0E65E622478426E009D90F1 /* Debug */,
+				C0E65E632478426E009D90F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0E65E642478426E009D90F1 /* Build configuration list for PBXNativeTarget "Box Designer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0E65E652478426E009D90F1 /* Debug */,
+				C0E65E662478426E009D90F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0E65E672478426E009D90F1 /* Build configuration list for PBXNativeTarget "Box DesignerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0E65E682478426E009D90F1 /* Debug */,
+				C0E65E692478426E009D90F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C0E65E432478426D009D90F1 /* Project object */;
+}

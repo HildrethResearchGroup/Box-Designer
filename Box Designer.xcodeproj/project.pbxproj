@@ -11,6 +11,9 @@
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
 		C0E65E602478426E009D90F1 /* Box_DesignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E5F2478426E009D90F1 /* Box_DesignerTests.swift */; };
+		C0E65E6C24784BBC009D90F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E6B24784BBC009D90F1 /* MainViewController.swift */; };
+		C0E65E7124784D9F009D90F1 /* DuckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E7024784D9F009D90F1 /* DuckView.swift */; };
+		C0E65E74247851D2009D90F1 /* DuckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E73247851D2009D90F1 /* DuckModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +36,9 @@
 		C0E65E5B2478426E009D90F1 /* Box DesignerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Box DesignerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E5F2478426E009D90F1 /* Box_DesignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box_DesignerTests.swift; sourceTree = "<group>"; };
 		C0E65E612478426E009D90F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0E65E6B24784BBC009D90F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = "Box Designer/MainViewController.swift"; sourceTree = SOURCE_ROOT; };
+		C0E65E7024784D9F009D90F1 /* DuckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckView.swift; sourceTree = "<group>"; };
+		C0E65E73247851D2009D90F1 /* DuckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +80,11 @@
 		C0E65E4D2478426D009D90F1 /* Box Designer */ = {
 			isa = PBXGroup;
 			children = (
-				C0E65E6A247842D6009D90F1 /* View Controllers */,
-				C0E65E502478426E009D90F1 /* Assets.xcassets */,
+				C0E65E72247851C0009D90F1 /* Model */,
 				C0E65E4E2478426D009D90F1 /* AppDelegate.swift */,
+				C0E65E502478426E009D90F1 /* Assets.xcassets */,
+				C0E65E6D24784D70009D90F1 /* Views */,
+				C0E65E6A247842D6009D90F1 /* View Controllers */,
 				C0E65E522478426E009D90F1 /* MainMenu.xib */,
 				C0E65E552478426E009D90F1 /* Info.plist */,
 				C0E65E562478426E009D90F1 /* Box_Designer.entitlements */,
@@ -96,8 +104,25 @@
 		C0E65E6A247842D6009D90F1 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0E65E6B24784BBC009D90F1 /* MainViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C0E65E6D24784D70009D90F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0E65E7024784D9F009D90F1 /* DuckView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C0E65E72247851C0009D90F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0E65E73247851D2009D90F1 /* DuckModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +226,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
+				C0E65E6C24784BBC009D90F1 /* MainViewController.swift in Sources */,
+				C0E65E74247851D2009D90F1 /* DuckModel.swift in Sources */,
+				C0E65E7124784D9F009D90F1 /* DuckView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

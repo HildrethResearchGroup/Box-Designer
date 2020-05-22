@@ -74,8 +74,9 @@
 		C0E65E4D2478426D009D90F1 /* Box Designer */ = {
 			isa = PBXGroup;
 			children = (
-				C0E65E4E2478426D009D90F1 /* AppDelegate.swift */,
+				C0E65E6A247842D6009D90F1 /* View Controllers */,
 				C0E65E502478426E009D90F1 /* Assets.xcassets */,
+				C0E65E4E2478426D009D90F1 /* AppDelegate.swift */,
 				C0E65E522478426E009D90F1 /* MainMenu.xib */,
 				C0E65E552478426E009D90F1 /* Info.plist */,
 				C0E65E562478426E009D90F1 /* Box_Designer.entitlements */,
@@ -90,6 +91,13 @@
 				C0E65E612478426E009D90F1 /* Info.plist */,
 			);
 			path = "Box DesignerTests";
+			sourceTree = "<group>";
+		};
+		C0E65E6A247842D6009D90F1 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

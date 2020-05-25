@@ -82,7 +82,7 @@
                             </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
-                                    <action selector="openScene:" target="-1" id="EIF-mE-erc"/>
+                                    <action selector="openScene:" target="-1" id="esi-pV-WOY"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
@@ -106,7 +106,7 @@
                             </menuItem>
                             <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                 <connections>
-                                    <action selector="saveScene:" target="-1" id="cSx-FQ-lbY"/>
+                                    <action selector="saveScene:" target="-1" id="ySd-hb-dIC"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Save As…" keyEquivalent="s" id="Bw7-FT-i3A">

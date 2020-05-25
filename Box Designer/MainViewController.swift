@@ -10,49 +10,7 @@ import Foundation
 import Cocoa
 import SceneKit
 
-class MainViewController: NSViewController
-    /*DuckModelDelegate*/ {
-    /*
-    @IBOutlet weak var button_saveDucks: NSButton!
-    @IBOutlet weak var duckView: DuckView!
-     
-    
-    var duckModel = DuckModel()
-    
-    override func awakeFromNib() {
-        duckModel.delegate = self
-        self.setDuckViewState(self.duckModel.duckState)
-    }
-    
-    func setDuckViewState(_ duckState: DuckState) {
-        switch duckState {
-        case .safe:
-            duckView.areDucksSafe = true
-        case .dead, .inDanger:
-            duckView.areDucksSafe = false
-        }
-    }
-    
-    
-    
-    
-    func duckModelStateDidChange(_ duckState: DuckState) {
-        setDuckViewState(duckState)
-    }
-    
-    @IBAction func saveDucks(_ sender: Any) {
-        let duckState = duckModel.duckState
-        
-        switch duckState {
-        case .dead:
-            return
-        case .inDanger:
-            self.duckModel.duckState = .safe
-        case .safe:
-            return
-        }
-    }
-    */
+class MainViewController: NSViewController {
     
     @IBOutlet weak var boxView: SCNView!
         
@@ -99,10 +57,12 @@ class MainViewController: NSViewController
     @IBAction func openScene(_ sender: Any) {
         guard let window = self.view.window else { return }
         let panel = NSOpenPanel()
+        
+        panel.allowedFileTypes = ["scn"]
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
         panel.allowsMultipleSelection = false
-        panel.allowedFileTypes = ["scn"]
+        
         panel.beginSheetModal(for: window) { (response) in
             if response == NSApplication.ModalResponse.OK {
                 do {
@@ -116,8 +76,19 @@ class MainViewController: NSViewController
     }
     
     @IBAction func saveScene(_ sender: Any) {
+        guard let window = self.view.window else {return}
+        let savePanel = NSSavePanel()
         
+        savePanel.allowedFileTypes = ["scn", "pdf"]
+        savePanel.canCreateDirectories = true
+        savePanel.isExtensionHidden = false
+        
+        savePanel.beginSheetModal(for: window) { (response) in
+            if response == NSApplication.ModalResponse.OK {
+                guard let targetURL = savePanel.url else { return }
+                self.boxView.scene?.write(to: targetURL, delegate: nil)
+            }
+        }
     }
-    
-    
 }
+    

@@ -9,8 +9,9 @@
 import Foundation
 import Cocoa
 
-class MainViewController: NSViewController, DuckModelDelegate {
-       
+class MainViewController: NSViewController
+    /*DuckModelDelegate*/ {
+    /*
     @IBOutlet weak var button_saveDucks: NSButton!
     @IBOutlet weak var duckView: DuckView!
     
@@ -51,6 +52,6 @@ class MainViewController: NSViewController, DuckModelDelegate {
             return
         }
     }
-    
+    */
     
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.SceneKitIBPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,21 +12,15 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Box_Designer" customModuleProvider="target">
             <connections>
-                <outlet property="button_saveDucks" destination="7ta-sR-i7Z" id="Z8B-EY-z1B"/>
                 <outlet property="mainViewController" destination="uCy-kt-Apg" id="Ngx-Yk-U3L"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <viewController id="zyj-4y-yw5" customClass="Main"/>
-        <viewController id="uCy-kt-Apg" customClass="MainViewController" customModule="Box_Designer" customModuleProvider="target">
-            <connections>
-                <outlet property="button_saveDucks" destination="7ta-sR-i7Z" id="Mkd-RE-bz3"/>
-                <outlet property="duckView" destination="Aot-wk-mgb" id="RUH-26-XeC"/>
-            </connections>
-        </viewController>
+        <viewController id="uCy-kt-Apg" customClass="MainViewController" customModule="Box_Designer" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -694,26 +689,15 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="529" height="383"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="529" height="383"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button toolTip="Save Ducks" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ta-sR-i7Z">
-                        <rect key="frame" x="14" y="335" width="117" height="32"/>
+                    <sceneView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HLm-d6-k5I">
+                        <rect key="frame" x="92" y="0.0" width="437" height="311"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Save Ducks" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" allowsMixedState="YES" imageScaling="proportionallyDown" inset="2" id="cs9-rM-Qyr">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="saveDucks:" target="uCy-kt-Apg" id="mbf-8E-Ws5"/>
-                        </connections>
-                    </button>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aot-wk-mgb" customClass="DuckView" customModule="Box_Designer" customModuleProvider="target">
-                        <rect key="frame" x="175" y="89" width="278" height="200"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    </customView>
+                    </sceneView>
                 </subviews>
             </view>
             <point key="canvasLocation" x="-67.5" y="-335.5"/>

@@ -57,25 +57,52 @@ class MainViewController: NSViewController
     @IBOutlet weak var boxView: SCNView!
         
    // MARK: Lifecycle
+    
+    override func awakeFromNib(){
+        sceneSetup()
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        sceneSetup()
     }
     
     // MARK: Scene
     func sceneSetup() {
         let scene = SCNScene()
-        let boxGeometry = SCNBox(width:4.0, height: 4.0, length: 4.0, chamferRadius: 0.0)
+        let boxGeometry = SCNBox(width:4.0, height: 4.0, length: 4.0, chamferRadius: 0.01)
         let boxNode = SCNNode(geometry: boxGeometry)
         
         scene.rootNode.addChildNode(boxNode)
         
         boxView.scene = scene
-        boxView.autoenablesDefaultLighting = true
         boxView.allowsCameraControl = true
+        
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = SCNLight()
+        ambientLightNode.light!.type = SCNLight.LightType.ambient
+        ambientLightNode.light!.color = NSColor(white: 0.67, alpha: 1.0)
+        scene.rootNode.addChildNode(ambientLightNode)
+        
+        let omniLightNode = SCNNode()
+        omniLightNode.light = SCNLight()
+        omniLightNode.light!.type = SCNLight.LightType.omni
+        omniLightNode.light!.color = NSColor(white: 0.75, alpha: 1.0)
+        omniLightNode.position = SCNVector3Make(50, 50, 50)
+        scene.rootNode.addChildNode(omniLightNode)
     }
+    
+    // MARK: File Handling
+    @IBAction func openScene(_ sender: Any) {
+        
+    }
+    
+    @IBAction func saveScene(_ sender: Any) {
+        
+    }
+    
+    
 }

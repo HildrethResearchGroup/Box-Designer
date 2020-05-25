@@ -97,7 +97,22 @@ class MainViewController: NSViewController
     
     // MARK: File Handling
     @IBAction func openScene(_ sender: Any) {
-        
+        guard let window = self.view.window else { return }
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = false
+        panel.allowedFileTypes = ["scn"]
+        panel.beginSheetModal(for: window) { (response) in
+            if response == NSApplication.ModalResponse.OK {
+                do {
+                    try self.boxView.scene = SCNScene.init(url: panel.urls[0])
+                }
+                catch {
+                    print("Could not open selected file.")
+                }
+            }
+        }
     }
     
     @IBAction func saveScene(_ sender: Any) {

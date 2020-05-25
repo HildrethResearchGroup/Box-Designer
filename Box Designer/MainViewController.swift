@@ -8,14 +8,14 @@
 
 import Foundation
 import Cocoa
+import SceneKit
 
 class MainViewController: NSViewController
     /*DuckModelDelegate*/ {
     /*
     @IBOutlet weak var button_saveDucks: NSButton!
     @IBOutlet weak var duckView: DuckView!
-    
-
+     
     
     var duckModel = DuckModel()
     
@@ -54,4 +54,28 @@ class MainViewController: NSViewController
     }
     */
     
+    @IBOutlet weak var boxView: SCNView!
+        
+   // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        sceneSetup()
+    }
+    
+    // MARK: Scene
+    func sceneSetup() {
+        let scene = SCNScene()
+        let boxGeometry = SCNBox(width:4.0, height: 4.0, length: 4.0, chamferRadius: 0.0)
+        let boxNode = SCNNode(geometry: boxGeometry)
+        
+        scene.rootNode.addChildNode(boxNode)
+        
+        boxView.scene = scene
+        boxView.autoenablesDefaultLighting = true
+        boxView.allowsCameraControl = true
+    }
 }

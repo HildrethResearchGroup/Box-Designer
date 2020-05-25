@@ -1,5 +1,5 @@
 //
-//  BoxViewController.swift
+//  ToolUseViewController.swift
 //  Box Designer
 //
 //  Created by Justin Clark on 5/25/20.
@@ -8,9 +8,9 @@
 
 import Foundation
 import Cocoa
-import SceneKit
 
-class BoxViewController: NSViewController {
+class ToolUseViewController: NSViewController {
+    
     
     
     

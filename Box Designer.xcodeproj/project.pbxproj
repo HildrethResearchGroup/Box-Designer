@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02043C29247C3F5000F595A1 /* BoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C28247C3F5000F595A1 /* BoxViewController.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
 		C0E65E602478426E009D90F1 /* Box_DesignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E5F2478426E009D90F1 /* Box_DesignerTests.swift */; };
 		C0E65E6C24784BBC009D90F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E6B24784BBC009D90F1 /* MainViewController.swift */; };
-		C0E65E7124784D9F009D90F1 /* DuckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E7024784D9F009D90F1 /* DuckView.swift */; };
 		C0E65E74247851D2009D90F1 /* DuckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E73247851D2009D90F1 /* DuckModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +26,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02043C28247C3F5000F595A1 /* BoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxViewController.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,7 +36,6 @@
 		C0E65E5F2478426E009D90F1 /* Box_DesignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box_DesignerTests.swift; sourceTree = "<group>"; };
 		C0E65E612478426E009D90F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0E65E6B24784BBC009D90F1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = "Box Designer/MainViewController.swift"; sourceTree = SOURCE_ROOT; };
-		C0E65E7024784D9F009D90F1 /* DuckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckView.swift; sourceTree = "<group>"; };
 		C0E65E73247851D2009D90F1 /* DuckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				C0E65E6B24784BBC009D90F1 /* MainViewController.swift */,
-				02043C28247C3F5000F595A1 /* BoxViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -115,7 +110,6 @@
 		C0E65E6D24784D70009D90F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C0E65E7024784D9F009D90F1 /* DuckView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,11 +222,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02043C29247C3F5000F595A1 /* BoxViewController.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
 				C0E65E6C24784BBC009D90F1 /* MainViewController.swift in Sources */,
 				C0E65E74247851D2009D90F1 /* DuckModel.swift in Sources */,
-				C0E65E7124784D9F009D90F1 /* DuckView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

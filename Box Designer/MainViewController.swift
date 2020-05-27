@@ -86,6 +86,18 @@ class MainViewController: NSViewController {
         savePanel.beginSheetModal(for: window) { (response) in
             if response == NSApplication.ModalResponse.OK {
                 guard let targetURL = savePanel.url else { return }
+                guard let targetFileType = savePanel.url?.pathExtension else {return}
+                
+                switch targetFileType {
+                case "scn":
+                    self.boxView.scene?.write(to: targetURL, delegate: nil)
+                case "pdf":
+                    let pdfFileSaver = PDFFileSaver()
+                    pdfFileSaver.saveAsPDF(to: targetURL)
+                default:
+                    print("Cannot save as that file type.")
+                    //TODO: convert to popup/panel style notification
+                }
                 self.boxView.scene?.write(to: targetURL, delegate: nil)
             }
         }

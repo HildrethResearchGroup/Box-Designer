@@ -102,5 +102,13 @@ class MainViewController: NSViewController {
             }
         }
     }
+    
+    func parseScene() ->String {
+        //fill in with actual stuff when wall modelling is more concrete!
+        let boxScene = boxView.scene
+        
+        var toReturn: String = "175 720 m 175 500 l h S"
+        return toReturn
+    }
 }
     

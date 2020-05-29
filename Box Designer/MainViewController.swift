@@ -92,8 +92,13 @@ class MainViewController: NSViewController {
                 case "scn":
                     self.boxView.scene?.write(to: targetURL, delegate: nil)
                 case "pdf":
-                    let pdfFileSaver = PDFFileSaver()
-                    pdfFileSaver.saveAsPDF(to: targetURL)
+                    do {
+                        let pdfFileSaver = PDFFileSaver()
+                        //pdfFileSaver.parseScene(boxView.scene)
+                        try pdfFileSaver.saveAsPDF(to: targetURL, sceneToSave: self.boxView?.scene)
+                    } catch {
+                        print("Could not open PDFSaver. Scene may be missing.")
+                    }
                 default:
                     print("Cannot save as that file type.")
                     //TODO: convert to popup/panel style notification
@@ -103,12 +108,13 @@ class MainViewController: NSViewController {
         }
     }
     
-    func parseScene() ->String {
+    
+    /*func parseScene() ->String {
         //fill in with actual stuff when wall modelling is more concrete!
         let boxScene = boxView.scene
         
         var toReturn: String = "175 720 m 175 500 l h S"
         return toReturn
-    }
+    }*/
 }
     

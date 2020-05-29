@@ -13,8 +13,7 @@ import SceneKit
 
 class PDFFileSaver {
     
-    func saveAsPDF(to targetURL: URL) {
-        
+    func saveAsPDF(to targetURL: URL, sceneToSave scene: SCNScene?) {
         do {
             //print to file with .pdf ending
             //url is received from NSSavePanel above
@@ -25,8 +24,9 @@ class PDFFileSaver {
             let beginText = "%PDF-1.6\n1 0 obj <</Type /Catalog /Pages 2 0 R>>\nendobj\n2 0 obj <</Type /Pages /Kids [3 0 R] /Count 1 /MediaBox [0 0 500 800]>>\nendobj\n3 0 obj <</Type /Page /Parent 2 0 R /Contents 4 0 R>>\nendobj\n4 0 obj\n"
         
             //stream holds the drawing directions for the box layouts
-            var stream: String = mainViewController.parseScene()
-        
+            //var stream: String = mainViewController.parseScene()
+            let stream: String = parseScene(sceneToParse: scene)
+            
             //beginStream needs to know the length of the stream; this is determined after stream is assigned above
             let beginStream = "<</Length \(stream.count + 2)>>\nstream\n"
         
@@ -51,10 +51,10 @@ class PDFFileSaver {
         }
     }
     
-   /* func parseScene(sceneToParse scene: SCNScene!) ->String {
+    func parseScene(sceneToParse scene: SCNScene!) ->String {
         //fill in with actual stuff when wall modelling is more concrete!
         var toReturn: String = "175 720 m 175 500 l h S"
         return toReturn
-    }*/
+    }
     
 }

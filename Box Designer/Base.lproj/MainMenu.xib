@@ -82,7 +82,7 @@
                             </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
-                                    <action selector="openScene:" target="-1" id="esi-pV-WOY"/>
+                                    <action selector="openScene:" target="uCy-kt-Apg" id="c3Q-Ni-OjS"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
@@ -106,7 +106,7 @@
                             </menuItem>
                             <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                 <connections>
-                                    <action selector="saveScene:" target="-1" id="ySd-hb-dIC"/>
+                                    <action selector="save:" target="uCy-kt-Apg" id="hOg-NP-fPP"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Save As…" keyEquivalent="s" id="Bw7-FT-i3A">
@@ -686,7 +686,7 @@
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="139" y="154"/>
+            <point key="canvasLocation" x="167" y="98"/>
         </menu>
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -703,7 +703,7 @@
                     </sceneView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-51.5" y="-344.5"/>
+            <point key="canvasLocation" x="-71" y="-340"/>
         </window>
     </objects>
 </document>

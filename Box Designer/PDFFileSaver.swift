@@ -13,7 +13,7 @@ import SceneKit
 
 class PDFFileSaver {
     
-    func saveAsPDF(to targetURL: URL, sceneToSave scene: SCNScene?) {
+    func saveAsPDF(to targetURL: URL, sceneToSave scene: SCNScene?) throws {
         do {
             //print to file with .pdf ending
             //url is received from NSSavePanel above

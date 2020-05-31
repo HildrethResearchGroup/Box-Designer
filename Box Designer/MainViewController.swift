@@ -57,29 +57,32 @@ class MainViewController: NSViewController {
         let scene = SCNScene()
         let boxGeometry = SCNBox(width:4.0, height: 4.0, length: 4.0, chamferRadius: 0.01)
         let boxNode = SCNNode(geometry: boxGeometry)
-        
         scene.rootNode.addChildNode(boxNode)
-        
         boxView.scene = scene
-        boxView.allowsCameraControl = true
-        
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = SCNLight.LightType.ambient
-        ambientLightNode.light!.color = NSColor(white: 0.67, alpha: 1.0)
-        scene.rootNode.addChildNode(ambientLightNode)
-        
-        let omniLightNode = SCNNode()
-        omniLightNode.light = SCNLight()
-        omniLightNode.light!.type = SCNLight.LightType.omni
-        omniLightNode.light!.color = NSColor(white: 0.75, alpha: 1.0)
-        omniLightNode.position = SCNVector3Make(50, 50, 50)
-        scene.rootNode.addChildNode(omniLightNode)
+        lightingSetup(scene)
+    }
+ 
+    func lightingSetup(_ scene:SCNScene) {
+         boxView.allowsCameraControl = true
+    
+         let ambientLightNode = SCNNode()
+         ambientLightNode.light = SCNLight()
+         ambientLightNode.light!.type = SCNLight.LightType.ambient
+         ambientLightNode.light!.color = NSColor(white: 0.67, alpha: 1.0)
+         scene.rootNode.addChildNode(ambientLightNode)
+    
+         let omniLightNode = SCNNode()
+         omniLightNode.light = SCNLight()
+         omniLightNode.light!.type = SCNLight.LightType.omni
+         omniLightNode.light!.color = NSColor(white: 0.75, alpha: 1.0)
+         omniLightNode.position = SCNVector3Make(50, 50, 50)
+         scene.rootNode.addChildNode(omniLightNode)
     }
     
     // MARK: File Handling
     @IBAction func openScene(_ sender: Any) {
-        guard let window = self.view.window else { return }
+        guard let window = boxView.window else { return }
+        guard var scene = self.boxView.scene else {return}
         let panel = NSOpenPanel()
         
         panel.allowedFileTypes = ["scn"]
@@ -90,7 +93,8 @@ class MainViewController: NSViewController {
         panel.beginSheetModal(for: window) { (response) in
             if response == NSApplication.ModalResponse.OK {
                 do {
-                    try self.boxView.scene = SCNScene.init(url: panel.urls[0])
+                    try scene = SCNScene.init(url: panel.urls[0])
+                    self.lightingSetup(scene)
                 }
                 catch {
                     print("Could not open selected file.")
@@ -99,8 +103,11 @@ class MainViewController: NSViewController {
         }
     }
     
-    @IBAction func saveScene(_ sender: Any) {
-        guard let window = self.view.window else {return}
+    @IBAction func save(_ sender: Any) {
+        print("save function entered")
+        
+        guard let window = boxView.window else {return}
+        print("window successfully gotten")
         let savePanel = NSSavePanel()
         
         savePanel.allowedFileTypes = ["scn", "pdf"]
@@ -116,8 +123,13 @@ class MainViewController: NSViewController {
                 case "scn":
                     self.boxView.scene?.write(to: targetURL, delegate: nil)
                 case "pdf":
-                    let pdfFileSaver = PDFFileSaver()
-                    pdfFileSaver.saveAsPDF(to: targetURL)
+                    do {
+                        let pdfFileSaver = PDFFileSaver()
+                        //pdfFileSaver.parseScene(boxView.scene)
+                        try pdfFileSaver.saveAsPDF(to: targetURL, sceneToSave: self.boxView?.scene)
+                    } catch {
+                        print("Could not open PDFSaver. Scene may be missing.")
+                    }
                 default:
                     print("Cannot save as that file type.")
                     //TODO: convert to popup/panel style notification

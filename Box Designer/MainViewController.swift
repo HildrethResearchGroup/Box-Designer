@@ -9,6 +9,9 @@
 import Foundation
 import Cocoa
 import SceneKit
+import AppKit
+
+
 
 class MainViewController: NSViewController {
     
@@ -27,6 +30,27 @@ class MainViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
     }
+    
+    //Charles Gougenheim
+    func createBox() {
+        // create bezier path
+        let path = NSBezierPath()
+        path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
+        path.line(to: CGPoint(x: 0.0, y: 0.5)) // point B
+        path.line(to: CGPoint(x: 0.5, y: 0.5)) // point C
+        path.line(to: CGPoint(x: 0.5, y: 0.0)) // point D
+        path.close()
+        
+        // create a geometry : SCNShape
+        let shape = SCNShape(path: path, extrusionDepth: 0.2)
+        let color = #colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)
+        shape.firstMaterial?.diffuse.contents = color
+        
+    }
+    
+    
+    
+    
     
     // MARK: Scene
     func sceneSetup() {

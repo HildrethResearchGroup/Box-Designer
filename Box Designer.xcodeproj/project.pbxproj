@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C32247ED22B00F595A1 /* PDFFileSaver.swift */; };
+		02043C35248574F100F595A1 /* BoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C34248574F100F595A1 /* BoxModel.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		02043C32247ED22B00F595A1 /* PDFFileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFFileSaver.swift; sourceTree = "<group>"; };
+		02043C34248574F100F595A1 /* BoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxModel.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				C0E65E73247851D2009D90F1 /* DuckModel.swift */,
+				02043C34248574F100F595A1 /* BoxModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			files = (
 				02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
+				02043C35248574F100F595A1 /* BoxModel.swift in Sources */,
 				C0E65E6C24784BBC009D90F1 /* MainViewController.swift in Sources */,
 				C0E65E74247851D2009D90F1 /* DuckModel.swift in Sources */,
 			);

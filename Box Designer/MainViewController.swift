@@ -32,7 +32,7 @@ class MainViewController: NSViewController {
     }
     
     //Charles Gougenheim
-    func createBox() {
+    func createBox() -> NSBezierPath {
         // create bezier path
         let path = NSBezierPath()
         path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
@@ -41,10 +41,21 @@ class MainViewController: NSViewController {
         path.line(to: CGPoint(x: 0.5, y: 0.0)) // point D
         path.close()
         
+        return path
+        
         // create a geometry : SCNShape
         let shape = SCNShape(path: path, extrusionDepth: 0.2)
         let color = #colorLiteral(red: 0.5058823824, green: 0.3372549117, blue: 0.06666667014, alpha: 1)
         shape.firstMaterial?.diffuse.contents = color
+        
+        // create a node
+        let boxNode = SCNNode(geometry: shape)
+        
+        // position node and add to the scene
+        
+        boxNode.position.z = -1
+        
+        sceneView.scene.rootNode.addChildNode(boxNode)
         
     }
     

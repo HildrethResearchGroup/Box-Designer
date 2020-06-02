@@ -47,7 +47,136 @@ class MainViewController: NSViewController {
         return NSColor(red:red, green: green, blue: blue, alpha: 1.0)
     }
     
-    //Charles Gougenheim
+    func createBoxFingers(length: Double, width: Double, height: Double) -> [SCNShape] {
+        // create bezier path
+        
+        var boxWalls = [SCNShape]()
+        
+        for numbers in [1,2,3,4,5]{
+            let path = NSBezierPath()
+            switch(numbers){
+            case 1,3:
+            path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
+            path.line(to: CGPoint(x: 0.0, y: height/5)) // point A to first corner in tab
+            path.line(to: CGPoint(x: -0.05, y: height/5)) // First corner in tab to second corner
+            path.line(to: CGPoint(x: -0.05, y: (height/5) * 2)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 2)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 3)) // point A to first corner in tab
+            path.line(to: CGPoint(x: -0.05, y: (height/5) * 3)) // First corner in tab to second corner
+            path.line(to: CGPoint(x: -0.05, y: (height/5) * 4)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 4)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: height)) // point B
+            
+            path.line(to: CGPoint(x: length, y: height)) // point C
+            path.line(to: CGPoint(x: length, y: (height/5) * 4)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y: (height/5) * 4)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y:(height/5) * 3)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: (height/5) * 3)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: (height/5) * 2)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y: (height/5) * 2)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y:(height/5) * 1)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: (height/5) * 1)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: 0)) // point C to first corner in tab
+                
+            path.line(to: CGPoint(x: (length/5) * 4, y: 0)) // point C
+            path.line(to: CGPoint(x: (length/5) * 4, y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y:0.00)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: 0.00)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: 0.0)) // point C to first corner in tab
+
+            case 2,4:
+            path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
+            path.line(to: CGPoint(x: 0.0, y: height/5)) // point A to first corner in tab
+            path.line(to: CGPoint(x: 0.05, y: height/5)) // First corner in tab to second corner
+            path.line(to: CGPoint(x: 0.05, y: (height/5) * 2)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 2)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 3)) // point A to first corner in tab
+            path.line(to: CGPoint(x: 0.05, y: (height/5) * 3)) // First corner in tab to second corner
+            path.line(to: CGPoint(x: 0.05, y: (height/5) * 4)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 4)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: height)) // point B
+                
+            path.line(to: CGPoint(x: width, y: height)) // point C
+            path.line(to: CGPoint(x: width, y: (height/5) * 4)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width - 0.05, y: (height/5) * 4)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width - 0.05, y:(height/5) * 3)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width, y: (height/5) * 3)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width, y: (height/5) * 2)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width - 0.05, y: (height/5) * 2)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width - 0.05, y:(height/5) * 1)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width, y: (height/5) * 1)) // point C to first corner in tab
+            path.line(to: CGPoint(x: width, y: 0)) // point C to first corner in tab
+                
+            path.line(to: CGPoint(x: (length/5) * 4, y: 0)) // point C
+            path.line(to: CGPoint(x: (length/5) * 4, y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y:0.00)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: 0.00)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: 0.0)) // point C to first corner in tab
+
+            case 5:
+            path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
+            path.line(to: CGPoint(x: 0.0, y: height/5)) // point A to first corner in tab
+            path.line(to: CGPoint(x: -0.05, y: height/5)) // First corner in tab to second corner
+            path.line(to: CGPoint(x: -0.05, y: (height/5) * 2)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 2)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 3)) // point A to first corner in tab
+            path.line(to: CGPoint(x: -0.05, y: (height/5) * 3)) // First corner in tab to second corner
+            path.line(to: CGPoint(x: -0.05, y: (height/5) * 4)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: (height/5) * 4)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.0, y: height)) // point B
+            
+            path.line(to: CGPoint(x: (length/5), y: height)) // point C
+            path.line(to: CGPoint(x: (length/5), y: height+0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: height+0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y:height)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: height)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: height + 0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 4, y:height+0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 4, y: height)) // point C to first corner in tab
+            
+            path.line(to: CGPoint(x: length, y: height)) // point C
+            path.line(to: CGPoint(x: length, y: (height/5) * 4)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y: (height/5) * 4)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y:(height/5) * 3)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: (height/5) * 3)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: (height/5) * 2)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y: (height/5) * 2)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length + 0.05, y:(height/5) * 1)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: (height/5) * 1)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: 0)) // point C to first corner in tab
+                
+            path.line(to: CGPoint(x: (length/5) * 4, y: 0)) // point C
+            path.line(to: CGPoint(x: (length/5) * 4, y: -0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: -0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y:0.00)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: 0.00)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: -0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: -0.05)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: 0.0)) // point C to first corner in tab
+            default :
+                print( "createBox switch statement defaulted")
+            }
+            
+            let shape = SCNShape(path: path, extrusionDepth: 0.2)
+            
+            let color = getRandomColor()
+            
+            shape.firstMaterial?.diffuse.contents = color
+            
+            boxWalls.append(shape)
+        }
+        
+        return boxWalls
+        
+    }
+    
+
     func createBox(length: Double, width: Double, height: Double) -> [SCNShape] {
         // create bezier path
 

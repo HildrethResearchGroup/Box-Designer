@@ -15,6 +15,8 @@ import AppKit
 
 class MainViewController: NSViewController {
     
+    let threeDView = ThreeDView()
+    
     @IBOutlet weak var boxView: SCNView!
         
    // MARK: Lifecycle
@@ -22,13 +24,19 @@ class MainViewController: NSViewController {
     override func awakeFromNib(){
         sceneSetup()
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
+        
+    }
+    
+    func addThreeDView() {
+        addChild(threeDView)
+        view.addSubview(threeDView.view)
     }
     
     func getRandomColor() -> NSColor {
@@ -42,42 +50,66 @@ class MainViewController: NSViewController {
     //Charles Gougenheim
     func createBox(length: Double, width: Double, height: Double) -> [SCNShape] {
         // create bezier path
-        
+
         var boxWalls = [SCNShape]()
         
-        for _ in [1,2,3,4,5]{
+        var extrusionDepth = 0.1
+        
+        var extrusionDepth1:CGFloat = 0.1
+
+        for count in [1,2,3]{
             let path = NSBezierPath()
-            path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
-            path.line(to: CGPoint(x: 0.0, y: height)) // point B
-            path.line(to: CGPoint(x: length, y: height)) // point C
-            path.line(to: CGPoint(x: length, y: 0.0)) // point D
+            switch count {
+            case 1:
+                path.move(to: CGPoint(x: 0, y: extrusionDepth)) // point A
+                path.line(to: CGPoint(x: 0, y: height)) // point B
+                path.line(to: CGPoint(x: length, y: height)) // point C
+                path.line(to: CGPoint(x: length, y: extrusionDepth)) // point D
+            case 2:
+                path.move(to: CGPoint(x: extrusionDepth, y: extrusionDepth)) // point A
+                path.line(to: CGPoint(x: extrusionDepth, y: height)) // point B
+                path.line(to: CGPoint(x: length-extrusionDepth, y: height)) // point C
+                path.line(to: CGPoint(x: length-extrusionDepth, y: extrusionDepth)) // point D
+            case 3:
+                path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
+                path.line(to: CGPoint(x: 0.0, y: height)) // point B
+                path.line(to: CGPoint(x: length, y: height)) // point C
+                path.line(to: CGPoint(x: length, y: 0.0)) // point D
+            default:
+                print("Oopsies")
+            }
             
-            let shape = SCNShape(path: path, extrusionDepth: 0.2)
+           
             
+            let shape = SCNShape(path: path, extrusionDepth: extrusionDepth1)
+
             let color = getRandomColor()
-            
+
             shape.firstMaterial?.diffuse.contents = color
             
             boxWalls.append(shape)
+            boxWalls.append(shape)
         }
-        
+
         return boxWalls
-        
+
     }
-    
+
     // MARK: Scene
     func sceneSetup() {
-        //var boxShape = [SCNShape]()
+//        var boxShape = [SCNShape]()
+        var extrusionDepth:CGFloat = 0.1
         let scene = SCNScene()
         /*let boxGeometry = SCNBox(width:4.0, height: 4.0, length: 4.0, chamferRadius: 0.01)
         let boxNode = SCNNode(geometry: boxGeometry)*/
-        
+
         var length = 1.0
         var width = 1.0
         var height = 1.0
-        
+
+
         let boxShape = createBox(length: length, width: width, height: height)
-        
+
 //        var i:Int = 0
 //
 //        for box in boxShape {
@@ -122,16 +154,18 @@ class MainViewController: NSViewController {
         
         //let boxNode = SCNNode(geometry: boxShape)
         let boxNode1 = SCNNode(geometry: boxShape[0])
-        let boxNode2 = SCNNode(geometry: boxShape[1])
-        let boxNode3 = SCNNode(geometry: boxShape[2])
+        let boxNode3 = SCNNode(geometry: boxShape[1])
+        let boxNode2 = SCNNode(geometry: boxShape[2])
         let boxNode4 = SCNNode(geometry: boxShape[3])
         let boxNode5 = SCNNode(geometry: boxShape[4])
 
         boxNode1.position = SCNVector3Make(0, 0, 0)
+        boxNode2.position = SCNVector3Make(extrusionDepth/2,0,-1*extrusionDepth/2)
         boxNode2.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
-        boxNode3.position = SCNVector3Make(0, 0, 1)
-        boxNode4.position = SCNVector3(1, 0, 0)
+        boxNode3.position = SCNVector3Make(0, 0, 1-extrusionDepth)
+        boxNode4.position = SCNVector3Make(1-extrusionDepth/2, 0, -1*extrusionDepth/2)
         boxNode4.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
+        boxNode5.position = SCNVector3(0,extrusionDepth/2,-extrusionDepth/2)
         boxNode5.rotation = SCNVector4(1, 0, 0, CGFloat.pi/2)
 
         scene.rootNode.addChildNode(boxNode1)

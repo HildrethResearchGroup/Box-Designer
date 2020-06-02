@@ -55,7 +55,7 @@ class MainViewController: NSViewController {
         for numbers in [1,2,3,4,5]{
             let path = NSBezierPath()
             switch(numbers){
-            case 1,3:
+            case 1,4:
             path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
             path.line(to: CGPoint(x: 0.0, y: height/5)) // point A to first corner in tab
             path.line(to: CGPoint(x: -0.05, y: height/5)) // First corner in tab to second corner
@@ -87,7 +87,7 @@ class MainViewController: NSViewController {
             path.line(to: CGPoint(x: (length/5), y: 0.05)) // point C to first corner in tab
             path.line(to: CGPoint(x: (length/5), y: 0.0)) // point C to first corner in tab
 
-            case 2,4:
+            case 2,3:
             path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
             path.line(to: CGPoint(x: 0.0, y: height/5)) // point A to first corner in tab
             path.line(to: CGPoint(x: 0.05, y: height/5)) // First corner in tab to second corner
@@ -236,7 +236,7 @@ class MainViewController: NSViewController {
         var height:CGFloat = 1.0
 
 
-        let boxShape = createBox(length: Double(length), width: Double(width), height: Double(height))
+        let boxShape = createBoxFingers(length: Double(length), width: Double(width), height: Double(height))
 
 //        var i:Int = 0
 //

@@ -52,6 +52,9 @@ class MainViewController: NSViewController {
         
         var boxWalls = [SCNShape]()
         
+        var extrusionDepth:Double = 0.05
+        var extrusionDepth1:CGFloat = 0.05
+        
         for numbers in [1,2,3,4,5]{
             let path = NSBezierPath()
             switch(numbers){
@@ -120,27 +123,27 @@ class MainViewController: NSViewController {
             path.line(to: CGPoint(x: (length/5), y: 0.0)) // point C to first corner in tab
 
             case 5:
-            path.move(to: CGPoint(x: 0.0, y: 0.0)) // point A
-            path.line(to: CGPoint(x: 0.0, y: height/5)) // point A to first corner in tab
+            path.move(to: CGPoint(x: 0.00, y: extrusionDepth)) // point A
+            path.line(to: CGPoint(x: 0.00, y: height/5)) // point A to first corner in tab
             path.line(to: CGPoint(x: -0.05, y: height/5)) // First corner in tab to second corner
             path.line(to: CGPoint(x: -0.05, y: (height/5) * 2)) // Second corner to third corner
-            path.line(to: CGPoint(x: 0.0, y: (height/5) * 2)) // Second corner to third corner
-            path.line(to: CGPoint(x: 0.0, y: (height/5) * 3)) // point A to first corner in tab
+            path.line(to: CGPoint(x: 0.00, y: (height/5) * 2)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.00, y: (height/5) * 3)) // point A to first corner in tab
             path.line(to: CGPoint(x: -0.05, y: (height/5) * 3)) // First corner in tab to second corner
             path.line(to: CGPoint(x: -0.05, y: (height/5) * 4)) // Second corner to third corner
-            path.line(to: CGPoint(x: 0.0, y: (height/5) * 4)) // Second corner to third corner
-            path.line(to: CGPoint(x: 0.0, y: height)) // point B
+            path.line(to: CGPoint(x: 0.00, y: (height/5) * 4)) // Second corner to third corner
+            path.line(to: CGPoint(x: 0.00, y: height-extrusionDepth)) // point B
             
-            path.line(to: CGPoint(x: (length/5), y: height)) // point C
-            path.line(to: CGPoint(x: (length/5), y: height+0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 2, y: height+0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 2, y:height)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 3, y: height)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 3, y: height + 0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 4, y:height+0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 4, y: height)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: height-extrusionDepth)) // point C
+            path.line(to: CGPoint(x: (length/5), y: height+0.05-extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: height+0.05-extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y:height-extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: height-extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: height + 0.05-extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 4, y:height+0.05-extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 4, y: height-extrusionDepth)) // point C to first corner in tab
             
-            path.line(to: CGPoint(x: length, y: height)) // point C
+            path.line(to: CGPoint(x: length, y: height-extrusionDepth)) // point C
             path.line(to: CGPoint(x: length, y: (height/5) * 4)) // point C to first corner in tab
             path.line(to: CGPoint(x: length + 0.05, y: (height/5) * 4)) // point C to first corner in tab
             path.line(to: CGPoint(x: length + 0.05, y:(height/5) * 3)) // point C to first corner in tab
@@ -149,21 +152,21 @@ class MainViewController: NSViewController {
             path.line(to: CGPoint(x: length + 0.05, y: (height/5) * 2)) // point C to first corner in tab
             path.line(to: CGPoint(x: length + 0.05, y:(height/5) * 1)) // point C to first corner in tab
             path.line(to: CGPoint(x: length, y: (height/5) * 1)) // point C to first corner in tab
-            path.line(to: CGPoint(x: length, y: 0)) // point C to first corner in tab
+            path.line(to: CGPoint(x: length, y: extrusionDepth)) // point C to first corner in tab
                 
-            path.line(to: CGPoint(x: (length/5) * 4, y: 0)) // point C
-            path.line(to: CGPoint(x: (length/5) * 4, y: -0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 3, y: -0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 3, y:0.00)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 2, y: 0.00)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5) * 2, y: -0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5), y: -0.05)) // point C to first corner in tab
-            path.line(to: CGPoint(x: (length/5), y: 0.0)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 4, y: extrusionDepth)) // point C
+            path.line(to: CGPoint(x: (length/5) * 4, y: -0.05+extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: -0.05+extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 3, y: extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5) * 2, y: -0.05+extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: -0.05+extrusionDepth)) // point C to first corner in tab
+            path.line(to: CGPoint(x: (length/5), y: extrusionDepth)) // point C to first corner in tab
             default :
                 print( "createBox switch statement defaulted")
             }
             
-            let shape = SCNShape(path: path, extrusionDepth: 0.2)
+            let shape = SCNShape(path: path, extrusionDepth: extrusionDepth1)
             
             let color = getRandomColor()
             
@@ -182,9 +185,9 @@ class MainViewController: NSViewController {
 
         var boxWalls = [SCNShape]()
         
-        var extrusionDepth = 0.1
+        var extrusionDepth = 0.05
         
-        var extrusionDepth1:CGFloat = 0.1
+        var extrusionDepth1:CGFloat = 0.05
         for count in [1,2,3]{
             let path = NSBezierPath()
             switch count {
@@ -226,7 +229,7 @@ class MainViewController: NSViewController {
     // MARK: Scene
     func sceneSetup() {
 //        var boxShape = [SCNShape]()
-        var extrusionDepth:CGFloat = 0.1
+        var extrusionDepth:CGFloat = 0.05
         let scene = SCNScene()
         /*let boxGeometry = SCNBox(width:4.0, height: 4.0, length: 4.0, chamferRadius: 0.01)
         let boxNode = SCNNode(geometry: boxGeometry)*/
@@ -280,21 +283,46 @@ class MainViewController: NSViewController {
 //            }
 //        }
         
-        //let boxNode = SCNNode(geometry: boxShape)
+        print("Are you using finger or overlapping joints?")
+        
+        let input = "finger"
+        
+//        while input != "finger" && input != "Finger" && input != "Overlapping" && input != "overlapping" {
+//            print("Invalid input try again")
+//            let input = readLine(strippingNewline: true)!
+//        }
+        
         let boxNode1 = SCNNode(geometry: boxShape[0])
         let boxNode3 = SCNNode(geometry: boxShape[1])
         let boxNode2 = SCNNode(geometry: boxShape[2])
         let boxNode4 = SCNNode(geometry: boxShape[3])
         let boxNode5 = SCNNode(geometry: boxShape[4])
+        
+        if(input == "Overlapping" || input == "overlapping") {
+        //let boxNode = SCNNode(geometry: boxShape)
+        
 
-        boxNode1.position = SCNVector3Make(0, 0, 0)
-        boxNode2.position = SCNVector3Make(extrusionDepth/2,0,-1*extrusionDepth/2)
-        boxNode2.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
-        boxNode3.position = SCNVector3Make(0, 0, width - extrusionDepth)
-        boxNode4.position = SCNVector3Make(length-extrusionDepth/2, 0, -1*extrusionDepth/2)
-        boxNode4.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
-        boxNode5.position = SCNVector3(0,extrusionDepth/2,-extrusionDepth/2)
-        boxNode5.rotation = SCNVector4(1, 0, 0, CGFloat.pi/2)
+            boxNode1.position = SCNVector3Make(0, 0, 0)
+            boxNode2.position = SCNVector3Make(extrusionDepth/2,0,-1*extrusionDepth/2)
+            boxNode2.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
+            boxNode3.position = SCNVector3Make(0, 0, width - extrusionDepth)
+            boxNode4.position = SCNVector3Make(length-extrusionDepth/2, 0, -1*extrusionDepth/2)
+            boxNode4.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
+            boxNode5.position = SCNVector3(0,extrusionDepth/2,-extrusionDepth/2)
+            boxNode5.rotation = SCNVector4(1, 0, 0, CGFloat.pi/2)
+            
+        }
+        
+        else {
+            boxNode1.position = SCNVector3Make(0, 0, 0)
+            boxNode2.position = SCNVector3Make(-extrusionDepth/2,0,-extrusionDepth/2)
+            boxNode2.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
+            boxNode3.position = SCNVector3Make(0, 0, width-extrusionDepth)
+            boxNode4.position = SCNVector3Make(length+extrusionDepth/2, 0, -1*extrusionDepth/2)
+            boxNode4.rotation = SCNVector4(0, 1, 0, -1 * CGFloat.pi/2)
+            boxNode5.position = SCNVector3(0,extrusionDepth/2,-extrusionDepth/2)
+            boxNode5.rotation = SCNVector4(1, 0, 0, CGFloat.pi/2)
+        }
 
         scene.rootNode.addChildNode(boxNode1)
         scene.rootNode.addChildNode(boxNode2)

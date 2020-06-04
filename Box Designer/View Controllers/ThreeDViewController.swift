@@ -10,7 +10,7 @@ import Foundation
 
 import SceneKit
 
-class ThreeDView: NSViewController {
+class ThreeDViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.layer?.backgroundColor = CGColor(red:100, green: 100, blue: 100, alpha: 1.0)

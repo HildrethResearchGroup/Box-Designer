@@ -11,13 +11,43 @@ import Cocoa
 import SceneKit
 import AppKit
 
+enum EdgeType: String {
+    case finger = "finger"
+    case overlapping = "overlapping"
+}
 
 
 class MainViewController: NSViewController {
     
-    let threeDView = ThreeDView()
+    let threeDView = ThreeDViewController()
     
     @IBOutlet weak var boxView: SCNView!
+    
+    @IBOutlet weak var button_edgeType: NSButton!
+    
+    
+    var edgeType = EdgeType.finger {
+        didSet {
+            if edgeType != oldValue {
+                self.sceneSetup()
+            }
+        }
+        
+    }
+    
+    
+    
+    @IBAction func changeEdgeType(_ sender: Any) {
+        let currentEdgeType = edgeType
+        
+        if currentEdgeType == .finger {
+            edgeType = .overlapping
+        } else if currentEdgeType == .overlapping {
+            edgeType = .finger
+        }
+        
+    }
+    
         
    // MARK: Lifecycle
     
@@ -237,9 +267,17 @@ class MainViewController: NSViewController {
         var length:CGFloat = 1.0
         var width:CGFloat = 1.0
         var height:CGFloat = 1.0
-
-
-        let boxShape = createBoxFingers(length: Double(length), width: Double(width), height: Double(height))
+        let input = edgeType
+        
+        var boxShape = [SCNShape()]
+        
+        if input == EdgeType.finger {
+            boxShape = createBoxFingers(length: Double(length), width: Double(width), height: Double(height))
+        } else {
+            boxShape = createBox(length: Double(length), width: Double(width), height: Double(height))
+        }
+        
+        
 
 //        var i:Int = 0
 //
@@ -285,7 +323,6 @@ class MainViewController: NSViewController {
         
         print("Are you using finger or overlapping joints?")
         
-        let input = "finger"
         
 //        while input != "finger" && input != "Finger" && input != "Overlapping" && input != "overlapping" {
 //            print("Invalid input try again")
@@ -298,7 +335,7 @@ class MainViewController: NSViewController {
         let boxNode4 = SCNNode(geometry: boxShape[3])
         let boxNode5 = SCNNode(geometry: boxShape[4])
         
-        if(input == "Overlapping" || input == "overlapping") {
+        if(input == EdgeType.overlapping) {
         //let boxNode = SCNNode(geometry: boxShape)
         
 

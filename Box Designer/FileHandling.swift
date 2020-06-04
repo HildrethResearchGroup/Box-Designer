@@ -8,10 +8,10 @@
 
 import Foundation
 import Cocoa
-import Scenekit
+import SceneKit
 
 class FileHandling {
-    @IBAction func openScene(_ sender: Any) {
+    /*@IBAction func openScene(_ sender: Any) {
         guard let window = boxView.window else { return }
         guard var scene = self.boxView.scene else {return}
         let panel = NSOpenPanel()
@@ -68,7 +68,7 @@ class FileHandling {
                 self.boxView.scene?.write(to: targetURL, delegate: nil)
             }
         }
-    }
+    }*/
     
     
 }

@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 //this allows us to use Point as a parameter and return type
-typealias Point = (x:Double, y: Double, z:Double)
+//typealias Point = (x:Double, y: Double, z:Double)
 
 class BoxModel {
     init(_ walls: [WallModel]) {
@@ -21,7 +21,7 @@ class BoxModel {
     var delegate: BoxModelDelegate? = nil //add in initial awake from nib
     
     //as walls are added from wakeFromNib() or other functions, add to array
-    var walls: [wallModel]
+    var walls: [WallModel]
     
     var boxWidth: Double = 4.50 {
         didSet {

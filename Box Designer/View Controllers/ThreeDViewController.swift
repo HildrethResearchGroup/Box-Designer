@@ -14,4 +14,20 @@ class ThreeDViewController: NSViewController {
    
     @IBOutlet weak var boxView: SCNView!
     
+    var boxSceneMaker = BoxSceneMaker()
+    
+    override func awakeFromNib(){
+        boxView.allowsCameraControl = true
+        boxView.scene = boxSceneMaker.sceneSetup()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+    }
+    
 }

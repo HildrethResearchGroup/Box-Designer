@@ -11,10 +11,7 @@ import Cocoa
 import SceneKit
 import AppKit
 
-enum EdgeType: String {
-    case finger = "finger"
-    case overlapping = "overlapping"
-}
+
 
 
 class MainViewController: NSViewController {
@@ -29,7 +26,7 @@ class MainViewController: NSViewController {
     var edgeType = EdgeType.finger {
         didSet {
             if edgeType != oldValue {
-                self.sceneSetup()
+                //self.sceneSetup()
             }
         }
         
@@ -52,7 +49,7 @@ class MainViewController: NSViewController {
    // MARK: Lifecycle
     
     override func awakeFromNib(){
-        sceneSetup()
+        //sceneSetup()
     }
     
     override func viewDidLoad() {

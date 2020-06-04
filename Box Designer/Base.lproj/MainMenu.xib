@@ -760,7 +760,7 @@
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHa-zb-Iik">
-                        <rect key="frame" x="28" y="144" width="96" height="19"/>
+                        <rect key="frame" x="28" y="146" width="96" height="19"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ISl-ju-MbQ"/>
                     </slider>

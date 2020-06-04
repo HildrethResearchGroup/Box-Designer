@@ -18,5 +18,18 @@ class InputViewController: NSViewController {
     
     @IBOutlet weak var tabWidthSlider: NSSlider!
     
+    override func awakeFromNib(){
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+    }
+
+
     
 }

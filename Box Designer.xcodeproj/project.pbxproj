@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C32247ED22B00F595A1 /* PDFFileSaver.swift */; };
 		02043C35248574F100F595A1 /* BoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C34248574F100F595A1 /* BoxModel.swift */; };
+		02043C432489A1F600F595A1 /* FileHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C422489A1F600F595A1 /* FileHandling.swift */; };
+		02043C452489A20100F595A1 /* BoxSceneMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C442489A20100F595A1 /* BoxSceneMaker.swift */; };
+		02043C472489A2D000F595A1 /* WallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C462489A2D000F595A1 /* WallModel.swift */; };
 		B9D0C36D2486F5DC00452C31 /* ThreeDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D0C36C2486F5DC00452C31 /* ThreeDViewController.swift */; };
 		B9D0C36F2486F63200452C31 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D0C36E2486F63200452C31 /* InputViewController.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
@@ -32,6 +35,9 @@
 /* Begin PBXFileReference section */
 		02043C32247ED22B00F595A1 /* PDFFileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFFileSaver.swift; sourceTree = "<group>"; };
 		02043C34248574F100F595A1 /* BoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxModel.swift; sourceTree = "<group>"; };
+		02043C422489A1F600F595A1 /* FileHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandling.swift; sourceTree = "<group>"; };
+		02043C442489A20100F595A1 /* BoxSceneMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxSceneMaker.swift; sourceTree = "<group>"; };
+		02043C462489A2D000F595A1 /* WallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallModel.swift; sourceTree = "<group>"; };
 		B9D0C36C2486F5DC00452C31 /* ThreeDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDViewController.swift; sourceTree = "<group>"; };
 		B9D0C36E2486F63200452C31 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,7 +100,9 @@
 				C0E65E502478426E009D90F1 /* Assets.xcassets */,
 				C0E65E552478426E009D90F1 /* Info.plist */,
 				C0E65E562478426E009D90F1 /* Box_Designer.entitlements */,
+				02043C442489A20100F595A1 /* BoxSceneMaker.swift */,
 				02043C32247ED22B00F595A1 /* PDFFileSaver.swift */,
+				02043C422489A1F600F595A1 /* FileHandling.swift */,
 			);
 			path = "Box Designer";
 			sourceTree = "<group>";
@@ -130,6 +138,7 @@
 			children = (
 				C0E65E73247851D2009D90F1 /* DuckModel.swift */,
 				02043C34248574F100F595A1 /* BoxModel.swift */,
+				02043C462489A2D000F595A1 /* WallModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,11 +245,14 @@
 			files = (
 				B9D0C36F2486F63200452C31 /* InputViewController.swift in Sources */,
 				B9D0C36D2486F5DC00452C31 /* ThreeDViewController.swift in Sources */,
+				02043C432489A1F600F595A1 /* FileHandling.swift in Sources */,
 				02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
 				02043C35248574F100F595A1 /* BoxModel.swift in Sources */,
 				C0E65E6C24784BBC009D90F1 /* MainViewController.swift in Sources */,
+				02043C472489A2D000F595A1 /* WallModel.swift in Sources */,
 				C0E65E74247851D2009D90F1 /* DuckModel.swift in Sources */,
+				02043C452489A20100F595A1 /* BoxSceneMaker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

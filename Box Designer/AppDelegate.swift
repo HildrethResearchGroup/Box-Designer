@@ -14,7 +14,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
 
     @IBOutlet weak var mainViewController: MainViewController!
-
+    @IBOutlet weak var threeDViewController: ThreeDViewController!
+    @IBOutlet weak var inputViewController: InputViewController!
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }

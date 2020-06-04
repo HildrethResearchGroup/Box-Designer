@@ -10,7 +10,7 @@
 		02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C32247ED22B00F595A1 /* PDFFileSaver.swift */; };
 		02043C35248574F100F595A1 /* BoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C34248574F100F595A1 /* BoxModel.swift */; };
 		B9D0C36D2486F5DC00452C31 /* ThreeDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D0C36C2486F5DC00452C31 /* ThreeDViewController.swift */; };
-		B9D0C36F2486F63200452C31 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D0C36E2486F63200452C31 /* Input.swift */; };
+		B9D0C36F2486F63200452C31 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D0C36E2486F63200452C31 /* InputViewController.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -33,7 +33,7 @@
 		02043C32247ED22B00F595A1 /* PDFFileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFFileSaver.swift; sourceTree = "<group>"; };
 		02043C34248574F100F595A1 /* BoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxModel.swift; sourceTree = "<group>"; };
 		B9D0C36C2486F5DC00452C31 /* ThreeDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDViewController.swift; sourceTree = "<group>"; };
-		B9D0C36E2486F63200452C31 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		B9D0C36E2486F63200452C31 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 			children = (
 				C0E65E6B24784BBC009D90F1 /* MainViewController.swift */,
 				B9D0C36C2486F5DC00452C31 /* ThreeDViewController.swift */,
-				B9D0C36E2486F63200452C31 /* Input.swift */,
+				B9D0C36E2486F63200452C31 /* InputViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -234,7 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9D0C36F2486F63200452C31 /* Input.swift in Sources */,
+				B9D0C36F2486F63200452C31 /* InputViewController.swift in Sources */,
 				B9D0C36D2486F5DC00452C31 /* ThreeDViewController.swift in Sources */,
 				02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,

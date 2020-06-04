@@ -15,7 +15,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Box_Designer" customModuleProvider="target">
             <connections>
+                <outlet property="inputViewController" destination="MM0-W8-VJL" id="lnO-7s-xcT"/>
                 <outlet property="mainViewController" destination="uCy-kt-Apg" id="Ngx-Yk-U3L"/>
+                <outlet property="threeDViewController" destination="lqc-0r-D5q" id="yFf-tR-lrZ"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -23,6 +25,19 @@
             <connections>
                 <outlet property="boxView" destination="CEi-E3-2ri" id="IoM-Ny-9c8"/>
                 <outlet property="button_edgeType" destination="DeZ-Kr-jsK" id="lCl-tO-xDV"/>
+            </connections>
+        </viewController>
+        <viewController id="lqc-0r-D5q" customClass="ThreeDViewController" customModule="Box_Designer" customModuleProvider="target">
+            <connections>
+                <outlet property="boxView" destination="CEi-E3-2ri" id="ZX1-fE-alj"/>
+            </connections>
+        </viewController>
+        <viewController id="MM0-W8-VJL" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
+            <connections>
+                <outlet property="heightTextField" destination="Kcw-6l-oM4" id="Fl4-mU-zUO"/>
+                <outlet property="lengthTextField" destination="enw-4O-Swn" id="6QW-r0-Hj9"/>
+                <outlet property="tabWidthSlider" destination="XHa-zb-Iik" id="HjK-uS-DOl"/>
+                <outlet property="widthTextField" destination="enw-4O-Swn" id="gM4-b5-g8i"/>
             </connections>
         </viewController>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -693,7 +708,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="546" height="330"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="546" height="330"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -714,6 +729,41 @@
                     <sceneView translatesAutoresizingMaskIntoConstraints="NO" id="CEi-E3-2ri">
                         <rect key="frame" x="144" y="20" width="382" height="290"/>
                     </sceneView>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kcw-6l-oM4">
+                        <rect key="frame" x="28" y="254" width="96" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="5Ok-ce-Vzb">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="NFA-ET-fDg"/>
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eqJ-gs-MkN">
+                        <rect key="frame" x="28" y="217" width="96" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="8Zj-qg-hcf">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="N9d-WY-dcr"/>
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="enw-4O-Swn">
+                        <rect key="frame" x="28" y="180" width="96" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="l63-d5-A48">
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="nku-Mt-lh3"/>
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHa-zb-Iik">
+                        <rect key="frame" x="28" y="144" width="96" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ISl-ju-MbQ"/>
+                    </slider>
                 </subviews>
                 <constraints>
                     <constraint firstItem="DeZ-Kr-jsK" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="LnV-JL-2wL"/>
@@ -724,7 +774,7 @@
                     <constraint firstItem="DeZ-Kr-jsK" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="aST-44-Akc"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="-63" y="-367"/>
+            <point key="canvasLocation" x="35" y="-372"/>
         </window>
     </objects>
 </document>

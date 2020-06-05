@@ -772,6 +772,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="okHeightButton:" target="MM0-W8-VJL" id="PsT-v1-hGH"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fOH-xI-o0x">
                         <rect key="frame" x="152" y="203" width="45" height="32"/>
@@ -780,6 +783,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="okWidthButton:" target="MM0-W8-VJL" id="Hri-bj-JuK"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CUS-Pq-jr1">
                         <rect key="frame" x="151" y="153" width="45" height="32"/>
@@ -788,6 +794,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="okLengthButton:" target="MM0-W8-VJL" id="ZDH-ap-OIG"/>
+                        </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hTI-vJ-p2B">
                         <rect key="frame" x="6" y="255" width="37" height="16"/>

@@ -17,10 +17,8 @@ class InputViewController: NSViewController {
     @IBOutlet weak var widthTextField: NSTextField!
     @IBOutlet weak var lengthTextField: NSTextField!
     
-    // height, width,length buttons
-    @IBOutlet weak var okButtonHeight: NSButton!
-    @IBOutlet weak var okButtonWidth: NSButton!
-    @IBOutlet weak var okButtonLength: NSButton!
+
+
     
     
     // height, width,length labels
@@ -42,6 +40,18 @@ class InputViewController: NSViewController {
         
     }
 
+    // height, width,length buttons
+    @IBAction func okHeightButton(_ sender: Any) {
+        let heightValue = Double(heightTextField.text!)
+        
+    }
+    @IBAction func okWidthButton(_ sender: Any) {
+        let widthValue = Double(widthTextField.text!)
 
+    }
+    @IBAction func okLengthButton(_ sender: Any) {
+        let lengthValue = Double(lengthTextField.text!)
+
+    }
     
 }

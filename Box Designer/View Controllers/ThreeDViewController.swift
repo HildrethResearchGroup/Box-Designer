@@ -10,15 +10,16 @@ import Foundation
 
 import SceneKit
 
-class ThreeDViewController: NSViewController {
-   
+class ThreeDViewController: NSViewController, BoxSceneMakerDelegate {
+
     @IBOutlet weak var boxView: SCNView!
     
     var boxSceneMaker = BoxSceneMaker()
     
     override func awakeFromNib(){
         boxView.allowsCameraControl = true
-        boxView.scene = boxSceneMaker.sceneSetup()
+        boxSceneMaker.sceneSetup()
+        boxView.scene = boxSceneMaker.scene
     }
     
     override func viewDidLoad() {
@@ -30,4 +31,7 @@ class ThreeDViewController: NSViewController {
         
     }
     
+    func sceneDidChange() {
+        boxView.scene = boxSceneMaker.scene
+    }
 }

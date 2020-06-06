@@ -40,7 +40,7 @@ class InputViewController: NSViewController {
         
     }
 
-    // height, width,length buttons
+ /*   // height, width,length buttons
     @IBAction func okHeightButton(_ sender: Any) {
         let heightValue = Double(heightTextField.text!)
         
@@ -52,6 +52,12 @@ class InputViewController: NSViewController {
     @IBAction func okLengthButton(_ sender: Any) {
         let lengthValue = Double(lengthTextField.text!)
 
+    }*/
+
+    @IBAction func addWallButtonPressed(_ sender: Any) {
+        
+        
     }
+    
     
 }

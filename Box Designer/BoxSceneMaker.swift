@@ -17,6 +17,16 @@ enum EdgeType: String {
 
 class BoxSceneMaker {
     
+    var scene = SCNScene() {
+        didSet {
+            if oldValue != scene {
+                delegate?.sceneDidChange()
+            }
+        }
+    }
+    
+    var delegate: BoxSceneMakerDelegate? = nil
+    
     func getRandomColor() -> NSColor {
         //Generate between 0 to 1
         let red:CGFloat = CGFloat(drand48())
@@ -222,8 +232,7 @@ class BoxSceneMaker {
         return node
     }
     
-    func sceneSetup() -> SCNScene {
-        var scene = SCNScene()
+    func sceneSetup() {
         var nodeBottom = makeSmallCornerWall(position: (0,0,0))
         scene.rootNode.addChildNode(nodeBottom)
         var nodeSide = makeLargeCornerWall(position: (0,0,0))
@@ -237,8 +246,15 @@ class BoxSceneMaker {
         
         
         lightingSetup(scene)
-        return scene
     }
+    
+    func addWall() {
+        print("adding wall")
+        var newNode = makeLongCornerWall(position: (0, 0, 0.50))
+        scene.rootNode.addChildNode(newNode)
+        delegate?.sceneDidChange()
+    }
+
     
     
     /*
@@ -489,7 +505,7 @@ class BoxSceneMaker {
     }
 
     // MARK: Scene
-    func sceneSetup() {
+    //func sceneSetup() {
         
         /*
         //var boxShape = [SCNShape]()
@@ -604,7 +620,7 @@ class BoxSceneMaker {
             lightingSetup(scene)
  
  */
-        }
+  //      }
      
         func lightingSetup(_ scene:SCNScene) {
              //boxView.allowsCameraControl = true
@@ -625,4 +641,8 @@ class BoxSceneMaker {
     
     
     
+}
+
+protocol BoxSceneMakerDelegate {
+    func sceneDidChange()
 }

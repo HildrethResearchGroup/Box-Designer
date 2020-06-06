@@ -29,6 +29,7 @@ class InputViewController: NSViewController {
     @IBOutlet weak var tabWidthSlider: NSSlider!
     
     override func awakeFromNib(){
+
     }
     
     override func viewDidLoad() {
@@ -40,18 +41,25 @@ class InputViewController: NSViewController {
         
     }
 
+//    boxInput = BoxSceneMaker.init()
+    
     // height, width,length buttons
     @IBAction func okHeightButton(_ sender: Any) {
-        let heightValue = Double(heightTextField.text!)
-        
+        if  let heightValue = Double(heightTextField.stringValue) {
+            BoxSceneMaker.boxInput.setUserHeight(height: heightValue)
+            print(BoxSceneMaker.boxInput.height)
+        }
     }
     @IBAction func okWidthButton(_ sender: Any) {
-        let widthValue = Double(widthTextField.text!)
-
+        if  let widthValue = Double(widthTextField.stringValue) {
+            BoxSceneMaker.boxInput.setUserWidth(width: widthValue)
+            print(BoxSceneMaker.boxInput.width)
+        }
     }
     @IBAction func okLengthButton(_ sender: Any) {
-        let lengthValue = Double(lengthTextField.text!)
-
+        if  let lengthValue = Double(lengthTextField.stringValue) {
+            BoxSceneMaker.boxInput.setUserLength(length: lengthValue)
+            print(BoxSceneMaker.boxInput.length)
+        }
     }
-    
 }

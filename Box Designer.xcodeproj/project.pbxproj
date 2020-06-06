@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C32247ED22B00F595A1 /* PDFFileSaver.swift */; };
+		02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C4E248C308400F595A1 /* BoxViewController.swift */; };
+		02043C51248C310A00F595A1 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C50248C310A00F595A1 /* InputViewController.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		02043C32247ED22B00F595A1 /* PDFFileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFFileSaver.swift; sourceTree = "<group>"; };
+		02043C4E248C308400F595A1 /* BoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxViewController.swift; sourceTree = "<group>"; };
+		02043C50248C310A00F595A1 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 		C0E65E6A247842D6009D90F1 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				02043C4E248C308400F595A1 /* BoxViewController.swift */,
+				02043C50248C310A00F595A1 /* InputViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -219,8 +225,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */,
 				02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
+				02043C51248C310A00F595A1 /* InputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

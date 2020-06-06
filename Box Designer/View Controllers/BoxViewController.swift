@@ -8,7 +8,10 @@
 
 import Foundation
 import Cocoa
+import SceneKit
 
 class BoxViewController: NSViewController {
+    
+    @IBOutlet weak var boxView: SCNView!
     
 }

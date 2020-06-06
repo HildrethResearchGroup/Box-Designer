@@ -21,7 +21,11 @@
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <viewController id="WuM-ZH-pnj" customClass="BoxViewController" customModule="Box_Designer" customModuleProvider="target"/>
+        <viewController id="WuM-ZH-pnj" customClass="BoxViewController" customModule="Box_Designer" customModuleProvider="target">
+            <connections>
+                <outlet property="boxView" destination="xX1-Mt-ukC" id="gyk-zs-tA5"/>
+            </connections>
+        </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -681,7 +685,7 @@
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="546" height="330"/>
+            <rect key="contentRect" x="284" y="400" width="546" height="330"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="546" height="330"/>

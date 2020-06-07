@@ -11,10 +11,15 @@ import Cocoa
 import SceneKit
 
 class BoxModel {
-    /*
-     This attribute stores all the WallModel objects that make up the current box design.
-     */
+
     var walls: [WallModel]
+    var boxWidth: Double
+    var boxLength: Double
+    var boxHeight: Double
+    var materialThickness: Double
+    var innerDimensions: Bool
+    var joinType: JoinType
+    var tabWidth: Double?
     
     //This initializer can be used to create a box using data loaded from a file
     init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ tabWidth: Double?) {
@@ -48,19 +53,6 @@ class BoxModel {
         self.innerDimensions = false
         self.joinType = JoinType.overlap
     }
-    
-    /*
-     These attributes may not necessarily be set at any time.
-     However, they make the process of adjusting the individual
-     walls of the path significantly easier.
-     */
-    var boxWidth: Double
-    var boxLength: Double
-    var boxHeight: Double
-    var materialThickness: Double
-    var innerDimensions: Bool
-    var joinType: JoinType
-    var tabWidth: Double?
     
     func smallestDimension() -> Double {
         var smallest = boxWidth

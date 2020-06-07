@@ -93,26 +93,31 @@ class PathGenerator {
     
     static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
         let path = NSBezierPath()
-        
-        //TODO: implement
+        path.append(makeOuterLeftTabPath(0.0, 0.0, length, materialThickness, tabWidth))
+        path.append(makeOuterUpTabPath(0.0, length, width, materialThickness, tabWidth))
+        path.append(makeOuterRightTabPath(width, length, length, materialThickness, tabWidth))
+        path.append(makeOuterDownTabPath(width, 0.0, width, materialThickness, tabWidth))
         return path
     }
     
     static func generateTabLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
         let path = NSBezierPath()
-
-        //TODO: implement
+        path.append(makeInnerLeftTabPath(materialThickness, 0.0, length, materialThickness, tabWidth))
+        path.append(makeOuterUpTabPath(materialThickness, length, width - 2 * materialThickness, materialThickness, tabWidth))
+        path.append(makeInnerRightTabPath(width - materialThickness, length, length, materialThickness, tabWidth))
+        path.append(makeOuterDownTabPath(width - materialThickness, 0.0, width - 2 * materialThickness, materialThickness, tabWidth))
         return path
     }
     
     static func generateTabSmallCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
         let path = NSBezierPath()
-        
-
-        //TODO: implement
+        path.append(makeInnerLeftTabPath(materialThickness, materialThickness, length - 2 * materialThickness, materialThickness, tabWidth))
+        path.append(makeInnerUpTabPath(materialThickness, length - materialThickness, width - 2 * materialThickness, materialThickness, tabWidth))
+        path.append(makeInnerRightTabPath(width - materialThickness, length - materialThickness, length - 2 * materialThickness, materialThickness, tabWidth))
+        path.append(makeInnerDownTabPath(width - materialThickness, materialThickness, width - 2 * materialThickness, materialThickness, tabWidth))
         return path
     }
-
+    
     static func makeOuterLeftTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
         
         let path = NSBezierPath()
@@ -122,7 +127,7 @@ class PathGenerator {
         path.move(to: CGPoint(x: startX, y: startY))
         path.line(to: CGPoint(x: startX, y: startY + outerTabWidth))
         
-        //first inward tab
+        //first inner tab
         path.append(makeRightLeftTab(x: startX, y: startY + outerTabWidth, materialThickness, tabWidth, upward: true))
         
         //how much of the length remains for placing the INNER tabs?
@@ -143,49 +148,252 @@ class PathGenerator {
         }
         
         //second outer tab
-        path.line(to: CGPoint(x: startX, y: sideLength))
+        path.line(to: CGPoint(x: startX, y: startY + sideLength))
         
         return path
     }
     
-    static func makeInnerLeftTabPath() -> NSBezierPath {
+    static func makeInnerLeftTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        
         let path = NSBezierPath()
+        let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
+        
+        //first outer tab
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX, y: startY + outerTabWidth))
+        
+        //first inner tab
+        path.append(makeLeftRightTab(x: startX, y: startY + outerTabWidth, materialThickness, tabWidth, upward: true))
+        
+        //how much of the length remains for placing the INNER tabs?
+        var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
+        var currentY = startY + outerTabWidth + tabWidth
+        
+        //when lengthRemaining is no longer greater than 0, we have put in enough inner tabs
+        while lengthRemaining > 0 {
+            //accounting for possible error due to double rounding
+            if (lengthRemaining - tabWidth < 0) {
+                break
+            }
+            path.line(to: CGPoint(x: startX, y: currentY + tabWidth))
+            currentY = currentY + tabWidth
+            path.append(makeLeftRightTab(x: startX, y: currentY, materialThickness, tabWidth, upward: true))
+            currentY = currentY + tabWidth
+            lengthRemaining = lengthRemaining - 2 * tabWidth
+        }
+        
+        //second outer tab
+        path.line(to: CGPoint(x: startX, y: startY + sideLength))
         
         return path
     }
     
-    static func makeOuterUpTabPath() -> NSBezierPath {
+    static func makeOuterUpTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        
         let path = NSBezierPath()
+        let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
+        
+        //first outer tab
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX + outerTabWidth, y: startY))
+        
+        //first inner tab
+        path.append(makeDownUpTab(x: startX + outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: true))
+        
+        //how much of the length remains for placing the INNER tabs?
+        var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
+        var currentX = startX + outerTabWidth + tabWidth
+        
+        //when lengthRemaining is no longer greater than 0, we have put in enough inner tabs
+        while lengthRemaining > 0 {
+            //accounting for possible error due to double rounding
+            if (lengthRemaining - tabWidth < 0) {
+                break
+            }
+            path.line(to: CGPoint(x: currentX + tabWidth, y: startY))
+            currentX = currentX + tabWidth
+            path.append(makeDownUpTab(x: currentX, y: startY, materialThickness, tabWidth, toTheRight: true))
+            currentX = currentX + tabWidth
+            lengthRemaining = lengthRemaining - 2 * tabWidth
+        }
+        
+        //second outer tab
+        path.line(to: CGPoint(x: startX + sideLength, y: startY))
         
         return path
     }
     
-    static func makeInnerUpTabPath() -> NSBezierPath {
+    static func makeInnerUpTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        
         let path = NSBezierPath()
+        let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
+        
+        //first outer tab
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX + outerTabWidth, y: startY))
+        
+        //first inner tab
+        path.append(makeUpDownTab(x: startX + outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: true))
+        
+        //how much of the length remains for placing the INNER tabs?
+        var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
+        var currentX = startX + outerTabWidth + tabWidth
+        
+        //when lengthRemaining is no longer greater than 0, we have put in enough inner tabs
+        while lengthRemaining > 0 {
+            //accounting for possible error due to double rounding
+            if (lengthRemaining - tabWidth < 0) {
+                break
+            }
+            path.line(to: CGPoint(x: currentX + tabWidth, y: startY))
+            currentX = currentX + tabWidth
+            path.append(makeUpDownTab(x: currentX, y: startY, materialThickness, tabWidth, toTheRight: true))
+            currentX = currentX + tabWidth
+            lengthRemaining = lengthRemaining - 2 * tabWidth
+        }
+        
+        //second outer tab
+        path.line(to: CGPoint(x: startX + sideLength, y: startY))
     
         return path
     }
     
-    static func makeOuterRightTabPath() -> NSBezierPath {
+    static func makeOuterRightTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        
         let path = NSBezierPath()
+        let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
+        
+        //first outer tab
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX, y: startY - outerTabWidth))
+        
+        //first inner tab
+        path.append(makeLeftRightTab(x: startX, y: startY - outerTabWidth, materialThickness, tabWidth, upward: false))
+        
+        //how much of the length remains for placing the INNER tabs?
+        var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
+        var currentY = startY - outerTabWidth - tabWidth
+        
+        //when lengthRemaining is no longer greater than 0, we have put in enough inner tabs
+        while lengthRemaining > 0 {
+            //accounting for possible error due to double rounding
+            if (lengthRemaining - tabWidth < 0) {
+                break
+            }
+            path.line(to: CGPoint(x: startX, y: currentY - tabWidth))
+            currentY = currentY - tabWidth
+            path.append(makeLeftRightTab(x: startX, y: currentY, materialThickness, tabWidth, upward: false))
+            currentY = currentY - tabWidth
+            lengthRemaining = lengthRemaining - 2 * tabWidth
+        }
+        
+        //second outer tab
+        path.line(to: CGPoint(x: startX, y: startY - sideLength))
         
         return path
     }
     
-    static func makeInnerRightTabPath() -> NSBezierPath {
+    static func makeInnerRightTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        
         let path = NSBezierPath()
+        let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
+        
+        //first outer tab
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX, y: startY - outerTabWidth))
+        
+        //first inner tab
+        path.append(makeRightLeftTab(x: startX, y: startY - outerTabWidth, materialThickness, tabWidth, upward: false))
+        
+        //how much of the length remains for placing the INNER tabs?
+        var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
+        var currentY = startY - outerTabWidth - tabWidth
+        
+        //when lengthRemaining is no longer greater than 0, we have put in enough inner tabs
+        while lengthRemaining > 0 {
+            //accounting for possible error due to double rounding
+            if (lengthRemaining - tabWidth < 0) {
+                break
+            }
+            path.line(to: CGPoint(x: startX, y: currentY - tabWidth))
+            currentY = currentY - tabWidth
+            path.append(makeRightLeftTab(x: startX, y: currentY, materialThickness, tabWidth, upward: false))
+            currentY = currentY - tabWidth
+            lengthRemaining = lengthRemaining - 2 * tabWidth
+        }
+        
+        //second outer tab
+        path.line(to: CGPoint(x: startX, y: startY - sideLength))
         
         return path
     }
     
-    static func makeOuterDownTabPath() -> NSBezierPath {
+    static func makeOuterDownTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        
         let path = NSBezierPath()
+        let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
+        
+        //first outer tab
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX - outerTabWidth, y: startY))
+        
+        //first inner tab
+        path.append(makeUpDownTab(x: startX - outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: false))
+        
+        //how much of the length remains for placing the INNER tabs?
+        var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
+        var currentX = startX - outerTabWidth - tabWidth
+        
+        //when lengthRemaining is no longer greater than 0, we have put in enough inner tabs
+        while lengthRemaining > 0 {
+            //accounting for possible error due to double rounding
+            if (lengthRemaining - tabWidth < 0) {
+                break
+            }
+            path.line(to: CGPoint(x: currentX - tabWidth, y: startY))
+            currentX = currentX - tabWidth
+            path.append(makeUpDownTab(x: currentX, y: startY, materialThickness, tabWidth, toTheRight: false))
+            currentX = currentX - tabWidth
+            lengthRemaining = lengthRemaining - 2 * tabWidth
+        }
+        
+        //second outer tab
+        path.line(to: CGPoint(x: startX - sideLength, y: startY))
         
         return path
     }
     
-    static func makeInnerDownTabPath() -> NSBezierPath {
+    static func makeInnerDownTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        
         let path = NSBezierPath()
+        let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
+        
+        //first outer tab
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX - outerTabWidth, y: startY))
+        
+        //first inner tab
+        path.append(makeDownUpTab(x: startX - outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: false))
+        
+        //how much of the length remains for placing the INNER tabs?
+        var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
+        var currentX = startX - outerTabWidth - tabWidth
+        
+        //when lengthRemaining is no longer greater than 0, we have put in enough inner tabs
+        while lengthRemaining > 0 {
+            //accounting for possible error due to double rounding
+            if (lengthRemaining - tabWidth < 0) {
+                break
+            }
+            path.line(to: CGPoint(x: currentX - tabWidth, y: startY))
+            currentX = currentX - tabWidth
+            path.append(makeDownUpTab(x: currentX, y: startY, materialThickness, tabWidth, toTheRight: false))
+            currentX = currentX - tabWidth
+            lengthRemaining = lengthRemaining - 2 * tabWidth
+        }
+        
+        //second outer tab
+        path.line(to: CGPoint(x: startX - sideLength, y: startY))
         
         return path
     }

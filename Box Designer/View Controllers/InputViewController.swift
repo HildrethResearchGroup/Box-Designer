@@ -14,6 +14,7 @@ class InputViewController: NSViewController {
     var boxModel = BoxModel()
     
     @IBOutlet weak var innerOrOuterDimensionControl: NSSegmentedCell!
+    @IBOutlet weak var joinTypeControl: NSSegmentedControl!
     
     @IBAction func innerOrOuterDimensionsSelected(_ sender: Any) {
         let choice = innerOrOuterDimensionControl.selectedSegment
@@ -24,5 +25,13 @@ class InputViewController: NSViewController {
         }
     }
     
+    @IBAction func joinTypeSelected(_ sender: Any) {
+        let choice = joinTypeControl.selectedSegment
+        if choice == 0 {
+            boxModel.joinType = JoinType.overlap
+        } else if choice == 1 {
+            boxModel.joinType = JoinType.tab
+        }
+    }
     
 }

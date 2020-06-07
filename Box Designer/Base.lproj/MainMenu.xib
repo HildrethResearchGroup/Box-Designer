@@ -29,6 +29,7 @@
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
                 <outlet property="innerOrOuterDimensionControl" destination="boA-gi-wev" id="fws-hn-ngW"/>
+                <outlet property="joinTypeControl" destination="8HL-HY-fgp" id="I8c-0q-QrN"/>
             </connections>
         </viewController>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
@@ -766,6 +767,9 @@
                                 <segment label="Tab" width="63" tag="1"/>
                             </segments>
                         </segmentedCell>
+                        <connections>
+                            <action selector="joinTypeSelected:" target="SYY-Aa-HfQ" id="TZH-MQ-3wg"/>
+                        </connections>
                     </segmentedControl>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wkp-bf-9xJ">
                         <rect key="frame" x="7" y="169" width="63" height="16"/>

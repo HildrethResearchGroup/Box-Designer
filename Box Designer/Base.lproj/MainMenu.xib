@@ -28,8 +28,14 @@
         </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
+                <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
                 <outlet property="innerOrOuterDimensionControl" destination="boA-gi-wev" id="fws-hn-ngW"/>
                 <outlet property="joinTypeControl" destination="8HL-HY-fgp" id="I8c-0q-QrN"/>
+                <outlet property="lengthTextField" destination="ej6-We-03q" id="0AL-08-AoL"/>
+                <outlet property="materialThicknessTextField" destination="JAJ-yv-jkR" id="D2m-hM-jd8"/>
+                <outlet property="tabWidthLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
+                <outlet property="tabWidthSlider" destination="BKc-5S-qKa" id="cLR-7K-9mg"/>
+                <outlet property="widthTextField" destination="fyW-Nm-b7I" id="Bjc-8T-Zyh"/>
             </connections>
         </viewController>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
@@ -707,8 +713,11 @@
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="lengthTextFieldDidChange:" target="SYY-Aa-HfQ" id="x8Z-2V-G4J"/>
+                        </connections>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fyW-Nm-b7I">
+                    <textField verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="fyW-Nm-b7I">
                         <rect key="frame" x="53" y="262" width="154" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="2al-I0-iAE">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="H0k-l9-zIP"/>
@@ -716,8 +725,11 @@
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="widthTextFieldDidChange:" target="SYY-Aa-HfQ" id="T41-ht-bx6"/>
+                        </connections>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G72-Xd-nTU">
+                    <textField verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="G72-Xd-nTU">
                         <rect key="frame" x="58" y="238" width="149" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="jNc-Pk-kCu">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="tDW-c6-oOu"/>
@@ -725,6 +737,9 @@
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="heightTextFieldDidChange:" target="SYY-Aa-HfQ" id="xyn-bT-yqa"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v94-LN-uCm">
                         <rect key="frame" x="7" y="289" width="46" height="16"/>
@@ -780,16 +795,23 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SOV-kb-V2U">
-                        <rect key="frame" x="7" y="145" width="66" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Tab Width" id="TJj-fq-ICy">
+                        <rect key="frame" x="7" y="145" width="114" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Tab Width [00.00]" id="TJj-fq-ICy">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BKc-5S-qKa">
-                        <rect key="frame" x="77" y="143" width="132" height="19"/>
-                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="5L2-db-ROf"/>
+                        <rect key="frame" x="125" y="143" width="84" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="nwL-1Q-4CI"/>
+                        </constraints>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="5L2-db-ROf">
+                            <connections>
+                                <action selector="tabWidthChanged:" target="SYY-Aa-HfQ" id="JCy-tf-KQ4"/>
+                            </connections>
+                        </sliderCell>
                     </slider>
                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Pwh-fu-fbl">
                         <rect key="frame" x="9" y="131" width="189" height="5"/>
@@ -797,7 +819,7 @@
                             <constraint firstAttribute="width" constant="189" id="bm3-P1-Wac"/>
                         </constraints>
                     </box>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JAJ-yv-jkR">
+                    <textField verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="JAJ-yv-jkR">
                         <rect key="frame" x="131" y="214" width="76" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ITf-c7-VAM">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Vqf-Hk-Rvs"/>
@@ -805,6 +827,9 @@
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="materialThicknessTextFieldDidChange:" target="SYY-Aa-HfQ" id="UUM-JJ-ZHo"/>
+                        </connections>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Fq-zm-he1">
                         <rect key="frame" x="86" y="188" width="123" height="24"/>
@@ -838,12 +863,12 @@
                 <constraints>
                     <constraint firstItem="fyW-Nm-b7I" firstAttribute="top" secondItem="ej6-We-03q" secondAttribute="bottom" constant="3" id="05n-cu-e3j"/>
                     <constraint firstItem="xX1-Mt-ukC" firstAttribute="leading" secondItem="8HL-HY-fgp" secondAttribute="trailing" constant="8" id="1ee-dL-bgr"/>
+                    <constraint firstItem="xX1-Mt-ukC" firstAttribute="leading" secondItem="BKc-5S-qKa" secondAttribute="trailing" constant="8" id="2HY-k0-rOa"/>
                     <constraint firstItem="YhN-0W-NDy" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="9" id="5HI-4F-bms"/>
                     <constraint firstItem="TQQ-QV-qyz" firstAttribute="top" secondItem="9B4-DF-hFg" secondAttribute="bottom" constant="8" id="6Ce-sA-R2V"/>
                     <constraint firstItem="2E1-fk-1I8" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="9" id="6kd-4R-qXp"/>
                     <constraint firstItem="ej6-We-03q" firstAttribute="leading" secondItem="v94-LN-uCm" secondAttribute="trailing" constant="8" id="7BS-l9-LF9"/>
                     <constraint firstItem="8HL-HY-fgp" firstAttribute="leading" secondItem="wkp-bf-9xJ" secondAttribute="trailing" constant="8" id="99M-xM-Udu"/>
-                    <constraint firstItem="BKc-5S-qKa" firstAttribute="leading" secondItem="SOV-kb-V2U" secondAttribute="trailing" constant="8" id="9tg-Gy-g4K"/>
                     <constraint firstItem="9B4-DF-hFg" firstAttribute="top" secondItem="v94-LN-uCm" secondAttribute="bottom" constant="8" id="AUF-fg-CN0"/>
                     <constraint firstItem="YhN-0W-NDy" firstAttribute="top" secondItem="G72-Xd-nTU" secondAttribute="bottom" constant="5" id="DAs-L2-I7Z"/>
                     <constraint firstItem="5Fq-zm-he1" firstAttribute="leading" secondItem="djz-sJ-WyU" secondAttribute="trailing" constant="8" id="HW7-Cs-WWE"/>
@@ -875,12 +900,11 @@
                     <constraint firstItem="xX1-Mt-ukC" firstAttribute="leading" secondItem="G72-Xd-nTU" secondAttribute="trailing" constant="8" id="s9P-WK-rXm"/>
                     <constraint firstAttribute="bottom" secondItem="xX1-Mt-ukC" secondAttribute="bottom" constant="20" id="sBS-zq-cez"/>
                     <constraint firstItem="ej6-We-03q" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="23" id="tut-sL-ye4"/>
-                    <constraint firstItem="xX1-Mt-ukC" firstAttribute="leading" secondItem="BKc-5S-qKa" secondAttribute="trailing" constant="8" id="v1K-C4-goP"/>
                     <constraint firstItem="SOV-kb-V2U" firstAttribute="top" secondItem="wkp-bf-9xJ" secondAttribute="bottom" constant="8" id="wma-ZK-PYQ"/>
                     <constraint firstItem="G72-Xd-nTU" firstAttribute="leading" secondItem="TQQ-QV-qyz" secondAttribute="trailing" constant="8" id="xdf-xe-Sdz"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="-233" y="-408"/>
+            <point key="canvasLocation" x="-235" y="-472"/>
         </window>
     </objects>
 </document>

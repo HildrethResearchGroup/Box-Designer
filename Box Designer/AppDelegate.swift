@@ -16,7 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var boxViewController: BoxViewController!
     @IBOutlet weak var inputViewController: InputViewController!
     
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }

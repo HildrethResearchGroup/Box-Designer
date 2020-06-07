@@ -10,6 +10,11 @@
 		02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C32247ED22B00F595A1 /* PDFFileSaver.swift */; };
 		02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C4E248C308400F595A1 /* BoxViewController.swift */; };
 		02043C51248C310A00F595A1 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C50248C310A00F595A1 /* InputViewController.swift */; };
+		02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C52248C74DD00F595A1 /* BoxModel.swift */; };
+		02043C55248C74EC00F595A1 /* WallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C54248C74EC00F595A1 /* WallModel.swift */; };
+		02043C57248C789600F595A1 /* WallType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C56248C789600F595A1 /* WallType.swift */; };
+		02043C59248C7AC000F595A1 /* JoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C58248C7AC000F595A1 /* JoinType.swift */; };
+		02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5A248C7BCC00F595A1 /* PathGenerator.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -30,6 +35,11 @@
 		02043C32247ED22B00F595A1 /* PDFFileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFFileSaver.swift; sourceTree = "<group>"; };
 		02043C4E248C308400F595A1 /* BoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxViewController.swift; sourceTree = "<group>"; };
 		02043C50248C310A00F595A1 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		02043C52248C74DD00F595A1 /* BoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxModel.swift; sourceTree = "<group>"; };
+		02043C54248C74EC00F595A1 /* WallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallModel.swift; sourceTree = "<group>"; };
+		02043C56248C789600F595A1 /* WallType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallType.swift; sourceTree = "<group>"; };
+		02043C58248C7AC000F595A1 /* JoinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinType.swift; sourceTree = "<group>"; };
+		02043C5A248C7BCC00F595A1 /* PathGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerator.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +98,9 @@
 				C0E65E502478426E009D90F1 /* Assets.xcassets */,
 				C0E65E552478426E009D90F1 /* Info.plist */,
 				C0E65E562478426E009D90F1 /* Box_Designer.entitlements */,
+				02043C58248C7AC000F595A1 /* JoinType.swift */,
+				02043C56248C789600F595A1 /* WallType.swift */,
+				02043C5A248C7BCC00F595A1 /* PathGenerator.swift */,
 				02043C32247ED22B00F595A1 /* PDFFileSaver.swift */,
 			);
 			path = "Box Designer";
@@ -121,6 +134,8 @@
 		C0E65E72247851C0009D90F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				02043C52248C74DD00F595A1 /* BoxModel.swift */,
+				02043C54248C74EC00F595A1 /* WallModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -225,8 +240,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02043C57248C789600F595A1 /* WallType.swift in Sources */,
 				02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */,
 				02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */,
+				02043C59248C7AC000F595A1 /* JoinType.swift in Sources */,
+				02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */,
+				02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */,
+				02043C55248C74EC00F595A1 /* WallModel.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
 				02043C51248C310A00F595A1 /* InputViewController.swift in Sources */,
 			);

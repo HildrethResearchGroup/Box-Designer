@@ -2,77 +2,49 @@
 //  WallModel.swift
 //  Box Designer
 //
-//  Created by Grace Clark on 6/4/20.
+//  Created by Grace Clark on 6/6/20.
 //  Copyright © 2020 Hildreth Research Group. All rights reserved.
 //
 
 import Foundation
 import Cocoa
-
-//this allows us to use Point as a parameter and return type
-typealias Point = (x:Double, y: Double, z:Double)
-
+import SceneKit.SCNGeometry
 
 class WallModel {
-    
-    init(_ path: NSBezierPath, tabs tabStyle: TabStyle) {
-        self.path = path
-        self.tabStyle = tabStyle
-    }
-    
-    var delegate: WallModelDelegate? = nil //set when you create the wall, either on awakeFromNib() or in addWall()
-    
-    //this may or may not be helpful
+    /*
+     These attributes are those strictly necessary for
+     1) drawing the wall's outline as a pdf
+     2) displaying the wall within a SCNView
+    */
     var path: NSBezierPath
+    var materialThickness: Double
+    var position: SCNVector3
     
-    var tabStyle: TabStyle {
-        didSet {
-            if tabStyle != oldValue {
-                delegate?.wallModelTabStyleDidChange(tabStyle)
-            }
-        }
+    //This function can be used to create a wall using data from a saved file
+    init(_ path: NSBezierPath, _ materialThickness: Double, _ position: SCNVector3) {
+        self.path = path
+        self.materialThickness = materialThickness
+        self.position = position
     }
     
-    var materialThickness: Double = 0.25 {
-        didSet {
-            if materialThickness != oldValue {
-                delegate?.wallModelMaterialThicknessDidChange(materialThickness)
-            }
-        }
+    //
+    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, tabWidth internalTabWidth: Double?) {
+        self.width = width
+        self.length = length
+        self.materialThickness = materialThickness
+        self.wallType = wallType
+        self.joinType = joinType
+        self.position = position
+        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, tabWidth: internalTabWidth)
     }
     
-    //these may need to be renamed to be more descriptive
-    var wallWidth: Double = 4.0 {
-        didSet {
-            if wallWidth != oldValue {
-                delegate?.wallModelWidthDidChange(wallWidth)
-            }
-        }
-    }
-    
-    var wallLength: Double = 4.0 {
-        didSet {
-            if wallLength != oldValue {
-                delegate?.wallModelLengthDidChange(wallLength)
-            }
-        }
-    }
-    
-    //three-variable tuple for x, y, z position
-    var location: Point = (0.0, 0.0, 0.0) {
-        didSet {
-            if location != oldValue {
-                delegate?.wallModelLocationDidChange(location)
-            }
-        }
-    }
-}
-
-protocol WallModelDelegate {
-    //use for changes in individual WALL
-    func wallModelTabStyleDidChange(_ tabStyle: TabStyle)
-    func wallModelMaterialThicknessDidChange(_ materialThickness: Double)
-    func wallModelWidthDidChange(_ wallWidth: Double)
-    func wallModelLengthDidChange(_ wallLength: Double)
-    func wallModelLocationDidChange(_ location: Point)
+    /*
+     These attributes may not necessarily be set at any time.
+     However, they make the process of adjusting the wall path
+     significantly easier.
+     */
+    var width: Double?
+    var length: Double?
+    var wallType: WallType?
+    var joinType: JoinType?
 }

@@ -1,5 +1,5 @@
 //
-//  BoxModel.swift
+//  JoinType.swift
 //  Box Designer
 //
 //  Created by Grace Clark on 6/6/20.
@@ -9,6 +9,7 @@
 import Foundation
 import Cocoa
 
-class BoxModel {
-    
+enum JoinType {
+    case tab
+    case overlap
 }

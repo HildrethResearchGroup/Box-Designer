@@ -17,6 +17,7 @@ class PathGenerator {
      smallCorner - can be found in the WallType enum.
      */
     static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, tabWidth internalTabWidth: Double?) -> NSBezierPath {
+        print("generatePath() function called")
         var path = NSBezierPath()
         switch (joinType) {
         case JoinType.overlap:

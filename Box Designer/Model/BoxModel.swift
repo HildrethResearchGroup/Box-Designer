@@ -13,13 +13,79 @@ import SceneKit
 class BoxModel {
 
     var walls: [WallModel]
-    var boxWidth: Double
-    var boxLength: Double
-    var boxHeight: Double
-    var materialThickness: Double
-    var innerDimensions: Bool
-    var joinType: JoinType
-    var tabWidth: Double?
+    var boxWidth: Double {
+        willSet {
+            if innerDimensions {
+                self.boxWidth = newValue + 2 * materialThickness
+            } else {
+                self.boxWidth = newValue
+            }
+        }
+    }
+    var boxLength: Double {
+        willSet {
+            if innerDimensions {
+                self.boxLength = newValue + 2 * materialThickness
+            } else {
+                self.boxLength = newValue
+            }
+        }
+    }
+    var boxHeight: Double {
+        willSet {
+            if innerDimensions {
+                self.boxHeight = newValue + 2 * materialThickness
+            } else {
+                self.boxHeight = newValue
+            }
+        }
+    }
+    var materialThickness: Double {
+        didSet {
+            if materialThickness != oldValue {
+                for wall in self.walls {
+                    wall.materialThickness = self.materialThickness
+                }
+            }
+        }
+    }
+    var innerDimensions: Bool {
+        didSet {
+            if innerDimensions != oldValue {
+                if innerDimensions {
+                    /*
+                     Invoking these properties' willSet functions;
+                     this will handle the adaptation to the innerDimension
+                     setting.  Trying to actively add the thickness here
+                     will result in it being added twice.
+                     
+                     I kind of hate that this works, but hey, it works.
+                     */
+                    self.boxLength = self.boxLength + 0
+                    self.boxWidth = self.boxWidth + 0
+                    self.boxHeight = self.boxHeight + 0
+                }
+            }
+        }
+    }
+    var joinType: JoinType {
+        didSet {
+            if joinType != oldValue {
+                for wall in self.walls {
+                    wall.joinType = self.joinType
+                }
+            }
+        }
+    }
+    var tabWidth: Double? {
+        didSet {
+            if tabWidth != oldValue {
+                for wall in self.walls {
+                    wall.tabWidth = self.tabWidth
+                }
+            }
+        }
+    }
     
     //This initializer can be used to create a box using data loaded from a file
     init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ tabWidth: Double?) {

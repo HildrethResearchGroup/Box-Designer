@@ -807,7 +807,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="nwL-1Q-4CI"/>
                         </constraints>
-                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="5L2-db-ROf">
+                        <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="5L2-db-ROf">
                             <connections>
                                 <action selector="tabWidthChanged:" target="SYY-Aa-HfQ" id="JCy-tf-KQ4"/>
                             </connections>

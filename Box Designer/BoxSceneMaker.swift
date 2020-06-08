@@ -10,6 +10,9 @@ import Foundation
 import Cocoa
 import SceneKit
 
+
+
+
 enum EdgeType: String {
     case finger = "finger"
     case overlapping = "overlapping"
@@ -34,15 +37,34 @@ class BoxSceneMaker {
         let blue:CGFloat = CGFloat(drand48())
         return NSColor(red:red, green: green, blue: blue, alpha: 1.0)
     }
-
+    
+    init(){
+        self.height = 1
+        self.width = 1
+        self.length = 1
+    }
+    
+    func setUserHeight(height: Double){
+        self.height = height
+    }
+    
+    func setUserWidth(width: Double){
+        self.width = width
+    }
+    
+    func setUserLength(length: Double){
+        self.length = length
+    }
+    
+    
     func generateWallPath(cornerType tabStyle:TabStyle, joinType edgeType:EdgeType, _ height: Double, _ width: Double, _ length: Double) -> NSBezierPath {
         switch(tabStyle) {
         case TabStyle.smallCorner:
-            return generateSmallCornerPath(joinType: edgeType, 1, 1, 1)
+            return generateSmallCornerPath(joinType: edgeType,BoxSceneMaker.boxInput.height, BoxSceneMaker.boxInput.width, BoxSceneMaker.boxInput.length)
         case TabStyle.largeCorner:
-            return generateLargeCornerPath(joinType: edgeType, 1, 1, 1)
+            return generateLargeCornerPath(joinType: edgeType,BoxSceneMaker.boxInput.height, BoxSceneMaker.boxInput.width, BoxSceneMaker.boxInput.length)
         case TabStyle.longCorner:
-            return generateLongCornerPath(joinType: edgeType, 1, 1, 1)
+            return generateLongCornerPath(joinType: edgeType,BoxSceneMaker.boxInput.height, BoxSceneMaker.boxInput.width, BoxSceneMaker.boxInput.length)
         }
     }
     
@@ -105,7 +127,7 @@ class BoxSceneMaker {
     
     func makeSmallCornerWall(position point: Point) -> SCNNode {
         var extrusionDepth: CGFloat = 0.05
-        var path = generateSmallCornerPath(joinType: EdgeType.finger, 1, 1, 1)
+        var path = generateSmallCornerPath(joinType: EdgeType.finger,BoxSceneMaker.boxInput.length, BoxSceneMaker.boxInput.height, BoxSceneMaker.boxInput.width)
         var wall = SCNShape(path: path, extrusionDepth: extrusionDepth)
         wall.firstMaterial?.diffuse.contents = getRandomColor()
         var node = SCNNode(geometry: wall)
@@ -164,7 +186,7 @@ class BoxSceneMaker {
     
     func makeLargeCornerWall(position point: Point) -> SCNNode {
         var extrusionDepth: CGFloat = 0.05
-        var path = generateLargeCornerPath(joinType: EdgeType.finger, 1, 1, 1)
+        var path = generateLargeCornerPath(joinType: EdgeType.finger,BoxSceneMaker.boxInput.length, BoxSceneMaker.boxInput.height, BoxSceneMaker.boxInput.width)
         var wall = SCNShape(path: path, extrusionDepth: extrusionDepth)
         wall.firstMaterial?.diffuse.contents = getRandomColor()
         var node = SCNNode(geometry: wall)
@@ -223,7 +245,7 @@ class BoxSceneMaker {
     
     func makeLongCornerWall(position point: Point) -> SCNNode {
         var extrusionDepth: CGFloat = 0.05
-        var path = generateLongCornerPath(joinType: EdgeType.finger, 1, 1, 1)
+        var path = generateLongCornerPath(joinType: EdgeType.finger, BoxSceneMaker.boxInput.length, BoxSceneMaker.boxInput.height, BoxSceneMaker.boxInput.width)
         var wall = SCNShape(path: path, extrusionDepth: extrusionDepth)
         wall.firstMaterial?.diffuse.contents = getRandomColor()
         var node = SCNNode(geometry: wall)
@@ -640,7 +662,9 @@ class BoxSceneMaker {
         }
     
     
-    
+//    func getUserInput(){
+//        
+//    }
 }
 
 protocol BoxSceneMakerDelegate {

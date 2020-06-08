@@ -125,11 +125,11 @@ class BoxModel {
             if innerDimensions != newValue {
                 if newValue == true {
                     /*
-                     when changing TO innerdimensions,
+                     When changing TO innerdimensions,
                      manually add the extra length
-                     to each dimension BEFORE switching
-                     future changes will be adjusted
-                     by the dimensions themselves
+                     to each dimension BEFORE switching.
+                     Future changes will be adjusted
+                     by the dimensions themselves.
                     */
                     self.boxLength += 2 * materialThickness
                     self.boxWidth += 2 * materialThickness
@@ -144,10 +144,10 @@ class BoxModel {
             if innerDimensions != oldValue {
                 if oldValue == true {
                     /*
-                     when changing FROM innerdimensions,
+                     When changing FROM innerDimensions,
                      manually remove the extra length
-                     from each dimension AFTER switching
-                     future changes will not need or
+                     from each dimension AFTER switching.
+                     Future changes will not need or
                      receive any adjustment.
                      */
                     self.boxLength -= 2 * materialThickness

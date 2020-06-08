@@ -29,7 +29,6 @@ class BoxViewController: NSViewController, SceneGeneratorDelegate {
     }
     
     func updateScene() {
-        print("update scene entered")
         self.boxView.scene = sceneGenerator.scene
     }
     

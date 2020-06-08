@@ -92,6 +92,8 @@ class PathGenerator {
     }
     
     static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+        print("Length: \(length), materialThickness: \(materialThickness), tabWidth: \(tabWidth)")
+        
         let path = NSBezierPath()
         path.append(makeOuterLeftTabPath(0.0, 0.0, length, materialThickness, tabWidth))
         path.append(makeOuterUpTabPath(0.0, length, width, materialThickness, tabWidth))
@@ -120,15 +122,24 @@ class PathGenerator {
     
     static func makeOuterLeftTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
         
+        print("length: \(sideLength), materialThickness: \(materialThickness), tabWidth \(tabWidth)")
+        
         let path = NSBezierPath()
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
         
+        /*
         //first outer tab
         path.move(to: CGPoint(x: startX, y: startY))
+        print("X: \(startX), Y: \(startY)")
         path.line(to: CGPoint(x: startX, y: startY + outerTabWidth))
-        
+        print("X: \(startX), Y: \(startY + outerTabWidth)")
         //first inner tab
         path.append(makeRightLeftTab(x: startX, y: startY + outerTabWidth, materialThickness, tabWidth, upward: true))
+        */
+        
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX, y: startY + sideLength / 3))
+        path.append(makeRightLeftTab(x: startX, y: startY + sideLength / 3, materialThickness, sideLength / 3, upward: true))
         
         /*
         //how much of the length remains for placing the INNER tabs?
@@ -199,12 +210,16 @@ class PathGenerator {
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
         
         //first outer tab
-        path.move(to: CGPoint(x: startX, y: startY))
+        /*path.move(to: CGPoint(x: startX, y: startY))
         path.line(to: CGPoint(x: startX + outerTabWidth, y: startY))
         
         //first inner tab
         path.append(makeDownUpTab(x: startX + outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: true))
+        */
         
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX + sideLength / 3, y: startY))
+        path.append(makeDownUpTab(x: startX + sideLength, y: startY, materialThickness, sideLength / 3, toTheRight: true))
         /*
         
         //how much of the length remains for placing the INNER tabs?
@@ -277,11 +292,15 @@ class PathGenerator {
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
         
         //first outer tab
-        path.move(to: CGPoint(x: startX, y: startY))
+        /*path.move(to: CGPoint(x: startX, y: startY))
         path.line(to: CGPoint(x: startX, y: startY - outerTabWidth))
         
         //first inner tab
         path.append(makeLeftRightTab(x: startX, y: startY - outerTabWidth, materialThickness, tabWidth, upward: false))
+        */
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX, y: startY - sideLength / 3))
+        path.append(makeLeftRightTab(x: startX, y: startY - sideLength / 3, materialThickness, sideLength / 3, upward: false))
         
         /*
         
@@ -322,6 +341,7 @@ class PathGenerator {
         //first inner tab
         path.append(makeRightLeftTab(x: startX, y: startY - outerTabWidth, materialThickness, tabWidth, upward: false))
         
+        
         /*
         
         //how much of the length remains for placing the INNER tabs?
@@ -355,12 +375,16 @@ class PathGenerator {
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
         
         //first outer tab
-        path.move(to: CGPoint(x: startX, y: startY))
+        /*path.move(to: CGPoint(x: startX, y: startY))
         path.line(to: CGPoint(x: startX - outerTabWidth, y: startY))
         
         //first inner tab
         path.append(makeUpDownTab(x: startX - outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: false))
+        */
         
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.line(to: CGPoint(x: startX - sideLength / 3, y: startY))
+        path.append(makeUpDownTab(x: startX - sideLength / 3, y: startY, materialThickness, sideLength / 3, toTheRight: false))
         /*
         
         //how much of the length remains for placing the INNER tabs?
@@ -473,6 +497,8 @@ class PathGenerator {
     static func makeRightLeftTab(x startX: Double, y startY: Double, _ materialThickness: Double, _ tabWidth: Double, upward dirUp: Bool) -> NSBezierPath {
         let path = NSBezierPath()
         path.move(to: CGPoint(x: startX, y: startY))
+        print("X: \(startX), Y: \(startY)")
+        print("materialThickness: \(materialThickness), tabWidth \(tabWidth)")
         if dirUp {
             path.line(to: CGPoint(x: startX + materialThickness, y: startY))
             path.line(to: CGPoint(x: startX + materialThickness, y: startY + tabWidth))
@@ -488,10 +514,14 @@ class PathGenerator {
     static func makeLeftRightTab(x startX: Double, y startY: Double, _ materialThickness: Double, _ tabWidth: Double, upward dirUp: Bool) -> NSBezierPath {
         let path = NSBezierPath()
         path.move(to: CGPoint(x: startX, y: startY))
+        print("X: \(startX), Y: \(startY)")
         if dirUp {
             path.line(to: CGPoint(x: startX - materialThickness, y: startY))
+            print("X: \(startX - materialThickness) Y: \(startY)")
             path.line(to: CGPoint(x: startX - materialThickness, y: startY + tabWidth))
+            print("X: \(startX - materialThickness) Y: \(startY + tabWidth)")
             path.line(to: CGPoint(x: startX, y: startY + tabWidth))
+            print("X: \(startX) Y: \(startY + tabWidth)")
         } else {
             path.line(to: CGPoint(x: startX - materialThickness, y: startY))
             path.line(to: CGPoint(x: startX - materialThickness, y: startY - tabWidth))

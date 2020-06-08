@@ -28,13 +28,11 @@ class SceneGenerator {
     
     var scene: SCNScene {
         didSet {
-            print("did set entered")
             delegate?.updateScene()
         }
     }
     
     func generateScene(_ boxModel: BoxModel) {        
-        print("generate scene entered")
         let scene = SCNScene()
         var wallNumber = 0
         for wall in boxModel.walls {

@@ -81,7 +81,6 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
-        print("slider moved")
         let tabWidth = tabWidthSlider.doubleValue
         tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidth)
         boxModel.tabWidth = tabWidth

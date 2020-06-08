@@ -162,6 +162,69 @@ class PathGenerator {
     
     static func generateTabLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
         let path = NSBezierPath()
+        
+        //left side
+        path.move(to: CGPoint(x: 0.0, y: materialThickness))
+        path.line(to: CGPoint(x: 0.0, y: length / 5))
+        
+        path.line(to: CGPoint(x: materialThickness, y: length / 5))
+        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 2))
+        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 2))
+        
+        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 3))
+        
+        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 3))
+        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 4))
+        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 4))
+        
+        path.line(to: CGPoint(x: 0.0, y: length - materialThickness))
+        
+        //top side
+        path.line(to: CGPoint(x: width / 5, y: length - materialThickness))
+        
+        path.line(to: CGPoint(x: width / 5, y: length))
+        path.line(to: CGPoint(x: (width / 5) * 2, y: length))
+        path.line(to: CGPoint(x: (width / 5) * 2, y: length - materialThickness))
+        
+        path.line(to: CGPoint(x: (width / 5) * 3, y: length - materialThickness))
+        
+        path.line(to: CGPoint(x: (width / 5) * 3, y: length))
+        path.line(to: CGPoint(x: (width / 5) * 4, y: length))
+        path.line(to: CGPoint(x: (width / 5) * 4, y: length - materialThickness))
+        
+        path.line(to: CGPoint(x: width, y: length - materialThickness))
+        
+        //right side
+        path.line(to: CGPoint(x: width, y: (length / 5) * 4))
+        
+        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 4))
+        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 3))
+        path.line(to: CGPoint(x: width, y: (length / 5) * 3))
+        
+        path.line(to: CGPoint(x: width, y: (length / 5) * 2))
+        
+        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 2))
+        path.line(to: CGPoint(x: width - materialThickness, y: length / 5))
+        path.line(to: CGPoint(x: width, y: length / 5))
+        
+        path.line(to: CGPoint(x: width, y: materialThickness))
+        
+        //bottom side
+        path.line(to: CGPoint(x: (width / 5) * 4, y: materialThickness))
+        
+        path.line(to: CGPoint(x: (width / 5) * 4, y: 0.0))
+        path.line(to: CGPoint(x: (width / 5) * 3, y: 0.0))
+        path.line(to: CGPoint(x: (width / 5) * 3, y: materialThickness))
+        
+        path.line(to: CGPoint(x: (width / 5) * 2, y: materialThickness))
+        
+        path.line(to: CGPoint(x: (width / 5) * 2, y: 0.0))
+        path.line(to: CGPoint(x: width / 5, y: 0.0))
+        path.line(to: CGPoint(x: width / 5, y: materialThickness))
+        
+        path.line(to: CGPoint(x: 0.0, y: materialThickness))
+        path.close()
+        
         /*path.append(makeOuterLeftTabPath(0.0, materialThickness, length, materialThickness, tabWidth))
         path.append(makeInnerUpTabPath(0.0, length - materialThickness, width - 2 * materialThickness, materialThickness, tabWidth))
         path.append(makeOuterRightTabPath(width, length - materialThickness, length, materialThickness, tabWidth))

@@ -197,13 +197,14 @@ class BoxModel {
     init() {
         //bottom wall
         let wall0 = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 0.25, 0.0), tabWidth: nil)
+        let wall1 = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
         //left and right walls
-        //let wall1 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(0.25, 0.0, 0.0), tabWidth: nil)
-        //let wall2 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(3.75, 0.0, 0.0), tabWidth: nil)
+        let wall2 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(0.25, 0.0, 0.0), tabWidth: nil)
+        let wall3 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(3.75, 0.0, 0.0), tabWidth: nil)
         //back and front walls
-        let wall3 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.25), tabWidth: nil)
-        let wall4 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 3.75), tabWidth: nil)
-        let walls = [wall0, wall3, wall4]
+        let wall4 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.25), tabWidth: nil)
+        let wall5 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 3.75), tabWidth: nil)
+        let walls = [wall0, wall1, wall2, wall3, wall4, wall5]
         
         self.walls = walls
         self.boxWidth = 4.0

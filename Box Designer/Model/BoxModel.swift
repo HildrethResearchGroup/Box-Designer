@@ -111,6 +111,8 @@ class BoxModel {
                         wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength - materialThickness/2))
                     } else if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(boxWidth - oldValue/2), 0.0, 0.0)) {
                         wall.position = SCNVector3Make(CGFloat(boxWidth - materialThickness/2), 0.0, 0.0)
+                    } else if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(boxHeight - oldValue/2), 0.0)) {
+                        wall.position = SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness/2), 0.0)
                     }
                 }
                 //inform SceneGenerator

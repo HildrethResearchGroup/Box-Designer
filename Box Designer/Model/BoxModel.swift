@@ -195,7 +195,7 @@ class BoxModel {
     
     //This initializer creates the default box model which is loaded whenever the application is launched
     init() {
-        //bottom wall
+        //bottom and top walls
         let wall0 = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 0.25, 0.0), tabWidth: nil)
         let wall1 = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
         //left and right walls

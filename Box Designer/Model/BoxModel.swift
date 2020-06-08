@@ -13,6 +13,7 @@ import SceneKit
 class BoxModel {
 
     var walls: [WallModel]
+    //refers to box dimension along x axis
     var boxWidth: Double {
         willSet {
             if innerDimensions {
@@ -21,7 +22,24 @@ class BoxModel {
                 self.boxWidth = newValue
             }
         }
+        didSet {
+            if boxWidth != oldValue {
+                for wall in self.walls {
+                    if (wall.wallType == WallType.largeCorner) {
+                        wall.width = boxWidth
+                    } else if (wall.wallType == WallType.smallCorner) {
+                        wall.width = boxWidth
+                    } else if (wall.wallType == WallType.longCorner) {
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(oldValue), 0.0, 0.0)) {
+                            wall.position = SCNVector3Make(CGFloat(boxWidth), 0.0, 0.0)
+                        }
+                    }
+                }
+            }
+            //inform SceneGenerator
+        }
     }
+    //refers to box dimension along z axis
     var boxLength: Double {
         willSet {
             if innerDimensions {
@@ -30,13 +48,46 @@ class BoxModel {
                 self.boxLength = newValue
             }
         }
+        didSet {
+            if boxLength != oldValue {
+                for wall in self.walls {
+                    if (wall.wallType == WallType.largeCorner) {
+                        wall.length = boxLength
+                    } else if (wall.wallType == WallType.smallCorner) {
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue))) {
+                            wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength))
+                        }
+                    } else if (wall.wallType == WallType.longCorner) {
+                        wall.width = boxLength
+                    }
+                }
+                //inform SceneGenerator
+            }
+        }
     }
+    //refers to box dimension along y axis
     var boxHeight: Double {
         willSet {
             if innerDimensions {
                 self.boxHeight = newValue + 2 * materialThickness
             } else {
                 self.boxHeight = newValue
+            }
+        }
+        didSet {
+            if boxHeight != oldValue {
+                for wall in self.walls {
+                    if (wall.wallType == WallType.largeCorner) {
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(oldValue), 0.0)) {
+                            wall.position = SCNVector3Make(0.0, CGFloat(boxHeight), 0.0)
+                        }
+                    } else if (wall.wallType == WallType.smallCorner) {
+                        wall.length = boxHeight
+                    } else if (wall.wallType == WallType.longCorner) {
+                        wall.length = boxHeight
+                    }
+                }
+                //inform SceneGenerator
             }
         }
     }
@@ -46,24 +97,42 @@ class BoxModel {
                 for wall in self.walls {
                     wall.materialThickness = self.materialThickness
                 }
+                //inform SceneGenerator
             }
         }
     }
     var innerDimensions: Bool {
+        willSet {
+            if innerDimensions != newValue {
+                if newValue == true {
+                    /*
+                     when changing TO innerdimensions,
+                     manually add the extra length
+                     to each dimension BEFORE switching
+                     future changes will be adjusted
+                     by the dimensions themselves
+                    */
+                    self.boxLength += 2 * materialThickness
+                    self.boxWidth += 2 * materialThickness
+                    self.boxHeight += 2 * materialThickness
+                    //inform SceneGenerator
+                }
+            }
+        }
         didSet {
             if innerDimensions != oldValue {
-                if innerDimensions {
+                if oldValue == true {
                     /*
-                     Invoking these properties' willSet functions;
-                     this will handle the adaptation to the innerDimension
-                     setting.  Trying to actively add the thickness here
-                     will result in it being added twice.
-                     
-                     I kind of hate that this works, but hey, it works.
+                     when changing FROM innerdimensions,
+                     manually remove the extra length
+                     from each dimension AFTER switching
+                     future changes will not need or
+                     receive any adjustment.
                      */
-                    self.boxLength = self.boxLength + 0
-                    self.boxWidth = self.boxWidth + 0
-                    self.boxHeight = self.boxHeight + 0
+                    self.boxLength -= 2 * materialThickness
+                    self.boxWidth -= 2 * materialThickness
+                    self.boxHeight -= 2 * materialThickness
+                    //inform SceneGenerator
                 }
             }
         }
@@ -74,6 +143,7 @@ class BoxModel {
                 for wall in self.walls {
                     wall.joinType = self.joinType
                 }
+                //inform SceneGenerator
             }
         }
     }
@@ -83,6 +153,7 @@ class BoxModel {
                 for wall in self.walls {
                     wall.tabWidth = self.tabWidth
                 }
+                //inform SceneGenerator
             }
         }
     }
@@ -109,7 +180,7 @@ class BoxModel {
         //back and front walls
         let wall3 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.0), tabWidth: nil)
         let wall4 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 4.0), tabWidth: nil)
-        var walls = [wall0, wall1, wall2, wall3, wall4]
+        let walls = [wall0, wall1, wall2, wall3, wall4]
         
         self.walls = walls
         self.boxWidth = 4.0

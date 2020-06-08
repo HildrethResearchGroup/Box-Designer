@@ -24,14 +24,14 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var tabWidthLabel: NSTextField!
     @IBOutlet weak var tabWidthSlider: NSSlider!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        boxModel = BoxModel()
         lengthTextField.doubleValue = boxModel.boxLength
         widthTextField.doubleValue = boxModel.boxWidth
         heightTextField.doubleValue = boxModel.boxHeight
         materialThicknessTextField.doubleValue = boxModel.materialThickness
-        
+                
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
@@ -79,6 +79,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
+        print("slider moved")
         let tabWidth = tabWidthSlider.doubleValue
         tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidth)
         boxModel.tabWidth = tabWidth

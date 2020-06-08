@@ -807,7 +807,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="nwL-1Q-4CI"/>
                         </constraints>
-                        <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="5L2-db-ROf">
+                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="5L2-db-ROf">
                             <connections>
                                 <action selector="tabWidthChanged:" target="SYY-Aa-HfQ" id="JCy-tf-KQ4"/>
                             </connections>
@@ -864,11 +864,13 @@
                     <constraint firstItem="fyW-Nm-b7I" firstAttribute="top" secondItem="ej6-We-03q" secondAttribute="bottom" constant="3" id="05n-cu-e3j"/>
                     <constraint firstItem="xX1-Mt-ukC" firstAttribute="leading" secondItem="8HL-HY-fgp" secondAttribute="trailing" constant="8" id="1ee-dL-bgr"/>
                     <constraint firstItem="xX1-Mt-ukC" firstAttribute="leading" secondItem="BKc-5S-qKa" secondAttribute="trailing" constant="8" id="2HY-k0-rOa"/>
+                    <constraint firstAttribute="bottom" secondItem="2E1-fk-1I8" secondAttribute="bottom" constant="98" id="58v-n9-l5A"/>
                     <constraint firstItem="YhN-0W-NDy" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="9" id="5HI-4F-bms"/>
                     <constraint firstItem="TQQ-QV-qyz" firstAttribute="top" secondItem="9B4-DF-hFg" secondAttribute="bottom" constant="8" id="6Ce-sA-R2V"/>
                     <constraint firstItem="2E1-fk-1I8" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="9" id="6kd-4R-qXp"/>
                     <constraint firstItem="ej6-We-03q" firstAttribute="leading" secondItem="v94-LN-uCm" secondAttribute="trailing" constant="8" id="7BS-l9-LF9"/>
                     <constraint firstItem="8HL-HY-fgp" firstAttribute="leading" secondItem="wkp-bf-9xJ" secondAttribute="trailing" constant="8" id="99M-xM-Udu"/>
+                    <constraint firstItem="xX1-Mt-ukC" firstAttribute="leading" secondItem="2E1-fk-1I8" secondAttribute="trailing" constant="124" id="A7a-CS-0m2"/>
                     <constraint firstItem="9B4-DF-hFg" firstAttribute="top" secondItem="v94-LN-uCm" secondAttribute="bottom" constant="8" id="AUF-fg-CN0"/>
                     <constraint firstItem="YhN-0W-NDy" firstAttribute="top" secondItem="G72-Xd-nTU" secondAttribute="bottom" constant="5" id="DAs-L2-I7Z"/>
                     <constraint firstItem="5Fq-zm-he1" firstAttribute="leading" secondItem="djz-sJ-WyU" secondAttribute="trailing" constant="8" id="HW7-Cs-WWE"/>
@@ -902,6 +904,7 @@
                     <constraint firstItem="ej6-We-03q" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="23" id="tut-sL-ye4"/>
                     <constraint firstItem="SOV-kb-V2U" firstAttribute="top" secondItem="wkp-bf-9xJ" secondAttribute="bottom" constant="8" id="wma-ZK-PYQ"/>
                     <constraint firstItem="G72-Xd-nTU" firstAttribute="leading" secondItem="TQQ-QV-qyz" secondAttribute="trailing" constant="8" id="xdf-xe-Sdz"/>
+                    <constraint firstItem="BKc-5S-qKa" firstAttribute="leading" secondItem="SOV-kb-V2U" secondAttribute="trailing" constant="8" id="zut-5c-Gkx"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="-235" y="-472"/>

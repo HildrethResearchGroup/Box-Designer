@@ -53,7 +53,7 @@ class PDFFileSaver {
     
     func parseScene(sceneToParse scene: SCNScene!) ->String {
         //fill in with actual stuff when wall modelling is more concrete!
-        var toReturn: String = "175 720 m 175 500 l h S"
+        let toReturn: String = "175 720 m 175 500 l h S"
         return toReturn
     }
     

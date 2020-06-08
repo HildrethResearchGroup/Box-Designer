@@ -17,7 +17,6 @@ class PathGenerator {
      smallCorner - can be found in the WallType enum.
      */
     static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, tabWidth internalTabWidth: Double?) -> NSBezierPath {
-        print("generatePath() function called")
         var path = NSBezierPath()
         switch (joinType) {
         case JoinType.overlap:
@@ -150,7 +149,6 @@ class PathGenerator {
         
         //second outer tab
         path.line(to: CGPoint(x: startX, y: startY + sideLength))
-        
         return path
     }
     
@@ -190,7 +188,7 @@ class PathGenerator {
     }
     
     static func makeOuterUpTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
-        
+
         let path = NSBezierPath()
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
         
@@ -220,7 +218,7 @@ class PathGenerator {
         
         //second outer tab
         path.line(to: CGPoint(x: startX + sideLength, y: startY))
-        
+
         return path
     }
     
@@ -260,7 +258,7 @@ class PathGenerator {
     }
     
     static func makeOuterRightTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
-        
+
         let path = NSBezierPath()
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
         
@@ -290,7 +288,7 @@ class PathGenerator {
         
         //second outer tab
         path.line(to: CGPoint(x: startX, y: startY - sideLength))
-        
+
         return path
     }
     
@@ -330,7 +328,7 @@ class PathGenerator {
     }
     
     static func makeOuterDownTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
-        
+
         let path = NSBezierPath()
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
         
@@ -360,7 +358,7 @@ class PathGenerator {
         
         //second outer tab
         path.line(to: CGPoint(x: startX - sideLength, y: startY))
-        
+
         return path
     }
     

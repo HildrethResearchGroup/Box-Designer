@@ -12,7 +12,9 @@ import SceneKit
 
 class SceneGenerator {
     
-    static func generateScene(_ boxModel: BoxModel) -> SCNScene {
+    var scene = SCNScene()
+    
+    func generateScene(_ boxModel: BoxModel) {
         
         let scene = SCNScene()
         for wall in boxModel.walls {
@@ -23,10 +25,10 @@ class SceneGenerator {
         }
         adjustLighting(scene)
         adjustCamera(scene)
-        return scene
+        self.scene = scene
     }
     
-    static func adjustLighting(_ scene: SCNScene) {
+    func adjustLighting(_ scene: SCNScene) {
         
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
@@ -43,7 +45,7 @@ class SceneGenerator {
         
     }
     
-    static func adjustCamera(_ scene: SCNScene) {
+    func adjustCamera(_ scene: SCNScene) {
         
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()

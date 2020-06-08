@@ -16,11 +16,8 @@ class WallModel {
      1) drawing the wall's outline as a pdf
      2) displaying the wall within a SCNView
     */
-    var path: NSBezierPath {
-        didSet {
-            print("Path was changed.")
-        }
-    }
+    var path: NSBezierPath
+
     var materialThickness: Double {
         didSet {
             if materialThickness != oldValue {

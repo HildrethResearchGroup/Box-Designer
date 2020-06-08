@@ -62,7 +62,7 @@ class WallModel {
     var tabWidth: Double? {
         didSet {
             if tabWidth != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
             }
         }
     }

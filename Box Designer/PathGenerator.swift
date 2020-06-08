@@ -92,8 +92,7 @@ class PathGenerator {
     }
     
     static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
-        print("Length: \(length), materialThickness: \(materialThickness), tabWidth: \(tabWidth)")
-        
+ 
         let path = NSBezierPath()
         path.append(makeOuterLeftTabPath(0.0, 0.0, length, materialThickness, tabWidth))
         path.append(makeOuterUpTabPath(0.0, length, width, materialThickness, tabWidth))
@@ -121,8 +120,6 @@ class PathGenerator {
     }
     
     static func makeOuterLeftTabPath(_ startX: Double, _ startY: Double, _ sideLength: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
-        
-        print("length: \(sideLength), materialThickness: \(materialThickness), tabWidth \(tabWidth)")
         
         let path = NSBezierPath()
         let outerTabWidth = calcOuterTabWidth(tabWidth, sideLength: sideLength)
@@ -497,8 +494,6 @@ class PathGenerator {
     static func makeRightLeftTab(x startX: Double, y startY: Double, _ materialThickness: Double, _ tabWidth: Double, upward dirUp: Bool) -> NSBezierPath {
         let path = NSBezierPath()
         path.move(to: CGPoint(x: startX, y: startY))
-        print("X: \(startX), Y: \(startY)")
-        print("materialThickness: \(materialThickness), tabWidth \(tabWidth)")
         if dirUp {
             path.line(to: CGPoint(x: startX + materialThickness, y: startY))
             path.line(to: CGPoint(x: startX + materialThickness, y: startY + tabWidth))
@@ -514,14 +509,10 @@ class PathGenerator {
     static func makeLeftRightTab(x startX: Double, y startY: Double, _ materialThickness: Double, _ tabWidth: Double, upward dirUp: Bool) -> NSBezierPath {
         let path = NSBezierPath()
         path.move(to: CGPoint(x: startX, y: startY))
-        print("X: \(startX), Y: \(startY)")
         if dirUp {
             path.line(to: CGPoint(x: startX - materialThickness, y: startY))
-            print("X: \(startX - materialThickness) Y: \(startY)")
             path.line(to: CGPoint(x: startX - materialThickness, y: startY + tabWidth))
-            print("X: \(startX - materialThickness) Y: \(startY + tabWidth)")
             path.line(to: CGPoint(x: startX, y: startY + tabWidth))
-            print("X: \(startX) Y: \(startY + tabWidth)")
         } else {
             path.line(to: CGPoint(x: startX - materialThickness, y: startY))
             path.line(to: CGPoint(x: startX - materialThickness, y: startY - tabWidth))

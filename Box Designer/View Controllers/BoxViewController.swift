@@ -10,8 +10,27 @@ import Foundation
 import Cocoa
 import SceneKit
 
-class BoxViewController: NSViewController {
+class BoxViewController: NSViewController, SceneGeneratorDelegate {
+
+    let sceneGenerator = SceneGenerator.shared
     
     @IBOutlet weak var boxView: SCNView!
+    
+    override func awakeFromNib() {
+        sceneGenerator.delegate = self
+        self.boxView.allowsCameraControl = true
+        self.boxView.scene = sceneGenerator.scene
+        self.boxView.needsDisplay = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+    func updateScene() {
+        print("update scene entered")
+        self.boxView.scene = sceneGenerator.scene
+    }
     
 }

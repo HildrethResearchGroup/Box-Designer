@@ -73,10 +73,10 @@ class PathGenerator {
     
     static func generateOverlapLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double) -> NSBezierPath {
         let path = NSBezierPath()
-        path.move(to: CGPoint(x: materialThickness, y: 0.0))
-        path.line(to: CGPoint(x: materialThickness, y: length))
-        path.line(to: CGPoint(x: width - materialThickness, y: length))
-        path.line(to: CGPoint(x: width - materialThickness, y: 0.0))
+        path.move(to: CGPoint(x: 0.0, y: materialThickness))
+        path.line(to: CGPoint(x: 0.0, y: length - materialThickness))
+        path.line(to: CGPoint(x: width, y: length - materialThickness))
+        path.line(to: CGPoint(x:width, y: materialThickness))
         path.close()
         return path
     }
@@ -102,10 +102,10 @@ class PathGenerator {
     
     static func generateTabLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
         let path = NSBezierPath()
-        path.append(makeInnerLeftTabPath(materialThickness, 0.0, length, materialThickness, tabWidth))
-        path.append(makeOuterUpTabPath(materialThickness, length, width - 2 * materialThickness, materialThickness, tabWidth))
-        path.append(makeInnerRightTabPath(width - materialThickness, length, length, materialThickness, tabWidth))
-        path.append(makeOuterDownTabPath(width - materialThickness, 0.0, width - 2 * materialThickness, materialThickness, tabWidth))
+        path.append(makeOuterLeftTabPath(0.0, materialThickness, length, materialThickness, tabWidth))
+        path.append(makeInnerUpTabPath(0.0, length - materialThickness, width - 2 * materialThickness, materialThickness, tabWidth))
+        path.append(makeOuterRightTabPath(width, length - materialThickness, length, materialThickness, tabWidth))
+        path.append(makeInnerDownTabPath(width, materialThickness, width - 2 * materialThickness, materialThickness, tabWidth))
         return path
     }
     
@@ -130,6 +130,7 @@ class PathGenerator {
         //first inner tab
         path.append(makeRightLeftTab(x: startX, y: startY + outerTabWidth, materialThickness, tabWidth, upward: true))
         
+        /*
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
         var currentY = startY + outerTabWidth + tabWidth
@@ -146,9 +147,10 @@ class PathGenerator {
             currentY = currentY + tabWidth
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
-        
+        */
         //second outer tab
         path.line(to: CGPoint(x: startX, y: startY + sideLength))
+        
         return path
     }
     
@@ -163,6 +165,8 @@ class PathGenerator {
         
         //first inner tab
         path.append(makeLeftRightTab(x: startX, y: startY + outerTabWidth, materialThickness, tabWidth, upward: true))
+        
+        /*
         
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
@@ -181,6 +185,8 @@ class PathGenerator {
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
         
+ */
+ 
         //second outer tab
         path.line(to: CGPoint(x: startX, y: startY + sideLength))
         
@@ -199,6 +205,8 @@ class PathGenerator {
         //first inner tab
         path.append(makeDownUpTab(x: startX + outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: true))
         
+        /*
+        
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
         var currentX = startX + outerTabWidth + tabWidth
@@ -216,6 +224,8 @@ class PathGenerator {
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
         
+ */
+ 
         //second outer tab
         path.line(to: CGPoint(x: startX + sideLength, y: startY))
 
@@ -233,6 +243,8 @@ class PathGenerator {
         
         //first inner tab
         path.append(makeUpDownTab(x: startX + outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: true))
+    
+        /*
         
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
@@ -251,6 +263,8 @@ class PathGenerator {
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
         
+ */
+ 
         //second outer tab
         path.line(to: CGPoint(x: startX + sideLength, y: startY))
     
@@ -269,6 +283,8 @@ class PathGenerator {
         //first inner tab
         path.append(makeLeftRightTab(x: startX, y: startY - outerTabWidth, materialThickness, tabWidth, upward: false))
         
+        /*
+        
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
         var currentY = startY - outerTabWidth - tabWidth
@@ -286,6 +302,8 @@ class PathGenerator {
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
         
+ */
+ 
         //second outer tab
         path.line(to: CGPoint(x: startX, y: startY - sideLength))
 
@@ -304,6 +322,8 @@ class PathGenerator {
         //first inner tab
         path.append(makeRightLeftTab(x: startX, y: startY - outerTabWidth, materialThickness, tabWidth, upward: false))
         
+        /*
+        
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
         var currentY = startY - outerTabWidth - tabWidth
@@ -321,6 +341,8 @@ class PathGenerator {
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
         
+ */
+ 
         //second outer tab
         path.line(to: CGPoint(x: startX, y: startY - sideLength))
         
@@ -339,6 +361,8 @@ class PathGenerator {
         //first inner tab
         path.append(makeUpDownTab(x: startX - outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: false))
         
+        /*
+        
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
         var currentX = startX - outerTabWidth - tabWidth
@@ -356,6 +380,8 @@ class PathGenerator {
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
         
+ */
+ 
         //second outer tab
         path.line(to: CGPoint(x: startX - sideLength, y: startY))
 
@@ -374,6 +400,8 @@ class PathGenerator {
         //first inner tab
         path.append(makeDownUpTab(x: startX - outerTabWidth, y: startY, materialThickness, tabWidth, toTheRight: false))
         
+        /*
+        
         //how much of the length remains for placing the INNER tabs?
         var lengthRemaining = sideLength - outerTabWidth * 2 - tabWidth
         var currentX = startX - outerTabWidth - tabWidth
@@ -391,6 +419,8 @@ class PathGenerator {
             lengthRemaining = lengthRemaining - 2 * tabWidth
         }
         
+ */
+ 
         //second outer tab
         path.line(to: CGPoint(x: startX - sideLength, y: startY))
         
@@ -403,9 +433,10 @@ class PathGenerator {
         while (left / 2 > tabWidth) {
             left -= 2 * tabWidth
         }
-        //above while loop will reduce the leftover by one iteration too many
-        //so add the two tabWidths worth back in
-        left += 2 * tabWidth
+        //ensure that width isn't less than zero
+        if (left < 0) {
+            left += 2 * tabWidth
+        }
         return left
     }
     

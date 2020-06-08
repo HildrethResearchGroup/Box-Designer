@@ -36,6 +36,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         joinTypeControl.selectSegment(withTag: 0)
         
         tabWidthSlider.isEnabled = false
+        
+        boxModel.sceneGenerator.generateScene(boxModel)
     }
     
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {

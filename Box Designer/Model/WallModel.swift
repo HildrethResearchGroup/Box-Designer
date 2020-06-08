@@ -11,6 +11,7 @@ import Cocoa
 import SceneKit.SCNGeometry
 
 class WallModel {
+
     /*
      These attributes are those strictly necessary for
      1) drawing the wall's outline as a pdf

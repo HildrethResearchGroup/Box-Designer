@@ -12,6 +12,8 @@ import SceneKit
 
 class BoxModel {
 
+    let sceneGenerator = SceneGenerator.shared
+    
     var walls: [WallModel]
     //refers to box dimension along x axis
     var boxWidth: Double {
@@ -30,13 +32,14 @@ class BoxModel {
                     } else if (wall.wallType == WallType.smallCorner) {
                         wall.width = boxWidth
                     } else if (wall.wallType == WallType.longCorner) {
-                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(oldValue), 0.0, 0.0)) {
-                            wall.position = SCNVector3Make(CGFloat(boxWidth), 0.0, 0.0)
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(oldValue - materialThickness/2), 0.0, 0.0)) {
+                            wall.position = SCNVector3Make(CGFloat(boxWidth - materialThickness/2), 0.0, 0.0)
                         }
                     }
                 }
             }
             //inform SceneGenerator
+            sceneGenerator.generateScene(self)
         }
     }
     //refers to box dimension along z axis
@@ -54,14 +57,15 @@ class BoxModel {
                     if (wall.wallType == WallType.largeCorner) {
                         wall.length = boxLength
                     } else if (wall.wallType == WallType.smallCorner) {
-                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue))) {
-                            wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength))
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue - materialThickness/2))) {
+                            wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength - materialThickness/2))
                         }
                     } else if (wall.wallType == WallType.longCorner) {
                         wall.width = boxLength
                     }
                 }
                 //inform SceneGenerator
+                sceneGenerator.generateScene(self)
             }
         }
     }
@@ -78,8 +82,8 @@ class BoxModel {
             if boxHeight != oldValue {
                 for wall in self.walls {
                     if (wall.wallType == WallType.largeCorner) {
-                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(oldValue), 0.0)) {
-                            wall.position = SCNVector3Make(0.0, CGFloat(boxHeight), 0.0)
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(oldValue - materialThickness/2), 0.0)) {
+                            wall.position = SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness/2), 0.0)
                         }
                     } else if (wall.wallType == WallType.smallCorner) {
                         wall.length = boxHeight
@@ -88,6 +92,7 @@ class BoxModel {
                     }
                 }
                 //inform SceneGenerator
+                sceneGenerator.generateScene(self)
             }
         }
     }
@@ -96,8 +101,20 @@ class BoxModel {
             if materialThickness != oldValue {
                 for wall in self.walls {
                     wall.materialThickness = self.materialThickness
+                    if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(oldValue/2), 0.0)) {
+                        wall.position = SCNVector3Make(0.0, CGFloat(materialThickness/2), 0.0)
+                    } else if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(oldValue/2), 0.0, 0.0)) {
+                        wall.position = SCNVector3Make(CGFloat(materialThickness/2), 0.0, 0.0)
+                    } else if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue/2))) {
+                        wall.position = SCNVector3Make(0.0, 0.0, CGFloat(materialThickness/2))
+                    } else if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(boxLength - oldValue/2))) {
+                        wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength - materialThickness/2))
+                    } else if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(boxWidth - oldValue/2), 0.0, 0.0)) {
+                        wall.position = SCNVector3Make(CGFloat(boxWidth - materialThickness/2), 0.0, 0.0)
+                    }
                 }
                 //inform SceneGenerator
+                sceneGenerator.generateScene(self)
             }
         }
     }
@@ -115,7 +132,9 @@ class BoxModel {
                     self.boxLength += 2 * materialThickness
                     self.boxWidth += 2 * materialThickness
                     self.boxHeight += 2 * materialThickness
+                    
                     //inform SceneGenerator
+                    sceneGenerator.generateScene(self)
                 }
             }
         }
@@ -132,7 +151,9 @@ class BoxModel {
                     self.boxLength -= 2 * materialThickness
                     self.boxWidth -= 2 * materialThickness
                     self.boxHeight -= 2 * materialThickness
+                    
                     //inform SceneGenerator
+                    sceneGenerator.generateScene(self)
                 }
             }
         }
@@ -144,6 +165,7 @@ class BoxModel {
                     wall.joinType = self.joinType
                 }
                 //inform SceneGenerator
+                sceneGenerator.generateScene(self)
             }
         }
     }
@@ -154,6 +176,7 @@ class BoxModel {
                     wall.tabWidth = self.tabWidth
                 }
                 //inform SceneGenerator
+                sceneGenerator.generateScene(self)
             }
         }
     }
@@ -173,13 +196,13 @@ class BoxModel {
     //This initializer creates the default box model which is loaded whenever the application is launched
     init() {
         //bottom wall
-        let wall0 = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.0), tabWidth: nil)
+        let wall0 = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 0.25, 0.0), tabWidth: nil)
         //left and right walls
-        let wall1 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.0), tabWidth: nil)
-        let wall2 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(4.0, 0.0, 0.0), tabWidth: nil)
+        let wall1 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(0.25, 0.0, 0.0), tabWidth: nil)
+        let wall2 = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(3.75, 0.0, 0.0), tabWidth: nil)
         //back and front walls
-        let wall3 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.0), tabWidth: nil)
-        let wall4 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 4.0), tabWidth: nil)
+        let wall3 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.25), tabWidth: nil)
+        let wall4 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 3.75), tabWidth: nil)
         let walls = [wall0, wall1, wall2, wall3, wall4]
         
         self.walls = walls

@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import SceneKit
 
 class InputViewController: NSViewController, NSTextDelegate {
     
@@ -23,6 +24,9 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     @IBOutlet weak var tabWidthLabel: NSTextField!
     @IBOutlet weak var tabWidthSlider: NSSlider!
+    
+    //@IBOutlet weak var addWall: NSButton!
+    @IBOutlet weak var lidOn_Off: NSButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -89,5 +93,11 @@ class InputViewController: NSViewController, NSTextDelegate {
     func setSliderLimits() {
         let smallestDimension = boxModel.smallestDimension()
         tabWidthSlider.maxValue = smallestDimension/3
+    }
+    
+    @IBAction func setLid_On_Off(_ sender: Any) {
+
+        boxModel.lidOn = !boxModel.lidOn
+
     }
 }

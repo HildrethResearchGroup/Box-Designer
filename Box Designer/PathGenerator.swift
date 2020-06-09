@@ -91,6 +91,20 @@ class PathGenerator {
         return path
     }
     
+//    static func generateOverlapSmallWallPath(_ width: Double, _ length: Double, _ materialThickness: Double) -> NSBezierPath {
+//        let path = NSBezierPath()
+//        path.move(to: CGPoint(x: materialThickness, y: materialThickness))
+//        path.line(to: CGPoint(x: materialThickness, y: length - materialThickness))
+//        path.line(to: CGPoint(x: width - materialThickness, y: length - materialThickness))
+//        path.line(to: CGPoint(x: width - materialThickness, y: materialThickness))
+//        path.close()
+//        return path
+//    }
+    
+    static func removeLid(){
+        
+    }
+    
     static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
  
         let path = NSBezierPath()
@@ -713,4 +727,6 @@ class PathGenerator {
         }
         return path
     }
+    
+
 }

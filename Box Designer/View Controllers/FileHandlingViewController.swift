@@ -11,6 +11,12 @@ import Cocoa
 
 class FileHandlingViewController: NSViewController {
     
+    @IBAction func openModel(_ sender: Any) {
     
+    }
+    
+    @IBAction func saveModel(_ sender: Any) {
+        
+    }
     
 }

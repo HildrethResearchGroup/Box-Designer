@@ -16,7 +16,6 @@
 		02043C59248C7AC000F595A1 /* JoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C58248C7AC000F595A1 /* JoinType.swift */; };
 		02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5A248C7BCC00F595A1 /* PathGenerator.swift */; };
 		02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5C248D72B400F595A1 /* SceneGenerator.swift */; };
-		02043C5F24900AD800F595A1 /* FileHandlingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5E24900AD800F595A1 /* FileHandlingViewController.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -43,7 +42,6 @@
 		02043C58248C7AC000F595A1 /* JoinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinType.swift; sourceTree = "<group>"; };
 		02043C5A248C7BCC00F595A1 /* PathGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerator.swift; sourceTree = "<group>"; };
 		02043C5C248D72B400F595A1 /* SceneGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneGenerator.swift; sourceTree = "<group>"; };
-		02043C5E24900AD800F595A1 /* FileHandlingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandlingViewController.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 			children = (
 				02043C4E248C308400F595A1 /* BoxViewController.swift */,
 				02043C50248C310A00F595A1 /* InputViewController.swift */,
-				02043C5E24900AD800F595A1 /* FileHandlingViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -252,7 +249,6 @@
 				02043C59248C7AC000F595A1 /* JoinType.swift in Sources */,
 				02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */,
 				02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */,
-				02043C5F24900AD800F595A1 /* FileHandlingViewController.swift in Sources */,
 				02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */,
 				02043C55248C74EC00F595A1 /* WallModel.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,

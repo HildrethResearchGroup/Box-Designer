@@ -211,16 +211,19 @@ class BoxModel {
                 let innerWallModel = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), tabWidth: nil)
                 if(lengthWall == true) {
                     walls.append(innerWallModel)
+                    lengthWall  = false
+                    sceneGenerator.generateScene(self)
                 }
             }
             else if lengthWall == true && counterLength == 2 {
                 let innerWallModel2 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), tabWidth: nil)
                     if(lengthWall == true) {
                         walls.append(innerWallModel2)
+                        lengthWall  = false
+                        sceneGenerator.generateScene(self)
                     }
                 }
-                lengthWall  = false
-                sceneGenerator.generateScene(self)
+            
             }
         
     }
@@ -232,10 +235,10 @@ class BoxModel {
                 if let index = walls.lastIndex(where: {$0.wallType == WallType.smallCorner}){
                      walls.remove(at: index)
                  }
-                
+                removeInnerWall = false
+                sceneGenerator.generateScene(self)
             }
-            removeInnerWall = false
-            sceneGenerator.generateScene(self)
+            
         }
         
     }

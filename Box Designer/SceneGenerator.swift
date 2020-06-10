@@ -31,8 +31,8 @@ class SceneGenerator {
             delegate?.updateScene()
         }
         willSet{
-            if scene.rootNode.childNodes.count > 0{
-            camera = scene.rootNode.childNodes[scene.rootNode.childNodes.count - 1]
+            if scene.rootNode.childNodes.count > 0 {
+                camera = scene.rootNode.childNodes.last
             }
         }
     }

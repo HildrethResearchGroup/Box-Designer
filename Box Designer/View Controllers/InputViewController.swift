@@ -13,6 +13,8 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     var boxModel = BoxModel()
     
+    var fileHandlingDelegate : FileHandlingDelegate? = FileHandlingControl()
+    
     @IBOutlet weak var lengthTextField: NSTextField!
     @IBOutlet weak var widthTextField: NSTextField!
     @IBOutlet weak var heightTextField: NSTextField!
@@ -38,6 +40,10 @@ class InputViewController: NSViewController, NSTextDelegate {
         tabWidthSlider.isEnabled = false
         
         boxModel.sceneGenerator.generateScene(boxModel)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {
@@ -90,4 +96,19 @@ class InputViewController: NSViewController, NSTextDelegate {
         let smallestDimension = boxModel.smallestDimension()
         tabWidthSlider.maxValue = smallestDimension/3
     }
+    
+    @IBAction func menuFileOpenItemSelected(_ sender: Any) {
+        print("menu item selected")
+        fileHandlingDelegate?.openModel(boxModel, self.view.window)
+    }
+    
+    @IBAction func menuFileSaveItemSelected(_ sender: Any) {
+        print("menu item selected")
+        fileHandlingDelegate?.saveModel(boxModel, self.view.window)
+    }
+}
+
+protocol FileHandlingDelegate {
+    func saveModel(_ boxModel: BoxModel, _ window: NSWindow?)
+    func openModel(_ boxModel: BoxModel, _ window: NSWindow?)
 }

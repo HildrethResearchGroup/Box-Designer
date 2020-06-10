@@ -35,6 +35,7 @@
                 <outlet property="materialThicknessTextField" destination="JAJ-yv-jkR" id="D2m-hM-jd8"/>
                 <outlet property="tabWidthLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
                 <outlet property="tabWidthSlider" destination="BKc-5S-qKa" id="cLR-7K-9mg"/>
+                <outlet property="view" destination="EiT-Mj-1SZ" id="IbT-W1-kOg"/>
                 <outlet property="widthTextField" destination="fyW-Nm-b7I" id="Bjc-8T-Zyh"/>
             </connections>
         </viewController>
@@ -93,7 +94,11 @@
                                     <action selector="newDocument:" target="-1" id="4Si-XN-c54"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9"/>
+                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                                <connections>
+                                    <action selector="menuFileOpenItemSelected:" target="SYY-Aa-HfQ" id="r5y-qA-76m"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
@@ -113,7 +118,11 @@
                                     <action selector="performClose:" target="-1" id="HmO-Ls-i7Q"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV"/>
+                            <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
+                                <connections>
+                                    <action selector="menuFileSaveItemSelected:" target="SYY-Aa-HfQ" id="Kkb-Un-Ksi"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Save As…" keyEquivalent="s" id="Bw7-FT-i3A">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>

@@ -25,7 +25,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var tabWidthLabel: NSTextField!
     @IBOutlet weak var tabWidthSlider: NSSlider!
     
-    //@IBOutlet weak var addWall: NSButton!
+    @IBOutlet weak var addWall: NSButton!
     @IBOutlet weak var lidOn_Off: NSButton!
     
     override func awakeFromNib() {
@@ -100,4 +100,10 @@ class InputViewController: NSViewController, NSTextDelegate {
         boxModel.lidOn = !boxModel.lidOn
 
     }
+    
+    
+    @IBAction func addWall(_ sender: Any) {
+        boxModel.innerWall = !boxModel.innerWall
+    }
+    
 }

@@ -186,7 +186,9 @@ class BoxModel {
             if lidOn != oldValue {
                 let wallLid = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
                 if (lidOn == false){
-                walls.removeLast()
+                    if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
+                        walls.remove(at: index)
+                    }
                 }else{
                     walls.append(wallLid)
                 }
@@ -196,6 +198,22 @@ class BoxModel {
         }
     }
     
+    var innerWall : Bool {
+        didSet {
+            if innerWall != oldValue {
+                let innerWallModel = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 1.5), tabWidth: nil)
+                if(innerWall == true) {
+                    walls.append(innerWallModel)
+                }
+                else {
+                    if let index = walls.lastIndex(where: {$0.wallType == WallType.smallCorner}){
+                        walls.remove(at: index)
+                    }
+                }
+                sceneGenerator.generateScene(self)
+            }
+        }
+    }
     
     //This initializer can be used to create a box using data loaded from a file
     init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ tabWidth: Double?) {
@@ -208,6 +226,8 @@ class BoxModel {
         self.joinType = joinType
         self.tabWidth = tabWidth
         self.lidOn = true
+        self.innerWall = false
+        
     }
     
     //This initializer creates the default box model which is loaded whenever the application is launched
@@ -230,6 +250,7 @@ class BoxModel {
         self.innerDimensions = false
         self.joinType = JoinType.overlap
         self.lidOn = true
+        self.innerWall = false
     }
     
     func smallestDimension() -> Double {

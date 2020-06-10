@@ -25,17 +25,21 @@ class SceneGenerator {
     }
     
     var delegate: SceneGeneratorDelegate?
-    
+    var camera: SCNNode?
     var scene: SCNScene {
         didSet {
             delegate?.updateScene()
         }
+        willSet{
+            camera = scene.rootNode.childNodes[scene.rootNode.childNodes.count - 1]
+        }
     }
     
-    func generateScene(_ boxModel: BoxModel) {        
+    func generateScene(_ boxModel: BoxModel) {
         let scene = SCNScene()
         var wallNumber = 0
         for wall in boxModel.walls {
+        
             
             //create node from wall data
             let newShape = SCNShape(path: wall.path, extrusionDepth: CGFloat(wall.materialThickness))
@@ -87,14 +91,18 @@ class SceneGenerator {
     
     func adjustCamera(_ scene: SCNScene) {
         
+        if camera == nil {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3Make(0, 0, 25)
         cameraNode.camera?.usesOrthographicProjection = true
         
         scene.rootNode.addChildNode(cameraNode)
-    }
+        }else{
+            scene.rootNode.addChildNode(camera!)
+        }
 
+    }
 }
 
 protocol SceneGeneratorDelegate {

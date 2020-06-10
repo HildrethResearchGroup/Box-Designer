@@ -11,7 +11,8 @@ import Cocoa
 import SceneKit
 
 class BoxModel {
-
+    var counterLength = 0
+    var counterPerp = 0
     let sceneGenerator = SceneGenerator.shared
     var walls: [WallModel]
     //refers to box dimension along x axis
@@ -34,6 +35,7 @@ class BoxModel {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(oldValue - materialThickness/2), 0.0, 0.0)) {
                             wall.position = SCNVector3Make(CGFloat(boxWidth - materialThickness/2), 0.0, 0.0)
                         }
+                        
                     }
                 }
             }
@@ -58,6 +60,12 @@ class BoxModel {
                     } else if (wall.wallType == WallType.smallCorner) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue - materialThickness/2))) {
                             wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength - materialThickness/2))
+                        }
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0,CGFloat((1/3) * oldValue))){
+                           wall.position = SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength))
+                        }
+                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * oldValue))){
+                           wall.position = SCNVector3Make(0.0, 0.0, CGFloat((2/3) * self.boxLength))
                         }
                     } else if (wall.wallType == WallType.longCorner) {
                         wall.width = boxLength
@@ -184,7 +192,7 @@ class BoxModel {
     var lidOn: Bool {
         didSet {
             if lidOn != oldValue {
-                let wallLid = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
+                let wallLid = WallModel(boxWidth, boxHeight, boxWidth, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
                 if (lidOn == false){
                     if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
                         walls.remove(at: index)
@@ -197,24 +205,27 @@ class BoxModel {
             }
         }
     }
-    
-    var innerWall : Bool {
+    var lengthWall : Bool {
         didSet {
-            if innerWall != oldValue {
-                let innerWallModel = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 1.5), tabWidth: nil)
-                if(innerWall == true) {
+            if lengthWall == true && counterLength == 1 {
+                let innerWallModel = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), tabWidth: nil)
+                if(lengthWall == true) {
                     walls.append(innerWallModel)
                 }
-                else {
-                    if let index = walls.lastIndex(where: {$0.wallType == WallType.smallCorner}){
-                        walls.remove(at: index)
+            }
+            else if lengthWall == true && counterLength == 2 {
+                let innerWallModel2 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), tabWidth: nil)
+                    if(lengthWall == true) {
+                        walls.append(innerWallModel2)
                     }
                 }
+                lengthWall  = false
                 sceneGenerator.generateScene(self)
             }
-        }
+        
     }
     
+
     //This initializer can be used to create a box using data loaded from a file
     init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ tabWidth: Double?) {
         self.walls = walls
@@ -226,7 +237,7 @@ class BoxModel {
         self.joinType = joinType
         self.tabWidth = tabWidth
         self.lidOn = true
-        self.innerWall = false
+        self.lengthWall = false
         
     }
     
@@ -250,7 +261,7 @@ class BoxModel {
         self.innerDimensions = false
         self.joinType = JoinType.overlap
         self.lidOn = true
-        self.innerWall = false
+        self.lengthWall = false
     }
     
     func smallestDimension() -> Double {

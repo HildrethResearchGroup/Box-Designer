@@ -57,7 +57,7 @@ class PDFFileSaver {
         
         let inchScale: Double = 100.0
         let margin: Double = 50.0 //half an inch margin from the edge
-        let padding: Double = 25.0 //quarter of an inch padding between
+        let padding: Double = 25.0 //quarter of an inch padding between        
         
         var maxXSoFar: Double = 0
         var maxYSoFar: Double = 0

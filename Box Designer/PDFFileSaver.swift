@@ -58,14 +58,29 @@ class PDFFileSaver {
         
         let inchScale: Double = 100.0
         let margin: Double = 50.0 //half an inch margin from the edge
+        let padding: Double = 50.0 //half an inch padding between
         
-        var maxXSoFar = margin
-        var maxYSoFar = margin
+        var maxXSoFar: Double = 0
+        var maxYSoFar: Double = 0
+        
+        var counter: Int = 0
         
         for wall in boxModel.walls {
 
             let path = wall.path
             var startPoint = NSPoint()
+            
+            var xOffset: Double = 0
+            var yOffset: Double = 0
+            
+            if counter % 2 == 0 {
+                maxYSoFar = 0 //reset maxYSoFar after moving horizontally
+                xOffset = maxXSoFar + margin
+                yOffset = margin
+            } else if counter % 2 == 1 {
+                xOffset = maxXSoFar + margin
+                yOffset = maxYSoFar + margin
+            }
             
             for element in 0..<path.elementCount {
                 
@@ -93,11 +108,15 @@ class PDFFileSaver {
                  
                  At this time, margin and padding are also taken into account
                  */
-                let x: Double = Double(point.x) * inchScale + margin
-                let y: Double = Double(point.y) * inchScale + margin
+                let x: Double = Double(point.x) * inchScale + xOffset
+                let y: Double = Double(point.y) * inchScale + yOffset
                 
-                maxXSoFar = x
-                maxYSoFar = y
+                if (x > maxXSoFar && counter % 2 == 1) {
+                    maxXSoFar = x
+                }
+                if (y > maxYSoFar) {
+                    maxYSoFar = y
+                }
                 
                 switch (elementType) {
                 case NSBezierPath.ElementType.moveTo:
@@ -112,6 +131,7 @@ class PDFFileSaver {
                     break
                 }
             }
+            counter += 1
         }
         return toReturn
     }

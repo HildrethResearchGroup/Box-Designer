@@ -58,7 +58,7 @@ class PDFFileSaver {
         
         let inchScale: Double = 100.0
         let margin: Double = 50.0 //half an inch margin from the edge
-        let padding: Double = 50.0 //half an inch padding between
+        let padding: Double = 25.0 //quarter of an inch padding between
         
         var maxXSoFar: Double = 0
         var maxYSoFar: Double = 0
@@ -75,11 +75,11 @@ class PDFFileSaver {
             
             if counter % 2 == 0 {
                 maxYSoFar = 0 //reset maxYSoFar after moving horizontally
-                xOffset = maxXSoFar + margin
+                xOffset = maxXSoFar + padding
                 yOffset = margin
             } else if counter % 2 == 1 {
-                xOffset = maxXSoFar + margin
-                yOffset = maxYSoFar + margin
+                xOffset = maxXSoFar + padding
+                yOffset = maxYSoFar + padding
             }
             
             for element in 0..<path.elementCount {
@@ -111,6 +111,7 @@ class PDFFileSaver {
                 let x: Double = Double(point.x) * inchScale + xOffset
                 let y: Double = Double(point.y) * inchScale + yOffset
                 
+                //only update maxX after placing two walls vertically
                 if (x > maxXSoFar && counter % 2 == 1) {
                     maxXSoFar = x
                 }

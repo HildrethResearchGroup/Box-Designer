@@ -107,16 +107,15 @@ class InputViewController: NSViewController, NSTextDelegate {
 
     }
     
-    
     @IBAction func addWall(_ sender: Any) {
-        boxModel.innerWall = !boxModel.innerWall
+        boxModel.hasInnerWall = !boxModel.hasInnerWall
+    }
+    
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {
-        print("menu item selected")
         fileHandlingDelegate?.openModel(boxModel, self.view.window)
     }
     
     @IBAction func menuFileSaveItemSelected(_ sender: Any) {
-        print("menu item selected")
         fileHandlingDelegate?.saveModel(boxModel, self.view.window)
     }
 }

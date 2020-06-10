@@ -184,7 +184,7 @@ class BoxModel {
     var lidOn: Bool {
         didSet {
             if lidOn != oldValue {
-                let wallLid = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
+                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), tabWidth: tabWidth)
                 if (lidOn == false){
                     if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
                         walls.remove(at: index)
@@ -198,11 +198,11 @@ class BoxModel {
         }
     }
     
-    var innerWall : Bool {
+    var hasInnerWall : Bool {
         didSet {
-            if innerWall != oldValue {
+            if hasInnerWall != oldValue {
                 let innerWallModel = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 1.5), tabWidth: nil)
-                if(innerWall == true) {
+                if(hasInnerWall == true) {
                     walls.append(innerWallModel)
                 }
                 else {
@@ -226,7 +226,7 @@ class BoxModel {
         self.joinType = joinType
         self.tabWidth = tabWidth
         self.lidOn = true
-        self.innerWall = false
+        self.hasInnerWall = false
         
     }
     
@@ -250,7 +250,7 @@ class BoxModel {
         self.innerDimensions = false
         self.joinType = JoinType.overlap
         self.lidOn = true
-        self.innerWall = false
+        self.hasInnerWall = false
     }
     
     func smallestDimension() -> Double {

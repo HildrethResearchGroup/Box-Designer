@@ -11,6 +11,8 @@ import Cocoa
 
 class FileHandlingControl: FileHandlingDelegate {
     
+    var modelUpdatingDelegate: modelUpdatingDelegate? = nil
+    
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?) {
  
         guard let displayWindow = window else { return }
@@ -60,13 +62,18 @@ class FileHandlingControl: FileHandlingDelegate {
         
         panel.beginSheetModal(for: displayWindow) { (response) in
             if response == NSApplication.ModalResponse.OK {
+                guard let url = panel.url else {return}
+                
                 //need to parse MODEL information saved however
                 print("yup thats a json. nice")
                 let fileOpener = JSONFileHandler()
-                //let boxModel
+                let boxModel = fileOpener.convertJSONToBoxModel(url)
+                
             }
         }
     }
 }
 
-
+protocol modelUpdatingDelegate {
+    func updateModel(_ boxModel: BoxModel)
+}

@@ -10,11 +10,12 @@ import Foundation
 import Cocoa
 import SceneKit
 
-class InputViewController: NSViewController, NSTextDelegate {
+class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelegate {
     
     var boxModel = BoxModel()
+    var fileHandlingControl = FileHandlingControl()
     
-    var fileHandlingDelegate : FileHandlingDelegate? = FileHandlingControl()
+    var fileHandlingDelegate : FileHandlingDelegate? = nil
     
     @IBOutlet weak var lengthTextField: NSTextField!
     @IBOutlet weak var widthTextField: NSTextField!
@@ -112,15 +113,22 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {
-        fileHandlingDelegate?.openModel(boxModel, self.view.window)
+        let newBoxModel = fileHandlingDelegate?.openModel(boxModel, self.view.window)
+        guard let self.boxModel = newBoxModel else {return}
+        boxModel.sceneGenerator.generateScene(self.boxModel)
     }
     
     @IBAction func menuFileSaveItemSelected(_ sender: Any) {
         fileHandlingDelegate?.saveModel(boxModel, self.view.window)
     }
+    
+    func updateModel(_ boxModel: BoxModel) {
+        self.boxModel = boxModel
+        boxModel.sceneGenerator.generateScene(boxModel)
+    }
 }
 
 protocol FileHandlingDelegate {
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?)
-    func openModel(_ boxModel: BoxModel, _ window: NSWindow?)
+    func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel
 }

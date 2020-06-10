@@ -225,6 +225,21 @@ class BoxModel {
         
     }
     
+    var removeInnerWall: Bool {
+        didSet {
+            if removeInnerWall == true && counterLength > 0 {
+                counterLength -= 1
+                if let index = walls.lastIndex(where: {$0.wallType == WallType.smallCorner}){
+                     walls.remove(at: index)
+                 }
+                
+            }
+            removeInnerWall = false
+            sceneGenerator.generateScene(self)
+        }
+        
+    }
+    
 
     //This initializer can be used to create a box using data loaded from a file
     init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ tabWidth: Double?) {
@@ -238,6 +253,7 @@ class BoxModel {
         self.tabWidth = tabWidth
         self.lidOn = true
         self.lengthWall = false
+        self.removeInnerWall = false
         
     }
     
@@ -262,6 +278,7 @@ class BoxModel {
         self.joinType = JoinType.overlap
         self.lidOn = true
         self.lengthWall = false
+        self.removeInnerWall = false
     }
     
     func smallestDimension() -> Double {

@@ -113,9 +113,9 @@ class InputViewController: NSViewController, NSTextDelegate {
         boxModel.lengthWall = true
     }
     
-//    @IBAction func minusButtonLengthwise(_ sender: Any) {
-//        boxModel.removeInnerWall = true
-//    }
+    @IBAction func minusButtonLengthwise(_ sender: Any) {
+        boxModel.removeInnerWall = true
+    }
     
     
 }

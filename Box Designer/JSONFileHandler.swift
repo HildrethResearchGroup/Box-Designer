@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class JSONFileSaver {
+class JSONFileHandler {
     
     func saveAsJSON(to targetURL: URL, _ model: BoxModel) throws {
         do {
@@ -96,4 +96,11 @@ class JSONFileSaver {
             print("could not save as JSON file")
         }
     }
+    
+    func convertJSONToBoxModel(_ targetURL: URL) -> BoxModel {
+        let boxModel = BoxModel()
+        
+        return boxModel
+    }
+    
 }

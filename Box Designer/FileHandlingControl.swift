@@ -27,8 +27,12 @@ class FileHandlingControl: FileHandlingDelegate {
                 let pathExtension = url.pathExtension
                 switch (pathExtension) {
                 case "json":
-                    let fileSaver = JSONFileSaver()
-                    fileSaver.saveAsJSON(to: url, boxModel)
+                    let fileSaver = JSONFileHandler()
+                    do {
+                        try fileSaver.saveAsJSON(to: url, boxModel)
+                    } catch {
+                        print("failed to save as a json file")
+                    }
                 case "pdf":
                     let fileSaver = PDFFileSaver()
                     do {
@@ -51,13 +55,15 @@ class FileHandlingControl: FileHandlingDelegate {
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
         panel.allowsMultipleSelection = false
-        panel.allowedFileTypes = ["xml"]
+        panel.allowedFileTypes = ["json"]
         panel.allowsOtherFileTypes = false
         
         panel.beginSheetModal(for: displayWindow) { (response) in
             if response == NSApplication.ModalResponse.OK {
                 //need to parse MODEL information saved however
-                
+                print("yup thats a json. nice")
+                let fileOpener = JSONFileHandler()
+                //let boxModel
             }
         }
     }

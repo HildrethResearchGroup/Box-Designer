@@ -14,7 +14,6 @@ import SceneKit
 class PDFFileSaver {
     
     func saveAsPDF(to targetURL: URL, _ boxModel: BoxModel) throws {
-        print("saving as PDF")
         do {
             //print to file with .pdf ending
             //url is received from NSSavePanel above

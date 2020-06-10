@@ -18,7 +18,7 @@ class FileHandlingControl: FileHandlingDelegate {
         
         panel.canCreateDirectories = true
         panel.isExtensionHidden = false
-        panel.allowedFileTypes = ["xml", "pdf"]
+        panel.allowedFileTypes = ["json", "pdf"]
         panel.allowsOtherFileTypes = false
         
         panel.beginSheetModal(for: displayWindow) { (response) in
@@ -26,12 +26,10 @@ class FileHandlingControl: FileHandlingDelegate {
                 guard let url = panel.url else { return }
                 let pathExtension = url.pathExtension
                 switch (pathExtension) {
-                case "xml":
-                    print("saving as an xml doc")
-                    let fileSaver = XMLFileSaver()
-                    fileSaver.saveAsXML(to: url, boxModel)
+                case "json":
+                    let fileSaver = JSONFileSaver()
+                    fileSaver.saveAsJSON(to: url, boxModel)
                 case "pdf":
-                    print("saving as a pdf doc")
                     let fileSaver = PDFFileSaver()
                     do {
                         try fileSaver.saveAsPDF(to: url, boxModel)

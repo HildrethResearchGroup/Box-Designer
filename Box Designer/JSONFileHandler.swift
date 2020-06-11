@@ -120,7 +120,7 @@ class JSONFileHandler {
             textToWrite += "\t\"lidOn\": \"\(model.lidOn)\",\n"
             
             //has InnerWall as true or false
-            textToWrite += "\t\"hasInnerWall\": \"\(model.hasInnerWall)\"\n"
+            //textToWrite += "\t\"hasInnerWall\": \"\(model.hasInnerWall)\"\n"
             
             //end the boxModel object on same indentation
             textToWrite += "}"

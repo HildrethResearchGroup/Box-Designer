@@ -30,6 +30,12 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     @IBOutlet weak var addWall: NSButton!
     @IBOutlet weak var lidOn_Off: NSButton!
     
+    
+    @IBOutlet weak var plusButtonLengthwise: NSButton!
+    @IBOutlet weak var minusButtonLengthwise: NSButton!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         boxModel = BoxModel()
@@ -128,6 +134,16 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     }
 }
 
+    @IBAction func plusButtonLengthwise(_ sender: Any) {
+        boxModel.counterLength += 1
+        boxModel.lengthWall = true
+    }
+    
+    @IBAction func minusButtonLengthwise(_ sender: Any) {
+        boxModel.removeInnerWall = true
+    }
+    
+    
 protocol FileHandlingDelegate {
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?)
     func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel

@@ -49,10 +49,11 @@ class FileHandlingControl: FileHandlingDelegate {
         }
     }
     
-    func openModel(_ boxModel: BoxModel, _ window: NSWindow?) {
+    func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel {
         
-        guard let displayWindow = window else { return }
+        guard let displayWindow = window else { return boxModel }
         let panel = NSOpenPanel()
+        var boxModel = BoxModel()
         
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
@@ -67,10 +68,12 @@ class FileHandlingControl: FileHandlingDelegate {
                 //need to parse MODEL information saved however
                 print("yup thats a json. nice")
                 let fileOpener = JSONFileHandler()
-                let boxModel = fileOpener.convertJSONToBoxModel(url)
+                boxModel = fileOpener.convertJSONToBoxModel(url)
                 
             }
         }
+        
+        return boxModel
     }
 }
 

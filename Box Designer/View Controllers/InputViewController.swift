@@ -113,10 +113,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
 
     }
     
-    @IBAction func addWall(_ sender: Any) {
-        boxModel.hasInnerWall = !boxModel.hasInnerWall
-    }
-    
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {
         let newBoxModel = fileHandlingDelegate.openModel(boxModel, self.view.window)
         self.boxModel = newBoxModel
@@ -132,7 +128,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
         self.boxModel = boxModel
         boxModel.sceneGenerator.generateScene(boxModel)
     }
-}
 
     @IBAction func plusButtonLengthwise(_ sender: Any) {
         boxModel.counterLength += 1
@@ -143,7 +138,8 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
         boxModel.removeInnerWall = true
     }
     
-    
+}
+
 protocol FileHandlingDelegate {
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?)
     func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel

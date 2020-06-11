@@ -65,11 +65,13 @@ class FileHandlingControl: FileHandlingDelegate {
             if response == NSApplication.ModalResponse.OK {
                 guard let url = panel.url else {return}
                 
-                //need to parse MODEL information saved however
-                print("yup thats a json. nice")
+                //need to json model
                 let fileOpener = JSONFileHandler()
-                boxModel = fileOpener.convertJSONToBoxModel(url)
-                
+                do {
+                    try boxModel = fileOpener.convertJSONToBoxModel(url)
+                } catch {
+                    print("could not save as a json file")
+                }
             }
         }
         

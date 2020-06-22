@@ -60,79 +60,296 @@ class PDFFileSaver {
         let padding: Double = 25.0 //quarter of an inch padding between        
         
         var maxXSoFar: Double = 0
-        var maxYSoFar: Double = 0
         
-        var counter: Int = 0
+        var smallCornerWalls: [WallModel] = Array()
+        var longCornerWalls: [WallModel] = Array()
+        var largeCornerWalls: [WallModel] = Array()
+        
+        var leftoverWalls: [WallModel] = Array()
         
         for wall in boxModel.walls {
-
-            let path = wall.path
-            var startPoint = NSPoint()
-            
-            var xOffset: Double = 0
-            var yOffset: Double = 0
-            
-            if counter % 2 == 0 {
-                maxYSoFar = 0 //reset maxYSoFar after moving horizontally
-                xOffset = maxXSoFar + padding
-                yOffset = margin
-            } else if counter % 2 == 1 {
-                xOffset = maxXSoFar + padding
-                yOffset = maxYSoFar + padding
+            switch (wall.wallType) {
+            case WallType.smallCorner:
+                smallCornerWalls.append(wall)
+            case WallType.longCorner:
+                longCornerWalls.append(wall)
+            case WallType.largeCorner:
+                largeCornerWalls.append(wall)
             }
-            
-            for element in 0..<path.elementCount {
-                
-                var point = NSPoint()
-                let elementType = path.element(at: element, associatedPoints: &point)
-                
-                if element == 0 {
-                    startPoint = point
-                }
-                /*
-                 last element in every path seems to be a repeat of first element
-                 this obviously does not need to be drawn, and doing so
-                 actually prevents the pdf from displaying.
-                 */
-                if (element > 0 && elementType == NSBezierPath.ElementType.moveTo && point == startPoint) {
-                    break
-                }
-                
-                /*
-                 Points in the path are stored as CGFloat.
-                 However, CGFloat does not conform to "LosslessStringConvertible".
-                 Doubles, on the other hand, do; so, convert
-                 the x and y values to type Double, then
-                 to type String.
-                 
-                 At this time, margin and padding are also taken into account
-                 */
-                let x: Double = Double(point.x) * inchScale + xOffset
-                let y: Double = Double(point.y) * inchScale + yOffset
-                
-                //only update maxX after placing two walls vertically
-                if (x > maxXSoFar && counter % 2 == 1) {
-                    maxXSoFar = x
-                }
-                if (y > maxYSoFar) {
-                    maxYSoFar = y
-                }
-                
-                switch (elementType) {
-                case NSBezierPath.ElementType.moveTo:
-                    toReturn += String(x) + " " + String(y) + " m "
-                case NSBezierPath.ElementType.lineTo:
-                    toReturn += String(x) + " " + String(y) + " l "
-                case NSBezierPath.ElementType.closePath:
-                    toReturn += "h S\n"
-                case NSBezierPath.ElementType.curveTo:
-                    break
-                @unknown default:
-                    break
-                }
-            }
-            counter += 1
         }
+        
+        var xOffset: Double = margin
+        
+        if !smallCornerWalls.isEmpty {
+            
+            maxXSoFar = 0
+            var yOffset: Double = margin
+            
+            for wall in smallCornerWalls {
+                
+                let tabWidth = wall.tabWidth ?? 0
+                
+                if (yOffset + (wall.length + tabWidth) * inchScale) > 1100 {
+                    leftoverWalls.append(wall)
+                    break
+                }
+                
+                if wall.width > maxXSoFar {
+                    maxXSoFar = (wall.width - wall.materialThickness) * inchScale
+                }
+                
+                let path = wall.path
+                var startPoint = NSPoint()
+                
+                for element in 0..<path.elementCount {
+                    
+                    var point = NSPoint()
+                    let elementType = path.element(at: element, associatedPoints: &point)
+                    
+                    if element == 0 {
+                        startPoint = point
+                    }
+                    /*
+                     last element in every path seems to be a repeat of first element
+                     this obviously does not need to be drawn, and doing so
+                     actually prevents the pdf from displaying.
+                     */
+                    if (element > 0 && elementType == NSBezierPath.ElementType.moveTo && point == startPoint) {
+                        break
+                    }
+                    
+                    /*
+                     Points in the path are stored as CGFloat.
+                     However, CGFloat does not conform to "LosslessStringConvertible".
+                     Doubles, on the other hand, do; so, convert
+                     the x and y values to type Double, then
+                     to type String.
+                     
+                     At this time, margin and padding are also taken into account
+                     */
+                    let x: Double = Double(point.x) * inchScale + xOffset
+                    let y: Double = Double(point.y) * inchScale + yOffset
+                    
+                    switch (elementType) {
+                    case NSBezierPath.ElementType.moveTo:
+                        toReturn += String(x) + " " + String(y) + " m "
+                    case NSBezierPath.ElementType.lineTo:
+                        toReturn += String(x) + " " + String(y) + " l "
+                    case NSBezierPath.ElementType.closePath:
+                        toReturn += "h S\n"
+                    case NSBezierPath.ElementType.curveTo:
+                        break
+                    @unknown default:
+                        break
+                    }
+                }
+                yOffset += wall.length * inchScale + padding
+            }
+        }
+        
+        xOffset += maxXSoFar + padding
+        
+        if !longCornerWalls.isEmpty {
+            
+            maxXSoFar = 0
+            var yOffset: Double = margin
+            
+            for wall in longCornerWalls {
+                
+                let tabWidth = wall.tabWidth ?? 0
+                
+                if (yOffset + (wall.length + tabWidth) * inchScale) > 1100 {
+                    leftoverWalls.append(wall)
+                    break
+                }
+                
+                if wall.width > maxXSoFar {
+                    maxXSoFar = wall.width * inchScale
+                }
+        
+                let path = wall.path
+                var startPoint = NSPoint()
+                
+                for element in 0..<path.elementCount {
+                    
+                    var point = NSPoint()
+                    let elementType = path.element(at: element, associatedPoints: &point)
+                    
+                    if element == 0 {
+                        startPoint = point
+                    }
+                    /*
+                     last element in every path seems to be a repeat of first element
+                     this obviously does not need to be drawn, and doing so
+                     actually prevents the pdf from displaying.
+                     */
+                    if (element > 0 && elementType == NSBezierPath.ElementType.moveTo && point == startPoint) {
+                        break
+                    }
+                    
+                    /*
+                     Points in the path are stored as CGFloat.
+                     However, CGFloat does not conform to "LosslessStringConvertible".
+                     Doubles, on the other hand, do; so, convert
+                     the x and y values to type Double, then
+                     to type String.
+                     
+                     At this time, margin and padding are also taken into account
+                     */
+                    let x: Double = Double(point.x) * inchScale + xOffset
+                    let y: Double = Double(point.y) * inchScale + yOffset
+                    
+                    switch (elementType) {
+                    case NSBezierPath.ElementType.moveTo:
+                        toReturn += String(x) + " " + String(y) + " m "
+                    case NSBezierPath.ElementType.lineTo:
+                        toReturn += String(x) + " " + String(y) + " l "
+                    case NSBezierPath.ElementType.closePath:
+                        toReturn += "h S\n"
+                    case NSBezierPath.ElementType.curveTo:
+                        break
+                    @unknown default:
+                        break
+                    }
+                }
+                yOffset += wall.length * inchScale + padding
+            }
+        }
+        
+        xOffset += maxXSoFar + padding
+        
+        if !largeCornerWalls.isEmpty {
+            
+            maxXSoFar = 0
+            var yOffset: Double = margin
+            
+            for wall in largeCornerWalls {
+                
+                let tabWidth = wall.tabWidth ?? 0
+                
+                if (yOffset + (wall.length + tabWidth) * inchScale) > 1100 {
+                    print("adding a wall to the leftover array")
+                    leftoverWalls.append(wall)
+                    break
+                }
+                
+                if wall.width > maxXSoFar {
+                    maxXSoFar = wall.width * inchScale
+                }
+                
+                let path = wall.path
+                var startPoint = NSPoint()
+                
+                for element in 0..<path.elementCount {
+                    
+                    var point = NSPoint()
+                    let elementType = path.element(at: element, associatedPoints: &point)
+                    
+                    if element == 0 {
+                        startPoint = point
+                    }
+                    /*
+                     last element in every path seems to be a repeat of first element
+                     this obviously does not need to be drawn, and doing so
+                     actually prevents the pdf from displaying.
+                     */
+                    if (element > 0 && elementType == NSBezierPath.ElementType.moveTo && point == startPoint) {
+                        break
+                    }
+                    
+                    /*
+                     Points in the path are stored as CGFloat.
+                     However, CGFloat does not conform to "LosslessStringConvertible".
+                     Doubles, on the other hand, do; so, convert
+                     the x and y values to type Double, then
+                     to type String.
+                     
+                     At this time, margin and padding are also taken into account
+                     */
+                    let x: Double = Double(point.x) * inchScale + xOffset
+                    let y: Double = Double(point.y) * inchScale + yOffset
+                    
+                    switch (elementType) {
+                    case NSBezierPath.ElementType.moveTo:
+                        toReturn += String(x) + " " + String(y) + " m "
+                    case NSBezierPath.ElementType.lineTo:
+                        toReturn += String(x) + " " + String(y) + " l "
+                    case NSBezierPath.ElementType.closePath:
+                        toReturn += "h S\n"
+                    case NSBezierPath.ElementType.curveTo:
+                        break
+                    @unknown default:
+                        break
+                    }
+                }
+                yOffset += wall.length * inchScale + padding
+            }
+        }
+
+        xOffset += maxXSoFar + padding
+        
+        if !leftoverWalls.isEmpty {
+            
+            print(leftoverWalls.count)
+            
+            maxXSoFar = 0
+            var yOffset: Double = margin
+            
+            for wall in leftoverWalls {
+                
+                if wall.width > maxXSoFar {
+                    maxXSoFar = wall.width * inchScale
+                }
+                
+                let path = wall.path
+                var startPoint = NSPoint()
+                
+                for element in 0..<path.elementCount {
+                    
+                    var point = NSPoint()
+                    let elementType = path.element(at: element, associatedPoints: &point)
+                    
+                    if element == 0 {
+                        startPoint = point
+                    }
+                    /*
+                     last element in every path seems to be a repeat of first element
+                     this obviously does not need to be drawn, and doing so
+                     actually prevents the pdf from displaying.
+                     */
+                    if (element > 0 && elementType == NSBezierPath.ElementType.moveTo && point == startPoint) {
+                        break
+                    }
+                    
+                    /*
+                     Points in the path are stored as CGFloat.
+                     However, CGFloat does not conform to "LosslessStringConvertible".
+                     Doubles, on the other hand, do; so, convert
+                     the x and y values to type Double, then
+                     to type String.
+                     
+                     At this time, margin and padding are also taken into account
+                     */
+                    let x: Double = Double(point.x) * inchScale + xOffset
+                    let y: Double = Double(point.y) * inchScale + yOffset
+                    
+                    switch (elementType) {
+                    case NSBezierPath.ElementType.moveTo:
+                        toReturn += String(x) + " " + String(y) + " m "
+                    case NSBezierPath.ElementType.lineTo:
+                        toReturn += String(x) + " " + String(y) + " l "
+                    case NSBezierPath.ElementType.closePath:
+                        toReturn += "h S\n"
+                    case NSBezierPath.ElementType.curveTo:
+                        break
+                    @unknown default:
+                        break
+                    }
+                }
+                yOffset += wall.length * inchScale + padding
+            }
+        }
+        
         return toReturn
     }
     

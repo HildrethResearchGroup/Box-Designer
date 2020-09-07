@@ -40,8 +40,9 @@ class SceneGenerator {
     func generateScene(_ boxModel: BoxModel) {
         var wallNumber = 0
         for wall in boxModel.walls {
-        
-            
+            rootNode.enumerateChildNodes { (node, stop) in
+                node.removeFromParentNode()
+            }
             //create node from wall data
             let newShape = SCNShape(path: wall.path, extrusionDepth: CGFloat(wall.materialThickness))
             let newNode = SCNNode(geometry: newShape)

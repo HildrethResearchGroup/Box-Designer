@@ -38,7 +38,6 @@ class SceneGenerator {
     }
     
     func generateScene(_ boxModel: BoxModel) {
-        let scene = SCNScene()
         var wallNumber = 0
         for wall in boxModel.walls {
         
@@ -71,7 +70,6 @@ class SceneGenerator {
         }
         adjustLighting(scene)
         adjustCamera(scene)
-        self.scene = scene
     }
     
     func adjustLighting(_ scene: SCNScene) {

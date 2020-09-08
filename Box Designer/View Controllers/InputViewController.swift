@@ -164,7 +164,7 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
             boxModel.tabWidth = tabWidthSlider.doubleValue
         }
-        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", boxModel.tabWidth)
+        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", boxModel.tabWidth as! CVarArg)
     }
     
     func setSliderLimits() {

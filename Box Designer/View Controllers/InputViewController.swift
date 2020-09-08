@@ -60,54 +60,79 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
         super.viewDidLoad()
     }
     
-    @IBAction func lengthTextFieldDidChange(_ sender: Any) {
-        boxModel.boxLength = lengthTextField.doubleValue
-        setSliderLimits()
-    }
-    
     @IBAction func mmMenuClicked(_ sender: Any) {
-        if mmInch{
-            mmMenu.state = NSControl.StateValue.off
-            inchMenu.state = NSControl.StateValue.on
-            
-            boxModel.boxLength = boxModel.boxLength * 25.4
-            boxModel.boxWidth = boxModel.boxWidth * 25.4
-            boxModel.boxHeight = boxModel.boxHeight * 25.4
-            
-            lengthTextField.doubleValue = boxModel.boxLength
-            widthTextField.doubleValue = boxModel.boxWidth
-            heightTextField.doubleValue = boxModel.boxHeight
-        }
-    }
-    
-    @IBAction func inchMenuClicked(_ sender: Any) {
         if !mmInch{
             mmMenu.state = NSControl.StateValue.on
             inchMenu.state = NSControl.StateValue.off
             
-            boxModel.boxLength = boxModel.boxLength * (1/25.4)
-            boxModel.boxWidth = boxModel.boxWidth * (1/25.4)
-            boxModel.boxHeight = boxModel.boxHeight * (1/25.4)
-            
-            lengthTextField.doubleValue = boxModel.boxLength
-            widthTextField.doubleValue = boxModel.boxWidth
-            heightTextField.doubleValue = boxModel.boxHeight
+            //the units are inches so adj to mm
+            lengthTextField.doubleValue = boxModel.boxLength * 25.4
+            widthTextField.doubleValue = boxModel.boxWidth * 25.4
+            heightTextField.doubleValue = boxModel.boxHeight * 25.4
+            materialThicknessTextField.doubleValue = boxModel.materialThickness * 25.4
+            mmInch = true
         }
     }
     
+    @IBAction func inchMenuClicked(_ sender: Any) {
+        //changing the units only changes the displayed amount not the model size
+        if mmInch{
+            mmMenu.state = NSControl.StateValue.off
+            inchMenu.state = NSControl.StateValue.on
+            
+            //the units are inches so just set it back
+            lengthTextField.doubleValue = boxModel.boxLength
+            widthTextField.doubleValue = boxModel.boxWidth
+            heightTextField.doubleValue = boxModel.boxHeight
+            materialThicknessTextField.doubleValue = boxModel.materialThickness
+            mmInch = false
+        }
+    }
+    
+    @IBAction func lengthTextFieldDidChange(_ sender: Any) {
+        if mmInch{
+            //if the setting is in mm
+            boxModel.boxLength = lengthTextField.doubleValue * (1/25.4)
+        }else{
+            //if the setting is in inches
+           boxModel.boxLength = lengthTextField.doubleValue
+        }
+        setSliderLimits()
+    }
     
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
-        boxModel.boxWidth = widthTextField.doubleValue
+        if mmInch{
+            //if the setting is in mm
+            boxModel.boxWidth = widthTextField.doubleValue * (1/25.4)
+        }else{
+            //if the setting is in inches
+            boxModel.boxWidth = widthTextField.doubleValue
+        }
+        
         setSliderLimits()
     }
     
     @IBAction func heightTextFieldDidChange(_ sender: Any) {
-        boxModel.boxHeight = heightTextField.doubleValue
+        if mmInch{
+            //if the setting is in mm
+            boxModel.boxHeight = heightTextField.doubleValue * (1/25.4)
+        }else{
+            //if the setting is in inches
+            boxModel.boxHeight = heightTextField.doubleValue
+        }
+        
         setSliderLimits()
     }
     
     @IBAction func materialThicknessTextFieldDidChange(_ sender: Any) {
-        boxModel.materialThickness = materialThicknessTextField.doubleValue
+        if mmInch{
+            //if the setting is in mm
+            boxModel.materialThickness = materialThicknessTextField.doubleValue * (1/25.4)
+        }else{
+            //if the setting is in inches
+            boxModel.materialThickness = materialThicknessTextField.doubleValue
+        }
+        
     }
     
     @IBAction func innerOrOuterDimensionsSelected(_ sender: Any) {
@@ -139,7 +164,13 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     
     func setSliderLimits() {
         let smallestDimension = boxModel.smallestDimension()
-        tabWidthSlider.maxValue = smallestDimension/3
+        if mmInch{
+            //if the setting is in mm
+            tabWidthSlider.maxValue = (smallestDimension/3) * 25.4
+        }else{
+            //if the setting is in inches
+            tabWidthSlider.maxValue = smallestDimension/3
+        }
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {

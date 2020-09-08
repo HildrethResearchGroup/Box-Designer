@@ -157,9 +157,14 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
-        let tabWidth = tabWidthSlider.doubleValue
-        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidth)
-        boxModel.tabWidth = tabWidth
+        if mmInch{
+            //if the setting is in mm change back to inches
+            boxModel.tabWidth = tabWidthSlider.doubleValue * (1/25.4)
+        }else{
+            //if the setting is in inches
+            boxModel.tabWidth = tabWidthSlider.doubleValue
+        }
+        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", boxModel.tabWidth)
     }
     
     func setSliderLimits() {

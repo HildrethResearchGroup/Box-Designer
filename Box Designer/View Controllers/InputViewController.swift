@@ -16,6 +16,9 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     
     var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl()
     
+    @IBOutlet weak var mmMenu: NSMenuItem!
+    @IBOutlet weak var inchMenu: NSMenuItem!
+    
     @IBOutlet weak var lengthTextField: NSTextField!
     @IBOutlet weak var widthTextField: NSTextField!
     @IBOutlet weak var heightTextField: NSTextField!
@@ -34,7 +37,8 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     @IBOutlet weak var plusButtonLengthwise: NSButton!
     @IBOutlet weak var minusButtonLengthwise: NSButton!
     
-    
+    //mm is true and inch is false
+    private var mmInch: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,6 +64,37 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
         boxModel.boxLength = lengthTextField.doubleValue
         setSliderLimits()
     }
+    
+    @IBAction func mmMenuClicked(_ sender: Any) {
+        if mmInch{
+            mmMenu.state = NSControl.StateValue.off
+            inchMenu.state = NSControl.StateValue.on
+            
+            boxModel.boxLength = boxModel.boxLength * 25.4
+            boxModel.boxWidth = boxModel.boxWidth * 25.4
+            boxModel.boxHeight = boxModel.boxHeight * 25.4
+            
+            lengthTextField.doubleValue = boxModel.boxLength
+            widthTextField.doubleValue = boxModel.boxWidth
+            heightTextField.doubleValue = boxModel.boxHeight
+        }
+    }
+    
+    @IBAction func inchMenuClicked(_ sender: Any) {
+        if !mmInch{
+            mmMenu.state = NSControl.StateValue.on
+            inchMenu.state = NSControl.StateValue.off
+            
+            boxModel.boxLength = boxModel.boxLength * (1/25.4)
+            boxModel.boxWidth = boxModel.boxWidth * (1/25.4)
+            boxModel.boxHeight = boxModel.boxHeight * (1/25.4)
+            
+            lengthTextField.doubleValue = boxModel.boxLength
+            widthTextField.doubleValue = boxModel.boxWidth
+            heightTextField.doubleValue = boxModel.boxHeight
+        }
+    }
+    
     
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
         boxModel.boxWidth = widthTextField.doubleValue

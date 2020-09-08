@@ -127,10 +127,11 @@ class BoxModel {
             }
         }
     }
+        
     var innerDimensions: Bool {
         willSet {
             if innerDimensions != newValue {
-                if newValue == true {
+                if newValue {
                     /*
                      When changing TO innerdimensions,
                      manually add the extra length
@@ -149,7 +150,7 @@ class BoxModel {
         }
         didSet {
             if innerDimensions != oldValue {
-                if oldValue == true {
+                if oldValue {
                     /*
                      When changing FROM innerDimensions,
                      manually remove the extra length
@@ -207,17 +208,17 @@ class BoxModel {
     }
     var lengthWall : Bool {
         didSet {
-            if lengthWall == true && counterLength == 1 {
+            if lengthWall && counterLength == 1 {
                 let innerWallModel = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), tabWidth: nil)
-                if(lengthWall == true) {
+                if(lengthWall) {
                     walls.append(innerWallModel)
-                    lengthWall  = false
+                    lengthWall = false
                     sceneGenerator.generateScene(self)
                 }
             }
-            else if lengthWall == true && counterLength == 2 {
+            else if lengthWall && counterLength == 2 {
                 let innerWallModel2 = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), tabWidth: nil)
-                    if(lengthWall == true) {
+                    if(lengthWall) {
                         walls.append(innerWallModel2)
                         lengthWall  = false
                         sceneGenerator.generateScene(self)
@@ -230,7 +231,7 @@ class BoxModel {
     
     var removeInnerWall: Bool {
         didSet {
-            if removeInnerWall == true && counterLength > 0 {
+            if removeInnerWall && counterLength > 0 {
                 counterLength -= 1
                 if let index = walls.lastIndex(where: {$0.wallType == WallType.smallCorner}){
                      walls.remove(at: index)
@@ -257,7 +258,6 @@ class BoxModel {
         self.lidOn = true
         self.lengthWall = false
         self.removeInnerWall = false
-        
     }
     
     //This initializer creates the default box model which is loaded whenever the application is launched

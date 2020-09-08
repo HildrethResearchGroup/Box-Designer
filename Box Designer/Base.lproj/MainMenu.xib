@@ -29,12 +29,14 @@
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
+                <outlet property="inchMenu" destination="pJz-17-zPr" id="Mub-cU-X8r"/>
                 <outlet property="innerOrOuterDimensionControl" destination="boA-gi-wev" id="fws-hn-ngW"/>
                 <outlet property="joinTypeControl" destination="8HL-HY-fgp" id="I8c-0q-QrN"/>
                 <outlet property="lengthTextField" destination="ej6-We-03q" id="0AL-08-AoL"/>
                 <outlet property="lidOn_Off" destination="heo-qw-yu3" id="W7p-oK-YyD"/>
                 <outlet property="materialThicknessTextField" destination="JAJ-yv-jkR" id="D2m-hM-jd8"/>
                 <outlet property="minusButtonLengthwise" destination="jiz-9X-T5k" id="5F1-XQ-Bw6"/>
+                <outlet property="mmMenu" destination="6oz-WZ-lag" id="m6Z-Ur-32H"/>
                 <outlet property="plusButtonLengthwise" destination="qmP-cB-sff" id="wBy-gP-3XL"/>
                 <outlet property="tabWidthLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
                 <outlet property="tabWidthSlider" destination="BKc-5S-qKa" id="cLR-7K-9mg"/>
@@ -144,12 +146,18 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" id="Vvd-L1-ir7">
                                     <items>
-                                        <menuItem title="MM" state="on" id="6oz-WZ-lag">
+                                        <menuItem title="Inches" state="on" id="pJz-17-zPr">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="inchMenuClicked:" target="SYY-Aa-HfQ" id="iUt-rY-H8t"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="MM" id="6oz-WZ-lag">
                                             <attributedString key="attributedTitle"/>
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Inches" id="pJz-17-zPr">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="mmMenuClicked:" target="SYY-Aa-HfQ" id="vW5-K8-1e7"/>
+                                            </connections>
                                         </menuItem>
                                     </items>
                                 </menu>

@@ -22,7 +22,7 @@ class WallModel {
     var materialThickness: Double {
         didSet {
             if materialThickness != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
@@ -38,7 +38,7 @@ class WallModel {
     var width: Double {
         didSet {
             if width != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
@@ -47,7 +47,7 @@ class WallModel {
     var length: Double {
         didSet {
             if length != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
@@ -55,16 +55,20 @@ class WallModel {
     var joinType: JoinType {
         didSet {
             if joinType != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
     var tabWidth: Double? {
         didSet {
             if tabWidth != oldValue {
-                self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
+    }
+    
+    func updatePath(){
+        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
     }
     
     init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, tabWidth internalTabWidth: Double?) {

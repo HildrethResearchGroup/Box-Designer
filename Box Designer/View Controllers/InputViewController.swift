@@ -71,6 +71,9 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             heightTextField.doubleValue = boxModel.boxHeight * 25.4
             materialThicknessTextField.doubleValue = boxModel.materialThickness * 25.4
             mmInch = true
+            setSliderLimits()
+            tabWidthSlider.doubleValue = tabWidthSlider.doubleValue * 25.4
+            tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidthSlider.doubleValue)
         }
     }
     
@@ -86,6 +89,10 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             heightTextField.doubleValue = boxModel.boxHeight
             materialThicknessTextField.doubleValue = boxModel.materialThickness
             mmInch = false
+            //set the limits second because otherwise the adjustment is incorect
+            tabWidthSlider.doubleValue = tabWidthSlider.doubleValue * 1/25.4
+            setSliderLimits()
+            tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidthSlider.doubleValue)
         }
     }
     
@@ -164,7 +171,7 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
             boxModel.tabWidth = tabWidthSlider.doubleValue
         }
-        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", boxModel.tabWidth as! CVarArg)
+        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidthSlider.doubleValue)
     }
     
     func setSliderLimits() {

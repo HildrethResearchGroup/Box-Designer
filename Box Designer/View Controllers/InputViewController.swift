@@ -33,9 +33,14 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     @IBOutlet weak var addWall: NSButton!
     @IBOutlet weak var lidOn_Off: NSButton!
     
+    @IBOutlet weak var lengthLabel: NSTextField!
+    @IBOutlet weak var widthLabel: NSTextField!
+    @IBOutlet weak var heightLabel: NSTextField!
+    @IBOutlet weak var thicknessLabel: NSTextField!
     
     @IBOutlet weak var plusButtonLengthwise: NSButton!
     @IBOutlet weak var minusButtonLengthwise: NSButton!
+    
     
     //mm is true and inch is false
     private var mmInch: Bool = false
@@ -52,12 +57,27 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
         joinTypeControl.selectSegment(withTag: 0)
         
         tabWidthSlider.isEnabled = false
-        
+        changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func changeLabels(_ unit : Bool) {
+        var unitString: String
+        // true is inches, false is mm
+        if unit{
+            unitString = "(mm)"
+        } else{
+            unitString = "(in)"
+        }
+        // change label units for user reference
+        lengthLabel.stringValue = "Length " + unitString
+        widthLabel.stringValue = "Width " + unitString
+        heightLabel.stringValue = "Height " + unitString
+        thicknessLabel.stringValue = "Material Thickness " + unitString
     }
     
     @IBAction func mmMenuClicked(_ sender: Any) {
@@ -71,6 +91,7 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             heightTextField.doubleValue = boxModel.boxHeight * 25.4
             materialThicknessTextField.doubleValue = boxModel.materialThickness * 25.4
             mmInch = true
+            changeLabels(mmInch)
             setSliderLimits()
             tabWidthSlider.doubleValue = tabWidthSlider.doubleValue * 25.4
             tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidthSlider.doubleValue)
@@ -89,6 +110,7 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             heightTextField.doubleValue = boxModel.boxHeight
             materialThicknessTextField.doubleValue = boxModel.materialThickness
             mmInch = false
+            changeLabels(mmInch)
             //set the limits second because otherwise the adjustment is incorect
             tabWidthSlider.doubleValue = tabWidthSlider.doubleValue * 1/25.4
             setSliderLimits()

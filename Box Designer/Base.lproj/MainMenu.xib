@@ -28,10 +28,12 @@
         </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
+                <outlet property="heightLabel" destination="TQQ-QV-qyz" id="HJI-Sc-bQu"/>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
                 <outlet property="inchMenu" destination="pJz-17-zPr" id="Mub-cU-X8r"/>
                 <outlet property="innerOrOuterDimensionControl" destination="boA-gi-wev" id="fws-hn-ngW"/>
                 <outlet property="joinTypeControl" destination="8HL-HY-fgp" id="I8c-0q-QrN"/>
+                <outlet property="lengthLabel" destination="v94-LN-uCm" id="b8E-gN-vyP"/>
                 <outlet property="lengthTextField" destination="ej6-We-03q" id="0AL-08-AoL"/>
                 <outlet property="lidOn_Off" destination="heo-qw-yu3" id="W7p-oK-YyD"/>
                 <outlet property="materialThicknessTextField" destination="JAJ-yv-jkR" id="D2m-hM-jd8"/>
@@ -40,7 +42,9 @@
                 <outlet property="plusButtonLengthwise" destination="qmP-cB-sff" id="wBy-gP-3XL"/>
                 <outlet property="tabWidthLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
                 <outlet property="tabWidthSlider" destination="BKc-5S-qKa" id="cLR-7K-9mg"/>
+                <outlet property="thicknessLabel" destination="YhN-0W-NDy" id="Puo-xd-tuB"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="IbT-W1-kOg"/>
+                <outlet property="widthLabel" destination="9B4-DF-hFg" id="Iqw-xV-icC"/>
                 <outlet property="widthTextField" destination="fyW-Nm-b7I" id="Bjc-8T-Zyh"/>
             </connections>
         </viewController>
@@ -253,7 +257,7 @@
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="284" y="400" width="802" height="744"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="802" height="744"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -263,14 +267,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     </sceneView>
                     <box fixedFrame="YES" borderType="line" title="Dimensions" translatesAutoresizingMaskIntoConstraints="NO" id="3Q9-g8-i8C">
-                        <rect key="frame" x="17" y="16" width="287" height="188"/>
+                        <rect key="frame" x="4" y="16" width="310" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <view key="contentView" id="1ba-zP-fpY">
-                            <rect key="frame" x="3" y="3" width="281" height="170"/>
+                            <rect key="frame" x="3" y="3" width="304" height="167"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <gridView fixedFrame="YES" xPlacement="center" yPlacement="center" rowAlignment="firstBaseline" rowSpacing="5" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UqG-Rj-efd">
-                                    <rect key="frame" x="20" y="20" width="241" height="130"/>
+                                    <rect key="frame" x="20" y="17" width="241" height="130"/>
                                     <rows>
                                         <gridRow id="VRy-jU-tHN"/>
                                         <gridRow id="moP-0Z-xZY"/>
@@ -286,7 +290,7 @@
                                         <gridCell row="VRy-jU-tHN" column="ST3-Ki-IHX" id="PTj-Pi-OeG">
                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v94-LN-uCm">
                                                 <rect key="frame" x="-2" y="111" width="46" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Length" id="Prh-VL-45w">
+                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Length" id="Prh-VL-45w">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -410,7 +414,7 @@
                         </view>
                     </box>
                     <box fixedFrame="YES" borderType="line" title="Joining" translatesAutoresizingMaskIntoConstraints="NO" id="1JE-Yf-tAW">
-                        <rect key="frame" x="323" y="101" width="295" height="103"/>
+                        <rect key="frame" x="323" y="98" width="295" height="103"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <view key="contentView" id="xZO-ci-QXt">
                             <rect key="frame" x="3" y="3" width="289" height="85"/>

@@ -210,7 +210,7 @@ class BoxModel {
     var lengthWall : Bool {
         didSet {
             if lengthWall && counterLength == 1 {
-                // TO DO change this so that the dimensions of added inner wall conform to dimensions of current box model
+                // add separator in the box
                 let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), tabWidth: nil)
                 if(lengthWall) {
                     walls.append(innerWallModel)
@@ -218,6 +218,7 @@ class BoxModel {
                     sceneGenerator.generateScene(self)
                 }
             }
+                // add another separator in the box
             else if lengthWall && counterLength == 2 {
                 let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), tabWidth: nil)
                     if(lengthWall) {

@@ -19,6 +19,7 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     @IBOutlet weak var mmMenu: NSMenuItem!
     @IBOutlet weak var inchMenu: NSMenuItem!
     
+    // user-input text fields for dimensions
     @IBOutlet weak var lengthTextField: NSTextField!
     @IBOutlet weak var widthTextField: NSTextField!
     @IBOutlet weak var heightTextField: NSTextField!
@@ -30,9 +31,9 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     @IBOutlet weak var tabWidthLabel: NSTextField!
     @IBOutlet weak var tabWidthSlider: NSSlider!
     
-    @IBOutlet weak var addWall: NSButton!
     @IBOutlet weak var lidOn_Off: NSButton!
     
+    // labels for respective text fields
     @IBOutlet weak var lengthLabel: NSTextField!
     @IBOutlet weak var widthLabel: NSTextField!
     @IBOutlet weak var heightLabel: NSTextField!
@@ -40,6 +41,8 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     
     @IBOutlet weak var plusButtonLengthwise: NSButton!
     @IBOutlet weak var minusButtonLengthwise: NSButton!
+    
+    @IBOutlet weak var exportToPDF: NSButton!
     
     
     //mm is true and inch is false
@@ -65,9 +68,10 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
         super.viewDidLoad()
     }
     
+    // function to update labels according to user selection
     func changeLabels(_ unit : Bool) {
         var unitString: String
-        // true is inches, false is mm
+        // false is inches, true is mm
         if unit{
             unitString = "(mm)"
         } else{
@@ -221,6 +225,12 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
     }
     
     @IBAction func menuFileSaveItemSelected(_ sender: Any) {
+        fileHandlingDelegate.saveModel(boxModel, self.view.window)
+    }
+    
+    // right now, the button just does the same as the menu option
+    // the functionality in this will be changed for one of the requirements (swift archiving capabilities)
+    @IBAction func exportToPDFClicked(_ sender: Any) {
         fileHandlingDelegate.saveModel(boxModel, self.view.window)
     }
     

@@ -28,6 +28,7 @@
         </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
+                <outlet property="exportToPDF" destination="tph-WQ-ChP" id="ARx-Lz-OaO"/>
                 <outlet property="heightLabel" destination="TQQ-QV-qyz" id="HJI-Sc-bQu"/>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
                 <outlet property="inchMenu" destination="pJz-17-zPr" id="Mub-cU-X8r"/>
@@ -256,14 +257,14 @@
         </menu>
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="284" y="400" width="802" height="744"/>
+            <rect key="contentRect" x="284" y="400" width="811" height="755"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="802" height="744"/>
+                <rect key="frame" x="0.0" y="0.0" width="811" height="755"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <sceneView fixedFrame="YES" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-Mt-ukC">
-                        <rect key="frame" x="0.0" y="209" width="802" height="535"/>
+                        <rect key="frame" x="0.0" y="212" width="811" height="543"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     </sceneView>
                     <box fixedFrame="YES" borderType="line" title="Dimensions" translatesAutoresizingMaskIntoConstraints="NO" id="3Q9-g8-i8C">
@@ -482,7 +483,7 @@
                         </view>
                     </box>
                     <box fixedFrame="YES" borderType="line" title="Miscellaneous" translatesAutoresizingMaskIntoConstraints="NO" id="VC0-1w-I5m">
-                        <rect key="frame" x="627" y="61" width="167" height="140"/>
+                        <rect key="frame" x="636" y="61" width="167" height="140"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <view key="contentView" id="cWx-cT-ss2">
                             <rect key="frame" x="3" y="3" width="161" height="122"/>
@@ -557,9 +558,20 @@
                             </subviews>
                         </view>
                     </box>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tph-WQ-ChP">
+                        <rect key="frame" x="681" y="24" width="125" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Export to PDF" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="23f-U6-szs">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="exportToPDFClicked:" target="SYY-Aa-HfQ" id="5Gc-QW-59D"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="122" y="-340"/>
+            <point key="canvasLocation" x="126.5" y="-334.5"/>
         </window>
     </objects>
 </document>

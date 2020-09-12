@@ -67,7 +67,7 @@ class WallModel {
         }
     }
     
-    func updatePath(){
+    private func updatePath(){
         self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
     }
     

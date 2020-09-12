@@ -105,6 +105,8 @@ class PathGenerator {
         
     }
     
+    /*we may be able to compress this down since the left and right sides are the same (exceptMaterialThickness is set to 0) and top and bottom are different*/
+    
     static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
  
         let path = NSBezierPath()

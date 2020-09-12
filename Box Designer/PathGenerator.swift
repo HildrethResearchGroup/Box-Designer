@@ -36,14 +36,29 @@ class PathGenerator {
     }
     
     static func generateOverlapPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType) -> NSBezierPath {
-        var path = NSBezierPath()
+        let path = NSBezierPath()
         switch (wallType) {
         case WallType.largeCorner:
-            path = generateOverlapLargeCornerPath(width, length, materialThickness)
+            path.move(to: CGPoint(x: 0.0, y: 0.0))
+            path.line(to: CGPoint(x: 0.0, y: length))
+            path.line(to: CGPoint(x: width, y: length))
+            path.line(to: CGPoint(x: width, y: 0.0))
+            path.close()
         case WallType.longCorner:
-            path = generateOverlapLongCornerPath(width, length, materialThickness)
+            let path = NSBezierPath()
+            path.move(to: CGPoint(x: 0.0, y: materialThickness))
+            path.line(to: CGPoint(x: 0.0, y: length - materialThickness))
+            path.line(to: CGPoint(x: width, y: length - materialThickness))
+            path.line(to: CGPoint(x:width, y: materialThickness))
+            path.close()
+            return path
         case WallType.smallCorner:
-            path = generateOverlapSmallCornerPath(width, length, materialThickness)
+            path.move(to: CGPoint(x: materialThickness, y: materialThickness))
+            path.line(to: CGPoint(x: materialThickness, y: length - materialThickness))
+            path.line(to: CGPoint(x: width - materialThickness, y: length - materialThickness))
+            path.line(to: CGPoint(x: width - materialThickness, y: materialThickness))
+            path.close()
+            return path
         }
         return path
     }
@@ -59,50 +74,6 @@ class PathGenerator {
             path = generateTabSmallCornerPath(width, length, materialThickness, internalTabWidth)
         }
         return path
-    }
-    
-    static func generateOverlapLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double) -> NSBezierPath {
-        let path = NSBezierPath()
-        path.move(to: CGPoint(x: 0.0, y: 0.0))
-        path.line(to: CGPoint(x: 0.0, y: length))
-        path.line(to: CGPoint(x: width, y: length))
-        path.line(to: CGPoint(x: width, y: 0.0))
-        path.close()
-        return path
-    }
-    
-    static func generateOverlapLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double) -> NSBezierPath {
-        let path = NSBezierPath()
-        path.move(to: CGPoint(x: 0.0, y: materialThickness))
-        path.line(to: CGPoint(x: 0.0, y: length - materialThickness))
-        path.line(to: CGPoint(x: width, y: length - materialThickness))
-        path.line(to: CGPoint(x:width, y: materialThickness))
-        path.close()
-        return path
-    }
-    
-    static func generateOverlapSmallCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double) -> NSBezierPath {
-        let path = NSBezierPath()
-        path.move(to: CGPoint(x: materialThickness, y: materialThickness))
-        path.line(to: CGPoint(x: materialThickness, y: length - materialThickness))
-        path.line(to: CGPoint(x: width - materialThickness, y: length - materialThickness))
-        path.line(to: CGPoint(x: width - materialThickness, y: materialThickness))
-        path.close()
-        return path
-    }
-    
-//    static func generateOverlapSmallWallPath(_ width: Double, _ length: Double, _ materialThickness: Double) -> NSBezierPath {
-//        let path = NSBezierPath()
-//        path.move(to: CGPoint(x: materialThickness, y: materialThickness))
-//        path.line(to: CGPoint(x: materialThickness, y: length - materialThickness))
-//        path.line(to: CGPoint(x: width - materialThickness, y: length - materialThickness))
-//        path.line(to: CGPoint(x: width - materialThickness, y: materialThickness))
-//        path.close()
-//        return path
-//    }
-    
-    static func removeLid(){
-        
     }
     
     /*we may be able to compress this down since the left and right sides are the same (exceptMaterialThickness is set to 0) and top and bottom are different*/

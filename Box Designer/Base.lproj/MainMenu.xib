@@ -252,14 +252,14 @@
         </menu>
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="284" y="400" width="802" height="744"/>
+            <rect key="contentRect" x="284" y="400" width="800" height="750"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="802" height="744"/>
+                <rect key="frame" x="0.0" y="0.0" width="800" height="750"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <sceneView allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-Mt-ukC">
-                        <rect key="frame" x="0.0" y="205" width="802" height="539"/>
+                        <rect key="frame" x="0.0" y="205" width="800" height="545"/>
                     </sceneView>
                     <box borderType="line" title="Dimensions" id="3Q9-g8-i8C">
                         <rect key="frame" x="7" y="10" width="281" height="185"/>
@@ -412,10 +412,10 @@
                             <constraint firstAttribute="width" constant="275" id="XlL-3z-dHm"/>
                         </constraints>
                     </box>
-                    <box ambiguous="YES" borderType="line" title="Miscellaneous" id="VC0-1w-I5m">
+                    <box borderType="line" title="Miscellaneous" id="VC0-1w-I5m">
                         <rect key="frame" x="602" y="65" width="166" height="130"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <view key="contentView" ambiguous="YES" id="cWx-cT-ss2">
+                        <view key="contentView" id="cWx-cT-ss2">
                             <rect key="frame" x="3" y="3" width="160" height="112"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -492,10 +492,10 @@
                             <constraint firstAttribute="width" constant="160" id="zof-UN-SaE"/>
                         </constraints>
                     </box>
-                    <box borderType="line" title="Joining" id="1JE-Yf-tAW">
+                    <box ambiguous="YES" borderType="line" title="Joining" id="1JE-Yf-tAW">
                         <rect key="frame" x="302" y="95" width="286" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <view key="contentView" id="xZO-ci-QXt">
+                        <view key="contentView" ambiguous="YES" id="xZO-ci-QXt">
                             <rect key="frame" x="3" y="3" width="280" height="82"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>

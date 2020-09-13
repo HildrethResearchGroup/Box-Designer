@@ -95,11 +95,8 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
             heightTextField.doubleValue = boxModel.boxHeight * 25.4
             materialThicknessTextField.doubleValue = boxModel.materialThickness * 25.4
             mmInch = true
-<<<<<<< HEAD
             changeLabels(mmInch)
 
-=======
->>>>>>> e6d17a335aba45ead7c4f945b4fe7050f729bd36
         }
     }
     

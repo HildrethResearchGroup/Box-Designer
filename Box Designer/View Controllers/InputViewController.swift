@@ -71,9 +71,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             heightTextField.doubleValue = boxModel.boxHeight * 25.4
             materialThicknessTextField.doubleValue = boxModel.materialThickness * 25.4
             mmInch = true
-            setSliderLimits()
-            tabWidthSlider.doubleValue = tabWidthSlider.doubleValue * 25.4
-            tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidthSlider.doubleValue)
         }
     }
     
@@ -90,9 +87,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             materialThicknessTextField.doubleValue = boxModel.materialThickness
             mmInch = false
             //set the limits second because otherwise the adjustment is incorect
-            tabWidthSlider.doubleValue = tabWidthSlider.doubleValue * 1/25.4
-            setSliderLimits()
-            tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidthSlider.doubleValue)
         }
     }
     
@@ -104,7 +98,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
            boxModel.boxLength = lengthTextField.doubleValue
         }
-        setSliderLimits()
     }
     
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
@@ -115,8 +108,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
             boxModel.boxWidth = widthTextField.doubleValue
         }
-        
-        setSliderLimits()
     }
     
     @IBAction func heightTextFieldDidChange(_ sender: Any) {
@@ -127,8 +118,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
             boxModel.boxHeight = heightTextField.doubleValue
         }
-        
-        setSliderLimits()
     }
     
     @IBAction func materialThicknessTextFieldDidChange(_ sender: Any) {
@@ -158,31 +147,12 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             tabWidthSlider.isEnabled = false
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
-            setSliderLimits()
             tabWidthSlider.isEnabled = true
         }
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
-        if mmInch{
-            //if the setting is in mm change back to inches
-            boxModel.tabWidth = tabWidthSlider.doubleValue * (1/25.4)
-        }else{
-            //if the setting is in inches
-            boxModel.tabWidth = tabWidthSlider.doubleValue
-        }
-        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidthSlider.doubleValue)
-    }
-    
-    func setSliderLimits() {
-        let smallestDimension = boxModel.smallestDimension()
-        if mmInch{
-            //if the setting is in mm
-            tabWidthSlider.maxValue = (smallestDimension/3) * 25.4
-        }else{
-            //if the setting is in inches
-            tabWidthSlider.maxValue = smallestDimension/3
-        }
+        boxModel.nTab = tabWidthSlider.doubleValue
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {

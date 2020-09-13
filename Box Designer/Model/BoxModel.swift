@@ -179,11 +179,11 @@ class BoxModel {
             }
         }
     }
-    var tabWidth: Double? {
+    var nTab: Double? {
         didSet {
-            if tabWidth != oldValue {
+            if nTab != oldValue {
                 for wall in self.walls {
-                    wall.tabWidth = self.tabWidth
+                    wall.nTab = self.nTab
                 }
                 //inform SceneGenerator
                 sceneGenerator.generateScene(self)
@@ -193,7 +193,7 @@ class BoxModel {
     var lidOn: Bool {
         didSet {
             if lidOn != oldValue {
-                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), tabWidth: tabWidth)
+                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), tabWidth: nTab)
                 if (lidOn == false){
                     if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
                         walls.remove(at: index)
@@ -254,7 +254,7 @@ class BoxModel {
         self.materialThickness = materialThickness
         self.innerDimensions = innerDimensions
         self.joinType = joinType
-        self.tabWidth = tabWidth
+        self.nTab = tabWidth
         self.lidOn = true
         self.lengthWall = false
         self.removeInnerWall = false

@@ -59,26 +59,26 @@ class WallModel {
             }
         }
     }
-    var tabWidth: Double? {
+    var nTab: Double? {
         didSet {
-            if tabWidth != oldValue {
+            if nTab != oldValue {
                 updatePath()
             }
         }
     }
     
     private func updatePath(){
-        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, nTab: self.nTab)
     }
     
-    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, tabWidth internalTabWidth: Double?) {
+    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, tabWidth nTab: Double?) {
         self.width = width
         self.length = length
         self.materialThickness = materialThickness
         self.wallType = wallType
         self.joinType = joinType
-        self.tabWidth = internalTabWidth
+        self.nTab = nTab
         self.position = position
-        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, tabWidth: internalTabWidth)
+        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, nTab: nTab)
     }
 }

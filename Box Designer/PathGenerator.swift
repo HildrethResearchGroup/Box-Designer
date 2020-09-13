@@ -16,7 +16,7 @@ class PathGenerator {
      for generating a path.  Descriptions of the wall types - largeCorner, longCorner, and
      smallCorner - can be found in the WallType enum.
      */
-    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, tabWidth internalTabWidth: Double?) -> NSBezierPath {
+    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, nTab internalTabWidth: Double?) -> NSBezierPath {
         var path = NSBezierPath()
         switch (joinType) {
         case JoinType.overlap:
@@ -68,13 +68,13 @@ class PathGenerator {
         switch (wallType) {
         case WallType.largeCorner:
             //path = NSBezierPath()
-            path = generateTabLargeCornerPath(width, length, materialThickness, 4)
+            path = generateTabLargeCornerPath(width, length, materialThickness, Int(internalTabWidth))
         case WallType.longCorner:
             //path = NSBezierPath()
-            path = generateTabLongCornerPath(width, length, materialThickness, 4)
+            path = generateTabLongCornerPath(width, length, materialThickness, Int(internalTabWidth))
         case WallType.smallCorner:
             //path = NSBezierPath()
-            path = generateTabSmallCornerPath(width, length, materialThickness, 4)
+            path = generateTabSmallCornerPath(width, length, materialThickness, Int(internalTabWidth))
         }
         return path
     }

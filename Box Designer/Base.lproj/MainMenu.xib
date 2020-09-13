@@ -500,7 +500,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <gridView fixedFrame="YES" xPlacement="center" yPlacement="center" rowAlignment="firstBaseline" rowSpacing="7" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YYX-Aw-Baa">
-                                    <rect key="frame" x="20" y="17" width="249" height="45"/>
+                                    <rect key="frame" x="20" y="5" width="236" height="57"/>
                                     <rows>
                                         <gridRow id="9VZ-Kt-fbv"/>
                                         <gridRow id="qkp-dE-I4e"/>
@@ -512,7 +512,7 @@
                                     <gridCells>
                                         <gridCell row="9VZ-Kt-fbv" column="T6H-fr-paE" id="lLv-66-ogW">
                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wkp-bf-9xJ">
-                                                <rect key="frame" x="-2" y="26" width="63" height="16"/>
+                                                <rect key="frame" x="-2" y="38" width="63" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Join Type" id="4dP-sB-YjA">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -522,7 +522,7 @@
                                         </gridCell>
                                         <gridCell row="9VZ-Kt-fbv" column="Puj-Js-YF9" id="Wal-Re-Q4K">
                                             <segmentedControl key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8HL-HY-fgp">
-                                                <rect key="frame" x="116" y="21" width="135" height="24"/>
+                                                <rect key="frame" x="103" y="33" width="135" height="24"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="N36-Mk-B8j">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
@@ -537,8 +537,8 @@
                                         </gridCell>
                                         <gridCell row="qkp-dE-I4e" column="T6H-fr-paE" id="uf0-PJ-KB6">
                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SOV-kb-V2U">
-                                                <rect key="frame" x="-2" y="0.0" width="114" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Tab Width [00.00]" id="TJj-fq-ICy">
+                                                <rect key="frame" x="-2" y="6" width="101" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Number of Tabs" id="TJj-fq-ICy">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -547,8 +547,8 @@
                                         </gridCell>
                                         <gridCell row="qkp-dE-I4e" column="Puj-Js-YF9" id="Q90-s2-Zrl">
                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BKc-5S-qKa">
-                                                <rect key="frame" x="132" y="-2" width="104" height="19"/>
-                                                <sliderCell key="cell" alignment="left" maxValue="100" doubleValue="45.180722891566269" tickMarkPosition="above" sliderType="linear" id="5L2-db-ROf">
+                                                <rect key="frame" x="119" y="4" width="104" height="24"/>
+                                                <sliderCell key="cell" alignment="left" minValue="3" maxValue="13" doubleValue="3" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="5L2-db-ROf">
                                                     <connections>
                                                         <action selector="tabWidthChanged:" target="SYY-Aa-HfQ" id="JCy-tf-KQ4"/>
                                                     </connections>

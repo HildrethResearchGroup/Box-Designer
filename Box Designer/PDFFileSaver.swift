@@ -87,7 +87,7 @@ class PDFFileSaver {
             
             for wall in smallCornerWalls {
                 
-                let tabWidth = wall.tabWidth ?? 0
+                let tabWidth = wall.nTab ?? 0
                 
                 if (yOffset + (wall.length + tabWidth) * inchScale) > 1100 {
                     leftoverWalls.append(wall)
@@ -156,7 +156,7 @@ class PDFFileSaver {
             
             for wall in longCornerWalls {
                 
-                let tabWidth = wall.tabWidth ?? 0
+                let tabWidth = wall.nTab ?? 0
                 
                 if (yOffset + (wall.length + tabWidth) * inchScale) > 1100 {
                     leftoverWalls.append(wall)
@@ -225,7 +225,7 @@ class PDFFileSaver {
             
             for wall in largeCornerWalls {
                 
-                let tabWidth = wall.tabWidth ?? 0
+                let tabWidth = wall.nTab ?? 0
                 
                 if (yOffset + (wall.length + tabWidth) * inchScale) > 1100 {
                     print("adding a wall to the leftover array")

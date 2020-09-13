@@ -81,7 +81,7 @@ class JSONFileHandler {
                 textToWrite += "\t\t\"joinType\": \"\(model.walls[wall].joinType)\",\n"
                 
                 //tabWidth, which may be nil (null for JSON)
-                if let tabWidth = model.walls[wall].tabWidth {
+                if let tabWidth = model.walls[wall].nTab {
                     textToWrite += "\t\t\"tabWidth\": \(tabWidth)\n"
                 } else {
                     textToWrite += "\t\t\"tabWidth\": null\n"
@@ -110,7 +110,7 @@ class JSONFileHandler {
             textToWrite += "\t\"joinType\": \"\(model.joinType)\",\n"
             
             //tabWidth, which may be null
-            if let tabWidth = model.tabWidth {
+            if let tabWidth = model.nTab {
                 textToWrite += "\t\"tabWidth\": \(tabWidth),\n"
             } else {
                 textToWrite += "\t\"tabWidth\": null,\n"

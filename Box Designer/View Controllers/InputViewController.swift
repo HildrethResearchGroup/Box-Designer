@@ -211,14 +211,18 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     }
 
     @IBAction func plusButtonLengthwise(_ sender: Any) {
-        boxModel.counterLength += 1
-        boxModel.lengthWall = true
+        // for now, only allow two separators
+        // this conditional accounts for the fact that the user may click the '+' button multiple times, even if it's not doing anything
+        // if there are already max separators, don't need to increment counterLength
+        if boxModel.counterLength <  2 {
+            boxModel.counterLength += 1
+            boxModel.lengthWall = true
+        }
     }
     
     @IBAction func minusButtonLengthwise(_ sender: Any) {
         boxModel.removeInnerWall = true
     }
-    
 }
 
 protocol FileHandlingDelegate {

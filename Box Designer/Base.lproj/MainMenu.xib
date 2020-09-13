@@ -28,6 +28,7 @@
         </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
+                <outlet property="exportToPDF" destination="B3B-a2-e8l" id="xo9-TR-J6k"/>
                 <outlet property="heightLabel" destination="TQQ-QV-qyz" id="cmf-lR-o5T"/>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
                 <outlet property="inchMenu" destination="pJz-17-zPr" id="Mub-cU-X8r"/>
@@ -252,18 +253,18 @@
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="17" y="25"/>
+            <point key="canvasLocation" x="-34" y="96"/>
         </menu>
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="284" y="400" width="813" height="738"/>
+            <rect key="contentRect" x="284" y="400" width="813" height="752"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="813" height="738"/>
+                <rect key="frame" x="0.0" y="0.0" width="813" height="752"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <sceneView allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-Mt-ukC">
-                        <rect key="frame" x="0.0" y="205" width="813" height="533"/>
+                        <rect key="frame" x="0.0" y="205" width="813" height="547"/>
                     </sceneView>
                     <box borderType="line" title="Miscellaneous" id="VC0-1w-I5m">
                         <rect key="frame" x="642" y="65" width="166" height="130"/>
@@ -345,10 +346,10 @@
                             <constraint firstAttribute="width" constant="160" id="zof-UN-SaE"/>
                         </constraints>
                     </box>
-                    <box ambiguous="YES" borderType="line" title="Joining" id="1JE-Yf-tAW">
+                    <box borderType="line" title="Joining" id="1JE-Yf-tAW">
                         <rect key="frame" x="330" y="95" width="286" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <view key="contentView" ambiguous="YES" id="xZO-ci-QXt">
+                        <view key="contentView" id="xZO-ci-QXt">
                             <rect key="frame" x="3" y="3" width="280" height="82"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -417,10 +418,10 @@
                             <constraint firstAttribute="height" constant="100" id="j9K-dG-9yP"/>
                         </constraints>
                     </box>
-                    <box borderType="line" title="Dimensions" id="3Q9-g8-i8C">
+                    <box ambiguous="YES" borderType="line" title="Dimensions" id="3Q9-g8-i8C">
                         <rect key="frame" x="5" y="10" width="298" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <view key="contentView" id="1ba-zP-fpY">
+                        <view key="contentView" ambiguous="YES" id="1ba-zP-fpY">
                             <rect key="frame" x="3" y="3" width="292" height="167"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -568,6 +569,14 @@
                             <constraint firstAttribute="width" constant="275" id="XlL-3z-dHm"/>
                         </constraints>
                     </box>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B3B-a2-e8l">
+                        <rect key="frame" x="731" y="21" width="80" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dGa-5p-E0j">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="VC0-1w-I5m" firstAttribute="leading" secondItem="xZO-ci-QXt" secondAttribute="trailing" constant="20" id="269-XZ-Kdd"/>
@@ -581,7 +590,7 @@
                     <constraint firstItem="3Q9-g8-i8C" firstAttribute="top" secondItem="xX1-Mt-ukC" secondAttribute="bottom" constant="10" id="sJZ-Do-kxt"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="128.5" y="-346"/>
+            <point key="canvasLocation" x="128.5" y="-339"/>
         </window>
     </objects>
 </document>

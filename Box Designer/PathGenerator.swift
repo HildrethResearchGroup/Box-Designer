@@ -67,221 +67,178 @@ class PathGenerator {
         var path = NSBezierPath()
         switch (wallType) {
         case WallType.largeCorner:
-            path = generateTabLargeCornerPath(width, length, materialThickness, internalTabWidth)
+            //path = NSBezierPath()
+            path = generateTabLargeCornerPath(width, length, materialThickness, 4)
         case WallType.longCorner:
-            path = generateTabLongCornerPath(width, length, materialThickness, internalTabWidth)
+            //path = NSBezierPath()
+            path = generateTabLongCornerPath(width, length, materialThickness, 4)
         case WallType.smallCorner:
-            path = generateTabSmallCornerPath(width, length, materialThickness, internalTabWidth)
+            //path = NSBezierPath()
+            path = generateTabSmallCornerPath(width, length, materialThickness, 4)
         }
         return path
     }
     
     /*we may be able to compress this down since the left and right sides are the same (exceptMaterialThickness is set to 0) and top and bottom are different*/
     
-    static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+    static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ nTabs: Int) -> NSBezierPath {
  
-        let path = NSBezierPath()
+        //the number of sections
+        let nSections = ((nTabs) * 2) - 1
+        //the length of sections
+        let sectionLength = length/Double(nSections)
+        let sectionWidth = width/Double(nSections)
         
-        //left side
+        let path = NSBezierPath()
         path.move(to: CGPoint(x: 0.0, y: 0.0))
-        path.line(to: CGPoint(x: 0.0, y: length / 5))
         
-        path.line(to: CGPoint(x: materialThickness, y: length / 5))
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 2))
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 2))
-        
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 3))
-        
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 3))
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 4))
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 4))
-        
-        path.line(to: CGPoint(x: 0.0, y: length))
+        //left side
+        path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+        }
         
         //top side
-        path.line(to: CGPoint(x: width / 5, y: length))
-        
-        path.line(to: CGPoint(x: width / 5, y: length - materialThickness))
-        path.line(to: CGPoint(x: (width / 5) * 2, y: length - materialThickness))
-        path.line(to: CGPoint(x: (width / 5) * 2, y: length))
-        
-        path.line(to: CGPoint(x: (width / 5) * 3, y: length))
-        
-        path.line(to: CGPoint(x: (width / 5) * 3, y: length - materialThickness))
-        path.line(to: CGPoint(x: (width / 5) * 4, y: length - materialThickness))
-        path.line(to: CGPoint(x: (width / 5) * 4, y: length))
-        
-        path.line(to: CGPoint(x: width, y: length))
+        path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+        }
         
         //right side
-        path.line(to: CGPoint(x: width, y: (length / 5) * 4))
-        
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 4))
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 3))
-        path.line(to: CGPoint(x: width, y: (length / 5) * 3))
-        
-        path.line(to: CGPoint(x: width, y: (length / 5) * 2))
-        
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 2))
-        path.line(to: CGPoint(x: width - materialThickness, y: length / 5))
-        path.line(to: CGPoint(x: width, y: length / 5))
-        
-        path.line(to: CGPoint(x: width, y: 0.0))
+        path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+        }
         
         //bottom side
-        path.line(to: CGPoint(x: (width / 5) * 4, y: 0.0))
+        path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+        }
         
-        path.line(to: CGPoint(x: (width / 5) * 4, y: materialThickness))
-        path.line(to: CGPoint(x: (width / 5) * 3, y: materialThickness))
-        path.line(to: CGPoint(x: (width / 5) * 3, y: 0.0))
-        
-        path.line(to: CGPoint(x: (width / 5) * 2, y: 0.0))
-        
-        path.line(to: CGPoint(x: (width / 5) * 2, y: materialThickness))
-        path.line(to: CGPoint(x: width / 5, y: materialThickness))
-        path.line(to: CGPoint(x: width / 5, y: 0.0))
-            
-        path.line(to: CGPoint(x: 0.0, y: 0.0))
         path.close()
-        
         return path
     }
     
-    static func generateTabLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+    static func generateTabLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ nTabs: Int) -> NSBezierPath {
+        
+        //the number of sections
+        let nSections = (nTabs * 2) + 1
+        //the length of sections
+        let sectionLength = (length-(materialThickness*2))/Double(nSections - 2)
+        let sectionWidth = width/Double(nSections - 2)
         
         let path = NSBezierPath()
-        
-        //left side
         path.move(to: CGPoint(x: 0.0, y: materialThickness))
-        path.line(to: CGPoint(x: 0.0, y: length / 5))
         
-        path.line(to: CGPoint(x: materialThickness, y: length / 5))
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 2))
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 2))
-        
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 3))
-        
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 3))
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 4))
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 4))
-        
-        path.line(to: CGPoint(x: 0.0, y: length - materialThickness))
+        //left side
+        path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+        }
         
         //top side
-        path.line(to: CGPoint(x: width / 5, y: length - materialThickness))
-        
-        path.line(to: CGPoint(x: width / 5, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 2, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 2, y: length - materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 3, y: length - materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 3, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 4, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 4, y: length - materialThickness))
-        
-        path.line(to: CGPoint(x: width, y: length - materialThickness))
+        path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+        }
         
         //right side
-        path.line(to: CGPoint(x: width, y: (length / 5) * 4))
-        
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 4))
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 3))
-        path.line(to: CGPoint(x: width, y: (length / 5) * 3))
-        
-        path.line(to: CGPoint(x: width, y: (length / 5) * 2))
-        
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 2))
-        path.line(to: CGPoint(x: width - materialThickness, y: length / 5))
-        path.line(to: CGPoint(x: width, y: length / 5))
-        
-        path.line(to: CGPoint(x: width, y: materialThickness))
+        path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+        }
         
         //bottom side
-        path.line(to: CGPoint(x: (width / 5) * 4, y: materialThickness))
+        path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+        }
         
-        path.line(to: CGPoint(x: (width / 5) * 4, y: 0.0))
-        path.line(to: CGPoint(x: (width / 5) * 3, y: 0.0))
-        path.line(to: CGPoint(x: (width / 5) * 3, y: materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 2, y: materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 2, y: 0.0))
-        path.line(to: CGPoint(x: width / 5, y: 0.0))
-        path.line(to: CGPoint(x: width / 5, y: materialThickness))
-        
-        path.line(to: CGPoint(x: 0.0, y: materialThickness))
         path.close()
-
         return path
     }
     
-    static func generateTabSmallCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ tabWidth: Double) -> NSBezierPath {
+    static func generateTabSmallCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ nTabs: Int) -> NSBezierPath {
+        
+        //the number of sections
+        let nSections = (nTabs * 2) + 1
+        //the length of sections
+        let sectionLength = (length-(materialThickness*2))/Double(nSections - 2)
+        let sectionWidth = width/Double(nSections - 2)
+        let gap = sectionWidth - materialThickness
         
         let path = NSBezierPath()
-        
+        path.move(to: CGPoint(x: sectionWidth, y: 0.0))
         //left side
-        path.move(to: CGPoint(x: materialThickness, y: materialThickness))
-        path.line(to: CGPoint(x: materialThickness, y: length / 5))
+        path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+        path.relativeLine(to: CGPoint(x: -gap, y: 0.0))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
+        }
         
-        path.line(to: CGPoint(x: 0.0, y: length / 5))
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 2 ))
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 2 ))
+        path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+        path.relativeLine(to: CGPoint(x: gap, y: 0.0))
+        path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+        path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
         
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 3 ))
+        for _ in 0...(nTabs - 3){
+            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+        }
         
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 3))
-        path.line(to: CGPoint(x: 0.0, y: (length / 5) * 4 ))
-        path.line(to: CGPoint(x: materialThickness, y: (length / 5) * 4 ))
+        path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+        path.relativeLine(to: CGPoint(x: gap, y: 0.0))
         
-        path.line(to: CGPoint(x: materialThickness, y: length - materialThickness))
+        for _ in 0...(nTabs - 2){
+            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
+        }
         
-        //top side
-        path.line(to: CGPoint(x: width / 5, y: length - materialThickness))
+        path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+        path.relativeLine(to: CGPoint(x: -gap, y: 0.0))
+        path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+        path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
         
-        path.line(to: CGPoint(x: width / 5, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 2, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 2, y: length - materialThickness))
+        for _ in 0...(nTabs - 3){
+            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
+            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
+            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+        }
         
-        path.line(to: CGPoint(x: (width / 5) * 3, y: length - materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 3, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 4, y: length))
-        path.line(to: CGPoint(x: (width / 5) * 4, y: length - materialThickness))
-        
-        path.line(to: CGPoint(x: width - materialThickness, y: length - materialThickness))
-        
-        //right side
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 4))
-        
-        path.line(to: CGPoint(x: width, y: (length / 5) * 4))
-        path.line(to: CGPoint(x: width, y: (length / 5) * 3 ))
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 3 ))
-        
-        path.line(to: CGPoint(x: width - materialThickness, y: (length / 5) * 2 ))
-        
-        path.line(to: CGPoint(x: width, y: (length / 5) * 2))
-        path.line(to: CGPoint(x: width, y: length / 5 ))
-        path.line(to: CGPoint(x: width - materialThickness, y: length / 5 ))
-        
-        path.line(to: CGPoint(x: width - materialThickness, y: materialThickness))
-        
-        //bottom side
-        path.line(to: CGPoint(x: (width / 5) * 4, y: materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 4, y: 0.0))
-        path.line(to: CGPoint(x: (width / 5) * 3, y: 0.0))
-        path.line(to: CGPoint(x: (width / 5) * 3, y: materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 2, y: materialThickness))
-        
-        path.line(to: CGPoint(x: (width / 5) * 2, y: 0.0))
-        path.line(to: CGPoint(x: width / 5, y: 0.0))
-        path.line(to: CGPoint(x: width / 5, y: materialThickness))
-        
-        path.line(to: CGPoint(x: materialThickness, y: materialThickness))
         path.close()
-        
         return path
     }
 }

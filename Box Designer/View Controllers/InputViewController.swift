@@ -86,6 +86,7 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             heightTextField.doubleValue = boxModel.boxHeight
             materialThicknessTextField.doubleValue = boxModel.materialThickness
             mmInch = false
+            //set the limits second because otherwise the adjustment is incorect
         }
     }
     
@@ -97,7 +98,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
            boxModel.boxLength = lengthTextField.doubleValue
         }
-        setSliderLimits()
     }
     
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
@@ -108,8 +108,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
             boxModel.boxWidth = widthTextField.doubleValue
         }
-        
-        setSliderLimits()
     }
     
     @IBAction func heightTextFieldDidChange(_ sender: Any) {
@@ -120,8 +118,6 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             //if the setting is in inches
             boxModel.boxHeight = heightTextField.doubleValue
         }
-        
-        setSliderLimits()
     }
     
     @IBAction func materialThicknessTextFieldDidChange(_ sender: Any) {
@@ -151,26 +147,12 @@ class InputViewController: NSViewController, NSTextDelegate, modelUpdatingDelega
             tabWidthSlider.isEnabled = false
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
-            setSliderLimits()
             tabWidthSlider.isEnabled = true
         }
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
-        let tabWidth = tabWidthSlider.doubleValue
-        tabWidthLabel.stringValue = String(format: "Tab Width [%.2f]", tabWidth)
-        boxModel.tabWidth = tabWidth
-    }
-    
-    func setSliderLimits() {
-        let smallestDimension = boxModel.smallestDimension()
-        if mmInch{
-            //if the setting is in mm
-            tabWidthSlider.maxValue = (smallestDimension/3) * 25.4
-        }else{
-            //if the setting is in inches
-            tabWidthSlider.maxValue = smallestDimension/3
-        }
+        boxModel.nTab = tabWidthSlider.doubleValue
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {

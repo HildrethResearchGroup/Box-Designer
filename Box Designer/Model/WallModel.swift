@@ -22,7 +22,7 @@ class WallModel {
     var materialThickness: Double {
         didSet {
             if materialThickness != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
@@ -38,7 +38,7 @@ class WallModel {
     var width: Double {
         didSet {
             if width != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
@@ -47,7 +47,7 @@ class WallModel {
     var length: Double {
         didSet {
             if length != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
@@ -55,26 +55,30 @@ class WallModel {
     var joinType: JoinType {
         didSet {
             if joinType != oldValue {
-                path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+                updatePath()
             }
         }
     }
-    var tabWidth: Double? {
+    var nTab: Double? {
         didSet {
-            if tabWidth != oldValue {
-                self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, tabWidth: self.tabWidth)
+            if nTab != oldValue {
+                updatePath()
             }
         }
     }
     
-    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, tabWidth internalTabWidth: Double?) {
+    private func updatePath(){
+        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, nTab: self.nTab)
+    }
+    
+    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, tabWidth nTab: Double?) {
         self.width = width
         self.length = length
         self.materialThickness = materialThickness
         self.wallType = wallType
         self.joinType = joinType
-        self.tabWidth = internalTabWidth
+        self.nTab = nTab
         self.position = position
-        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, tabWidth: internalTabWidth)
+        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, nTab: nTab)
     }
 }

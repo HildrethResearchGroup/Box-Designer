@@ -79,7 +79,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
         selectionHandeling.selectedNode = result.node
-        selectionHandeling.higlight()
+        selectionHandeling.highlightSide()
     }
     
     override func scrollWheel(with event: NSEvent) {

@@ -55,6 +55,13 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     let rotateSensetivity:CGFloat = 0.01
     let zoomSensetivity:CGFloat = 0.1
     
+    func inView(_ event: NSEvent)->Bool {
+        if(boxView.hitTest(event.locationInWindow) == boxView){
+            return true
+        }
+        return false
+    }
+    
     override func otherMouseDragged(with event: NSEvent) {
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
@@ -65,6 +72,12 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         currentPos.x += event.deltaX * -moveSensetivity
         currentPos.y += event.deltaY * moveSensetivity
         boxView.pointOfView!.position = currentPos
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+        let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
+        result.node.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
     }
     
     override func scrollWheel(with event: NSEvent) {

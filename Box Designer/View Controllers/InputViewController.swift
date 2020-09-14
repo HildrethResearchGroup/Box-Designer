@@ -11,8 +11,8 @@ import Cocoa
 import SceneKit
 
 class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDelegate **Audrey greyed this out for now, don't think it's needed, but want to make sure before deleting
-    
     var boxModel = BoxModel()
+    let selectionHandeling = SelectionHandeling.shared
     
     var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl()
     
@@ -77,7 +77,9 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
-        result.node.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
+        
+        selectionHandeling.selectedNode = result.node
+        selectionHandeling.higlight()
     }
     
     override func scrollWheel(with event: NSEvent) {

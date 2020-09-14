@@ -28,6 +28,7 @@
         </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
+                <outlet property="boxView" destination="xX1-Mt-ukC" id="zjT-Ea-BU5"/>
                 <outlet property="exportToPDF" destination="B3B-a2-e8l" id="xo9-TR-J6k"/>
                 <outlet property="heightLabel" destination="TQQ-QV-qyz" id="cmf-lR-o5T"/>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
@@ -258,7 +259,7 @@
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="284" y="400" width="813" height="752"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="813" height="752"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

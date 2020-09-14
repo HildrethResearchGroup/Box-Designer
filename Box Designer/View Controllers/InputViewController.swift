@@ -16,6 +16,8 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     
     var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl()
     
+    @IBOutlet weak var boxView: SCNView!
+    
     @IBOutlet weak var mmMenu: NSMenuItem!
     @IBOutlet weak var inchMenu: NSMenuItem!
     
@@ -43,6 +45,38 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBOutlet weak var minusButtonLengthwise: NSButton!
     
     @IBOutlet weak var exportToPDF: NSButton!
+    
+    
+    
+    //====================Camera Controls=========================
+    var mouseDown: Bool = false
+    
+    let moveSensetivity:CGFloat = 0.01
+    let rotateSensetivity:CGFloat = 0.01
+    let zoomSensetivity:CGFloat = 0.1
+    
+    override func otherMouseDragged(with event: NSEvent) {
+        
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
+        
+    }
+    
+    override func rightMouseDragged(with event: NSEvent) {
+        var currentPos:SCNVector3 = boxView.pointOfView!.position
+        currentPos.x += event.deltaX * -moveSensetivity
+        currentPos.y += event.deltaY * moveSensetivity
+        boxView.pointOfView!.position = currentPos
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensetivity)
+        if(boxView.pointOfView!.camera!.orthographicScale < 0.1){
+            boxView.pointOfView!.camera?.orthographicScale = 0.1
+        }
+    }
+    
+    //============================================================
     
     
     //mm is true and inch is false

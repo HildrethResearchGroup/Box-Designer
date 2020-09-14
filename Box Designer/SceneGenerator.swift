@@ -24,6 +24,10 @@ class SceneGenerator {
         scene = SCNScene()
     }
     
+    
+    let cameraOrbit = SCNNode()
+    
+    
     var delegate: SceneGeneratorDelegate?
     var camera: SCNNode?
     var scene: SCNScene {
@@ -41,6 +45,7 @@ class SceneGenerator {
         self.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
+        cameraOrbit.position = SCNVector3Make(CGFloat(boxModel.boxWidth/2), CGFloat(boxModel.boxHeight/2), CGFloat(boxModel.boxLength/2))
         var wallNumber = 0
         for wall in boxModel.walls {
             //create node from wall data
@@ -93,14 +98,18 @@ class SceneGenerator {
     func adjustCamera(_ scene: SCNScene) {
         
         if camera == nil {
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3Make(0, 0, 25)
-        cameraNode.camera?.usesOrthographicProjection = true
-        
-        scene.rootNode.addChildNode(cameraNode)
+            let cameraNode = SCNNode()
+            cameraNode.camera = SCNCamera()
+            cameraNode.position = SCNVector3Make(0, 0, 25)
+            cameraNode.camera?.usesOrthographicProjection = true
+            cameraNode.camera?.automaticallyAdjustsZRange = true
+            cameraOrbit.addChildNode(cameraNode)
+            self.scene.rootNode.addChildNode(cameraOrbit)
+            camera = cameraNode
         }else{
-            scene.rootNode.addChildNode(camera!)
+            cameraOrbit.addChildNode(camera!)
+            self.scene.rootNode.addChildNode(cameraOrbit)
+            //scene.rootNode.addChildNode(camera!)
         }
 
     }

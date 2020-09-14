@@ -65,6 +65,24 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     override func otherMouseDragged(with event: NSEvent) {
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
+        
+        
+        //this needs to be refactored
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.x = (((SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180) - 360)/180) * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 < -180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.x = (((SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180) + 360)/180) * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.y = (((SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) - 360)/180) * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 < -180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.y = (((SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) + 360)/180) * CGFloat.pi
+        }
+        
+        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
+        
     }
     
     override func rightMouseDragged(with event: NSEvent) {

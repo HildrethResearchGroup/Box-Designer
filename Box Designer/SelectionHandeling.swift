@@ -44,21 +44,31 @@ class SelectionHandeling{
     }
     
     func highlightSide(){
-        let path = NSBezierPath()
-        path.move(to: CGPoint(x: 0.0, y: 0.0))
-        path.line(to: CGPoint(x: 0.0, y: 2))
-        path.line(to: CGPoint(x: 2, y: 2))
-        path.line(to: CGPoint(x: 2, y: 0.0))
-        path.move(to: CGPoint(x: 0.5, y: 0.5))
-        path.relativeLine(to: CGPoint(x: 1.0, y: 0))
-        path.relativeLine(to: CGPoint(x: 0, y: 1.0))
-        path.relativeLine(to: CGPoint(x: -1.0, y: 0))
-        path.relativeLine(to: CGPoint(x: 0.0, y: -1.0))
         
         let newShape = SCNShape(path: (selectedNode?.geometry as! SCNShape).path, extrusionDepth: shapeDepth)
         hightlightFace = SCNNode(geometry: newShape)
         hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
-        hightlightFace!.position.z += (0.25 + shapeDepth)
+        
+        if(selectedNode?.position.x != 0.0){
+            if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 0){
+                hightlightFace!.position.z -= (0.25 + shapeDepth)
+            }else{
+                hightlightFace!.position.z += (0.25 + shapeDepth)
+            }
+        }else if(selectedNode?.position.y != 0.0){
+            if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 0){
+                hightlightFace!.position.z += (0.25 + shapeDepth)
+            }else{
+                hightlightFace!.position.z -= (0.25 + shapeDepth)
+            }
+        }else if(selectedNode?.position.z != 0.0){
+            if(abs(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) > 90){
+                hightlightFace!.position.z -= (0.25 + shapeDepth)
+            }else{
+                hightlightFace!.position.z += (0.25 + shapeDepth)
+            }
+        }
+        
         selectedNode?.addChildNode(hightlightFace!)
         
     }

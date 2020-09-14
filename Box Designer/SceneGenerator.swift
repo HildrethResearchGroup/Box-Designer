@@ -45,6 +45,7 @@ class SceneGenerator {
         self.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
+        //ensure that the camera stays on the center on the box
         cameraOrbit.position = SCNVector3Make(CGFloat(boxModel.boxWidth/2), CGFloat(boxModel.boxHeight/2), CGFloat(boxModel.boxLength/2))
         var wallNumber = 0
         for wall in boxModel.walls {
@@ -103,7 +104,10 @@ class SceneGenerator {
             cameraNode.position = SCNVector3Make(0, 0, 25)
             cameraNode.camera?.usesOrthographicProjection = true
             cameraNode.camera?.automaticallyAdjustsZRange = true
+            cameraNode.camera?.orthographicScale = 3.5
             cameraOrbit.addChildNode(cameraNode)
+            cameraOrbit.eulerAngles.x -= CGFloat.pi/8
+            cameraOrbit.eulerAngles.y -= CGFloat.pi/4
             self.scene.rootNode.addChildNode(cameraOrbit)
             camera = cameraNode
         }else{

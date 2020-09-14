@@ -56,10 +56,8 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     let zoomSensetivity:CGFloat = 0.1
     
     override func otherMouseDragged(with event: NSEvent) {
-        
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
-        
     }
     
     override func rightMouseDragged(with event: NSEvent) {

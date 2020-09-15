@@ -42,7 +42,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBOutlet weak var plusButtonLengthwise: NSButton!
     @IBOutlet weak var minusButtonLengthwise: NSButton!
     
-    @IBOutlet weak var exportToPDF: NSButton!
+    @IBOutlet weak var exportButton: NSButton!
     
     
     //mm is true and inch is false
@@ -201,7 +201,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     
     // right now, the button just does the same as the menu option
     // the functionality in this will be changed for one of the requirements (swift archiving capabilities)
-    @IBAction func exportToPDFClicked(_ sender: Any) {
+    @IBAction func exportButtonClicked(_ sender: Any) {
         fileHandlingDelegate.saveModel(boxModel, self.view.window)
     }
     

@@ -77,14 +77,19 @@ class BoxDesignerPDF {
         // the number of walls you can fit on a page depends on the margin on both sides (2*margin), the padding between walls, and the wall length/width
         var wallPDFWidth: Double = pdfMargin*2
         var wallPDFHeight: Double = pdfMargin*2
+        var verticallyDrawnWalls: Int = 0
+        var horizontallyDrawnWalls: Int = 0
+        var pageJustDrawn = false
         var test = [WallModel]()
         // iterate through walls and add new page if a wall would get cutoff in y direction
         for (index,wall) in boxModel.walls.enumerated() {
             
-            if CGFloat(wallPDFHeight) > pdfHeight {
-                wallPDFHeight = pdfMargin*2
+            wallPDFHeight += wall.length*100.0 + pdfPadding
+            
+            if CGFloat(wallPDFHeight) >= pdfHeight {
                 addPage(test)
                 test = []
+                pageJustDrawn = true
                 
             } else if index == (boxModel.walls.endIndex-1) {
                 test.append(wall)
@@ -92,9 +97,14 @@ class BoxDesignerPDF {
                 
             } else {
                 test.append(wall)
-                wallPDFHeight += wall.length*100.0 + pdfPadding
+                print("hi")
             }
-            
+            if pageJustDrawn {
+                test.append(wall)
+                wallPDFHeight = pdfMargin*2 + wall.length*100.0 + pdfPadding
+                pageJustDrawn = false
+            }
+            print(index,test, boxModel.walls.endIndex-1)
         }
 
         // split walls into different arrays depending on number of pages

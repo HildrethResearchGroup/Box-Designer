@@ -40,6 +40,7 @@ class FileHandlingControl: FileHandlingDelegate {
                     }
                 case "pdf":
                     let fileSaver = BoxDesignerPDF(targetURL: url, boxModel)
+                    fileSaver.defaultPDFDisplay()
                     fileSaver.saveAsPDF()
                 default:
                     break

@@ -20,8 +20,12 @@ class BoxDesignerPDF {
     var context : CGContext!
     var nsContext : NSGraphicsContext
     var mediaBox: CGRect
+    var wallsOnPage = [[WallModel]]()
+    
+    let pdfMargin: Double = 50.0
+    let pdfPadding: Double = 25.0
     let pdfHeight: CGFloat = 1100.0
-    let pdfWidth: CGFloat = 800.0
+    let pdfWidth: CGFloat = 900.0
     
     init(targetURL: URL, _ boxModel: BoxModel) {
         
@@ -32,27 +36,25 @@ class BoxDesignerPDF {
         mediaBox = CGRect(x: 0.0, y: 0.0, width: pdfWidth, height: pdfHeight)
         context = CGContext(targetURL as CFURL, mediaBox: &mediaBox, nil)
         nsContext = NSGraphicsContext(cgContext: context, flipped: true)
-        
-        // for now, add page here until better functionality
-        let paths = wallPathsToArray()
-        addPage(paths)
+        //wallPathsToArrays()
+
     }
     
-    func wallPathsToArray() -> [NSBezierPath] {
-        
-        var paths = [NSBezierPath]()
-        // for now, just put all paths in this array
-        // later, this can be specified to which paths to draw on a specific page
-//        for wall in boxModel.walls {
-//            paths.append(wall.path)
-//        }
-        paths.append(boxModel.walls[0].path) // for testing, just try to draw one of the walls
-        return paths
+ //    this function allows you to specify which walls to draw on which pages
+    func wallPathsToArrays() {
+        var test = [WallModel]()
+//        for now, just put all paths in this array
+//            later, this can be specified to which paths to draw on a specific page
+        for wall in boxModel.walls {
+            test.append(wall)
+        }
+        addPage(test)
+
     }
     
-    func addPage(_ paths: [NSBezierPath]){
+    func addPage(_ walls: [WallModel]){
         // initialize custom PDF page
-        let page = BoxDesignPDFPage(paths)!
+        let page = BoxDesignPDFPage(walls)!
         
         // set current context (NS not CG)
         NSGraphicsContext.current = nsContext
@@ -68,7 +70,34 @@ class BoxDesignerPDF {
         NSGraphicsContext.current = nil
         // add page to list of pages in doc
         pages.append(page)
+        
+    }
+    
+    func defaultPDFDisplay() {
+        // the number of walls you can fit on a page depends on the margin on both sides (2*margin), the padding between walls, and the wall length/width
+        var wallPDFWidth: Double = pdfMargin*2
+        var wallPDFHeight: Double = pdfMargin*2
+        var test = [WallModel]()
+        // iterate through walls and add new page if a wall would get cutoff in y direction
+        for (index,wall) in boxModel.walls.enumerated() {
+            
+            if CGFloat(wallPDFHeight) > pdfHeight {
+                wallPDFHeight = pdfMargin*2
+                addPage(test)
+                test = []
+                
+            } else if index == (boxModel.walls.endIndex-1) {
+                test.append(wall)
+                addPage(test)
+                
+            } else {
+                test.append(wall)
+                wallPDFHeight += wall.length*100.0 + pdfPadding
+            }
+            
+        }
 
+        // split walls into different arrays depending on number of pages
     }
     
     func saveAsPDF() {

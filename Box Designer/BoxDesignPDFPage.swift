@@ -14,21 +14,24 @@ import PDFKit
 
 class BoxDesignPDFPage : PDFPage {
     
-    var pathsToDraw : [NSBezierPath]
+    var wallsToDraw : [WallModel]
     let inchScale : Double = 100.0
     let margin : Double = 50.0
     let padding : Double = 25.0
     var firstLineDrawn = false
     
-    init?(_ pathsToDraw : [NSBezierPath]) {
-        self.pathsToDraw = pathsToDraw
+    init?(_ wallsToDraw : [WallModel]) {
+        self.wallsToDraw = wallsToDraw
         super.init()
     }
     
     func drawPaths() {
-        let xOffset = margin
-        let yOffset = margin
-        for path in pathsToDraw {
+        var xOffset = margin
+        var yOffset = margin
+        for wall in wallsToDraw {
+            
+            let path = wall.path
+        
             var moveToPoint = NSPoint()
             
             var lineToPoint = NSPoint()
@@ -47,7 +50,6 @@ class BoxDesignPDFPage : PDFPage {
                     break
                 }
                 
-                // TO-DO: need to refactor this block to account for the path being move,line,line,line,line,close NOT move,line,move,line,..,close
                 switch (elementType) {
                 case NSBezierPath.ElementType.moveTo:
                     moveToPoint.x = point.x * CGFloat(inchScale) + CGFloat(xOffset)
@@ -79,7 +81,8 @@ class BoxDesignPDFPage : PDFPage {
                     break
                 }
             }
-            //yOffset += wall.length * inchScale + padding
+            yOffset += wall.length * inchScale + padding
+        
         }
     }
     

@@ -43,12 +43,28 @@ class SelectionHandeling{
         selectedNode!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
     }
     
+    func highlightEdges(){
+        let path = ((selectedNode?.geometry as! SCNShape).path!)
+        
+        var lineShape = LineDrawing(path)
+        
+        //hightlightFace = SCNNode(geometry: newShape)
+        //hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+        //self._addChild()
+    }
+    
     func highlightSide(){
         
         let newShape = SCNShape(path: (selectedNode?.geometry as! SCNShape).path, extrusionDepth: shapeDepth)
         hightlightFace = SCNNode(geometry: newShape)
         hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
         
+        self._addChild()
+    }
+    
+    private func _addChild(){
+        //Since its isometric select the side that is being looked at
+        //what side is being looked at is calculated by the camera angle ¬
         if(selectedNode?.position.x != 0.0){
             if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 0){
                 hightlightFace!.position.z -= (0.25 + shapeDepth)
@@ -70,7 +86,6 @@ class SelectionHandeling{
         }
         
         selectedNode?.addChildNode(hightlightFace!)
-        
     }
     
     init(){

@@ -17,7 +17,9 @@ class BoxDesignerPDF {
     let boxModel : BoxModel
     let targetURL : URL
     var pages = [BoxDesignPDFPage]()
-    var nsimage : NSImage
+    var context : CGContext!
+    var nsContext : NSGraphicsContext
+    var mediaBox: CGRect
     let pdfHeight: CGFloat = 1100.0
     let pdfWidth: CGFloat = 800.0
     
@@ -25,8 +27,13 @@ class BoxDesignerPDF {
         
         self.boxModel = boxModel
         self.targetURL = targetURL
-        // just for testing purposes
-        nsimage = NSImage.init(size: NSMakeSize(pdfWidth, pdfHeight))
+        
+        // instantiate variables needed to draw to PDFPage
+        mediaBox = CGRect(x: 0.0, y: 0.0, width: pdfWidth, height: pdfHeight)
+        context = CGContext(targetURL as CFURL, mediaBox: &mediaBox, nil)
+        nsContext = NSGraphicsContext(cgContext: context, flipped: true)
+        
+        // for now, add page here until better functionality
         let paths = wallPathsToArray()
         addPage(paths)
     }
@@ -44,29 +51,34 @@ class BoxDesignerPDF {
     }
     
     func addPage(_ paths: [NSBezierPath]){
-        //var rect = NSMakeRect(CGFloat(0),CGFloat(0),pdfHeight,pdfWidth)
+        // initialize custom PDF page
+        let page = BoxDesignPDFPage(paths)!
         
-        let page = BoxDesignPDFPage(image: nsimage, paths)!
-        let box = PDFDisplayBox(rawValue: 0)
-        var pageRect = CGRect(x: 0, y: 0, width: 1100, height: 800) // this line is where we can change the PDF page size for later
-        let dataConsumer = CGDataConsumer(url: targetURL as CFURL)
+        // set current context (NS not CG)
+        NSGraphicsContext.current = nsContext
         
-        let context = CGContext(consumer: dataConsumer!, mediaBox: &pageRect, nil)
-        page.draw(with: box!, to: context!)
+        // begin, draw, and end the PDF page
+        context?.beginPDFPage(nil); do {
+            
+            context?.saveGState(); do {
+                page.draw(with: .mediaBox, to: context!)
+            }; context?.restoreGState()
+            
+        }; context?.endPDFPage()
+        NSGraphicsContext.current = nil
+        // add page to list of pages in doc
         pages.append(page)
-        // CGContextRelease(context) // might need this line
 
     }
     
     func saveAsPDF() {
         var index : Int = 0
-        // add all pages to document
-        for pdfpage in pages {
+        //add all pages to document
+        for (pdfpage) in pages {
             document.insert(pdfpage, at: index)
             index += 1
-            
         }
-        // write the document
-        document.write(to: targetURL)
+        // close PDF and write to URL in context (targetURL)
+        context?.closePDF()
     }
 }

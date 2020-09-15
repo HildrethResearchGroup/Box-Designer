@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C32247ED22B00F595A1 /* PDFFileSaver.swift */; };
+		02043C33247ED22B00F595A1 /* BoxDesignPDFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C32247ED22B00F595A1 /* BoxDesignPDFPage.swift */; };
 		02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C4E248C308400F595A1 /* BoxViewController.swift */; };
 		02043C51248C310A00F595A1 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C50248C310A00F595A1 /* InputViewController.swift */; };
 		02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C52248C74DD00F595A1 /* BoxModel.swift */; };
@@ -36,7 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02043C32247ED22B00F595A1 /* PDFFileSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFFileSaver.swift; sourceTree = "<group>"; };
+		02043C32247ED22B00F595A1 /* BoxDesignPDFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignPDFPage.swift; sourceTree = "<group>"; };
 		02043C4E248C308400F595A1 /* BoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxViewController.swift; sourceTree = "<group>"; };
 		02043C50248C310A00F595A1 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		02043C52248C74DD00F595A1 /* BoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxModel.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 				02043C5C248D72B400F595A1 /* SceneGenerator.swift */,
 				02043C56248C789600F595A1 /* WallType.swift */,
 				02043C5A248C7BCC00F595A1 /* PathGenerator.swift */,
-				02043C32247ED22B00F595A1 /* PDFFileSaver.swift */,
+				02043C32247ED22B00F595A1 /* BoxDesignPDFPage.swift */,
 				02043C6224904DBF00F595A1 /* JSONFileHandler.swift */,
 				02043C6024902CCF00F595A1 /* FileHandlingControl.swift */,
 				6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */,
@@ -256,7 +256,7 @@
 				02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */,
 				02043C6124902CCF00F595A1 /* FileHandlingControl.swift in Sources */,
 				02043C6324904DBF00F595A1 /* JSONFileHandler.swift in Sources */,
-				02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */,
+				02043C33247ED22B00F595A1 /* BoxDesignPDFPage.swift in Sources */,
 				6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */,
 				02043C59248C7AC000F595A1 /* JoinType.swift in Sources */,
 				02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */,

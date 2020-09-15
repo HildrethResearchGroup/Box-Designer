@@ -11,7 +11,7 @@ import Cocoa
 
 class FileHandlingControl: FileHandlingDelegate {
     
-    // var modelUpdatingDelegate: modelUpdatingDelegate? = nil **Audrey greyed this out for now, don't think it's needed, but want to make sure before deleting
+
     
     // this is the function that talks with the app menu for saving
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?) {
@@ -39,12 +39,8 @@ class FileHandlingControl: FileHandlingDelegate {
                         print("Failed to save as a JSON file.")
                     }
                 case "pdf":
-                    let fileSaver = PDFFileSaver()
-                    do {
-                        try fileSaver.saveAsPDF(to: url, boxModel)
-                    } catch {
-                        print("Failed to save as a PDF.")
-                    }
+                    let fileSaver = BoxDesignerPDF(targetURL: url, boxModel)
+                    fileSaver.saveAsPDF()
                 default:
                     break
                 }
@@ -84,7 +80,3 @@ class FileHandlingControl: FileHandlingDelegate {
     }
 }
 
-// Audrey is commenting out this for now to make sure it's not doing anything -- will get rid of it after ensuring there won't be repercussions
-//protocol modelUpdatingDelegate {
-//    func updateModel(_ boxModel: BoxModel)
-//}

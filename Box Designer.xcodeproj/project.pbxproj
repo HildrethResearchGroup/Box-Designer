@@ -18,6 +18,7 @@
 		02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5C248D72B400F595A1 /* SceneGenerator.swift */; };
 		02043C6124902CCF00F595A1 /* FileHandlingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6024902CCF00F595A1 /* FileHandlingControl.swift */; };
 		02043C6324904DBF00F595A1 /* JSONFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6224904DBF00F595A1 /* JSONFileHandler.swift */; };
+		6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -46,6 +47,7 @@
 		02043C5C248D72B400F595A1 /* SceneGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneGenerator.swift; sourceTree = "<group>"; };
 		02043C6024902CCF00F595A1 /* FileHandlingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandlingControl.swift; sourceTree = "<group>"; };
 		02043C6224904DBF00F595A1 /* JSONFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileHandler.swift; sourceTree = "<group>"; };
+		6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignerPDF.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,17 +102,17 @@
 				C0E65E6A247842D6009D90F1 /* View Controllers */,
 				C0E65E6D24784D70009D90F1 /* Views */,
 				C0E65E4E2478426D009D90F1 /* AppDelegate.swift */,
-				C0E65E522478426E009D90F1 /* MainMenu.xib */,
 				C0E65E502478426E009D90F1 /* Assets.xcassets */,
 				C0E65E552478426E009D90F1 /* Info.plist */,
 				C0E65E562478426E009D90F1 /* Box_Designer.entitlements */,
 				02043C58248C7AC000F595A1 /* JoinType.swift */,
-				02043C6024902CCF00F595A1 /* FileHandlingControl.swift */,
 				02043C5C248D72B400F595A1 /* SceneGenerator.swift */,
 				02043C56248C789600F595A1 /* WallType.swift */,
 				02043C5A248C7BCC00F595A1 /* PathGenerator.swift */,
-				02043C6224904DBF00F595A1 /* JSONFileHandler.swift */,
 				02043C32247ED22B00F595A1 /* PDFFileSaver.swift */,
+				02043C6224904DBF00F595A1 /* JSONFileHandler.swift */,
+				02043C6024902CCF00F595A1 /* FileHandlingControl.swift */,
+				6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */,
 			);
 			path = "Box Designer";
 			sourceTree = "<group>";
@@ -136,6 +138,7 @@
 		C0E65E6D24784D70009D90F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C0E65E522478426E009D90F1 /* MainMenu.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				02043C6124902CCF00F595A1 /* FileHandlingControl.swift in Sources */,
 				02043C6324904DBF00F595A1 /* JSONFileHandler.swift in Sources */,
 				02043C33247ED22B00F595A1 /* PDFFileSaver.swift in Sources */,
+				6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */,
 				02043C59248C7AC000F595A1 /* JoinType.swift in Sources */,
 				02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */,
 				02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */,

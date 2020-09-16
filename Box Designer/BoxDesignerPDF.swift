@@ -24,8 +24,8 @@ class BoxDesignerPDF {
     
     let pdfMargin: Double = 50.0
     let pdfPadding: Double = 25.0
-    let pdfHeight: CGFloat = 1100.0
-    let pdfWidth: CGFloat = 900.0
+    let pdfHeight: Double = 1500.0
+    let pdfWidth: Double = 900.0
     
     init(targetURL: URL, _ boxModel: BoxModel) {
         
@@ -33,81 +33,53 @@ class BoxDesignerPDF {
         self.targetURL = targetURL
         
         // instantiate variables needed to draw to PDFPage
-        mediaBox = CGRect(x: 0.0, y: 0.0, width: pdfWidth, height: pdfHeight)
+        mediaBox = CGRect(x: 0.0, y: 0.0, width: CGFloat(pdfWidth), height: CGFloat(pdfHeight))
         context = CGContext(targetURL as CFURL, mediaBox: &mediaBox, nil)
         nsContext = NSGraphicsContext(cgContext: context, flipped: true)
-        //wallPathsToArrays()
 
     }
     
- //    this function allows you to specify which walls to draw on which pages
-    func wallPathsToArrays() {
-        var test = [WallModel]()
-//        for now, just put all paths in this array
-//            later, this can be specified to which paths to draw on a specific page
-        for wall in boxModel.walls {
-            test.append(wall)
-        }
-        addPage(test)
-
-    }
-    
-    func addPage(_ walls: [WallModel]){
+    func addPage(_ walls: [WallModel]) -> [WallModel]{
         // initialize custom PDF page
-        let page = BoxDesignPDFPage(walls)!
-        
+        let page = BoxDesignPDFPage(walls,margin: pdfMargin, padding: pdfPadding, height: pdfHeight, width: pdfWidth)!
+        var leftoverWalls = [WallModel]()
         // set current context (NS not CG)
         NSGraphicsContext.current = nsContext
         
-        // begin, draw, and end the PDF page
+        // begin, draw, and end the PDF page on cg context
         context?.beginPDFPage(nil); do {
             
-            context?.saveGState(); do {
                 page.draw(with: .mediaBox, to: context!)
+            
+            context?.saveGState(); do {
+                leftoverWalls = page.drawPaths(for: .mediaBox)
             }; context?.restoreGState()
             
         }; context?.endPDFPage()
+        // revert ns context setting to nil
         NSGraphicsContext.current = nil
         // add page to list of pages in doc
         pages.append(page)
-        
+        return leftoverWalls
     }
     
-    func defaultPDFDisplay() {
-        // the number of walls you can fit on a page depends on the margin on both sides (2*margin), the padding between walls, and the wall length/width
-        var wallPDFWidth: Double = pdfMargin*2
-        var wallPDFHeight: Double = pdfMargin*2
-        var verticallyDrawnWalls: Int = 0
-        var horizontallyDrawnWalls: Int = 0
-        var pageJustDrawn = false
-        var test = [WallModel]()
-        // iterate through walls and add new page if a wall would get cutoff in y direction
-        for (index,wall) in boxModel.walls.enumerated() {
-            
-            wallPDFHeight += wall.length*100.0 + pdfPadding
-            
-            if CGFloat(wallPDFHeight) >= pdfHeight {
-                addPage(test)
-                test = []
-                pageJustDrawn = true
-                
-            } else if index == (boxModel.walls.endIndex-1) {
-                test.append(wall)
-                addPage(test)
-                
-            } else {
-                test.append(wall)
-                print("hi")
-            }
-            if pageJustDrawn {
-                test.append(wall)
-                wallPDFHeight = pdfMargin*2 + wall.length*100.0 + pdfPadding
-                pageJustDrawn = false
-            }
-            print(index,test, boxModel.walls.endIndex-1)
-        }
+    // function to put each wall on its own PDF page in document
+    func oneComponentPerPageLayout() {
 
-        // split walls into different arrays depending on number of pages
+        for wall in boxModel.walls {
+            // don't need to save walls that weren't drawn for this function
+            var _ = addPage([wall])
+        }
+    }
+    
+    // default PDF layout for user
+    func defaultPDFDisplay() {
+        
+        var wallsToDraw = boxModel.walls
+        // keep adding a new page until all walls are drawn
+        while !wallsToDraw.isEmpty {
+            wallsToDraw = addPage(wallsToDraw)
+        }
     }
     
     func saveAsPDF() {

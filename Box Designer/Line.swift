@@ -12,46 +12,22 @@ import Cocoa
 
 
 enum linePos {
-    case top
-    case bottom
+    case far
+    case close
     case center
 }
 
-class Line{
+class Line: CustomStringConvertible{
     init(_ pointA: NSPoint, _ pointB: NSPoint){
         self.topPoint = pointA
         self.bottomPoint = pointB
-        //abitrarily assign the points if not valid
-        if(self.perfect()){
-            //swap the points as necessary
-            if(horizontal()){
-                if(self.topPoint.x < self.bottomPoint.x){
-                    let tempPoint = self.topPoint
-                    self.topPoint = self.bottomPoint
-                    self.bottomPoint = tempPoint
-                }
-            }else{
-                if(self.topPoint.y < self.bottomPoint.y){
-                    let tempPoint = self.topPoint
-                    self.topPoint = self.bottomPoint
-                    self.bottomPoint = tempPoint
-                }
-            }
-        }else{
-            //non perfect lines
-            let sizeA = pointA.x + pointA.y
-            let sizeB = pointB.x + pointB.y
-            if(sizeB > sizeA){
-                let tempPoint = self.topPoint
-                self.topPoint = self.bottomPoint
-                self.bottomPoint = tempPoint
-            }
-        }
     }
     
     //top is the larger point
-    private var topPoint: NSPoint
-    private var bottomPoint: NSPoint
+    private let topPoint: NSPoint
+    private let bottomPoint: NSPoint
+    
+    var thickness: CGFloat = 0.1
     
     func perfect()->Bool{
         //can't be a point
@@ -74,18 +50,27 @@ class Line{
         return(self.topPoint.x - self.bottomPoint.x == 0)
     }
     
-    func returnTestPoints(_ region: linePos)->[NSPoint]{
+    func point()->Bool{
+        return(self.topPoint.x - self.bottomPoint.x == 0 && self.topPoint.y - self.bottomPoint.y == 0)
+    }
+    
+    func returnTestPoints(_ region: linePos, left:Bool)->[NSPoint]{
         var returnValue: [NSPoint] = []
-        
         switch (region) {
-            case linePos.top:
+            case linePos.far:
+                
                 break
             case linePos.center:
+                
                 break
-            case linePos.bottom:
+            case linePos.close:
+                
                 break
+                
         }
         return returnValue
     }
+    
+    public var description: String {return "\(bottomPoint) -> \(topPoint)"}
     
 }

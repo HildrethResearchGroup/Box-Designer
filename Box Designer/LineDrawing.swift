@@ -16,13 +16,18 @@ class LineDrawing{
     
     init(_ path: NSBezierPath){
         self.path = path
-        self._getLines()
+        self._doThing(self._getLines())
     }
     
     private var path: NSBezierPath
     
-    
-    private func _getLines(){
+    private var insidePath = NSBezierPath()
+    private var outsidePath = NSBezierPath()
+          
+    var linePath = NSBezierPath()
+  
+    private func _getLines()->[Line]{
+        var lines: [Line] = []
         var pointArray:[NSPoint] = []
         
         let point: NSPointPointer = UnsafeMutablePointer<NSPoint>.allocate(capacity: 3)
@@ -30,9 +35,41 @@ class LineDrawing{
             path.element(at: x, associatedPoints: point)
             pointArray.append(point[0])
         }
-        print(pointArray)
+        for x in 0...(path.elementCount-2){
+            let line = Line(pointArray[x+1], pointArray[x])
+            if(!line.point()){
+                lines.append(line)
+            }
+        }
+        print(lines)
+        return lines
     }
     
-    var shape: SCNShape = SCNShape()
+    private func _doThing(_ lines:[Line]){
+        for invLine in lines{
+            var topLeft:NSPoint
+            var bottomLeft:NSPoint
+            var topRight:NSPoint
+            var bottomRight:NSPoint
+            //find the points to use on the left
+            
+        linePath.append(self.insidePath)
+        //linePath.append(self.outsidePath)
+        
+        let point: NSPointPointer = UnsafeMutablePointer<NSPoint>.allocate(capacity: 3)
+        print(lines)
+        for x in 0...(insidePath.elementCount-1){
+            insidePath.element(at: x, associatedPoints: point)
+            print("inside: ", point[0])
+        }
+        //for x in 0...(outsidePath.elementCount-1){
+        //   outsidePath.element(at: x, associatedPoints: point)
+        //   print("outside: ", point[0])
+        //}
+    }
+    
+    func generateShape()->SCNShape{
+        return SCNShape(path: linePath, extrusionDepth: 0.001)
+    }
     
 }

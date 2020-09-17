@@ -47,10 +47,9 @@ class SelectionHandeling{
         let path = ((selectedNode?.geometry as! SCNShape).path!)
         
         var lineShape = LineDrawing(path)
-        
-        //hightlightFace = SCNNode(geometry: newShape)
-        //hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
-        //self._addChild()
+        hightlightFace = SCNNode(geometry: lineShape.generateShape())
+        hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+        self._addChild()
     }
     
     func highlightSide(){

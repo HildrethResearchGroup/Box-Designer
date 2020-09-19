@@ -67,13 +67,16 @@ class LineDrawing{
             var squarePoints:[NSPoint] = idvLine.returnTestPoints(linePos.top)
             //test left side
             var inside = path.contains(centerPoints[0])
-            if(inside == path.contains(squarePoints[0])){
-                topLeft = squarePoints[0]
-            }else{
-                topLeft = squarePoints[1]
-            }
+            
             //test right side
+            
+            
             if(path.contains(centerPoints[0])){
+                if(inside == path.contains(squarePoints[1])){
+                    topLeft = squarePoints[1]
+                }else{
+                    topLeft = squarePoints[0]
+                }
                 inside = path.contains(centerPoints[1])
                 if(inside == path.contains(squarePoints[3])){
                     topRight = squarePoints[3]
@@ -81,6 +84,12 @@ class LineDrawing{
                     topRight = squarePoints[2]
                 }
             }else{
+                inside = path.contains(centerPoints[0])
+                if(inside == path.contains(squarePoints[0])){
+                    topLeft = squarePoints[0]
+                }else{
+                    topLeft = squarePoints[1]
+                }
                 inside = path.contains(centerPoints[1])
                 if(inside == path.contains(squarePoints[2])){
                     topRight = squarePoints[2]
@@ -91,14 +100,15 @@ class LineDrawing{
             //============= Bottom Point =================
             squarePoints = idvLine.returnTestPoints(linePos.bottom)
             //test left side
-            inside = path.contains(centerPoints[0])
-            if(inside == path.contains(squarePoints[0])){
-                bottomLeft = squarePoints[0]
-            }else{
-                bottomLeft = squarePoints[1]
-            }
+           
             //test right side
             if(path.contains(centerPoints[0])){
+                inside = path.contains(centerPoints[0])
+                if(inside == path.contains(squarePoints[1])){
+                    bottomLeft = squarePoints[1]
+                }else{
+                    bottomLeft = squarePoints[0]
+                }
                 inside = path.contains(centerPoints[1])
                 if(inside == path.contains(squarePoints[3])){
                     bottomRight = squarePoints[3]
@@ -106,6 +116,12 @@ class LineDrawing{
                     bottomRight = squarePoints[2]
                 }
             }else{
+                inside = path.contains(centerPoints[0])
+                if(inside == path.contains(squarePoints[0])){
+                    bottomLeft = squarePoints[0]
+                }else{
+                    bottomLeft = squarePoints[1]
+                }
                 inside = path.contains(centerPoints[1])
                 if(inside == path.contains(squarePoints[2])){
                     bottomRight = squarePoints[2]
@@ -113,7 +129,10 @@ class LineDrawing{
                     bottomRight = squarePoints[3]
                 }
             }
-            if(bottomLeft == NSMakePoint(-0.028, 0.361) || bottomRight == NSMakePoint(-0.028, 0.361) || topLeft == NSMakePoint(-0.028, 0.361) || topRight == NSMakePoint(-0.028, 0.361)){
+            
+            let breakPoint: NSPoint = NSMakePoint(3.6, 1.8)
+            if(bottomLeft == breakPoint || bottomRight == breakPoint || topLeft == breakPoint || topRight == breakPoint){
+                var squarePoints:[NSPoint] = idvLine.returnTestPoints(linePos.top)
                 print("hit")
             }
             

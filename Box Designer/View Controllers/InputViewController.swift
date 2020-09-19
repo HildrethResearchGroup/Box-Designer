@@ -97,7 +97,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
         selectionHandeling.selectedNode = result.node
-        selectionHandeling.highlightEdges()
+        selectionHandeling.highlightEdges(thickness: 0.1)
     }
     
     override func scrollWheel(with event: NSEvent) {

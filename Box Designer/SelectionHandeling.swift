@@ -43,11 +43,11 @@ class SelectionHandeling{
         selectedNode!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
     }
     
-    func highlightEdges(){
+    func highlightEdges(thickness: CGFloat = 0.1){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
         
-        var lineShape = LineDrawing(path)
-        hightlightFace = SCNNode(geometry: lineShape.generateShape())
+        let lineShape = LineDrawing(path, thickness)
+        hightlightFace = SCNNode(geometry: lineShape.shape)
         hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
         self._addChild()
     }

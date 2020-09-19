@@ -118,8 +118,8 @@
 				02043C6224904DBF00F595A1 /* JSONFileHandler.swift */,
 				02043C32247ED22B00F595A1 /* PDFFileSaver.swift */,
 				23B37C2925101CD900105D87 /* SelectionHandeling.swift */,
-				23B37C7325110AEA00105D87 /* Line.swift */,
 				23B37C752511671800105D87 /* LineDrawing.swift */,
+				23B37C7325110AEA00105D87 /* Line.swift */,
 			);
 			path = "Box Designer";
 			sourceTree = "<group>";

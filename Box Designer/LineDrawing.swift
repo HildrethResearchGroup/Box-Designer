@@ -15,44 +15,50 @@ class LineDrawing{
     //this will not work with paths with curves
     
     
-    init(_ path: NSBezierPath,_ lineThickness: CGFloat){
+    init(_ path: NSBezierPath,_ lineThickness: CGFloat, insideLine:Bool = false){
+        self.insideLine = insideLine
         self.lineThickness = lineThickness
-        self.path = path
-        self._getLines()
         
+        self.path = path
+        self.updatePaths(self.getLines(path))
+        self.shape = self.generateShape()
     }
     
+    private var insideLine:Bool
     private var lineThickness: CGFloat
     private var path: NSBezierPath
-    private var lines:[Line] = []
     
-    let insidePath = NSBezierPath()
-    let outsidePath = NSBezierPath()
-    let grandPath = NSBezierPath()
+    var shape:SCNShape = SCNShape()
     
-    private func _getLines(){
+    var insidePath = NSBezierPath()
+    var outsidePath = NSBezierPath()
+    var grandPath = NSBezierPath()
+    
+    func getLines(_ locPath:NSBezierPath) -> [Line]{
+        var returnValue:[Line] = []
         var pointArray:[NSPoint] = []
         
         let point: NSPointPointer = UnsafeMutablePointer<NSPoint>.allocate(capacity: 3)
         //gets the points in a path
-        for x in 0...(path.elementCount-1){
-            path.element(at: x, associatedPoints: point)
+        for x in 0..<locPath.elementCount{
+            locPath.element(at: x, associatedPoints: point)
             pointArray.append(point[0])
         }
         //cretes line array
         for x in 0...(pointArray.count - 2){
             if(pointArray[x] != pointArray[x+1]){
-                var tempLine = Line(pointArray[x], pointArray[x+1], thickness: self.lineThickness)
+                let tempLine = Line(pointArray[x], pointArray[x+1], thickness: self.lineThickness)
                 if(!tempLine.point()){
-                    lines.append(tempLine)
+                    returnValue.append(tempLine)
                     print(tempLine)
                 }
                 
             }
         }
-        let insidePath = NSBezierPath()
-        let outsidePath = NSBezierPath()
+        return returnValue
+    }
         
+    func updatePaths(_ lines:[Line]){
         for idvLine in lines{
             var topLeft: NSPoint
             var bottomLeft: NSPoint
@@ -130,11 +136,14 @@ class LineDrawing{
                 }
             }
             
+            //debugging tool
+            /*
             let breakPoint: NSPoint = NSMakePoint(3.6, 1.8)
             if(bottomLeft == breakPoint || bottomRight == breakPoint || topLeft == breakPoint || topRight == breakPoint){
                 var squarePoints:[NSPoint] = idvLine.returnTestPoints(linePos.top)
                 print("hit")
             }
+            */
             
             if(path.contains(centerPoints[0])){
                 //left inside
@@ -175,17 +184,30 @@ class LineDrawing{
             
             
         }
-        for x in 0..<insidePath.elementCount{
-            insidePath.element(at: x, associatedPoints: point)
-            print(point[0])
-        }
-        
         grandPath.append(insidePath)
         grandPath.append(outsidePath)
-        shape = SCNShape(path: grandPath, extrusionDepth: 0.0001)
     }
     
-    var shape: SCNShape = SCNShape()
+    private func generateShape(shapeExtrusionDepth:CGFloat = 0.001)->SCNShape{
+        var returnValue: SCNShape
+        if(insideLine){
+            self.path = self.insidePath
+            //reset variables
+            self.insidePath = NSBezierPath()
+            self.outsidePath = NSBezierPath()
+            self.grandPath = NSBezierPath()
+            self.insideLine = false
+            
+            //regenerate paths
+            self.updatePaths(self.getLines(self.path))
+            self.shape = self.generateShape()
+            
+            returnValue = SCNShape(path: grandPath, extrusionDepth: shapeExtrusionDepth)
+        }else{
+            returnValue = SCNShape(path: grandPath, extrusionDepth: shapeExtrusionDepth)
+        }
+        return returnValue
+    }
     
 }
 

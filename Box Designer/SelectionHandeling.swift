@@ -14,6 +14,7 @@ class SelectionHandeling{
     
     static let shared = SelectionHandeling()
     let shapeDepth: CGFloat = 0.0001
+    var inside: Bool = false
     
     private var nodeColor: NSColor?
     var selectedNode: SCNNode?{
@@ -46,7 +47,7 @@ class SelectionHandeling{
     func highlightEdges(thickness: CGFloat = 0.1){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
         
-        let lineShape = LineDrawing(path, thickness)
+        let lineShape = LineDrawing(path, thickness, insideLine: true)
         hightlightFace = SCNNode(geometry: lineShape.shape)
         hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
         self._addChild()
@@ -60,7 +61,7 @@ class SelectionHandeling{
         
         self._addChild()
     }
-    
+
     private func _addChild(){
         //Since its isometric select the side that is being looked at
         //what side is being looked at is calculated by the camera angle ¬

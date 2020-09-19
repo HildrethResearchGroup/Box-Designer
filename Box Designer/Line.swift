@@ -17,7 +17,7 @@ enum linePos {
     case center
 }
 
-class Line{
+class Line: CustomStringConvertible{
     init(_ pointA: NSPoint, _ pointB: NSPoint, thickness: CGFloat = 0.01){
         //lines point from a to b
         
@@ -115,5 +115,7 @@ class Line{
         }
         return returnValue
     }
+    
+    public var description: String { return "\(bottomPoint) -> \(topPoint)" }
     
 }

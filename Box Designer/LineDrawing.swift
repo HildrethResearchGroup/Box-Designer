@@ -73,13 +73,21 @@ class LineDrawing{
                 topLeft = squarePoints[1]
             }
             //test right side
-            inside = path.contains(centerPoints[1])
-            if(inside == path.contains(squarePoints[3])){
-                topRight = squarePoints[3]
+            if(path.contains(centerPoints[0])){
+                inside = path.contains(centerPoints[1])
+                if(inside == path.contains(squarePoints[3])){
+                    topRight = squarePoints[3]
+                }else{
+                    topRight = squarePoints[2]
+                }
             }else{
-                topRight = squarePoints[2]
+                inside = path.contains(centerPoints[1])
+                if(inside == path.contains(squarePoints[2])){
+                    topRight = squarePoints[2]
+                }else{
+                    topRight = squarePoints[3]
+                }
             }
-            
             //============= Bottom Point =================
             squarePoints = idvLine.returnTestPoints(linePos.bottom)
             //test left side
@@ -90,13 +98,21 @@ class LineDrawing{
                 bottomLeft = squarePoints[1]
             }
             //test right side
-            inside = path.contains(centerPoints[1])
-            if(inside == path.contains(squarePoints[3])){
-                bottomRight = squarePoints[3]
+            if(path.contains(centerPoints[0])){
+                inside = path.contains(centerPoints[1])
+                if(inside == path.contains(squarePoints[3])){
+                    bottomRight = squarePoints[3]
+                }else{
+                    bottomRight = squarePoints[2]
+                }
             }else{
-                bottomRight = squarePoints[2]
+                inside = path.contains(centerPoints[1])
+                if(inside == path.contains(squarePoints[2])){
+                    bottomRight = squarePoints[2]
+                }else{
+                    bottomRight = squarePoints[3]
+                }
             }
-            
             if(bottomLeft == NSMakePoint(-0.028, 0.361) || bottomRight == NSMakePoint(-0.028, 0.361) || topLeft == NSMakePoint(-0.028, 0.361) || topRight == NSMakePoint(-0.028, 0.361)){
                 print("hit")
             }
@@ -140,8 +156,8 @@ class LineDrawing{
             
             
         }
-        for x in 0...(outsidePath.elementCount-1){
-            outsidePath.element(at: x, associatedPoints: point)
+        for x in 0..<insidePath.elementCount{
+            insidePath.element(at: x, associatedPoints: point)
             print(point[0])
         }
         

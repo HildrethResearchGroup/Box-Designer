@@ -188,7 +188,7 @@ class LineDrawing{
         grandPath.append(outsidePath)
     }
     
-    private func generateShape(shapeExtrusionDepth:CGFloat = 0.001)->SCNShape{
+    func generateShape(shapeExtrusionDepth:CGFloat = 0.001)->SCNShape{
         var returnValue: SCNShape
         if(insideLine){
             self.path = self.insidePath
@@ -201,12 +201,42 @@ class LineDrawing{
             //regenerate paths
             self.updatePaths(self.getLines(self.path))
             self.shape = self.generateShape()
-            
             returnValue = SCNShape(path: grandPath, extrusionDepth: shapeExtrusionDepth)
         }else{
             returnValue = SCNShape(path: grandPath, extrusionDepth: shapeExtrusionDepth)
         }
         return returnValue
+    }
+    
+    func generateIndv()->[SCNShape]{
+        var shapes:[SCNShape] = []
+        
+        if(insideLine){
+            self.path = self.insidePath
+            //reset variables
+            self.insidePath = NSBezierPath()
+            self.outsidePath = NSBezierPath()
+            self.grandPath = NSBezierPath()
+            self.insideLine = false
+            
+            //regenerate paths
+            self.updatePaths(self.getLines(self.path))
+        }else{
+            let lines = self.getLines(self.path)
+            for idvLine in lines{
+                print(idvLine)
+                let shapePath = idvLine.rectanglePath()
+                let point: NSPointPointer = UnsafeMutablePointer<NSPoint>.allocate(capacity: 3)
+                    //gets the points in a path
+                for x in 0..<shapePath.elementCount{
+                    shapePath.element(at: x, associatedPoints: point)
+                    print(point[0])
+               }
+                
+               shapes.append(SCNShape(path: shapePath, extrusionDepth: 0.0001))
+            }
+        }
+        return shapes
     }
     
 }

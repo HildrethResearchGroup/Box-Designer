@@ -66,6 +66,19 @@ class Line: CustomStringConvertible{
         return(self.topPoint == self.bottomPoint)
     }
     
+    func rectanglePath()->NSBezierPath{
+        let shapePath = NSBezierPath()
+        
+        var modPoint : NSPoint = NSMakePoint(abs(self.thickness)*cos(angle + (90*CGFloat.pi/180)), abs(self.thickness)*sin(angle + (90*CGFloat.pi/180)));
+        let bottomLeft = NSMakePoint(bottomPoint.x + modPoint.x, bottomPoint.y + modPoint.y)
+        
+        modPoint = NSMakePoint(abs(self.thickness)*cos(angle - (90*CGFloat.pi/180)), abs(self.thickness)*sin(angle - (90*CGFloat.pi/180)))
+        let topRight = NSMakePoint(topPoint.x + modPoint.x, topPoint.y + modPoint.y)
+        
+        shapePath.appendRect(NSMakeRect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y))
+        return shapePath
+    }
+    
     func returnTestPoints(_ region: linePos)->[NSPoint]{
         var returnValue: [NSPoint] = []
             

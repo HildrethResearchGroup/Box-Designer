@@ -62,6 +62,8 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         return false
     }
     
+    
+    
     override func otherMouseDragged(with event: NSEvent) {
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
@@ -97,7 +99,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
         selectionHandeling.selectedNode = result.node
-        selectionHandeling.highlightEdges(thickness: 0.1)
+        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: true)
     }
     
     override func scrollWheel(with event: NSEvent) {

@@ -19,7 +19,13 @@ class SelectionHandeling{
     private var nodeColor: NSColor?
     var selectedNode: SCNNode?{
         willSet{
+            
+            
+            //reset the color
             if(nodeColor != nil){
+                selectedNode!.enumerateChildNodes { (node, stop) in
+                    node.removeFromParentNode()
+                }
                 selectedNode!.geometry?.firstMaterial?.diffuse.contents = nodeColor
                 nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
             }else{
@@ -44,14 +50,23 @@ class SelectionHandeling{
         selectedNode!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
     }
     
-    func highlightEdges(thickness: CGFloat = 0.1){
+    func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
-        
-        let lineShape = LineDrawing(path, thickness, insideLine: true)
-        hightlightFace = SCNNode(geometry: lineShape.shape)
-        hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
-        self._addChild()
+        let lineShape = LineDrawing(path, thickness, insideLine: insideSelection)
+        if(idvLines){
+            let shapes = lineShape.generateIndv()
+            for shape in shapes{
+                let locNode = SCNNode(geometry: shape)
+                locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+                self._addChild(locNode)
+            }
+        }else{
+            hightlightFace = SCNNode(geometry: lineShape.shape)
+            hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+            self._addChild(hightlightFace!)
+        }
     }
+    
     
     func highlightSide(){
         
@@ -59,33 +74,33 @@ class SelectionHandeling{
         hightlightFace = SCNNode(geometry: newShape)
         hightlightFace!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
         
-        self._addChild()
+        self._addChild(hightlightFace!)
     }
 
-    private func _addChild(){
+    private func _addChild(_ node:SCNNode){
         //Since its isometric select the side that is being looked at
         //what side is being looked at is calculated by the camera angle ¬
         if(selectedNode?.position.x != 0.0){
             if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 0){
-                hightlightFace!.position.z -= (0.25 + shapeDepth)
+                node.position.z -= (0.25 + shapeDepth)
             }else{
-                hightlightFace!.position.z += (0.25 + shapeDepth)
+                node.position.z += (0.25 + shapeDepth)
             }
         }else if(selectedNode?.position.y != 0.0){
             if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 0){
-                hightlightFace!.position.z += (0.25 + shapeDepth)
+                node.position.z += (0.25 + shapeDepth)
             }else{
-                hightlightFace!.position.z -= (0.25 + shapeDepth)
+                node.position.z -= (0.25 + shapeDepth)
             }
         }else if(selectedNode?.position.z != 0.0){
             if(abs(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) > 90){
-                hightlightFace!.position.z -= (0.25 + shapeDepth)
+                node.position.z -= (0.25 + shapeDepth)
             }else{
-                hightlightFace!.position.z += (0.25 + shapeDepth)
+                node.position.z += (0.25 + shapeDepth)
             }
         }
         
-        selectedNode?.addChildNode(hightlightFace!)
+        selectedNode?.addChildNode(node)
     }
     
     init(){

@@ -11,10 +11,12 @@ import Cocoa
 import SceneKit
 
 class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDelegate **Audrey greyed this out for now, don't think it's needed, but want to make sure before deleting
-    
     var boxModel = BoxModel()
+    let selectionHandeling = SelectionHandeling.shared
     
     var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl()
+    
+    @IBOutlet weak var boxView: SCNView!
     
     @IBOutlet weak var mmMenu: NSMenuItem!
     @IBOutlet weak var inchMenu: NSMenuItem!
@@ -43,6 +45,71 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBOutlet weak var minusButtonLengthwise: NSButton!
     
     @IBOutlet weak var exportToPDF: NSButton!
+    
+    
+    
+    //====================Camera Controls=========================
+    var mouseDown: Bool = false
+    
+    let moveSensetivity:CGFloat = 0.01
+    let rotateSensetivity:CGFloat = 0.01
+    let zoomSensetivity:CGFloat = 0.1
+    
+    func inView(_ event: NSEvent)->Bool {
+        if(boxView.hitTest(event.locationInWindow) == boxView){
+            return true
+        }
+        return false
+    }
+    
+    
+    
+    override func otherMouseDragged(with event: NSEvent) {
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
+        
+        
+        //this needs to be refactored
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.x = (((SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180) - 360)/180) * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 < -180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.x = (((SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180) + 360)/180) * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.y = (((SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) - 360)/180) * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 < -180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.y = (((SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) + 360)/180) * CGFloat.pi
+        }
+        
+        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
+        
+    }
+    
+    override func rightMouseDragged(with event: NSEvent) {
+        var currentPos:SCNVector3 = boxView.pointOfView!.position
+        currentPos.x += event.deltaX * -moveSensetivity
+        currentPos.y += event.deltaY * moveSensetivity
+        boxView.pointOfView!.position = currentPos
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+        let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
+        
+        selectionHandeling.selectedNode = result.node
+        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: true)
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensetivity)
+        if(boxView.pointOfView!.camera!.orthographicScale < 0.1){
+            boxView.pointOfView!.camera?.orthographicScale = 0.1
+        }
+    }
+    
+    //============================================================
     
     
     //mm is true and inch is false
@@ -211,14 +278,18 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     }
 
     @IBAction func plusButtonLengthwise(_ sender: Any) {
-        boxModel.counterLength += 1
-        boxModel.lengthWall = true
+        // for now, only allow two separators
+        // this conditional accounts for the fact that the user may click the '+' button multiple times, even if it's not doing anything
+        // if there are already max separators, don't need to increment counterLength
+        if boxModel.counterLength <  2 {
+            boxModel.counterLength += 1
+            boxModel.lengthWall = true
+        }
     }
     
     @IBAction func minusButtonLengthwise(_ sender: Any) {
         boxModel.removeInnerWall = true
     }
-    
 }
 
 protocol FileHandlingDelegate {

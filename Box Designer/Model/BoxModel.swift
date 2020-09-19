@@ -234,7 +234,8 @@ class BoxModel {
     
     var removeInnerWall: Bool {
         didSet {
-            if removeInnerWall && counterLength > 0 {
+            
+            if removeInnerWall && (counterLength > 0) {
                 counterLength -= 1
                 if let index = walls.lastIndex(where: {$0.wallType == WallType.smallCorner}){
                      walls.remove(at: index)

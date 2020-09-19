@@ -18,7 +18,7 @@ class BoxViewController: NSViewController, SceneGeneratorDelegate {
     
     override func awakeFromNib() {
         sceneGenerator.delegate = self
-        self.boxView.allowsCameraControl = true
+        self.boxView.allowsCameraControl = false
         self.boxView.scene = sceneGenerator.scene
         self.boxView.needsDisplay = true
     }

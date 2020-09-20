@@ -29,6 +29,7 @@
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
                 <outlet property="boxView" destination="xX1-Mt-ukC" id="zjT-Ea-BU5"/>
+                <outlet property="exportButton" destination="B3B-a2-e8l" id="Lck-Ku-r9H"/>
                 <outlet property="exportToPDF" destination="B3B-a2-e8l" id="xo9-TR-J6k"/>
                 <outlet property="heightLabel" destination="TQQ-QV-qyz" id="cmf-lR-o5T"/>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
@@ -577,6 +578,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="exportButtonClicked:" target="SYY-Aa-HfQ" id="5JS-ly-gBR"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

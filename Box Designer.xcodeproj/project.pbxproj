@@ -106,6 +106,7 @@
 				C0E65E552478426E009D90F1 /* Info.plist */,
 				C0E65E562478426E009D90F1 /* Box_Designer.entitlements */,
 				02043C58248C7AC000F595A1 /* JoinType.swift */,
+				C0E65E522478426E009D90F1 /* MainMenu.xib */,
 				02043C5C248D72B400F595A1 /* SceneGenerator.swift */,
 				02043C56248C789600F595A1 /* WallType.swift */,
 				02043C5A248C7BCC00F595A1 /* PathGenerator.swift */,
@@ -138,7 +139,6 @@
 		C0E65E6D24784D70009D90F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C0E65E522478426E009D90F1 /* MainMenu.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";

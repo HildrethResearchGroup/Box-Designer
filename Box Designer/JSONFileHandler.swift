@@ -44,8 +44,6 @@ class JSONFileHandler {
                      the x and y values to type Double, then
                      to type String.
                      */
-                    let x: Double = Double(point.x)
-                    let y: Double = Double(point.y)
                     
                     switch (elementType) {
                     case NSBezierPath.ElementType.moveTo:
@@ -143,8 +141,6 @@ class JSONFileHandler {
         } catch {
             print("could not read model to be opened.")
         }
-        
-        var walls: [WallModel]
         
         while (!textToRead.isEmpty) {
             

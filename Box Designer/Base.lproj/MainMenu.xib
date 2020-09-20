@@ -28,7 +28,8 @@
         </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
-                <outlet property="exportButton" destination="B3B-a2-e8l" id="xo9-TR-J6k"/>
+                <outlet property="boxView" destination="xX1-Mt-ukC" id="zjT-Ea-BU5"/>
+                <outlet property="exportToPDF" destination="B3B-a2-e8l" id="xo9-TR-J6k"/>
                 <outlet property="heightLabel" destination="TQQ-QV-qyz" id="cmf-lR-o5T"/>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
                 <outlet property="inchMenu" destination="pJz-17-zPr" id="Mub-cU-X8r"/>

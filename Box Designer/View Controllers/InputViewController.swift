@@ -12,6 +12,7 @@ import SceneKit
 
 class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDelegate **Audrey greyed this out for now, don't think it's needed, but want to make sure before deleting
     var boxModel = BoxModel()
+    let unitConversionFactor = 25.4
     let selectionHandeling = SelectionHandeling.shared
     
     var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl()
@@ -49,8 +50,10 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     
     
     //====================Camera Controls=========================
+    // Checks whether mouse button is pressed or not
     var mouseDown: Bool = false
     
+    // Sensitivity of camera movements in response to mouse
     let moveSensetivity:CGFloat = 0.01
     let rotateSensetivity:CGFloat = 0.01
     let zoomSensetivity:CGFloat = 0.1
@@ -63,27 +66,14 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     }
     
     
-    
     override func otherMouseDragged(with event: NSEvent) {
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
         
+        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
+        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
         
-        //this needs to be refactored
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.x = (((SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180) - 360)/180) * CGFloat.pi
-        }
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 < -180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.x = (((SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180) + 360)/180) * CGFloat.pi
-        }
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.y = (((SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) - 360)/180) * CGFloat.pi
-        }
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 < -180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.y = (((SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) + 360)/180) * CGFloat.pi
-        }
-        
-        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
+//        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
         
     }
     
@@ -157,10 +147,10 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
             inchMenu.state = NSControl.StateValue.off
             
             //the units are inches so adj to mm
-            lengthTextField.doubleValue = boxModel.boxLength * 25.4
-            widthTextField.doubleValue = boxModel.boxWidth * 25.4
-            heightTextField.doubleValue = boxModel.boxHeight * 25.4
-            materialThicknessTextField.doubleValue = boxModel.materialThickness * 25.4
+            lengthTextField.doubleValue = boxModel.boxLength * unitConversionFactor
+            widthTextField.doubleValue = boxModel.boxWidth * unitConversionFactor
+            heightTextField.doubleValue = boxModel.boxHeight * unitConversionFactor
+            materialThicknessTextField.doubleValue = boxModel.materialThickness * unitConversionFactor
             mmInch = true
             changeLabels(mmInch)
 
@@ -187,7 +177,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {
         if mmInch{
             //if the setting is in mm
-            boxModel.boxLength = lengthTextField.doubleValue * (1/25.4)
+            boxModel.boxLength = lengthTextField.doubleValue * (1/unitConversionFactor)
         }else{
             //if the setting is in inches
            boxModel.boxLength = lengthTextField.doubleValue
@@ -197,7 +187,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
         if mmInch{
             //if the setting is in mm
-            boxModel.boxWidth = widthTextField.doubleValue * (1/25.4)
+            boxModel.boxWidth = widthTextField.doubleValue * (1/unitConversionFactor)
         }else{
             //if the setting is in inches
             boxModel.boxWidth = widthTextField.doubleValue
@@ -207,7 +197,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBAction func heightTextFieldDidChange(_ sender: Any) {
         if mmInch{
             //if the setting is in mm
-            boxModel.boxHeight = heightTextField.doubleValue * (1/25.4)
+            boxModel.boxHeight = heightTextField.doubleValue * (1/unitConversionFactor)
         }else{
             //if the setting is in inches
             boxModel.boxHeight = heightTextField.doubleValue
@@ -217,7 +207,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBAction func materialThicknessTextFieldDidChange(_ sender: Any) {
         if mmInch{
             //if the setting is in mm
-            boxModel.materialThickness = materialThicknessTextField.doubleValue * (1/25.4)
+            boxModel.materialThickness = materialThicknessTextField.doubleValue * (1/unitConversionFactor)
         }else{
             //if the setting is in inches
             boxModel.materialThickness = materialThicknessTextField.doubleValue
@@ -289,6 +279,18 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     
     @IBAction func minusButtonLengthwise(_ sender: Any) {
         boxModel.removeInnerWall = true
+    }
+    
+    // Manages camera angles as the mouse drags the box around
+    func manageMouseDrag(_ direction: inout CGFloat) {
+        let deg: CGFloat = 180
+        //this needs to be refactored
+        if(direction/CGFloat.pi * deg > deg){
+            direction = (((direction/CGFloat.pi * deg) - deg * 2)/deg) * CGFloat.pi
+        }
+        if(direction/CGFloat.pi * deg < -deg){
+            direction = (((direction/CGFloat.pi * deg) + deg * 2)/deg) * CGFloat.pi
+        }
     }
 }
 

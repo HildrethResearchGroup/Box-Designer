@@ -21,6 +21,9 @@ class SelectionHandeling{
         willSet{
             //reset the color
             if(nodeColor != nil){
+                selectedNode!.enumerateChildNodes { (node, stop) in
+                    node.removeFromParentNode()
+                }
                 selectedNode!.geometry?.firstMaterial?.diffuse.contents = nodeColor
                 nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
             }else{

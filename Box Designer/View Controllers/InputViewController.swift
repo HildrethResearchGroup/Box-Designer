@@ -91,10 +91,18 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         var hitTestOptions = [SCNHitTestOption: Any]()
         hitTestOptions[SCNHitTestOption.ignoreHiddenNodes] = false
         
-        let result: SCNHitTestResult = boxView.hitTest(clickCord, options: hitTestOptions)[0]
-        if(result.node.parent != boxView.scene?.rootNode){
-            selectionHandeling.hoverNode = result.node
+        let result = boxView.hitTest(clickCord, options: hitTestOptions)
+        
+        if (result.count == 0){
+            selectionHandeling.hoverNode = nil
+            selectionHandeling.hoverNode?.isHidden = true
+            return
+        }
+        
+        if(result[0].node.parent != boxView.scene?.rootNode){
+            selectionHandeling.hoverNode = result[0].node
         }else{
+            selectionHandeling.hoverNode = nil
             selectionHandeling.hoverNode?.isHidden = true
         }
         
@@ -122,19 +130,19 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
             
-            
+            cameraLocked = true
             //we may want to refactor this into a function
             //the math can be simplified but isn't for readability
             if(result.node.position.x != 0.0){
                 //left and right
                 if(yAngle > 0){
-                    //left
-                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (0)/180 * CGFloat.pi
-                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (-90)/180 * CGFloat.pi
-                }else{
                     //right
                     SceneGenerator.shared.cameraOrbit.eulerAngles.x = (0)/180 * CGFloat.pi
                     SceneGenerator.shared.cameraOrbit.eulerAngles.y = (90)/180 * CGFloat.pi
+                }else{
+                    //left
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (0)/180 * CGFloat.pi
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (-90)/180 * CGFloat.pi
                 }
             }else if(result.node.position.y != 0.0){
                 //top and bottom
@@ -165,7 +173,10 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         
     }
     
-    func lockCamera(){
+    override func keyUp(with event: NSEvent) {
+        if(event.keyCode == 53){
+            cameraLocked = false
+        }
         
     }
     

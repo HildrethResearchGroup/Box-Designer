@@ -19,17 +19,25 @@ class SelectionHandeling{
     private var nodeColor: NSColor?
     var selectedNode: SCNNode?{
         willSet{
-            
-            
             //reset the color
             if(nodeColor != nil){
-                selectedNode!.enumerateChildNodes { (node, stop) in
-                    node.removeFromParentNode()
-                }
                 selectedNode!.geometry?.firstMaterial?.diffuse.contents = nodeColor
                 nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
             }else{
                 nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+            }
+        }
+    }
+    
+    var hoverNode: SCNNode?{
+        willSet{
+            if(hoverNode == nil){
+                newValue?.isHidden = false
+            }else{
+                if(newValue != hoverNode){
+                    newValue?.isHidden = false
+                    hoverNode?.isHidden = true
+                }
             }
         }
     }
@@ -58,6 +66,7 @@ class SelectionHandeling{
             for shape in shapes{
                 let locNode = SCNNode(geometry: shape)
                 locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+                locNode.isHidden = true
                 self._addChild(locNode)
             }
         }else{

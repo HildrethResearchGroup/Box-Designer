@@ -56,13 +56,8 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     let zoomSensetivity:CGFloat = 0.1
     
     func inView(_ event: NSEvent)->Bool {
-        if(boxView.hitTest(event.locationInWindow) == boxView){
-            return true
-        }
-        return false
+        return (boxView.hitTest(event.locationInWindow) == boxView)
     }
-    
-    
     
     override func otherMouseDragged(with event: NSEvent) {
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
@@ -87,6 +82,16 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         
     }
     
+    override func mouseMoved(with event: NSEvent) {
+        let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+        
+        var hitTestOptions = [SCNHitTestOption: Any]()
+        hitTestOptions[SCNHitTestOption.ignoreHiddenNodes] = false
+        
+        let result: SCNHitTestResult = boxView.hitTest(clickCord, options: hitTestOptions)[0]
+        selectionHandeling.hoverNode = result.node
+    }
+    
     override func rightMouseDragged(with event: NSEvent) {
         var currentPos:SCNVector3 = boxView.pointOfView!.position
         currentPos.x += event.deltaX * -moveSensetivity
@@ -99,8 +104,9 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
         selectionHandeling.selectedNode = result.node
-        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: true)
+        selectionHandeling.higlight()
     }
+    
     
     override func scrollWheel(with event: NSEvent) {
         boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensetivity)

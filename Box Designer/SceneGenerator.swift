@@ -76,7 +76,7 @@ class SceneGenerator {
             wallNumber += 1
         }
         adjustLighting(scene)
-        adjustCamera(scene)
+        adjustCamera(scene, boxModel)
     }
     
     func adjustLighting(_ scene: SCNScene) {
@@ -96,15 +96,17 @@ class SceneGenerator {
         
     }
     
-    func adjustCamera(_ scene: SCNScene) {
+    func adjustCamera(_ scene: SCNScene, _ boxModel: BoxModel) {
         
         if camera == nil {
             let cameraNode = SCNNode()
             cameraNode.camera = SCNCamera()
-            cameraNode.position = SCNVector3Make(0, 0, 25)
+            // Starting position of camera is dependent on largest box dimension
+            cameraNode.position = SCNVector3Make(0, 0, CGFloat(max(boxModel.boxWidth, boxModel.boxHeight, boxModel.boxLength)))
             cameraNode.camera?.usesOrthographicProjection = true
             cameraNode.camera?.automaticallyAdjustsZRange = true
-            cameraNode.camera?.orthographicScale = 3.5
+            // Orthographic scale is dependent on largest box dimension
+            cameraNode.camera?.orthographicScale = max(boxModel.boxWidth, boxModel.boxHeight, boxModel.boxLength)
             cameraOrbit.addChildNode(cameraNode)
             cameraOrbit.eulerAngles.x -= CGFloat.pi/8
             cameraOrbit.eulerAngles.y -= CGFloat.pi/4

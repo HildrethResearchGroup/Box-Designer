@@ -10,12 +10,12 @@ import Foundation
 import Cocoa
 import SceneKit
 
-class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDelegate **Audrey greyed this out for now, don't think it's needed, but want to make sure before deleting
+class InputViewController: NSViewController, NSTextDelegate { 
     var boxModel = BoxModel()
     let unitConversionFactor = 25.4
     let selectionHandeling = SelectionHandeling.shared
     
-    var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl()
+    var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl.shared
     
     @IBOutlet weak var boxView: SCNView!
     

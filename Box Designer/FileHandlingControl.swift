@@ -11,7 +11,12 @@ import Cocoa
 
 class FileHandlingControl: FileHandlingDelegate {
     
-
+    static let shared = FileHandlingControl()
+    var oneComponent = false
+    var pdfHeight = 11.0 // default value in inches
+    var pdfWidth = 8.5 // default value in inches
+    var margin = 0.5
+    var padding = 0.25
     
     // this is the function that talks with the app menu for saving
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?) {
@@ -24,6 +29,9 @@ class FileHandlingControl: FileHandlingDelegate {
         panel.isExtensionHidden = false
         panel.allowedFileTypes = ["json", "pdf"]
         panel.allowsOtherFileTypes = false
+        
+        // add accessory view for PDF options
+        panel.accessoryView = PDFOptionsView()
         
         // file saves according to user input (.json or .pdf)
         panel.beginSheetModal(for: displayWindow) { (response) in
@@ -39,8 +47,7 @@ class FileHandlingControl: FileHandlingDelegate {
                         print("Failed to save as a JSON file.")
                     }
                 case "pdf":
-                    let fileSaver = BoxDesignerPDF(targetURL: url, boxModel)
-                    fileSaver.defaultPDFDisplay()
+                    let fileSaver = BoxDesignerPDF(targetURL: url, boxModel, height: self.pdfHeight, width: self.pdfWidth, margin: self.margin, padding: self.padding, oneComponent: self.oneComponent)
                     fileSaver.saveAsPDF()
                 default:
                     break

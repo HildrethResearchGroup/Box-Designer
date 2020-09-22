@@ -22,15 +22,23 @@ class BoxDesignerPDF {
     var mediaBox: CGRect
     var wallsOnPage = [[WallModel]]()
     
-    let pdfMargin: Double = 50.0
-    let pdfPadding: Double = 25.0
-    let pdfHeight: Double = 1500.0
-    let pdfWidth: Double = 900.0
+    let inchScale = 100.0
+    let pdfMargin: Double
+    let pdfPadding: Double
+    let pdfHeight: Double
+    let pdfWidth: Double
+    let oneComponent : Bool
     
-    init(targetURL: URL, _ boxModel: BoxModel) {
+    init(targetURL: URL, _ boxModel: BoxModel, height: Double, width: Double, margin: Double, padding: Double, oneComponent: Bool) {
         
+        // set variables
         self.boxModel = boxModel
         self.targetURL = targetURL
+        self.pdfWidth = width*inchScale
+        self.pdfHeight = height*inchScale
+        self.pdfMargin = margin*inchScale
+        self.pdfPadding = padding*inchScale
+        self.oneComponent = oneComponent
         
         // instantiate variables needed to draw to PDFPage
         mediaBox = CGRect(x: 0.0, y: 0.0, width: CGFloat(pdfWidth), height: CGFloat(pdfHeight))
@@ -83,6 +91,12 @@ class BoxDesignerPDF {
     }
     
     func saveAsPDF() {
+        // call function for whatever layout type was given
+        if (oneComponent) {
+            self.oneComponentPerPageLayout()
+        } else {
+            self.defaultPDFDisplay()
+        }
         var index : Int = 0
         //add all pages to document
         for (pdfpage) in pages {
@@ -91,5 +105,6 @@ class BoxDesignerPDF {
         }
         // close PDF and write to URL in context (targetURL)
         context?.closePDF()
+        
     }
 }

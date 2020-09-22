@@ -34,9 +34,9 @@ class Line: CustomStringConvertible{
     }
     
     //top is the larger point
-    private var topPoint: NSPoint = NSPoint()
-    private var bottomPoint: NSPoint = NSPoint()
-    private var angle: CGFloat
+    var topPoint: NSPoint = NSPoint()
+    var bottomPoint: NSPoint = NSPoint()
+    var angle: CGFloat
     
     var thickness: CGFloat
     
@@ -77,6 +77,10 @@ class Line: CustomStringConvertible{
         
         shapePath.appendRect(NSMakeRect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y))
         return shapePath
+    }
+    
+    func midpoint()->NSPoint{
+        return NSMakePoint((topPoint.x + bottomPoint.x) / 2, (topPoint.y + bottomPoint.y) / 2)
     }
     
     func returnTestPoints(_ region: linePos)->[NSPoint]{

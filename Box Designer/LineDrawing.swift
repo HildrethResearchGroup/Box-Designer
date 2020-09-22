@@ -28,6 +28,7 @@ class LineDrawing{
     private var lineThickness: CGFloat
     private var path: NSBezierPath
     
+    var snapSize: CGFloat = 0.1
     var shape:SCNShape = SCNShape()
     
     var insidePath = NSBezierPath()
@@ -223,17 +224,31 @@ class LineDrawing{
             self.updatePaths(self.getLines(self.path))
         }else{
             let lines = self.getLines(self.path)
+            var points: [NSPoint] = []
+
             for idvLine in lines{
-                print(idvLine)
+                points.append(idvLine.topPoint)
+                points.append(idvLine.bottomPoint)
                 let shapePath = idvLine.rectanglePath()
-                let point: NSPointPointer = UnsafeMutablePointer<NSPoint>.allocate(capacity: 3)
-                    //gets the points in a path
-                for x in 0..<shapePath.elementCount{
-                    shapePath.element(at: x, associatedPoints: point)
-                    print(point[0])
-               }
+                shapes.append(SCNShape(path: shapePath, extrusionDepth: 0.0001))
                 
-               shapes.append(SCNShape(path: shapePath, extrusionDepth: 0.0001))
+                //draw midpoint triangle
+                let center = idvLine.midpoint()
+                let trianglePath = NSBezierPath()
+                
+                trianglePath.move(to: NSMakePoint(center.x - snapSize/2, center.y - snapSize/2))
+                trianglePath.relativeLine(to: NSMakePoint(snapSize/2, snapSize))
+                trianglePath.relativeLine(to: NSMakePoint(snapSize/2, -snapSize))
+                trianglePath.close()
+                shapes.append(SCNShape(path: trianglePath, extrusionDepth: 0.0001))
+            }
+            //eliminates duplicates
+            let uniquePoints = Array(NSSet(array: points))
+            for point in uniquePoints{
+                //draw corner squares
+                let corner = point as! NSPoint
+                let circlePath = NSBezierPath(rect: NSMakeRect(corner.x - (snapSize/2), corner.y - (snapSize/2), snapSize, snapSize))
+                shapes.append(SCNShape(path: circlePath, extrusionDepth: 0.0001))
             }
         }
         return shapes

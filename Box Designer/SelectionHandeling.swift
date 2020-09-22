@@ -20,14 +20,18 @@ class SelectionHandeling{
     var selectedNode: SCNNode?{
         willSet{
             //reset the color
-            if(nodeColor != nil){
+            if(nodeColor != nil && selectedNode != nil){
                 selectedNode!.enumerateChildNodes { (node, stop) in
                     node.removeFromParentNode()
                 }
                 selectedNode!.geometry?.firstMaterial?.diffuse.contents = nodeColor
-                nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                if(newValue != nil){
+                    nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                }
             }else{
-                nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                if(newValue != nil){
+                    nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                }
             }
         }
     }

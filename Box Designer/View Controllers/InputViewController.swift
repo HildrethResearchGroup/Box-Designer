@@ -126,7 +126,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
             
             //make sure that it is part of the cube
             if(result.node.parent != boxView.scene?.rootNode){return}
-            selectionHandeling.highlightEdges(thickness: 0.05, insideSelection: false, idvLines: true)
+            selectionHandeling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
             
@@ -176,6 +176,7 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     override func keyUp(with event: NSEvent) {
         if(event.keyCode == 53){
             cameraLocked = false
+            selectionHandeling.selectedNode = nil
         }
         
     }

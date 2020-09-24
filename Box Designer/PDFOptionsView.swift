@@ -13,14 +13,13 @@ import Cocoa
 //@IBDesignable
 class PDFOptionsView: NSView {
     
-    var fileHandlingControl = FileHandlingControl.shared
-    
     @IBOutlet var view: NSView!
-    
+    let fileHandlingControl = FileHandlingControl.shared
     @IBOutlet weak var pdfWidthTextField: NSTextField!
     @IBOutlet weak var pdfHeightTextField: NSTextField!
     @IBOutlet weak var margin: NSTextField!
     @IBOutlet weak var padding: NSTextField!
+    @IBOutlet weak var stroke: NSTextField!
     
     @IBOutlet weak var oneComponentButton: NSButton!
     
@@ -44,12 +43,14 @@ class PDFOptionsView: NSView {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        // set default values
+        
+        // set default values in view
         pdfWidthTextField.doubleValue = fileHandlingControl.pdfWidth
         pdfHeightTextField.doubleValue = fileHandlingControl.pdfHeight
         margin.doubleValue = fileHandlingControl.margin
         padding.doubleValue = fileHandlingControl.padding
+        stroke.doubleValue = fileHandlingControl.stroke
+        
         oneComponentButton.state = NSButton.StateValue.off
         
     }
@@ -73,5 +74,9 @@ class PDFOptionsView: NSView {
     @IBAction func oneComponentClicked(_ sender: Any) {
         
         fileHandlingControl.oneComponent = oneComponentButton.state == NSButton.StateValue.on
+    }
+    
+    @IBAction func strokeTextFieldChanged(_ sender: Any) {
+        fileHandlingControl.stroke = stroke.doubleValue
     }
 }

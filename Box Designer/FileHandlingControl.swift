@@ -18,10 +18,22 @@ class FileHandlingControl: FileHandlingDelegate {
     var pdfWidth = 8.5 // default value in inches
     var margin = 0.5
     var padding = 0.25
+    var stroke = 3.0
+    
+    func resetToDefault() {
+        oneComponent = false
+        pdfHeight = 11.0 // default value in inches
+        pdfWidth = 8.5 // default value in inches
+        margin = 0.5
+        padding = 0.25
+        stroke = 3.0
+    }
     
     // this is the function that talks with the app menu for saving
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?) {
- 
+        
+        // reset default values each time this is called if in same session
+        resetToDefault()
         guard let displayWindow = window else { return }
         let panel = NSSavePanel()
         
@@ -31,8 +43,9 @@ class FileHandlingControl: FileHandlingDelegate {
         panel.allowedFileTypes = ["json", "pdf"]
         panel.allowsOtherFileTypes = false
         
-        let accView = PDFOptionsView(frame: CGRect(x: 0, y: 0, width: 310, height: 236))
+        
         // add accessory view for PDF options
+        let accView = PDFOptionsView(frame: CGRect(x: 0, y: 0, width: 310, height: 267))
         panel.accessoryView = accView
         
         // file saves according to user input (.json or .pdf)
@@ -49,7 +62,7 @@ class FileHandlingControl: FileHandlingDelegate {
                         print("Failed to save as a JSON file.")
                     }
                 case "pdf":
-                    let fileSaver = BoxDesignerPDF(targetURL: url, boxModel, height: self.pdfHeight, width: self.pdfWidth, margin: self.margin, padding: self.padding, oneComponent: self.oneComponent)
+                    let fileSaver = BoxDesignerPDF(targetURL: url, boxModel)
                     fileSaver.saveAsPDF()
                     //self.accView.prepareForReuse()
                 default:
@@ -57,6 +70,7 @@ class FileHandlingControl: FileHandlingDelegate {
                 }
             }
         }
+        //accView.prepareForReuse()
     }
     
     // this function allows users to upload a box model into the app

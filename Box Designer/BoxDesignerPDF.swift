@@ -21,27 +21,18 @@ class BoxDesignerPDF {
     var nsContext : NSGraphicsContext
     var mediaBox: CGRect
     var wallsOnPage = [[WallModel]]()
+    var fileHandlingControl = FileHandlingControl.shared
     
     let inchScale = 100.0
-    let pdfMargin: Double
-    let pdfPadding: Double
-    let pdfHeight: Double
-    let pdfWidth: Double
-    let oneComponent : Bool
     
-    init(targetURL: URL, _ boxModel: BoxModel, height: Double, width: Double, margin: Double, padding: Double, oneComponent: Bool) {
+    init(targetURL: URL, _ boxModel: BoxModel) {
         
         // set variables
         self.boxModel = boxModel
         self.targetURL = targetURL
-        self.pdfWidth = width*inchScale
-        self.pdfHeight = height*inchScale
-        self.pdfMargin = margin*inchScale
-        self.pdfPadding = padding*inchScale
-        self.oneComponent = oneComponent
         
         // instantiate variables needed to draw to PDFPage
-        mediaBox = CGRect(x: 0.0, y: 0.0, width: CGFloat(pdfWidth), height: CGFloat(pdfHeight))
+        mediaBox = CGRect(x: 0.0, y: 0.0, width: CGFloat(fileHandlingControl.pdfWidth*inchScale), height: CGFloat(fileHandlingControl.pdfHeight*inchScale))
         context = CGContext(targetURL as CFURL, mediaBox: &mediaBox, nil)
         nsContext = NSGraphicsContext(cgContext: context, flipped: true)
 
@@ -49,7 +40,7 @@ class BoxDesignerPDF {
     
     func addPage(_ walls: [WallModel]) -> [WallModel]{
         // initialize custom PDF page
-        let page = BoxDesignPDFPage(walls,margin: pdfMargin, padding: pdfPadding, height: pdfHeight, width: pdfWidth)!
+        let page = BoxDesignPDFPage(walls)!
         var leftoverWalls = [WallModel]()
         // set current context (NS not CG)
         NSGraphicsContext.current = nsContext
@@ -92,7 +83,7 @@ class BoxDesignerPDF {
     
     func saveAsPDF() {
         // call function for whatever layout type was given
-        if (oneComponent) {
+        if (fileHandlingControl.oneComponent) {
             self.oneComponentPerPageLayout()
         } else {
             self.defaultPDFDisplay()

@@ -14,28 +14,21 @@ import PDFKit
 
 class BoxDesignPDFPage : PDFPage {
     
+    var fileHandlingControl = FileHandlingControl.shared
     var wallsToDraw : [WallModel]
     let inchScale : Double = 100.0
-    let margin : Double
-    let padding : Double
-    let pageHeight : Double
-    let pageWidth : Double
     var firstLineDrawn = false
     
-    init?(_ wallsToDraw : [WallModel], margin: Double, padding: Double, height: Double, width: Double) {
+    init?(_ wallsToDraw : [WallModel]) {
         self.wallsToDraw = wallsToDraw
-        self.margin = margin
-        self.padding = padding
-        self.pageHeight = height
-        self.pageWidth = width
         super.init()
     }
     // this method draws wall starting at the bottom left of the page and going up, it then moves to the right and starts drawing up from the bottom again
     // it returns walls that would not fit on itself (the page)
     func drawPaths(for box: PDFDisplayBox)->[WallModel] {
-        var xOffset = margin
-        var yOffset = margin
-        var maxXSoFar = margin
+        var xOffset = fileHandlingControl.margin*inchScale
+        var yOffset = fileHandlingControl.margin*inchScale
+        var maxXSoFar = fileHandlingControl.margin*inchScale
         var leftoverWalls = [WallModel]()
         
         for wall in wallsToDraw {
@@ -46,15 +39,15 @@ class BoxDesignPDFPage : PDFPage {
             
             // if vertical space is used up, change xOffset to be beside it, and reset y-offset so drawing starts at bottom of page again
             // only if there's still horizontal space
-            if (yOffset + wall.length * inchScale > pageHeight - margin) {
+            if (yOffset + wall.length * inchScale > fileHandlingControl.pdfHeight*inchScale - fileHandlingControl.margin*inchScale) {
                 // if horizontal space is used up, add the wall to leftover walls and break so that the remaining walls (if any) can also be added
-                if (maxXSoFar + wall.width * inchScale > pageWidth - margin) {
+                if (maxXSoFar + wall.width * inchScale > fileHandlingControl.pdfWidth*inchScale - fileHandlingControl.margin*inchScale) {
                     leftoverWalls.append(wall)
                     continue
                 } else {
                     // if vertical space is used up but horizontal isn't, reset xOffset to account for wall widths already drawn and reset yOffset ot be at the bottom of the page (accounting for margin)
                     xOffset = maxXSoFar
-                    yOffset = margin
+                    yOffset = fileHandlingControl.margin*inchScale
                 }
             }
 
@@ -100,11 +93,11 @@ class BoxDesignPDFPage : PDFPage {
                     break
                 }
             }
-            yOffset += wall.length * inchScale + padding
+            yOffset += wall.length * inchScale + fileHandlingControl.padding*inchScale
             
             // for walls that are being drawn in y direction, just set maxXSoFar as the widest wall drawn
-            if (xOffset + wall.width * inchScale + padding > maxXSoFar) {
-                maxXSoFar += wall.width * inchScale + padding
+            if (xOffset + wall.width * inchScale + fileHandlingControl.padding*inchScale > maxXSoFar) {
+                maxXSoFar += wall.width * inchScale + fileHandlingControl.padding*inchScale
             }
         }
         return leftoverWalls
@@ -115,7 +108,7 @@ class BoxDesignPDFPage : PDFPage {
         NSColor.black.set()
         path.move(to: fromPoint)
         path.line(to: toPoint)
-        path.lineWidth = 2.0
+        path.lineWidth = CGFloat(fileHandlingControl.stroke)
         path.stroke()
         firstLineDrawn = true
     }

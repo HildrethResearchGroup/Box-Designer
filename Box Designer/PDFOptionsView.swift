@@ -10,19 +10,30 @@ import Foundation
 import SceneKit
 import Cocoa
 
+//@IBDesignable
 class PDFOptionsView: NSView {
     
-    var fileHandlingControl = FileHandlingControl.shared
     
+    var fileHandlingControl = FileHandlingControl.shared
     @IBOutlet weak var pdfWidthTextField: NSTextField!
     @IBOutlet weak var pdfHeightTextField: NSTextField!
     @IBOutlet weak var margin: NSTextField!
     @IBOutlet weak var padding: NSTextField!
     
     @IBOutlet weak var oneComponentButton: NSButton!
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        awakeFromNib()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        awakeFromNib()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // set default values
         pdfWidthTextField.doubleValue = fileHandlingControl.pdfWidth
         pdfHeightTextField.doubleValue = fileHandlingControl.pdfHeight
@@ -31,7 +42,6 @@ class PDFOptionsView: NSView {
         oneComponentButton.state = NSButton.StateValue.off
         
     }
-    
     
     @IBAction func widthTextFieldChanged(_ sender: Any) {
         fileHandlingControl.pdfWidth = pdfWidthTextField.doubleValue
@@ -50,6 +60,7 @@ class PDFOptionsView: NSView {
     }
     
     @IBAction func oneComponentClicked(_ sender: Any) {
+        
         if oneComponentButton.state == NSButton.StateValue.on {
             fileHandlingControl.oneComponent = true
         } else {

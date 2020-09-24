@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import SceneKit
 
 class FileHandlingControl: FileHandlingDelegate {
     
@@ -30,8 +31,9 @@ class FileHandlingControl: FileHandlingDelegate {
         panel.allowedFileTypes = ["json", "pdf"]
         panel.allowsOtherFileTypes = false
         
+        let accView = PDFOptionsViewController.viewForPanel()
         // add accessory view for PDF options
-        panel.accessoryView = PDFOptionsView()
+        panel.accessoryView = accView
         
         // file saves according to user input (.json or .pdf)
         panel.beginSheetModal(for: displayWindow) { (response) in
@@ -49,6 +51,7 @@ class FileHandlingControl: FileHandlingDelegate {
                 case "pdf":
                     let fileSaver = BoxDesignerPDF(targetURL: url, boxModel, height: self.pdfHeight, width: self.pdfWidth, margin: self.margin, padding: self.padding, oneComponent: self.oneComponent)
                     fileSaver.saveAsPDF()
+                    //self.accView.prepareForReuse()
                 default:
                     break
                 }

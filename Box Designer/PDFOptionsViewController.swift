@@ -2,7 +2,7 @@
 //  PDFOptionsViewController.swift
 //  Box Designer
 //
-//  Created by Audrey Horne on 9/22/20.
+//  Created by Audrey Horne on 9/23/20.
 //  Copyright © 2020 Hildreth Research Group. All rights reserved.
 //
 
@@ -12,8 +12,21 @@ import SceneKit
 
 class PDFOptionsViewController: NSViewController {
     
-    var fileHandlingControl = FileHandlingControl.shared
+    static func viewForPanel() -> NSView {
+        let accVC = PDFOptionsViewController()
+        let view = accVC.view as! AccessoryView
+        view.setUp()
+        return view
+    }
     
+}
+
+// nested class because, specifically for an accessory view in NSSavePanel, you need an NSView, not NSViewController
+class AccessoryView: NSView {
+    
+    let fileHandlingControl = FileHandlingControl.shared
+    
+    // text fields and buttons in view
     @IBOutlet weak var pdfWidthTextField: NSTextField!
     @IBOutlet weak var pdfHeightTextField: NSTextField!
     @IBOutlet weak var margin: NSTextField!
@@ -21,19 +34,13 @@ class PDFOptionsViewController: NSViewController {
     
     @IBOutlet weak var oneComponentButton: NSButton!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func setUp() {
         // set default values
         pdfWidthTextField.doubleValue = fileHandlingControl.pdfWidth
         pdfHeightTextField.doubleValue = fileHandlingControl.pdfHeight
         margin.doubleValue = fileHandlingControl.margin
         padding.doubleValue = fileHandlingControl.padding
         oneComponentButton.state = NSButton.StateValue.off
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     @IBAction func widthTextFieldChanged(_ sender: Any) {
@@ -53,11 +60,6 @@ class PDFOptionsViewController: NSViewController {
     }
     
     @IBAction func oneComponentClicked(_ sender: Any) {
-        if oneComponentButton.state == NSButton.StateValue.on {
-            fileHandlingControl.oneComponent = true
-        } else {
-            fileHandlingControl.oneComponent = false
-        }
+        fileHandlingControl.oneComponent = oneComponentButton.state == .on
     }
-    
 }

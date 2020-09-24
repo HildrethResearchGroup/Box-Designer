@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 import SceneKit
 
-class FileHandlingControl: FileHandlingDelegate {
+class FileHandlingControl {
     
     static let shared = FileHandlingControl()
     var oneComponent = false
@@ -40,7 +40,7 @@ class FileHandlingControl: FileHandlingDelegate {
         // settings that allow user to save as only .json or .pdf
         panel.canCreateDirectories = true
         panel.isExtensionHidden = false
-        panel.allowedFileTypes = ["json", "pdf"]
+        panel.allowedFileTypes = ["pdf", "json"]
         panel.allowsOtherFileTypes = false
         
         
@@ -64,13 +64,12 @@ class FileHandlingControl: FileHandlingDelegate {
                 case "pdf":
                     let fileSaver = BoxDesignerPDF(targetURL: url, boxModel)
                     fileSaver.saveAsPDF()
-                    //self.accView.prepareForReuse()
+                
                 default:
                     break
                 }
             }
         }
-        //accView.prepareForReuse()
     }
     
     // this function allows users to upload a box model into the app

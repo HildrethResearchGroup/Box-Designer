@@ -20,7 +20,6 @@ class BoxDesignerPDF {
     var context : CGContext!
     var nsContext : NSGraphicsContext
     var mediaBox: CGRect
-    var wallsOnPage = [[WallModel]]()
     var fileHandlingControl = FileHandlingControl.shared
     
     let inchScale = 100.0
@@ -82,20 +81,16 @@ class BoxDesignerPDF {
     }
     
     func saveAsPDF() {
-        // call function for whatever layout type was given
-        if (fileHandlingControl.oneComponent) {
-            self.oneComponentPerPageLayout()
-        } else {
-            self.defaultPDFDisplay()
-        }
-        var index : Int = 0
-        //add all pages to document
-        for (pdfpage) in pages {
-            document.insert(pdfpage, at: index)
-            index += 1
-        }
-        // close PDF and write to URL in context (targetURL)
-        context?.closePDF()
         
+        // call function for whatever layout type was given
+        fileHandlingControl.oneComponent ? oneComponentPerPageLayout() : defaultPDFDisplay()
+        
+        //add all pages to document
+        for (index,pdfpage) in pages.enumerated() {
+            document.insert(pdfpage, at: index)
+            
+        }
+        // close context PDF and write to URL in context (targetURL)
+        context?.closePDF()
     }
 }

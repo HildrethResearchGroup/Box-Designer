@@ -16,7 +16,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     let selectionHandeling = SelectionHandeling.shared
     
     
-    var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl.shared
+    var fileHandlingControl = FileHandlingControl.shared
     
     @IBOutlet weak var boxView: SCNView!
     @IBOutlet weak var pdfOptionsView: PDFOptionsView!
@@ -247,20 +247,20 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {
-        let newBoxModel = fileHandlingDelegate.openModel(boxModel, self.view.window)
+        let newBoxModel = fileHandlingControl.openModel(boxModel, self.view.window)
         self.boxModel = newBoxModel
         //reset all displays to be correct
         boxModel.sceneGenerator.generateScene(self.boxModel)
     }
     
     @IBAction func menuFileSaveItemSelected(_ sender: Any) {
-        fileHandlingDelegate.saveModel(boxModel, self.view.window)
+        fileHandlingControl.saveModel(boxModel, self.view.window)
     }
     
     // right now, the button just does the same as the menu option
     // the functionality in this will be changed for one of the requirements (swift archiving capabilities)
     @IBAction func exportButtonClicked(_ sender: Any) {
-        fileHandlingDelegate.saveModel(boxModel, self.view.window)
+        fileHandlingControl.saveModel(boxModel, self.view.window)
     }
     
     func updateModel(_ boxModel: BoxModel) {
@@ -295,7 +295,3 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
 }
 
-protocol FileHandlingDelegate {
-    func saveModel(_ boxModel: BoxModel, _ window: NSWindow?)
-    func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel
-}

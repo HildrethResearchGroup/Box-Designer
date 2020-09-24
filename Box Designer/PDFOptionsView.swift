@@ -13,24 +13,35 @@ import Cocoa
 //@IBDesignable
 class PDFOptionsView: NSView {
     
-    
     var fileHandlingControl = FileHandlingControl.shared
+    
+    @IBOutlet var view: NSView!
+    
     @IBOutlet weak var pdfWidthTextField: NSTextField!
     @IBOutlet weak var pdfHeightTextField: NSTextField!
     @IBOutlet weak var margin: NSTextField!
     @IBOutlet weak var padding: NSTextField!
     
     @IBOutlet weak var oneComponentButton: NSButton!
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        awakeFromNib()
-    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        awakeFromNib()
+        commonInit()
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
     }
     
+    func commonInit() {
+        
+        Bundle.main.loadNibNamed("PDFOptionsView", owner: self, topLevelObjects: nil)
+        let contentFrame = NSMakeRect(0, 0, self.frame.size.width, self.frame.size.height)
+        self.view.frame = contentFrame
+        self.addSubview(self.view)
+        
+        awakeFromNib()
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -61,10 +72,6 @@ class PDFOptionsView: NSView {
     
     @IBAction func oneComponentClicked(_ sender: Any) {
         
-        if oneComponentButton.state == NSButton.StateValue.on {
-            fileHandlingControl.oneComponent = true
-        } else {
-            fileHandlingControl.oneComponent = false
-        }
+        fileHandlingControl.oneComponent = oneComponentButton.state == NSButton.StateValue.on
     }
 }

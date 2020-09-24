@@ -31,7 +31,7 @@ class FileHandlingControl: FileHandlingDelegate {
         panel.allowedFileTypes = ["json", "pdf"]
         panel.allowsOtherFileTypes = false
         
-        let accView = PDFOptionsViewController.viewForPanel()
+        let accView = PDFOptionsView(frame: CGRect(x: 0, y: 0, width: 310, height: 236))
         // add accessory view for PDF options
         panel.accessoryView = accView
         

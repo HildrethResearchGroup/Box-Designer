@@ -15,10 +15,11 @@ class InputViewController: NSViewController, NSTextDelegate {
     let unitConversionFactor = 25.4
     let selectionHandeling = SelectionHandeling.shared
     
+    
     var fileHandlingDelegate : FileHandlingDelegate = FileHandlingControl.shared
     
     @IBOutlet weak var boxView: SCNView!
-    
+    @IBOutlet weak var pdfOptionsView: PDFOptionsView!
     @IBOutlet weak var mmMenu: NSMenuItem!
     @IBOutlet weak var inchMenu: NSMenuItem!
     

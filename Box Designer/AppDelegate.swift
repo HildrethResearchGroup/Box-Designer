@@ -15,7 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var boxViewController: BoxViewController!
     @IBOutlet weak var inputViewController: InputViewController!
-    @IBOutlet weak var pdfViewController: PDFOptionsViewController!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application

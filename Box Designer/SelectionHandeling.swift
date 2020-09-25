@@ -20,7 +20,6 @@ class SelectionHandeling{
     var selectedNode: SCNNode?{
         willSet{
             
-            
             //reset the color
             if(nodeColor != nil){
                 selectedNode!.enumerateChildNodes { (node, stop) in

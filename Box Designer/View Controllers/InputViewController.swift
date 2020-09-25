@@ -50,13 +50,10 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     
     
     //====================Camera Controls=========================
-    // Checks whether mouse button is pressed or not
-    var mouseDown: Bool = false
-    
     // Sensitivity of camera movements in response to mouse
-    let moveSensetivity:CGFloat = 0.01
-    let rotateSensetivity:CGFloat = 0.01
-    let zoomSensetivity:CGFloat = 0.1
+    let moveSensitivity:CGFloat = 0.01
+    let rotateSensitivity:CGFloat = 0.01
+    let zoomSensitivity:CGFloat = 0.1
     
     func inView(_ event: NSEvent)->Bool {
         if(boxView.hitTest(event.locationInWindow) == boxView){
@@ -65,10 +62,10 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         return false
     }
     
-    
+    // Handles mouse movement when dragging the camera view around
     override func otherMouseDragged(with event: NSEvent) {
-        boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
-        boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensitivity
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensitivity
         
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
@@ -79,8 +76,8 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     
     override func rightMouseDragged(with event: NSEvent) {
         var currentPos:SCNVector3 = boxView.pointOfView!.position
-        currentPos.x += event.deltaX * -moveSensetivity
-        currentPos.y += event.deltaY * moveSensetivity
+        currentPos.x += event.deltaX * -moveSensitivity
+        currentPos.y += event.deltaY * moveSensitivity
         boxView.pointOfView!.position = currentPos
     }
     
@@ -89,16 +86,23 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
         selectionHandeling.selectedNode = result.node
-        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: true)
+        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: false)
     }
     
     override func scrollWheel(with event: NSEvent) {
-        boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensetivity)
+        boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensitivity)
         if(boxView.pointOfView!.camera!.orthographicScale < 0.1){
             boxView.pointOfView!.camera?.orthographicScale = 0.1
         }
     }
     
+    // Handling trackpad events
+    override func magnify (with event: NSEvent) {
+        boxView.pointOfView!.camera?.orthographicScale += Double(event.magnification/zoomSensitivity)
+        if(boxView.pointOfView!.camera!.orthographicScale < 0.1){
+            boxView.pointOfView!.camera?.orthographicScale = 0.1
+        }
+    }
     //============================================================
     
     

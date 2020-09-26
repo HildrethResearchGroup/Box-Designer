@@ -18,6 +18,7 @@
 		02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5C248D72B400F595A1 /* SceneGenerator.swift */; };
 		02043C6124902CCF00F595A1 /* FileHandlingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6024902CCF00F595A1 /* FileHandlingControl.swift */; };
 		02043C6324904DBF00F595A1 /* JSONFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6224904DBF00F595A1 /* JSONFileHandler.swift */; };
+		23283E06251D61920067D20E /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283E05251D61920067D20E /* Ray.swift */; };
 		23B37C2A25101CD900105D87 /* SelectionHandeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C2925101CD900105D87 /* SelectionHandeling.swift */; };
 		23B37C7425110AEA00105D87 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C7325110AEA00105D87 /* Line.swift */; };
 		23B37C762511671800105D87 /* LineDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C752511671800105D87 /* LineDrawing.swift */; };
@@ -50,6 +51,7 @@
 		02043C5C248D72B400F595A1 /* SceneGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneGenerator.swift; sourceTree = "<group>"; };
 		02043C6024902CCF00F595A1 /* FileHandlingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandlingControl.swift; sourceTree = "<group>"; };
 		02043C6224904DBF00F595A1 /* JSONFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileHandler.swift; sourceTree = "<group>"; };
+		23283E05251D61920067D20E /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		23B37C2925101CD900105D87 /* SelectionHandeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandeling.swift; sourceTree = "<group>"; };
 		23B37C7325110AEA00105D87 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		23B37C752511671800105D87 /* LineDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawing.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				23B37C7325110AEA00105D87 /* Line.swift */,
 				02043C52248C74DD00F595A1 /* BoxModel.swift */,
 				02043C54248C74EC00F595A1 /* WallModel.swift */,
+				23283E05251D61920067D20E /* Ray.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */,
 				02043C55248C74EC00F595A1 /* WallModel.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
+				23283E06251D61920067D20E /* Ray.swift in Sources */,
 				02043C51248C310A00F595A1 /* InputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

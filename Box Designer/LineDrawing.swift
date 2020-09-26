@@ -49,11 +49,11 @@ class LineDrawing{
         for x in 0...(pointArray.count - 2){
             if(pointArray[x] != pointArray[x+1]){
                 let tempLine = Line(pointArray[x], pointArray[x+1], thickness: self.lineThickness)
+                //ensure that no points are added
                 if(!tempLine.point()){
                     returnValue.append(tempLine)
-                    print(tempLine)
-                }
-                
+                    print(tempLine, tempLine.angle*180/CGFloat.pi)
+                } 
             }
         }
         return returnValue
@@ -187,6 +187,44 @@ class LineDrawing{
         }
         grandPath.append(insidePath)
         grandPath.append(outsidePath)
+    }
+    
+    func findClosedPath(_ lines:[Line]){
+        var points: [NSPoint] = []
+        var connections: [Int: Set<Int>] = [:]
+        
+
+        for idvLine in lines{
+            points.append(idvLine.topPoint)
+            points.append(idvLine.bottomPoint)
+        }
+        //the dictionary index for the points corispond to the index of points in unique points
+        var uniquePoints: [NSPoint] = []
+        for x in NSSet(array: points){uniquePoints.append(x as! NSPoint)}
+        print(uniquePoints)
+        for x in 0..<uniquePoints.count{
+            
+            let corner = uniquePoints[x]
+            var connectionSet = Set<Int>()
+            
+            for idvLine in lines{
+                if(idvLine.topPoint == corner){
+                    connectionSet.insert(uniquePoints.firstIndex(of: idvLine.bottomPoint)!)
+                }else if(idvLine.bottomPoint == corner){
+                    connectionSet.insert(uniquePoints.firstIndex(of: idvLine.topPoint)!)
+                }
+            }
+            connections[x] = connectionSet
+        }
+        //eliminate duplicate entries
+        //1->2 and 2->1 are equivalent
+        for (index, connectionSet) in connections{
+            print (index)
+            for node in connectionSet{
+                print("Node", node)
+            }
+        }
+        
     }
     
     func generateShape(shapeExtrusionDepth:CGFloat = 0.001)->SCNShape{

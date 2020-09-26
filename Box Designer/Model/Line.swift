@@ -17,6 +17,7 @@ enum linePos {
     case center
 }
 
+//technically this is a segment
 class Line: CustomStringConvertible{
     init(_ pointA: NSPoint, _ pointB: NSPoint, thickness: CGFloat = 0.01){
         //lines point from a to b
@@ -31,6 +32,12 @@ class Line: CustomStringConvertible{
         
         self.thickness = thickness
         angle = atan((pointB.y - pointA.y)/(pointB.x - pointA.x))
+        //correct the angles
+        if(angle*180/CGFloat.pi < 0.0){
+            angle += 2*CGFloat.pi
+        }else if((angle*180/CGFloat.pi).sign == .minus && (angle*180/CGFloat.pi).isZero){
+            angle += CGFloat.pi
+        }
     }
     
     //top is the larger point
@@ -64,6 +71,15 @@ class Line: CustomStringConvertible{
     func point()->Bool{
         //ensure its not a point then check
         return(self.topPoint == self.bottomPoint)
+    }
+     
+    func opposite(_ point:NSPoint) -> NSPoint? {
+        if(point == topPoint){
+            return bottomPoint
+        }else if(point == topPoint){
+            return topPoint
+        }
+        return nil
     }
     
     func rectanglePath()->NSBezierPath{
@@ -106,7 +122,7 @@ class Line: CustomStringConvertible{
                 //center left
                 var modPoint : NSPoint = NSMakePoint(abs(self.thickness)*cos(angle + (90*CGFloat.pi/180)), abs(self.thickness)*sin(angle + (90*CGFloat.pi/180)));
                 returnValue.append(NSMakePoint((topPoint.x + bottomPoint.x)/2 + modPoint.x, (topPoint.y + bottomPoint.y)/2  + modPoint.y))
-                //center right
+
                 modPoint = NSMakePoint(abs(self.thickness)*cos(angle - (90*CGFloat.pi/180)), abs(self.thickness)*sin(angle - (90*CGFloat.pi/180)))
                 returnValue.append(NSMakePoint((topPoint.x + bottomPoint.x)/2 + modPoint.x, (topPoint.y + bottomPoint.y)/2  + modPoint.y))
                 break

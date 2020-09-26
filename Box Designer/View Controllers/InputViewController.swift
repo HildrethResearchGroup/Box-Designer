@@ -74,13 +74,26 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         
     }
     
+    // Handling right click events with the mouse or trackpad
     override func rightMouseDragged(with event: NSEvent) {
-        var currentPos:SCNVector3 = boxView.pointOfView!.position
-        currentPos.x += event.deltaX * -moveSensitivity
-        currentPos.y += event.deltaY * moveSensitivity
-        boxView.pointOfView!.position = currentPos
+        // If using a mouse, translate the camera relative to the box
+        if (event.subtype == .mouseEvent) {
+            var currentPos:SCNVector3 = boxView.pointOfView!.position
+            currentPos.x += event.deltaX * -moveSensitivity
+            currentPos.y += event.deltaY * moveSensitivity
+            boxView.pointOfView!.position = currentPos
+        }
+        // Otherwise, when using a trackpad, rotate the camera's perspective, just like with the middle mouse button
+        else {
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensitivity
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensitivity
+            
+            manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
+            manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
+        }
     }
     
+    // When the mouse button is released, update the camera view of the box
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
@@ -89,20 +102,43 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         selectionHandeling.highlightEdges(thickness: 0.1, idvLines: false)
     }
     
+    // Handling scroll wheel events with the mouse/trackpad
     override func scrollWheel(with event: NSEvent) {
-        boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensitivity)
+        // If the scrolling event is from a mouse, zoom in/out
+        if (event.subtype == .mouseEvent) {
+            boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensitivity)
+            if (boxView.pointOfView!.camera!.orthographicScale < 0.1){
+                boxView.pointOfView!.camera?.orthographicScale = 0.1
+            }
+        }
+        // Otherwise, If the scrolling event is from a trackpad, make it translate the camera relative to the box
+        else {
+            var currentPos:SCNVector3 = boxView.pointOfView!.position
+            currentPos.x -= event.deltaX * (moveSensitivity*10)
+            currentPos.y += event.deltaY * (moveSensitivity*10)
+            boxView.pointOfView!.position = currentPos
+        }
+    }
+    
+    // Handling trackpad events
+    // Allows users to zoom in and out with the trackpad
+    override func magnify (with event: NSEvent) {
+        boxView.pointOfView!.camera?.orthographicScale -= Double(event.magnification/zoomSensitivity)
         if(boxView.pointOfView!.camera!.orthographicScale < 0.1){
             boxView.pointOfView!.camera?.orthographicScale = 0.1
         }
     }
     
-    // Handling trackpad events
-    override func magnify (with event: NSEvent) {
-        boxView.pointOfView!.camera?.orthographicScale += Double(event.magnification/zoomSensitivity)
-        if(boxView.pointOfView!.camera!.orthographicScale < 0.1){
-            boxView.pointOfView!.camera?.orthographicScale = 0.1
-        }
+    // Allows users to rotate the view of the box with the trackpad
+    override func rotate (with event: NSEvent) {
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.x += CGFloat(event.rotation) * (rotateSensitivity*4)
+        boxModel.sceneGenerator.cameraOrbit.eulerAngles.y += CGFloat(event.rotation) * (rotateSensitivity*4)
+        
+        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
+        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
     }
+    
+    
     //============================================================
     
     

@@ -218,13 +218,38 @@ class LineDrawing{
         }
         //eliminate duplicate entries
         //1->2 and 2->1 are equivalent
-        for (index, connectionSet) in connections{
-            print (index)
-            for node in connectionSet{
-                print("Node", node)
+        print(connections)
+        for index in 0..<connections.count{
+            for node in connections[index]!{
+                if (index > node){
+                    connections[node]?.remove(index)
+                }
             }
         }
+        print(connections)
         
+        var currentPath:[Int]
+        for (index, _) in connections{
+            currentPath = [index]
+            print(index)
+            recursiveSearch(currentPath, connections)
+        }
+        print(currentPaths)
+    }
+    //may want to refactor this design
+    var currentPaths:Set<Set<Int>> = Set()
+    
+    func recursiveSearch(_ currentPath:[Int], _ connections: [Int: Set<Int>]){
+        var returnValue = currentPath
+        for locConnection in connections[currentPath.last!]!{
+            returnValue.append(locConnection)
+            print(" ", locConnection)
+            if(connections[currentPath.first!]!.contains(locConnection) && currentPath.count != 1){
+                currentPaths.insert(Set<Int>(returnValue))
+            }
+            recursiveSearch(returnValue, connections)
+        }
+        //Does not run if empty
     }
     
     func generateShape(shapeExtrusionDepth:CGFloat = 0.001)->SCNShape{

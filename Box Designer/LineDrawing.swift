@@ -218,7 +218,6 @@ class LineDrawing{
         }
         //eliminate duplicate entries
         //1->2 and 2->1 are equivalent
-        print(connections)
         for index in 0..<connections.count{
             for node in connections[index]!{
                 if (index > node){
@@ -226,12 +225,10 @@ class LineDrawing{
                 }
             }
         }
-        print(connections)
-        
         var currentPath:[Int]
         for (index, _) in connections{
             currentPath = [index]
-            print(index)
+ 
             recursiveSearch(currentPath, connections)
         }
         print(currentPaths)
@@ -243,7 +240,6 @@ class LineDrawing{
         var returnValue = currentPath
         for locConnection in connections[currentPath.last!]!{
             returnValue.append(locConnection)
-            print(" ", locConnection)
             if(connections[currentPath.first!]!.contains(locConnection) && currentPath.count != 1){
                 currentPaths.insert(Set<Int>(returnValue))
             }

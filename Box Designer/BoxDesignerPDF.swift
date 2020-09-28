@@ -9,7 +9,7 @@
 import Foundation
 import PDFKit
 import Cocoa
-
+import CoreFoundation
 
 class BoxDesignerPDF {
     
@@ -21,6 +21,7 @@ class BoxDesignerPDF {
     var nsContext : NSGraphicsContext
     var mediaBox: CGRect
     var fileHandlingControl = FileHandlingControl.shared
+    let startTime : CFAbsoluteTime
     
     let inchScale = 100.0
     
@@ -29,7 +30,7 @@ class BoxDesignerPDF {
         // set variables
         self.boxModel = boxModel
         self.targetURL = targetURL
-        
+        startTime = CFAbsoluteTimeGetCurrent()
         // instantiate variables needed to draw to PDFPage
         mediaBox = CGRect(x: 0.0, y: 0.0, width: CGFloat(fileHandlingControl.pdfWidth*inchScale), height: CGFloat(fileHandlingControl.pdfHeight*inchScale))
         context = CGContext(targetURL as CFURL, mediaBox: &mediaBox, nil)
@@ -92,5 +93,7 @@ class BoxDesignerPDF {
         }
         // close context PDF and write to URL in context (targetURL)
         context?.closePDF()
+        let endTime = CFAbsoluteTimeGetCurrent()
+        print(endTime - startTime)
     }
 }

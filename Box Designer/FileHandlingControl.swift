@@ -10,6 +10,7 @@ import Foundation
 import Cocoa
 import SceneKit
 
+
 class FileHandlingControl {
     
     static let shared = FileHandlingControl()
@@ -62,9 +63,10 @@ class FileHandlingControl {
                         print("Failed to save as a JSON file.")
                     }
                 case "pdf":
-                    let fileSaver = BoxDesignerPDF(targetURL: url, boxModel)
-                    fileSaver.saveAsPDF()
-                
+                    BoxDesignerPDF(targetURL: url, boxModel).saveAsPDF()
+                    //unowned let fileSaver = BoxDesignerPDF(targetURL: url, boxModel)
+                    //fileSaver.saveAsPDF()
+                    
                 default:
                     break
                 }

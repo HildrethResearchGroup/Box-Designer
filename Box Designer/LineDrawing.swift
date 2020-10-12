@@ -52,7 +52,6 @@ class LineDrawing{
                 //ensure that no points are added
                 if(!tempLine.point()){
                     returnValue.append(tempLine)
-                    print(tempLine, tempLine.angle*180/CGFloat.pi)
                 } 
             }
         }
@@ -216,36 +215,74 @@ class LineDrawing{
             }
             connections[x] = connectionSet
         }
-        //eliminate duplicate entries
-        //1->2 and 2->1 are equivalent
-        for index in 0..<connections.count{
-            for node in connections[index]!{
-                if (index > node){
-                    connections[node]?.remove(index)
+        for (index, nodes) in connections{
+            if(nodes.count <= 1){
+                connections.removeValue(forKey: index)
+                for (indexS, _) in connections{
+                    connections[indexS]?.remove(index)
                 }
             }
         }
+        print(connections)
         var currentPath:[Int]
         for (index, _) in connections{
             currentPath = [index]
- 
             recursiveSearch(currentPath, connections)
         }
+        currentPaths = removeDuplicates(currentPaths)
         print(currentPaths)
     }
     //may want to refactor this design
-    var currentPaths:Set<Set<Int>> = Set()
+    var currentPaths:Set<[Int]> = Set()
     
     func recursiveSearch(_ currentPath:[Int], _ connections: [Int: Set<Int>]){
         var returnValue = currentPath
         for locConnection in connections[currentPath.last!]!{
+            if (returnValue.contains(locConnection)){continue}
             returnValue.append(locConnection)
-            if(connections[currentPath.first!]!.contains(locConnection) && currentPath.count != 1){
-                currentPaths.insert(Set<Int>(returnValue))
+            if(isValidLoop(returnValue, connections)){
+                currentPaths.insert(returnValue)
             }
             recursiveSearch(returnValue, connections)
+            _ = returnValue.popLast()
         }
         //Does not run if empty
+    }
+    
+    func removeDuplicates(_ paths:Set<[Int]>)->Set<[Int]>{
+        var returnValue = paths
+        for path in returnValue{
+            var delete = false
+            for comparePath in returnValue{
+                if(Set(path) == Set(comparePath) && path != comparePath){
+                    delete = true
+                }
+            }
+            if(delete){
+                returnValue.remove(path)
+                delete = false
+            }
+            
+        }
+        return returnValue
+    }
+    
+    func isValidLoop(_ currentPath:[Int], _ connections: [Int: Set<Int>])->Bool{
+        //verify correct size
+        if(currentPath.count <= 2){return false}
+        for a1 in 0..<currentPath.count{
+            if(a1 == (currentPath.count - 1)){
+                if(!(connections[currentPath.first!]!.contains(currentPath.last!))){
+                    return false
+                }
+            }else{
+                if(!(connections[currentPath[a1]]!.contains(currentPath[a1+1]))){
+                    return false
+                }
+            }
+        }
+        
+        return true
     }
     
     func generateShape(shapeExtrusionDepth:CGFloat = 0.001)->SCNShape{

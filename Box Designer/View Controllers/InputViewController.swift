@@ -13,7 +13,7 @@ import SceneKit
 class InputViewController: NSViewController, NSTextDelegate { 
     var boxModel = BoxModel()
     let unitConversionFactor = 25.4
-    let selectionHandeling = SelectionHandeling.shared
+    let selectionHandling = SelectionHandeling.shared
     
     
     var fileHandlingControl = FileHandlingControl.shared
@@ -70,9 +70,6 @@ class InputViewController: NSViewController, NSTextDelegate {
         
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
-        
-//        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
-        
     }
     
     // Handling right click events with the mouse or trackpad
@@ -99,8 +96,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
-        selectionHandeling.selectedNode = result.node
-        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: false)
+        selectionHandling.selectedNode = result.node
+        selectionHandling.highlightEdges(thickness: 0.1, idvLines: false)
     }
     
     // Handling scroll wheel events with the mouse/trackpad
@@ -211,11 +208,15 @@ class InputViewController: NSViewController, NSTextDelegate {
             materialThicknessTextField.doubleValue = boxModel.materialThickness
             mmInch = false
             changeLabels(mmInch)
-            //set the limits second because otherwise the adjustment is incorect
+            //set the limits second because otherwise the adjustment is incorrect
         }
     }
     
+    // Changing the dimensions of the box
+    // Changing the dimensions of the box pushes the camera closer or farther away from the box
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {
+        
+        SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
             boxModel.boxLength = lengthTextField.doubleValue * (1/unitConversionFactor)
@@ -226,6 +227,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
+        SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
             boxModel.boxWidth = widthTextField.doubleValue * (1/unitConversionFactor)
@@ -236,6 +238,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func heightTextFieldDidChange(_ sender: Any) {
+        SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
             boxModel.boxHeight = heightTextField.doubleValue * (1/unitConversionFactor)

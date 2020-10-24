@@ -33,7 +33,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var joinTypeControl: NSSegmentedControl!
     
     @IBOutlet weak var tabWidthLabel: NSTextField!
-    @IBOutlet weak var tabWidthSlider: NSSlider!
+    @IBOutlet weak var tabWidthTextField: NSTextField!
     
     @IBOutlet weak var lidOn_Off: NSButton!
     
@@ -154,7 +154,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
-        tabWidthSlider.isEnabled = false
+        tabWidthTextField.isEnabled = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }
@@ -215,7 +215,6 @@ class InputViewController: NSViewController, NSTextDelegate {
     // Changing the dimensions of the box
     // Changing the dimensions of the box pushes the camera closer or farther away from the box
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {
-        
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
@@ -272,15 +271,15 @@ class InputViewController: NSViewController, NSTextDelegate {
         let choice = joinTypeControl.selectedSegment
         if choice == 0 {
             boxModel.joinType = JoinType.overlap
-            tabWidthSlider.isEnabled = false
+            tabWidthTextField.isEnabled = false
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
-            tabWidthSlider.isEnabled = true
+            tabWidthTextField.isEnabled = true
         }
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
-        boxModel.nTab = tabWidthSlider.doubleValue
+        boxModel.nTab = tabWidthTextField.doubleValue
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {

@@ -12,12 +12,11 @@ import SceneKit
 
 class BoxModel {
     var counterLength = 0
-    var counterPerp = 0
     let sceneGenerator = SceneGenerator.shared
     var walls: [WallModel]
     //refers to box dimension along x axis
     var boxWidth: Double {
-        //TO DO: refactor this. this code should not be in a variable declaration
+        
         willSet {
             if innerDimensions {
                 self.boxWidth = newValue + 2 * materialThickness
@@ -288,14 +287,14 @@ class BoxModel {
         self.removeInnerWall = false
     }
     
-    func smallestDimension() -> Double {
-        var smallest = boxWidth
-        if boxLength < smallest {
-            smallest = boxLength
-        }
-        if boxHeight < smallest {
-            smallest = boxHeight
-        }
-        return smallest
-    }
+//    func smallestDimension() -> Double {
+//        var smallest = boxWidth
+//        if boxLength < smallest {
+//            smallest = boxLength
+//        }
+//        if boxHeight < smallest {
+//            smallest = boxHeight
+//        }
+//        return smallest
+//    }
 }

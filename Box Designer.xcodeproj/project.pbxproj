@@ -18,7 +18,7 @@
 		02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5C248D72B400F595A1 /* SceneGenerator.swift */; };
 		02043C6124902CCF00F595A1 /* FileHandlingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6024902CCF00F595A1 /* FileHandlingControl.swift */; };
 		02043C6324904DBF00F595A1 /* JSONFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6224904DBF00F595A1 /* JSONFileHandler.swift */; };
-		23B37C2A25101CD900105D87 /* SelectionHandeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C2925101CD900105D87 /* SelectionHandeling.swift */; };
+		23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C2925101CD900105D87 /* SelectionHandling.swift */; };
 		23B37C7425110AEA00105D87 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C7325110AEA00105D87 /* Line.swift */; };
 		23B37C762511671800105D87 /* LineDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C752511671800105D87 /* LineDrawing.swift */; };
 		6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */; };
@@ -52,7 +52,7 @@
 		02043C5C248D72B400F595A1 /* SceneGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneGenerator.swift; sourceTree = "<group>"; };
 		02043C6024902CCF00F595A1 /* FileHandlingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandlingControl.swift; sourceTree = "<group>"; };
 		02043C6224904DBF00F595A1 /* JSONFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileHandler.swift; sourceTree = "<group>"; };
-		23B37C2925101CD900105D87 /* SelectionHandeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandeling.swift; sourceTree = "<group>"; };
+		23B37C2925101CD900105D87 /* SelectionHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandling.swift; sourceTree = "<group>"; };
 		23B37C7325110AEA00105D87 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		23B37C752511671800105D87 /* LineDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawing.swift; sourceTree = "<group>"; };
 		6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignerPDF.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				02043C56248C789600F595A1 /* WallType.swift */,
 				02043C5A248C7BCC00F595A1 /* PathGenerator.swift */,
 				02043C6224904DBF00F595A1 /* JSONFileHandler.swift */,
-				23B37C2925101CD900105D87 /* SelectionHandeling.swift */,
+				23B37C2925101CD900105D87 /* SelectionHandling.swift */,
 				23B37C752511671800105D87 /* LineDrawing.swift */,
 				23B37C7325110AEA00105D87 /* Line.swift */,
 				02043C32247ED22B00F595A1 /* BoxDesignPDFPage.swift */,
@@ -268,7 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23B37C2A25101CD900105D87 /* SelectionHandeling.swift in Sources */,
+				23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */,
 				23B37C762511671800105D87 /* LineDrawing.swift in Sources */,
 				02043C57248C789600F595A1 /* WallType.swift in Sources */,
 				02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */,

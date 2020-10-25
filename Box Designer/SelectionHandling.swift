@@ -1,5 +1,5 @@
 //
-//  SelectionHandeling.swift
+//  SelectionHandling.swift
 //  Box Designer
 //
 //  Created by CSCI370 on 9/14/20.
@@ -10,9 +10,9 @@ import Foundation
 import SceneKit
 import Cocoa
 
-class SelectionHandeling{
+class SelectionHandling{
     
-    static let shared = SelectionHandeling()
+    static let shared = SelectionHandling()
     let shapeDepth: CGFloat = 0.0001
     var inside: Bool = false
     

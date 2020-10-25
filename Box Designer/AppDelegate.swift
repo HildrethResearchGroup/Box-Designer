@@ -9,15 +9,14 @@
 import Cocoa
 
 /**
- AppDelegate for BoxDesigner application
- - Description:
-    - This class instantiates the application.
+ AppDelegate for BoxDesigner application -- initializes application views.
  - Authors:
     - CSM Field Session Summer 2020 and Fall 2020.
  
  - Copyright:
     - Copyright © 2020 Hildreth Research Group. All rights reserved.
-
+ - Note:
+    - Both functions in this class (applicationDidFinishLaunching and applicationWillTerminate) are accompanied by the Apple Developer Documentation in Quick Help.
  */
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

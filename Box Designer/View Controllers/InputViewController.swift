@@ -13,7 +13,7 @@ import SceneKit
 class InputViewController: NSViewController, NSTextDelegate { 
     var boxModel = BoxModel()
     let unitConversionFactor = 25.4
-    let selectionHandling = SelectionHandeling.shared
+    let selectionHandling = SelectionHandling.shared
     
     
     var fileHandlingControl = FileHandlingControl.shared

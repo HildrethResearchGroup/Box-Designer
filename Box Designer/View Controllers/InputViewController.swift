@@ -13,6 +13,7 @@ import SceneKit
 class InputViewController: NSViewController, NSTextDelegate { 
     var boxModel = BoxModel()
     let unitConversionFactor = 25.4
+    let minTabs = 3.0
     let selectionHandling = SelectionHandeling.shared
     
     
@@ -292,7 +293,15 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func numberTabChanged(_ sender: Any) {
-        boxModel.nTab = numberTabTextField.doubleValue
+        if numberTabTextField.doubleValue < 3.0 {
+            if tabDialog() {
+                numberTabTextField.doubleValue = minTabs
+                boxModel.nTab = minTabs
+            }
+        }
+        else {
+            boxModel.nTab = numberTabTextField.doubleValue
+        }
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {
@@ -347,6 +356,17 @@ class InputViewController: NSViewController, NSTextDelegate {
         if(direction/CGFloat.pi * deg < -deg){
             direction = (((direction/CGFloat.pi * deg) + deg * 2)/deg) * CGFloat.pi
         }
+    }
+    
+    // Prevents the user from implementing fewer tabs than is allowed
+    func tabDialog() -> Bool {
+        let tabAlert = NSAlert()
+        tabAlert.messageText = "Invalid tab selection."
+        tabAlert.informativeText = "Press 'OK' to default to the minimum number of tabs \(Int(minTabs)), or press 'Cancel' to abort the operation."
+        tabAlert.alertStyle = .warning
+        tabAlert.addButton(withTitle: "OK")
+        tabAlert.addButton(withTitle: "Cancel")
+        return tabAlert.runModal() == .alertFirstButtonReturn
     }
 }
 

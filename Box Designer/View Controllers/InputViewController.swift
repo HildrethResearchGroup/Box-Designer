@@ -142,10 +142,6 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     //============================================================
     
-    
-    //mm is true and inch is false
-    private var mmInch: Bool = false
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         boxModel = BoxModel()

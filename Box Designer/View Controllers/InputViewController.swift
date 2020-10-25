@@ -142,7 +142,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     //============================================================
     
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         boxModel = BoxModel()
@@ -150,7 +150,6 @@ class InputViewController: NSViewController, NSTextDelegate {
         tabWidthTextField.doubleValue = 1
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
-        
         
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)

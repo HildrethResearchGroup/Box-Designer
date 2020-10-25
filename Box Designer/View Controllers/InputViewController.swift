@@ -143,21 +143,15 @@ class InputViewController: NSViewController, NSTextDelegate {
     //============================================================
     
     
-    //mm is true and inch is false
-    private var mmInch: Bool = false
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         boxModel = BoxModel()
-        lengthTextField.doubleValue = boxModel.boxLength
-        widthTextField.doubleValue = boxModel.boxWidth
-        heightTextField.doubleValue = boxModel.boxHeight
-        materialThicknessTextField.doubleValue = boxModel.materialThickness
-                
+        
+        tabWidthTextField.doubleValue = 1
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
-        tabWidthTextField.isEnabled = false
+        
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }

@@ -147,7 +147,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         super.awakeFromNib()
         boxModel = BoxModel()
         
-        numberTabTextField.doubleValue = 1
+        numberTabTextField.isEnabled = false
+        numberTabTextField.doubleValue = 3
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
@@ -286,10 +287,11 @@ class InputViewController: NSViewController, NSTextDelegate {
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
             numberTabTextField.isEnabled = true
+            boxModel.nTab = numberTabTextField.doubleValue
         }
     }
     
-    @IBAction func tabWidthChanged(_ sender: Any) {
+    @IBAction func numberTabChanged(_ sender: Any) {
         boxModel.nTab = numberTabTextField.doubleValue
     }
     

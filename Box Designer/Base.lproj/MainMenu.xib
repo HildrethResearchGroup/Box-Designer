@@ -44,7 +44,7 @@
                 <outlet property="minusButtonLengthwise" destination="jiz-9X-T5k" id="5F1-XQ-Bw6"/>
                 <outlet property="mmMenu" destination="6oz-WZ-lag" id="m6Z-Ur-32H"/>
                 <outlet property="numberTabLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
-                <outlet property="numberTabTextField" destination="OQ8-j6-eeU" id="s5C-Tf-gDp"/>
+                <outlet property="numberTabTextField" destination="OQ8-j6-eeU" id="Mhj-yB-JiR"/>
                 <outlet property="pdfOptionsView" destination="84M-x9-aDz" id="6Ve-r8-JqM"/>
                 <outlet property="plusButtonLengthwise" destination="qmP-cB-sff" id="wBy-gP-3XL"/>
                 <outlet property="thicknessLabel" destination="YhN-0W-NDy" id="m1y-yw-xug"/>
@@ -598,6 +598,9 @@
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <connections>
+                                                        <action selector="numberTabChanged:" target="SYY-Aa-HfQ" id="zdV-Vu-zH8"/>
+                                                    </connections>
                                                 </textFieldCell>
                                             </textField>
                                         </gridCell>

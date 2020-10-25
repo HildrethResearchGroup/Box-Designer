@@ -52,7 +52,6 @@ class SceneGenerator {
             //create node from wall data
             let newShape = SCNShape(path: wall.path, extrusionDepth: CGFloat(wall.materialThickness))
             let newNode = SCNNode(geometry: newShape)
-            
             //adjust position and rotation
             newNode.position = wall.position
             switch (wall.wallType) {
@@ -102,7 +101,7 @@ class SceneGenerator {
             let cameraNode = SCNNode()
             cameraNode.camera = SCNCamera()
             // Starting position of camera is dependent on largest box dimension
-            cameraNode.position = SCNVector3Make(0, 0, CGFloat(max(boxModel.boxWidth, boxModel.boxHeight, boxModel.boxLength)))
+            cameraNode.position = SCNVector3Make(0, 0, pow(CGFloat(max(boxModel.boxWidth, boxModel.boxHeight, boxModel.boxLength)), 4))
             cameraNode.camera?.usesOrthographicProjection = true
             cameraNode.camera?.automaticallyAdjustsZRange = true
             // Orthographic scale is dependent on largest box dimension

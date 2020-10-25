@@ -153,7 +153,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
-        tabWidthTextField.isEnabled = false
+        //tabWidthTextField.isEnabled = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }

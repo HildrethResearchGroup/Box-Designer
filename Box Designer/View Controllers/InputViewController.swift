@@ -33,8 +33,8 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var joinTypeControl: NSSegmentedControl!
     @IBOutlet weak var unitChoiceControl: NSSegmentedCell!
     
-    @IBOutlet weak var tabWidthLabel: NSTextField!
-    @IBOutlet weak var tabWidthTextField: NSTextField!
+    @IBOutlet weak var numberTabLabel: NSTextField!
+    @IBOutlet weak var numberTabTextField: NSTextField!
     
     @IBOutlet weak var lidOn_Off: NSButton!
     
@@ -147,7 +147,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         super.awakeFromNib()
         boxModel = BoxModel()
         
-        tabWidthTextField.doubleValue = 1
+        numberTabTextField.doubleValue = 1
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
@@ -197,7 +197,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         if mmInch{
             mmMenu.state = NSControl.StateValue.off
             inchMenu.state = NSControl.StateValue.on
-            
+            unitChoiceControl.selectedSegment = 0
             //the units are inches so just set it back
             lengthTextField.doubleValue = boxModel.boxLength
             widthTextField.doubleValue = boxModel.boxWidth
@@ -219,6 +219,20 @@ class InputViewController: NSViewController, NSTextDelegate {
         }else{
             //if the setting is in inches
            boxModel.boxLength = lengthTextField.doubleValue
+        }
+    }
+    @IBAction func unitSegmentedControl(_ sender: Any) {
+        let choice = unitChoiceControl.selectedSegment
+        if choice == 0 {
+            mmInch = false
+            changeLabels(mmInch)
+            mmMenu.state = NSControl.StateValue.off
+            inchMenu.state = NSControl.StateValue.on
+        } else if choice == 1 {
+            mmInch = true
+            changeLabels(mmInch)
+            mmMenu.state = NSControl.StateValue.on
+            inchMenu.state = NSControl.StateValue.off
         }
     }
     
@@ -268,15 +282,15 @@ class InputViewController: NSViewController, NSTextDelegate {
         let choice = joinTypeControl.selectedSegment
         if choice == 0 {
             boxModel.joinType = JoinType.overlap
-            tabWidthTextField.isEnabled = false
+            numberTabTextField.isEnabled = false
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
-            tabWidthTextField.isEnabled = true
+            numberTabTextField.isEnabled = true
         }
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
-        boxModel.nTab = tabWidthTextField.doubleValue
+        boxModel.nTab = numberTabTextField.doubleValue
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {

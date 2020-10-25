@@ -43,10 +43,10 @@
                 <outlet property="materialThicknessTextField" destination="JAJ-yv-jkR" id="D2m-hM-jd8"/>
                 <outlet property="minusButtonLengthwise" destination="jiz-9X-T5k" id="5F1-XQ-Bw6"/>
                 <outlet property="mmMenu" destination="6oz-WZ-lag" id="m6Z-Ur-32H"/>
+                <outlet property="numberTabLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
+                <outlet property="numberTabTextField" destination="OQ8-j6-eeU" id="s5C-Tf-gDp"/>
                 <outlet property="pdfOptionsView" destination="84M-x9-aDz" id="6Ve-r8-JqM"/>
                 <outlet property="plusButtonLengthwise" destination="qmP-cB-sff" id="wBy-gP-3XL"/>
-                <outlet property="tabWidthLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
-                <outlet property="tabWidthTextField" destination="OQ8-j6-eeU" id="s5C-Tf-gDp"/>
                 <outlet property="thicknessLabel" destination="YhN-0W-NDy" id="m1y-yw-xug"/>
                 <outlet property="unitChoiceControl" destination="zR4-5z-VaB" id="Jc0-Jx-6Kb"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="IbT-W1-kOg"/>
@@ -513,10 +513,10 @@
                                                         <segment label="Inch" width="56" selected="YES"/>
                                                         <segment label="MM" width="56" tag="1"/>
                                                     </segments>
-                                                    <connections>
-                                                        <action selector="unitSegmentedControl:" target="SYY-Aa-HfQ" id="vEi-6O-pn0"/>
-                                                    </connections>
                                                 </segmentedCell>
+                                                <connections>
+                                                    <action selector="unitSegmentedControl:" target="SYY-Aa-HfQ" id="xrS-ox-Si5"/>
+                                                </connections>
                                             </segmentedControl>
                                         </gridCell>
                                     </gridCells>

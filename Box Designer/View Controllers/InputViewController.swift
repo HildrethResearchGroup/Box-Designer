@@ -31,6 +31,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     @IBOutlet weak var innerOrOuterDimensionControl: NSSegmentedCell!
     @IBOutlet weak var joinTypeControl: NSSegmentedControl!
+    @IBOutlet weak var unitChoiceControl: NSSegmentedCell!
     
     @IBOutlet weak var tabWidthLabel: NSTextField!
     @IBOutlet weak var tabWidthSlider: NSSlider!
@@ -48,7 +49,9 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     @IBOutlet weak var exportButton: NSButton!
     
-    
+    //mm is true and inch is false
+    private var mmInch: Bool = false
+    private var mmInchDict : Dictionary<Bool, Double> = [false : 1.0, true : 25.4]
     
     //====================Camera Controls=========================
     // Sensitivity of camera movements in response to mouse
@@ -143,9 +146,6 @@ class InputViewController: NSViewController, NSTextDelegate {
     //============================================================
     
     
-    //mm is true and inch is false
-    private var mmInch: Bool = false
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         boxModel = BoxModel()
@@ -180,18 +180,19 @@ class InputViewController: NSViewController, NSTextDelegate {
         widthLabel.stringValue = "Width " + unitString
         heightLabel.stringValue = "Height " + unitString
         thicknessLabel.stringValue = "Material Thickness " + unitString
+        
+        // change text field according to units, with convFactor
+        lengthTextField.doubleValue = boxModel.boxLength * mmInchDict[mmInch]!
+        widthTextField.doubleValue = boxModel.boxWidth * mmInchDict[mmInch]!
+        heightTextField.doubleValue = boxModel.boxHeight * mmInchDict[mmInch]!
+        materialThicknessTextField.doubleValue = boxModel.materialThickness * mmInchDict[mmInch]!
     }
     
     @IBAction func mmMenuClicked(_ sender: Any) {
         if !mmInch{
             mmMenu.state = NSControl.StateValue.on
             inchMenu.state = NSControl.StateValue.off
-            
-            //the units are inches so adj to mm
-            lengthTextField.doubleValue = boxModel.boxLength * unitConversionFactor
-            widthTextField.doubleValue = boxModel.boxWidth * unitConversionFactor
-            heightTextField.doubleValue = boxModel.boxHeight * unitConversionFactor
-            materialThicknessTextField.doubleValue = boxModel.materialThickness * unitConversionFactor
+            unitChoiceControl.selectedSegment = 1
             mmInch = true
             changeLabels(mmInch)
 
@@ -203,15 +204,26 @@ class InputViewController: NSViewController, NSTextDelegate {
         if mmInch{
             mmMenu.state = NSControl.StateValue.off
             inchMenu.state = NSControl.StateValue.on
-            
-            //the units are inches so just set it back
-            lengthTextField.doubleValue = boxModel.boxLength
-            widthTextField.doubleValue = boxModel.boxWidth
-            heightTextField.doubleValue = boxModel.boxHeight
-            materialThicknessTextField.doubleValue = boxModel.materialThickness
+            unitChoiceControl.selectedSegment = 0
             mmInch = false
             changeLabels(mmInch)
-            //set the limits second because otherwise the adjustment is incorect
+            
+        }
+    }
+    
+    @IBAction func unitSegmentedControl(_ sender: Any) {
+        let choice = unitChoiceControl.selectedSegment
+        if choice == 0 {
+            mmInch = false
+            changeLabels(mmInch)
+            mmMenu.state = NSControl.StateValue.off
+            inchMenu.state = NSControl.StateValue.on
+            
+        } else if choice == 1 {
+            mmInch = true
+            changeLabels(mmInch)
+            mmMenu.state = NSControl.StateValue.on
+            inchMenu.state = NSControl.StateValue.off
         }
     }
     

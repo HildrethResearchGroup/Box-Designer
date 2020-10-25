@@ -13,7 +13,7 @@ import SceneKit
 class InputViewController: NSViewController, NSTextDelegate { 
     var boxModel = BoxModel()
     let unitConversionFactor = 25.4
-    let selectionHandeling = SelectionHandeling.shared
+    let selectionHandling = SelectionHandeling.shared
     
     
     var fileHandlingControl = FileHandlingControl.shared
@@ -34,7 +34,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var unitChoiceControl: NSSegmentedCell!
     
     @IBOutlet weak var tabWidthLabel: NSTextField!
-    @IBOutlet weak var tabWidthSlider: NSSlider!
+    @IBOutlet weak var tabWidthTextField: NSTextField!
     
     @IBOutlet weak var lidOn_Off: NSButton!
     
@@ -73,9 +73,6 @@ class InputViewController: NSViewController, NSTextDelegate {
         
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
-        
-//        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
-        
     }
     
     // Handling right click events with the mouse or trackpad
@@ -102,8 +99,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
-        selectionHandeling.selectedNode = result.node
-        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: false)
+        selectionHandling.selectedNode = result.node
+        selectionHandling.highlightEdges(thickness: 0.1, idvLines: false)
     }
     
     // Handling scroll wheel events with the mouse/trackpad
@@ -146,6 +143,9 @@ class InputViewController: NSViewController, NSTextDelegate {
     //============================================================
     
     
+    //mm is true and inch is false
+    private var mmInch: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         boxModel = BoxModel()
@@ -157,7 +157,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
-        tabWidthSlider.isEnabled = false
+        tabWidthTextField.isEnabled = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }
@@ -204,30 +204,22 @@ class InputViewController: NSViewController, NSTextDelegate {
         if mmInch{
             mmMenu.state = NSControl.StateValue.off
             inchMenu.state = NSControl.StateValue.on
-            unitChoiceControl.selectedSegment = 0
+            
+            //the units are inches so just set it back
+            lengthTextField.doubleValue = boxModel.boxLength
+            widthTextField.doubleValue = boxModel.boxWidth
+            heightTextField.doubleValue = boxModel.boxHeight
+            materialThicknessTextField.doubleValue = boxModel.materialThickness
             mmInch = false
             changeLabels(mmInch)
-            
+            //set the limits second because otherwise the adjustment is incorrect
         }
     }
     
-    @IBAction func unitSegmentedControl(_ sender: Any) {
-        let choice = unitChoiceControl.selectedSegment
-        if choice == 0 {
-            mmInch = false
-            changeLabels(mmInch)
-            mmMenu.state = NSControl.StateValue.off
-            inchMenu.state = NSControl.StateValue.on
-            
-        } else if choice == 1 {
-            mmInch = true
-            changeLabels(mmInch)
-            mmMenu.state = NSControl.StateValue.on
-            inchMenu.state = NSControl.StateValue.off
-        }
-    }
-    
+    // Changing the dimensions of the box
+    // Changing the dimensions of the box pushes the camera closer or farther away from the box
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {
+        SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
             boxModel.boxLength = lengthTextField.doubleValue * (1/unitConversionFactor)
@@ -238,6 +230,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
+        SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
             boxModel.boxWidth = widthTextField.doubleValue * (1/unitConversionFactor)
@@ -248,6 +241,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func heightTextFieldDidChange(_ sender: Any) {
+        SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
             boxModel.boxHeight = heightTextField.doubleValue * (1/unitConversionFactor)
@@ -281,15 +275,15 @@ class InputViewController: NSViewController, NSTextDelegate {
         let choice = joinTypeControl.selectedSegment
         if choice == 0 {
             boxModel.joinType = JoinType.overlap
-            tabWidthSlider.isEnabled = false
+            tabWidthTextField.isEnabled = false
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
-            tabWidthSlider.isEnabled = true
+            tabWidthTextField.isEnabled = true
         }
     }
     
     @IBAction func tabWidthChanged(_ sender: Any) {
-        boxModel.nTab = tabWidthSlider.doubleValue
+        boxModel.nTab = tabWidthTextField.doubleValue
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {

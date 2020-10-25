@@ -8,6 +8,17 @@
 
 import Cocoa
 
+/**
+ AppDelegate for BoxDesigner application
+ - Description:
+    - This class instantiates the application.
+ - Authors:
+    - CSM Field Session Summer 2020 and Fall 2020.
+ 
+ - Copyright:
+    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+
+ */
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 

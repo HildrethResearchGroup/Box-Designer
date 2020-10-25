@@ -21,20 +21,10 @@ class FileHandlingControl {
     var padding = 0.25
     var stroke = 3.0
     
-    func resetToDefault() {
-        oneComponent = false
-        pdfHeight = 11.0 // default value in inches
-        pdfWidth = 8.5 // default value in inches
-        margin = 0.5
-        padding = 0.25
-        stroke = 3.0
-    }
     
     // this is the function that talks with the app menu for saving
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?) {
         
-        // reset default values each time this is called if in same session
-        resetToDefault()
         guard let displayWindow = window else { return }
         let panel = NSSavePanel()
         

@@ -188,7 +188,7 @@ class LineDrawing{
         grandPath.append(outsidePath)
     }
     
-    func findClosedPath(_ lines:[Line]){
+    func findClosedPath(_ lines:[Line])->[[NSPoint]]{
         var points: [NSPoint] = []
         var connections: [Int: Set<Int>] = [:]
         
@@ -230,7 +230,17 @@ class LineDrawing{
             recursiveSearch(currentPath, connections)
         }
         currentPaths = removeDuplicates(currentPaths)
-        print(currentPaths)
+        
+        //put the cordinates back in the array
+        var returnValue:[[NSPoint]] = []
+        for indvPath in currentPaths{
+            var pointArray:[NSPoint] = []
+            for index in 0..<indvPath.count{
+                pointArray.append(uniquePoints[indvPath[index]])
+            }
+            returnValue.append(pointArray)
+        }
+        return returnValue
     }
     //may want to refactor this design
     var currentPaths:Set<[Int]> = Set()

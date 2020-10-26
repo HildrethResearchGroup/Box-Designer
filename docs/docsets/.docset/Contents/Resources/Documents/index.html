@@ -16,7 +16,7 @@
     <a title="  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (0% documented)</p>
+        <p><a href="index.html"> Docs</a> (3% documented)</p>
         <p class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -34,6 +34,78 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BoxDesignPDFPage.html">BoxDesignPDFPage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BoxDesignerPDF.html">BoxDesignerPDF</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/BoxViewController.html">BoxViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FileHandlingControl.html">FileHandlingControl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/InputViewController.html">InputViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/JSONFileHandler.html">JSONFileHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Line.html">Line</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/LineDrawing.html">LineDrawing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/PDFOptionsView.html">PDFOptionsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/PathGenerator.html">PathGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SceneGenerator.html">SceneGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/SelectionHandling.html">SelectionHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/WallModel.html">WallModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/JoinType.html">JoinType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/WallType.html">WallType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/linePos.html">linePos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/SceneGeneratorDelegate.html">SceneGeneratorDelegate</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -42,45 +114,52 @@
             
             <h1 id='box-designer' class='heading'>Box-Designer</h1>
 
-<p>This is a box designer that is designed to be used with a glow forge laser cutter.</p>
+<p>This is a box designer that is designed to be used with a Glowforge laser-cutter (model: Basic).</p>
+<h3 id='versions' class='heading'>Versions</h3>
+
+<ul>
+<li>v0.2.0 : ??</li>
+<li>v0.1.0 : 6/22/2020</li>
+</ul>
 <h3 id='usage' class='heading'>Usage</h3>
 
-<p><img src="userImages/BoxDesignerScreen.png" alt=""></p>
+<p>The designer has 3 key tool sections: Dimensions, Joining, and Miscellaneous. The dimensions has four inputs and two option. You can change the length, width, height, and material thickness. Additionally, there is the option to change if these dimensions refer to the outside or inside of the box. The sides of the boxes can be joined differently, either through tabs or simple overlapping. The number of tabs can also be adjusted. In the Miscellaneous section, there are options to take the lid on and off as well as add or remove internal dividors.</p>
+<h3 id='copyright' class='heading'>Copyright</h3>
 
-<p>The designer has 3 key tool sections: Demensions, Joining, and Miscellaneous. The demensions has 4 inputs and 1 option. You can change the length, width, hight, and material thickness. Additionally, there is the option to change if these demmensions refer to the outside or inside of the box. The sides of the boxes can be joined differently. Either though tabs or simply overlapping. The tab width can also be adjusted. In the Miscellanious section there are options to take the lid on and off as well as add or remove internal deviders.</p>
+<p>Copyright © 2020 Hildreth Research Group. All rights reserved.</p>
 <h3 id='settings' class='heading'>Settings</h3>
 
-<p>Units can be changed though Formate &gt; Units.
-Color Blind color options are also available under Formate &gt; Color Change.
+<p>Units can be changed though Format &gt; Units or in the GUI &ldquo;Dimensions&rdquo; section.
+Color blind color options are also available under Format &gt; Color Change.
 Low Vision windows with larger text to adjust the settings are available under View &gt; Low Vision.
-Additionally, CTRL + D will open the demensions window, CTRL + J will open the Joining window, and CTRL + M will open the Miscellaneous window.</p>
-<h3 id='box-designer-minimum-system-requirments' class='heading'>Box-Designer Minimum System Requirments</h3>
+Additionally, CTRL + D will open the dimensions window, CTRL + J will open the Joining window, and CTRL + M will open the Miscellaneous window.</p>
+<h3 id='box-designer-minimum-system-requirements' class='heading'>Box-Designer Minimum System Requirements</h3>
 
 <ul>
 <li>OS: macOS Catalina 10.15.6</li>
 <li>Processor: Intel Core i3 560 @ 3.3 GHz or AMD Phenom II X4 945 @ 3.0 GHz</li>
-<li>Memory: 50 mb of RAM</li>
+<li>Memory: 50 MB of RAM</li>
 <li>Graphics: Intel HD Graphics 5300 1536 MB</li>
 <li>Network: None</li>
-<li>Storage: 1MB Available Space</li>
+<li>Storage: 1 MB Available Space</li>
 <li>Sound Card: None</li>
 </ul>
-<h3 id='box-designer-reccomended-system-requirments' class='heading'>Box-Designer Reccomended System Requirments</h3>
+<h3 id='box-designer-recommended-system-requirements' class='heading'>Box-Designer Recommended System Requirements</h3>
 
 <ul>
 <li>OS: macOS Catalina 10.15.6</li>
 <li>Processor: Intel Core i3 560 @ 3.3 GHz or AMD Phenom II X4 945 @ 3.0 GHz</li>
-<li>Memory: 100 mb of RAM</li>
+<li>Memory: 100 MB of RAM</li>
 <li>Graphics: Intel HD Graphics 5300 1536 MB</li>
 <li>Network: None</li>
-<li>Storage: 2MB Available Space</li>
+<li>Storage: 2 MB Available Space</li>
 <li>Sound Card: None</li>
 </ul>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-25)</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -1,11 +1,18 @@
 # Box-Designer
-This is a box designer that is designed to be used with a glow forge laser cutter.
+This is a box designer that is designed to be used with a Glowforge laser-cutter (model: Basic).
+
+### Versions
+
+* v0.2.0 : ??
+* v0.1.0 : 6/22/2020
 
 ### Usage
 
-![](userImages/BoxDesignerScreen.png)
-
 The designer has 3 key tool sections: Dimensions, Joining, and Miscellaneous. The dimensions has four inputs and two option. You can change the length, width, height, and material thickness. Additionally, there is the option to change if these dimensions refer to the outside or inside of the box. The sides of the boxes can be joined differently, either through tabs or simple overlapping. The number of tabs can also be adjusted. In the Miscellaneous section, there are options to take the lid on and off as well as add or remove internal dividors.
+
+### Copyright
+Copyright © 2020 Hildreth Research Group. All rights reserved.
+
 ### Settings
 Units can be changed though Format > Units or in the GUI "Dimensions" section.
 Color blind color options are also available under Format > Color Change.

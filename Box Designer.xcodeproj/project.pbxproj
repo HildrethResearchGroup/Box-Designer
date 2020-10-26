@@ -24,6 +24,7 @@
 		6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */; };
 		675C27EA251A7E070022359A /* PDFOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675C27E9251A7E070022359A /* PDFOptionsView.swift */; };
 		675C27EE251C21250022359A /* PDFOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 675C27ED251C21240022359A /* PDFOptionsView.xib */; };
+		67ACA14425476462003D4905 /* Documentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ACA14325476462003D4905 /* Documentation.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -58,6 +59,7 @@
 		6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignerPDF.swift; sourceTree = "<group>"; };
 		675C27E9251A7E070022359A /* PDFOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFOptionsView.swift; sourceTree = "<group>"; };
 		675C27ED251C21240022359A /* PDFOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFOptionsView.xib; sourceTree = "<group>"; };
+		67ACA14325476462003D4905 /* Documentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Documentation.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		C0E65E4D2478426D009D90F1 /* Box Designer */ = {
 			isa = PBXGroup;
 			children = (
+				67ACA14325476462003D4905 /* Documentation.swift */,
 				C0E65E72247851C0009D90F1 /* Model */,
 				C0E65E6A247842D6009D90F1 /* View Controllers */,
 				C0E65E6D24784D70009D90F1 /* Views */,
@@ -270,6 +273,7 @@
 			files = (
 				23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */,
 				23B37C762511671800105D87 /* LineDrawing.swift in Sources */,
+				67ACA14425476462003D4905 /* Documentation.swift in Sources */,
 				02043C57248C789600F595A1 /* WallType.swift in Sources */,
 				02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */,
 				675C27EA251A7E070022359A /* PDFOptionsView.swift in Sources */,

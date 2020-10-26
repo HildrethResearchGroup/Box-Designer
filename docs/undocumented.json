@@ -169,76 +169,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 14,
-      "symbol": "FileHandlingControl",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 16,
-      "symbol": "FileHandlingControl.shared",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 17,
-      "symbol": "FileHandlingControl.oneComponent",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 18,
-      "symbol": "FileHandlingControl.pdfHeight",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 19,
-      "symbol": "FileHandlingControl.pdfWidth",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 20,
-      "symbol": "FileHandlingControl.margin",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 21,
-      "symbol": "FileHandlingControl.padding",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 22,
-      "symbol": "FileHandlingControl.stroke",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 26,
-      "symbol": "FileHandlingControl.saveModel(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/FileHandlingControl.swift",
-      "line": 68,
-      "symbol": "FileHandlingControl.openModel(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/JSONFileHandler.swift",
       "line": 12,
       "symbol": "JSONFileHandler",
@@ -257,27 +187,6 @@
       "line": 133,
       "symbol": "JSONFileHandler.convertJSONToBoxModel(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/JoinType.swift",
-      "line": 12,
-      "symbol": "JoinType",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/JoinType.swift",
-      "line": 13,
-      "symbol": "JoinType.tab",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/JoinType.swift",
-      "line": 14,
-      "symbol": "JoinType.overlap",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {

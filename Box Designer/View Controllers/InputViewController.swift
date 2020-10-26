@@ -87,16 +87,16 @@ class InputViewController: NSViewController, NSTextDelegate {
         let result = boxView.hitTest(clickCord, options: hitTestOptions)
         
         if (result.count == 0){
-            selectionHandeling.hoverNode = nil
-            selectionHandeling.hoverNode?.isHidden = true
+            selectionHandling.hoverNode = nil
+            selectionHandling.hoverNode?.isHidden = true
             return
         }
         
         if(result[0].node.parent != boxView.scene?.rootNode){
-            selectionHandeling.hoverNode = result[0].node
+            selectionHandling.hoverNode = result[0].node
         }else{
-            selectionHandeling.hoverNode = nil
-            selectionHandeling.hoverNode?.isHidden = true
+            selectionHandling.hoverNode = nil
+            selectionHandling.hoverNode?.isHidden = true
         }
         
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
@@ -127,14 +127,14 @@ class InputViewController: NSViewController, NSTextDelegate {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         if(event.clickCount == 1 && !cameraLocked){
-            selectionHandeling.selectedNode = result.node
-            selectionHandeling.higlight()
+            selectionHandling.selectedNode = result.node
+            selectionHandling.higlight()
         }else if(event.clickCount == 2){
-            selectionHandeling.selectedNode = result.node
+            selectionHandling.selectedNode = result.node
             
             //make sure that it is part of the cube
             if(result.node.parent != boxView.scene?.rootNode){return}
-            selectionHandeling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
+            selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
             
@@ -184,7 +184,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     override func keyUp(with event: NSEvent) {
         if(event.keyCode == 53){
             cameraLocked = false
-            selectionHandeling.selectedNode = nil
+            selectionHandling.selectedNode = nil
         }
         
     }

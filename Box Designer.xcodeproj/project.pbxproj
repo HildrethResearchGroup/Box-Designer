@@ -20,7 +20,7 @@
 		02043C6324904DBF00F595A1 /* JSONFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6224904DBF00F595A1 /* JSONFileHandler.swift */; };
 		23283E06251D61920067D20E /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283E05251D61920067D20E /* Ray.swift */; };
 		23283E08254749460067D20E /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C7325110AEA00105D87 /* Line.swift */; };
-		23B37C2A25101CD900105D87 /* SelectionHandeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C2925101CD900105D87 /* SelectionHandeling.swift */; };
+		23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C2925101CD900105D87 /* SelectionHandling.swift */; };
 		23B37C762511671800105D87 /* LineDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C752511671800105D87 /* LineDrawing.swift */; };
 		6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */; };
 		675C27EA251A7E070022359A /* PDFOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675C27E9251A7E070022359A /* PDFOptionsView.swift */; };
@@ -54,7 +54,7 @@
 		02043C6024902CCF00F595A1 /* FileHandlingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandlingControl.swift; sourceTree = "<group>"; };
 		02043C6224904DBF00F595A1 /* JSONFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileHandler.swift; sourceTree = "<group>"; };
 		23283E05251D61920067D20E /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
-		23B37C2925101CD900105D87 /* SelectionHandeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandeling.swift; sourceTree = "<group>"; };
+		23B37C2925101CD900105D87 /* SelectionHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandling.swift; sourceTree = "<group>"; };
 		23B37C7325110AEA00105D87 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		23B37C752511671800105D87 /* LineDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawing.swift; sourceTree = "<group>"; };
 		6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignerPDF.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23283E08254749460067D20E /* Line.swift in Sources */,
-				23B37C2A25101CD900105D87 /* SelectionHandeling.swift in Sources */,
+				23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */,
 				23B37C762511671800105D87 /* LineDrawing.swift in Sources */,
 				02043C57248C789600F595A1 /* WallType.swift in Sources */,
 				02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */,

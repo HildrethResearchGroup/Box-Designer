@@ -17,6 +17,7 @@ enum linePos {
     case center
 }
 
+//technically this is a segment
 class Line: CustomStringConvertible{
     init(_ pointA: NSPoint, _ pointB: NSPoint, thickness: CGFloat = 0.01){
         //lines point from a to b
@@ -30,15 +31,63 @@ class Line: CustomStringConvertible{
         
         
         self.thickness = thickness
+        
+        self.A = self.bottomPoint.y - self.topPoint.y
+        self.B = self.topPoint.x - self.bottomPoint.x
+        
         angle = atan((pointB.y - pointA.y)/(pointB.x - pointA.x))
+        //correct the angles
+        if(angle*180/CGFloat.pi < 0.0){
+            angle += 2*CGFloat.pi
+        }else if((angle*180/CGFloat.pi).sign == .minus && (angle*180/CGFloat.pi).isZero){
+            angle += CGFloat.pi
+        }
+        
+        if(self.A == 0 && self.B == 0){
+            //this is a point so dont define the slope or intercepts
+        }else if(self.A == 0){
+            //no x intercept and slope is 0
+            self.yIntercept = self.bottomPoint.y
+            self.slope = 0
+            self.C = yIntercept! * self.B
+        }else if(self.B == 0){
+            //no y intercept and slope is infinity
+            self.xIntercept = self.bottomPoint.x
+            self.slope = CGFloat.infinity
+            self.C = xIntercept! * self.B
+        }else{
+            self.slope = -self.A/self.B
+            self.yIntercept = self.bottomPoint.y - (self.bottomPoint.x * self.slope!)
+            self.xIntercept = -self.yIntercept!/self.slope!
+            self.C = yIntercept! * self.B
+        }
     }
     
     //top is the larger point
-    private var topPoint: NSPoint = NSPoint()
-    private var bottomPoint: NSPoint = NSPoint()
-    private var angle: CGFloat
+    var topPoint: NSPoint = NSPoint()
+    var bottomPoint: NSPoint = NSPoint()
+    var angle: CGFloat
+    //line intercept form
+    var xIntercept: CGFloat?
+    var yIntercept: CGFloat?
+    var slope: CGFloat?
+    //line standard form
+    var A: CGFloat
+    var B: CGFloat
+    //C is always defined needs to be refactored
+    var C: CGFloat?
     
     var thickness: CGFloat
+    
+    func intercept(_ otherLine:Line)->NSPoint?{
+        let x = -((self.B * otherLine.C!) - (self.C! * otherLine.B))/((self.A * otherLine.B) - (self.B * otherLine.A))
+        let y = ((self.A * otherLine.C!) - (self.C! * otherLine.A))/((self.A * otherLine.B) - (self.B * otherLine.A))
+        if(x <= self.bottomPoint.x && x >= self.topPoint.x){
+            return nil
+        }else{
+            return nil
+        }
+    }
     
     func perfect()->Bool{
         //can't be a point
@@ -65,6 +114,15 @@ class Line: CustomStringConvertible{
         //ensure its not a point then check
         return(self.topPoint == self.bottomPoint)
     }
+     
+    func opposite(_ point:NSPoint) -> NSPoint? {
+        if(point == topPoint){
+            return bottomPoint
+        }else if(point == topPoint){
+            return topPoint
+        }
+        return nil
+    }
     
     func rectanglePath()->NSBezierPath{
         let shapePath = NSBezierPath()
@@ -77,6 +135,10 @@ class Line: CustomStringConvertible{
         
         shapePath.appendRect(NSMakeRect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y))
         return shapePath
+    }
+    
+    func midpoint()->NSPoint{
+        return NSMakePoint((topPoint.x + bottomPoint.x) / 2, (topPoint.y + bottomPoint.y) / 2)
     }
     
     func returnTestPoints(_ region: linePos)->[NSPoint]{
@@ -102,7 +164,7 @@ class Line: CustomStringConvertible{
                 //center left
                 var modPoint : NSPoint = NSMakePoint(abs(self.thickness)*cos(angle + (90*CGFloat.pi/180)), abs(self.thickness)*sin(angle + (90*CGFloat.pi/180)));
                 returnValue.append(NSMakePoint((topPoint.x + bottomPoint.x)/2 + modPoint.x, (topPoint.y + bottomPoint.y)/2  + modPoint.y))
-                //center right
+
                 modPoint = NSMakePoint(abs(self.thickness)*cos(angle - (90*CGFloat.pi/180)), abs(self.thickness)*sin(angle - (90*CGFloat.pi/180)))
                 returnValue.append(NSMakePoint((topPoint.x + bottomPoint.x)/2 + modPoint.x, (topPoint.y + bottomPoint.y)/2  + modPoint.y))
                 break

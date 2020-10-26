@@ -51,16 +51,15 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     
     //====================Camera Controls=========================
-    // Sensitivity of camera movements in response to mouse
-    let moveSensitivity:CGFloat = 0.01
-    let rotateSensitivity:CGFloat = 0.01
-    let zoomSensitivity:CGFloat = 0.1
+    var mouseDown: Bool = false
+    var cameraLocked: Bool = false
+    
+    let moveSensetivity:CGFloat = 0.01
+    let rotateSensetivity:CGFloat = 0.01
+    let zoomSensetivity:CGFloat = 0.1
     
     func inView(_ event: NSEvent)->Bool {
-        if(boxView.hitTest(event.locationInWindow) == boxView){
-            return true
-        }
-        return false
+        return (boxView.hitTest(event.locationInWindow) == boxView)
     }
     
     // Handles mouse movement when dragging the camera view around
@@ -72,6 +71,50 @@ class InputViewController: NSViewController, NSTextDelegate {
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
         
 //        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
+        if(!cameraLocked){
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
+        }
+        
+        
+        //this needs to be refactored
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.x -= 2 * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 < -180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.x += 2 * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.y -= 2 * CGFloat.pi
+        }
+        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 < -180){
+            SceneGenerator.shared.cameraOrbit.eulerAngles.y += 2 * CGFloat.pi
+        }
+        
+        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180)
+        
+    }
+    
+    override func mouseMoved(with event: NSEvent) {
+        let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+        
+        var hitTestOptions = [SCNHitTestOption: Any]()
+        hitTestOptions[SCNHitTestOption.ignoreHiddenNodes] = false
+        
+        let result = boxView.hitTest(clickCord, options: hitTestOptions)
+        
+        if (result.count == 0){
+            selectionHandeling.hoverNode = nil
+            selectionHandeling.hoverNode?.isHidden = true
+            return
+        }
+        
+        if(result[0].node.parent != boxView.scene?.rootNode){
+            selectionHandeling.hoverNode = result[0].node
+        }else{
+            selectionHandeling.hoverNode = nil
+            selectionHandeling.hoverNode?.isHidden = true
+        }
         
     }
     
@@ -98,9 +141,67 @@ class InputViewController: NSViewController, NSTextDelegate {
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
+        if(event.clickCount == 1){
+            selectionHandeling.selectedNode = result.node
+            selectionHandeling.higlight()
+        }else if(event.clickCount == 2){
+            selectionHandeling.selectedNode = result.node
+            
+            //make sure that it is part of the cube
+            if(result.node.parent != boxView.scene?.rootNode){return}
+            selectionHandeling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
+            let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
+            let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
+            
+            cameraLocked = true
+            //we may want to refactor this into a function
+            //the math can be simplified but isn't for readability
+            if(result.node.position.x != 0.0){
+                //left and right
+                if(yAngle > 0){
+                    //right
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (0)/180 * CGFloat.pi
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (90)/180 * CGFloat.pi
+                }else{
+                    //left
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (0)/180 * CGFloat.pi
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (-90)/180 * CGFloat.pi
+                }
+            }else if(result.node.position.y != 0.0){
+                //top and bottom
+                if(xAngle > 0){
+                    //bottom
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (90)/180 * CGFloat.pi
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (0)/180 * CGFloat.pi
+                    
+                }else{
+                    //top
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (-90)/180 * CGFloat.pi
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (0)/180 * CGFloat.pi
+                }
+            }else if(result.node.position.z != 0.0){
+                //front and back
+                if(abs(yAngle) > 90){
+                    //back
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (0)/180 * CGFloat.pi
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (180)/180 * CGFloat.pi
+                }else{
+                    //front
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.x = (0)/180 * CGFloat.pi
+                    SceneGenerator.shared.cameraOrbit.eulerAngles.y = (0)/180 * CGFloat.pi
+                }
+            }
+            print(result.node.position)
+        }
         
-        selectionHandeling.selectedNode = result.node
-        selectionHandeling.highlightEdges(thickness: 0.1, idvLines: false)
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        if(event.keyCode == 53){
+            cameraLocked = false
+            selectionHandeling.selectedNode = nil
+        }
+        
     }
     
     // Handling scroll wheel events with the mouse/trackpad

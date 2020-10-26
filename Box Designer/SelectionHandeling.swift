@@ -21,14 +21,31 @@ class SelectionHandeling{
         willSet{
             
             //reset the color
-            if(nodeColor != nil){
+            if(nodeColor != nil && selectedNode != nil){
                 selectedNode!.enumerateChildNodes { (node, stop) in
                     node.removeFromParentNode()
                 }
                 selectedNode!.geometry?.firstMaterial?.diffuse.contents = nodeColor
-                nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                if(newValue != nil){
+                    nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                }
             }else{
-                nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                if(newValue != nil){
+                    nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                }
+            }
+        }
+    }
+    
+    var hoverNode: SCNNode?{
+        willSet{
+            if(hoverNode == nil){
+                newValue?.isHidden = false
+            }else{
+                if(newValue != hoverNode){
+                    newValue?.isHidden = false
+                    hoverNode?.isHidden = true
+                }
             }
         }
     }
@@ -52,11 +69,17 @@ class SelectionHandeling{
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
         let lineShape = LineDrawing(path, thickness, insideLine: insideSelection)
+        
+        let lines = [Line(NSMakePoint(0.0, 0.0), NSMakePoint(0.0, 1.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 1.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(2.0, 2.0)), Line(NSMakePoint(0.0, 1.0), NSMakePoint(1.0, 1.0))]
+        lineShape.findClosedPath(lines)
+        
+        
         if(idvLines){
             let shapes = lineShape.generateIndv()
             for shape in shapes{
                 let locNode = SCNNode(geometry: shape)
                 locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+                locNode.isHidden = true
                 self._addChild(locNode)
             }
         }else{

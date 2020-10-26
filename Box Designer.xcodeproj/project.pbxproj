@@ -55,7 +55,7 @@
 		02043C6224904DBF00F595A1 /* JSONFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileHandler.swift; sourceTree = "<group>"; };
 		23283E05251D61920067D20E /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		23B37C2925101CD900105D87 /* SelectionHandeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandeling.swift; sourceTree = "<group>"; };
-		23B37C7325110AEA00105D87 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Line.swift; path = ../Line.swift; sourceTree = "<group>"; };
+		23B37C7325110AEA00105D87 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		23B37C752511671800105D87 /* LineDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawing.swift; sourceTree = "<group>"; };
 		6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignerPDF.swift; sourceTree = "<group>"; };
 		675C27E9251A7E070022359A /* PDFOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFOptionsView.swift; sourceTree = "<group>"; };
@@ -130,6 +130,7 @@
 				6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */,
 				675C27E9251A7E070022359A /* PDFOptionsView.swift */,
 				675C27ED251C21240022359A /* PDFOptionsView.xib */,
+				23B37C7325110AEA00105D87 /* Line.swift */,
 			);
 			path = "Box Designer";
 			sourceTree = "<group>";
@@ -162,7 +163,6 @@
 		C0E65E72247851C0009D90F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				23B37C7325110AEA00105D87 /* Line.swift */,
 				02043C52248C74DD00F595A1 /* BoxModel.swift */,
 				02043C54248C74EC00F595A1 /* WallModel.swift */,
 				23283E05251D61920067D20E /* Ray.swift */,

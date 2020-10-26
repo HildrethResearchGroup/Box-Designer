@@ -74,7 +74,6 @@ class Line: CustomStringConvertible{
     //line standard form
     var A: CGFloat
     var B: CGFloat
-    //
     //C is always defined needs to be refactored
     var C: CGFloat?
     

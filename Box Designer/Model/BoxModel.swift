@@ -249,7 +249,7 @@ class BoxModel {
     
 
     //This initializer can be used to create a box using data loaded from a file
-    init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ tabWidth: Double?) {
+    init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ nTab: Double?) {
         self.walls = walls
         self.boxWidth = width
         self.boxLength = length
@@ -257,7 +257,7 @@ class BoxModel {
         self.materialThickness = materialThickness
         self.innerDimensions = innerDimensions
         self.joinType = joinType
-        self.nTab = tabWidth
+        self.nTab = nTab
         self.lidOn = true
         self.lengthWall = false
         self.removeInnerWall = false

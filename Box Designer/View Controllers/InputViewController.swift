@@ -54,9 +54,9 @@ class InputViewController: NSViewController, NSTextDelegate {
     var mouseDown: Bool = false
     var cameraLocked: Bool = false
     
-    let moveSensetivity:CGFloat = 0.01
-    let rotateSensetivity:CGFloat = 0.01
-    let zoomSensetivity:CGFloat = 0.1
+    let moveSensitivity:CGFloat = 0.01
+    let rotateSensitivity:CGFloat = 0.01
+    let zoomSensitivity:CGFloat = 0.1
     
     func inView(_ event: NSEvent)->Bool {
         return (boxView.hitTest(event.locationInWindow) == boxView)
@@ -64,35 +64,13 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     // Handles mouse movement when dragging the camera view around
     override func otherMouseDragged(with event: NSEvent) {
-        boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensitivity
-        boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensitivity
-        
-        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
-        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
-        
-//        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 + 180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 + 180)
         if(!cameraLocked){
-            boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensetivity
-            boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensetivity
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensitivity
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensitivity
+            
+            manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
+            manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
         }
-        
-        
-        //this needs to be refactored
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.x -= 2 * CGFloat.pi
-        }
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 < -180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.x += 2 * CGFloat.pi
-        }
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.y -= 2 * CGFloat.pi
-        }
-        if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 < -180){
-            SceneGenerator.shared.cameraOrbit.eulerAngles.y += 2 * CGFloat.pi
-        }
-        
-        print(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180, SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180)
-        
     }
     
     override func mouseMoved(with event: NSEvent) {
@@ -128,7 +106,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             boxView.pointOfView!.position = currentPos
         }
         // Otherwise, when using a trackpad, rotate the camera's perspective, just like with the middle mouse button
-        else {
+        else if(!cameraLocked){
             boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensitivity
             boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensitivity
             
@@ -141,7 +119,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
-        if(event.clickCount == 1){
+        if(event.clickCount == 1 && !cameraLocked){
             selectionHandeling.selectedNode = result.node
             selectionHandeling.higlight()
         }else if(event.clickCount == 2){
@@ -233,11 +211,13 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     // Allows users to rotate the view of the box with the trackpad
     override func rotate (with event: NSEvent) {
-        boxModel.sceneGenerator.cameraOrbit.eulerAngles.x += CGFloat(event.rotation) * (rotateSensitivity*4)
-        boxModel.sceneGenerator.cameraOrbit.eulerAngles.y += CGFloat(event.rotation) * (rotateSensitivity*4)
-        
-        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
-        manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
+        if(!cameraLocked){
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.x += CGFloat(event.rotation) * (rotateSensitivity*4)
+            boxModel.sceneGenerator.cameraOrbit.eulerAngles.y += CGFloat(event.rotation) * (rotateSensitivity*4)
+            
+            manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
+            manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
+        }
     }
     
     

@@ -125,51 +125,28 @@ class PathGenerator {
         path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [materialThickness,0.0], point2: [0.0,sectionLength], point3: [-materialThickness,0.0], point4: [0.0,sectionLength])
-//            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
-//            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
         }
         
         //top side
         path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [0.0,-materialThickness], point2: [sectionWidth,0.0], point3: [0.0,materialThickness], point4: [sectionWidth,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
-//            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
-//            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
         }
         
         //right side
         path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [-materialThickness,0.0], point2: [0.0,-sectionLength], point3: [materialThickness,0.0], point4: [0.0,-sectionLength])
-//            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
-//            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
         }
         
         //bottom side
         path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [0.0,materialThickness], point2: [-sectionWidth,0.0], point3: [0.0,-materialThickness], point4: [-sectionWidth,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
-//            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
-//            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
         }
         
         path.close()
         return path
-    }
-    
-    static func createTabPath(path: NSBezierPath, point1: [Double], point2: [Double], point3: [Double], point4: [Double]) {
-        path.relativeLine(to: CGPoint(x: point1[0], y: point1[1]))
-        path.relativeLine(to: CGPoint(x: point2[0], y: point2[1]))
-        path.relativeLine(to: CGPoint(x: point3[0], y: point3[1]))
-        path.relativeLine(to: CGPoint(x: point4[0], y: point4[1]))
     }
     
     static func generateTabLongCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ nTabs: Int) -> NSBezierPath {
@@ -187,40 +164,24 @@ class PathGenerator {
         path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [materialThickness,0.0], point2: [0.0,sectionLength], point3: [-materialThickness,0.0], point4: [0.0,sectionLength])
-//            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
-//            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
         }
 
         //top side
         path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [0.0,materialThickness], point2: [sectionWidth,0.0], point3: [0.0,-materialThickness], point4: [sectionWidth,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
-//            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
-//            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
         }
         
         //right side
         path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [-materialThickness,0.0], point2: [0.0,-sectionLength], point3: [materialThickness,0.0], point4: [0.0,-sectionLength])
-//            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
-//            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
         }
         
         //bottom side
         path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [0.0,-materialThickness], point2: [-sectionWidth,0.0], point3: [0.0,materialThickness], point4: [-sectionWidth,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
-//            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
-//            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
         }
         
         path.close()
@@ -243,24 +204,12 @@ class PathGenerator {
         path.relativeLine(to: CGPoint(x: -gap, y: 0.0))
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [0.0,sectionLength], point2: [-materialThickness,0.0], point3: [0.0,sectionLength], point4: [materialThickness,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
-//            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
-//            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
         }
         
         createTabPath(path: path, point1: [0.0,sectionLength], point2: [gap,0.0], point3: [0.0,materialThickness], point4: [sectionWidth,0.0])
-//        path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
-//        path.relativeLine(to: CGPoint(x: gap, y: 0.0))
-//        path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
-//        path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
         
         for _ in 0...(nTabs - 3){ //here 3
             createTabPath(path: path, point1: [0.0,-materialThickness], point2: [sectionWidth,0.0], point3: [0.0,materialThickness], point4: [sectionWidth,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
-//            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
-//            path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
         }
         
         path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
@@ -268,26 +217,21 @@ class PathGenerator {
         
         for _ in 0...(nTabs - 2){
             createTabPath(path: path, point1: [0.0,-sectionLength], point2: [materialThickness,0.0], point3: [0.0,-sectionLength], point4: [-materialThickness,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
-//            path.relativeLine(to: CGPoint(x: materialThickness, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
-//            path.relativeLine(to: CGPoint(x: -materialThickness, y: 0.0))
         }
         createTabPath(path: path, point1: [0.0,-sectionLength], point2: [-gap,0.0], point3: [0.0,-materialThickness], point4: [-sectionWidth,0.0])
-//        path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
-//        path.relativeLine(to: CGPoint(x: -gap, y: 0.0))
-//        path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
-//        path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
         
         for _ in 0...(nTabs - 3){ // here 3
             createTabPath(path: path, point1: [0.0,materialThickness], point2: [-sectionWidth,0.0], point3: [0.0,-materialThickness], point4: [-sectionWidth,0.0])
-//            path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
-//            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
-//            path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
-//            path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
         }
         
         path.close()
         return path
+    }
+    
+    static func createTabPath(path: NSBezierPath, point1: [Double], point2: [Double], point3: [Double], point4: [Double]) {
+        path.relativeLine(to: CGPoint(x: point1[0], y: point1[1]))
+        path.relativeLine(to: CGPoint(x: point2[0], y: point2[1]))
+        path.relativeLine(to: CGPoint(x: point3[0], y: point3[1]))
+        path.relativeLine(to: CGPoint(x: point4[0], y: point4[1]))
     }
 }

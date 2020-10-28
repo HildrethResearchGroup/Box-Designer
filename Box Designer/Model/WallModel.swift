@@ -71,7 +71,7 @@ class WallModel {
         self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, nTab: self.nTab)
     }
     
-    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, tabWidth nTab: Double?) {
+    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, nTab: Double?) {
         self.width = width
         self.length = length
         self.materialThickness = materialThickness

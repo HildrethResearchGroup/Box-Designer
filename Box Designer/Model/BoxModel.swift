@@ -193,7 +193,7 @@ class BoxModel {
     var lidOn: Bool {
         didSet {
             if lidOn != oldValue {
-                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), tabWidth: nTab)
+                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), nTab: nTab)
                 if (lidOn == false){
                     if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
                         walls.remove(at: index)
@@ -210,7 +210,7 @@ class BoxModel {
         didSet {
             if lengthWall && counterLength == 1 {
                 // add separator in the box
-                let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), tabWidth: nil)
+                let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), nTab: nTab)
                 if(lengthWall) {
                     walls.append(innerWallModel)
                     lengthWall = false
@@ -219,7 +219,7 @@ class BoxModel {
             }
                 // add another separator in the box
             else if lengthWall && counterLength == 2 {
-                let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), tabWidth: nil)
+                let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), nTab: nTab)
                     if(lengthWall) {
                         walls.append(innerWallModel2)
                         lengthWall  = false
@@ -247,7 +247,34 @@ class BoxModel {
         
     }
     
-
+    //This initializer creates the default box model which is loaded whenever the application is launched
+    init() {
+        
+        // initialize default values first so that they can be easily changed if you want to change the default
+        self.boxWidth = 4.0
+        self.boxLength = 4.0
+        self.boxHeight = 4.0
+        self.materialThickness = 0.50
+        self.nTab = 3
+        self.innerDimensions = false
+        self.joinType = JoinType.overlap
+        self.lidOn = true
+        self.lengthWall = false
+        self.removeInnerWall = false
+        
+        // create the walls
+        let wallBottom = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, 0.25, 0.0), nTab: nTab)
+        let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, 3.75, 0.0), nTab: nTab)
+        //left and right walls
+        let wallLeft = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(0.25, 0.0, 0.0), nTab: nTab)
+        let wallRight = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(3.75, 0.0, 0.0), nTab: nTab)
+        //back and front walls
+        let wallFront = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, 0.25), nTab: nTab)
+        let wallBack = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, 3.75), nTab: nTab)
+        let walls = [wallBottom,wallLeft, wallRight, wallFront, wallBack, wallLid]
+        self.walls = walls
+    }
+    
     //This initializer can be used to create a box using data loaded from a file
     init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ nTab: Double?) {
         self.walls = walls
@@ -263,38 +290,4 @@ class BoxModel {
         self.removeInnerWall = false
     }
     
-    //This initializer creates the default box model which is loaded whenever the application is launched
-    init() {
-        //bottom and top walls
-        let wallBottom = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 0.25, 0.0), tabWidth: nil)
-        let wallLid = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
-        //left and right walls
-        let wallLeft = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(0.25, 0.0, 0.0), tabWidth: nil)
-        let wallRight = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(3.75, 0.0, 0.0), tabWidth: nil)
-        //back and front walls
-        let wallFront = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 0.25), tabWidth: nil)
-        let wallBack = WallModel(4.0, 4.0, 0.50, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, 3.75), tabWidth: nil)
-        let walls = [wallBottom,wallLeft, wallRight, wallFront, wallBack, wallLid]
-        self.walls = walls
-        self.boxWidth = 4.0
-        self.boxLength = 4.0
-        self.boxHeight = 4.0
-        self.materialThickness = 0.50
-        self.innerDimensions = false
-        self.joinType = JoinType.overlap
-        self.lidOn = true
-        self.lengthWall = false
-        self.removeInnerWall = false
-    }
-    
-//    func smallestDimension() -> Double {
-//        var smallest = boxWidth
-//        if boxLength < smallest {
-//            smallest = boxLength
-//        }
-//        if boxHeight < smallest {
-//            smallest = boxHeight
-//        }
-//        return smallest
-//    }
 }

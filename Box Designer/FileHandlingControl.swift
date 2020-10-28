@@ -11,7 +11,7 @@ import Cocoa
 import SceneKit
 
 /**
- This is the controlling class for exporting the custom box template to PDF or JSON.
+ This is the controlling class for exporting the custom box template to PDF or JSON, or opening a saved box template into the application via JSON file.
  
  - Authors:
     - CSM Field Session Summer 2020 and Fall 2020.

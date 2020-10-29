@@ -54,7 +54,8 @@ class SceneGenerator {
     
     /**
      This function renders the display in the view, ensuring that all components are drawn, the camera view is correct, and colors are as desired.
-     - Parameter (boxModel) : The scene generation needs to be on the current box model desired by the user so that it can render accurately.
+     - Parameters:
+        - boxModel: The scene generation needs to be on the current box model desired by the user so that it can render accurately.
      */
     func generateScene(_ boxModel: BoxModel) {
         self.scene.rootNode.enumerateChildNodes { (node, stop) in
@@ -119,7 +120,7 @@ class SceneGenerator {
     /**
      This function will either set up a camera if it hasn't been initialized, or it adjusts the scene according to the updated camera from the user.
      - Parameter boxModel: This input ensures the camera is initialized according to the default box model.
-     - Note: The camera is not initialized until the first call to thsi function.
+     - Note: The camera is not initialized until the first call to this function.
      */
     func adjustCamera(_ boxModel: BoxModel) {
         // if camera hasn't been set up, initialize it and set up its specifications

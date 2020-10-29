@@ -17,7 +17,7 @@
     <a title="LineDrawing Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (8% documented)</p>
+        <p><a href="../index.html"> Docs</a> (17% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -73,6 +73,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/PathGenerator.html">PathGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Ray.html">Ray</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SceneGenerator.html">SceneGenerator</a>
@@ -228,6 +231,33 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">NSBezierPath</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer11LineDrawingC8snapSize12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/snapSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer11LineDrawingC8snapSize12CoreGraphics7CGFloatVvp">snapSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">snapSize</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
                       </div>
@@ -399,6 +429,141 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12Box_Designer11LineDrawingC14findClosedPathySaySaySo7CGPointVGGSayAA0C0CGF"></a>
+                    <a name="//apple_ref/swift/Method/findClosedPath(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer11LineDrawingC14findClosedPathySaySaySo7CGPointVGGSayAA0C0CGF">findClosedPath(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">findClosedPath</span><span class="p">(</span><span class="n">_</span> <span class="nv">lines</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/Line.html">Line</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="p">[[</span><span class="kt">NSPoint</span><span class="p">]]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer11LineDrawingC12currentPathsShySaySiGGvp"></a>
+                    <a name="//apple_ref/swift/Property/currentPaths" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer11LineDrawingC12currentPathsShySaySiGGvp">currentPaths</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">currentPaths</span><span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer11LineDrawingC15recursiveSearchyySaySiG_SDySiShySiGGtF"></a>
+                    <a name="//apple_ref/swift/Method/recursiveSearch(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer11LineDrawingC15recursiveSearchyySaySiG_SDySiShySiGGtF">recursiveSearch(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">recursiveSearch</span><span class="p">(</span><span class="n">_</span> <span class="nv">currentPath</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">],</span> <span class="n">_</span> <span class="nv">connections</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span> <span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer11LineDrawingC16removeDuplicatesyShySaySiGGAFF"></a>
+                    <a name="//apple_ref/swift/Method/removeDuplicates(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer11LineDrawingC16removeDuplicatesyShySaySiGGAFF">removeDuplicates(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">removeDuplicates</span><span class="p">(</span><span class="n">_</span> <span class="nv">paths</span><span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer11LineDrawingC11isValidLoopySbSaySiG_SDySiShySiGGtF"></a>
+                    <a name="//apple_ref/swift/Method/isValidLoop(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer11LineDrawingC11isValidLoopySbSaySiG_SDySiShySiGGtF">isValidLoop(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">isValidLoop</span><span class="p">(</span><span class="n">_</span> <span class="nv">currentPath</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">],</span> <span class="n">_</span> <span class="nv">connections</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span> <span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:12Box_Designer11LineDrawingC13generateShape19shapeExtrusionDepthSo8SCNShapeC12CoreGraphics7CGFloatV_tF"></a>
                     <a name="//apple_ref/swift/Method/generateShape(shapeExtrusionDepth:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:12Box_Designer11LineDrawingC13generateShape19shapeExtrusionDepthSo8SCNShapeC12CoreGraphics7CGFloatV_tF">generateShape(shapeExtrusionDepth:<wbr>)</a>
@@ -455,7 +620,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-26)</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

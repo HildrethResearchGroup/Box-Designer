@@ -219,84 +219,147 @@
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 20,
+      "line": 21,
       "symbol": "Line",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 21,
+      "line": 22,
       "symbol": "Line.init(_:_:thickness:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 37,
+      "line": 67,
       "symbol": "Line.topPoint",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 38,
+      "line": 68,
       "symbol": "Line.bottomPoint",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 39,
+      "line": 69,
       "symbol": "Line.angle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 41,
+      "line": 71,
+      "symbol": "Line.xIntercept",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 72,
+      "symbol": "Line.yIntercept",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 73,
+      "symbol": "Line.slope",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 75,
+      "symbol": "Line.A",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 76,
+      "symbol": "Line.B",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 79,
+      "symbol": "Line.C",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 81,
       "symbol": "Line.thickness",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 43,
+      "line": 83,
+      "symbol": "Line.intercept(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 93,
       "symbol": "Line.perfect()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 52,
+      "line": 102,
       "symbol": "Line.horizontal()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 58,
+      "line": 108,
       "symbol": "Line.vertical()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 64,
+      "line": 114,
       "symbol": "Line.point()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 69,
+      "line": 119,
+      "symbol": "Line.opposite(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 128,
       "symbol": "Line.rectanglePath()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
-      "line": 82,
+      "line": 141,
+      "symbol": "Line.midpoint()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Line.swift",
+      "line": 145,
       "symbol": "Line.returnTestPoints(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -339,34 +402,41 @@
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
       "line": 31,
+      "symbol": "LineDrawing.snapSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 32,
       "symbol": "LineDrawing.shape",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
-      "line": 33,
+      "line": 34,
       "symbol": "LineDrawing.insidePath",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
-      "line": 34,
+      "line": 35,
       "symbol": "LineDrawing.outsidePath",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
-      "line": 35,
+      "line": 36,
       "symbol": "LineDrawing.grandPath",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
-      "line": 37,
+      "line": 38,
       "symbol": "LineDrawing.getLines(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -381,13 +451,48 @@
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
       "line": 191,
+      "symbol": "LineDrawing.findClosedPath(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 246,
+      "symbol": "LineDrawing.currentPaths",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 248,
+      "symbol": "LineDrawing.recursiveSearch(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 262,
+      "symbol": "LineDrawing.removeDuplicates(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 280,
+      "symbol": "LineDrawing.isValidLoop(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 298,
       "symbol": "LineDrawing.generateShape(shapeExtrusionDepth:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/LineDrawing.swift",
-      "line": 211,
+      "line": 318,
       "symbol": "LineDrawing.generateIndv()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -492,16 +597,58 @@
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/BoxModel.swift",
-      "line": 252,
-      "symbol": "BoxModel.init(_:_:_:_:_:_:_:_:)",
+      "line": 251,
+      "symbol": "BoxModel.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/BoxModel.swift",
-      "line": 267,
-      "symbol": "BoxModel.init()",
+      "line": 279,
+      "symbol": "BoxModel.init(_:_:_:_:_:_:_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/Ray.swift",
+      "line": 13,
+      "symbol": "Ray",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/Ray.swift",
+      "line": 14,
+      "symbol": "Ray.init(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/Ray.swift",
+      "line": 20,
+      "symbol": "Ray.generatePoint(distance:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/Ray.swift",
+      "line": 24,
+      "symbol": "Ray.flipAngle()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/Ray.swift",
+      "line": 29,
+      "symbol": "Ray.angle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/Ray.swift",
+      "line": 30,
+      "symbol": "Ray.basePoint",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
@@ -577,7 +724,7 @@
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/Model/WallModel.swift",
       "line": 74,
-      "symbol": "WallModel.init(_:_:_:_:_:_:tabWidth:)",
+      "symbol": "WallModel.init(_:_:_:_:_:_:nTab:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -715,134 +862,8 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/PathGenerator.swift",
-      "line": 12,
-      "symbol": "PathGenerator",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/PathGenerator.swift",
-      "line": 19,
-      "symbol": "PathGenerator.generatePath(_:_:_:_:_:nTab:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/PathGenerator.swift",
-      "line": 38,
-      "symbol": "PathGenerator.generateOverlapPath(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/PathGenerator.swift",
-      "line": 66,
-      "symbol": "PathGenerator.generateTabPath(_:_:_:_:tabWidth:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/PathGenerator.swift",
-      "line": 84,
-      "symbol": "PathGenerator.generateTabLargeCornerPath(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/PathGenerator.swift",
-      "line": 135,
-      "symbol": "PathGenerator.generateTabLongCornerPath(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/PathGenerator.swift",
-      "line": 186,
-      "symbol": "PathGenerator.generateTabSmallCornerPath(_:_:_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 13,
-      "symbol": "SceneGenerator",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 20,
-      "symbol": "SceneGenerator.shared",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 22,
-      "symbol": "SceneGenerator.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 28,
-      "symbol": "SceneGenerator.cameraOrbit",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 31,
-      "symbol": "SceneGenerator.delegate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 32,
-      "symbol": "SceneGenerator.camera",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 33,
-      "symbol": "SceneGenerator.scene",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 44,
-      "symbol": "SceneGenerator.generateScene(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 81,
-      "symbol": "SceneGenerator.adjustLighting(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 98,
-      "symbol": "SceneGenerator.adjustCamera(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 123,
-      "symbol": "SceneGeneratorDelegate",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SceneGenerator.swift",
-      "line": 124,
+      "line": 153,
       "symbol": "SceneGeneratorDelegate.updateScene()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -891,49 +912,56 @@
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
-      "line": 36,
+      "line": 40,
+      "symbol": "SelectionHandling.hoverNode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 53,
       "symbol": "SelectionHandling.hightlightFace",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
-      "line": 44,
+      "line": 61,
       "symbol": "SelectionHandling.deleteNode()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
-      "line": 48,
+      "line": 65,
       "symbol": "SelectionHandling.higlight()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
-      "line": 52,
+      "line": 69,
       "symbol": "SelectionHandling.highlightEdges(thickness:insideSelection:idvLines:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
-      "line": 70,
+      "line": 93,
       "symbol": "SelectionHandling.highlightSide()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
-      "line": 79,
+      "line": 102,
       "symbol": "SelectionHandling._addChild(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/SelectionHandling.swift",
-      "line": 105,
+      "line": 128,
       "symbol": "SelectionHandling.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1178,247 +1206,247 @@
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 58,
-      "symbol": "InputViewController.moveSensitivity",
+      "line": 57,
+      "symbol": "InputViewController.mouseDown",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 59,
-      "symbol": "InputViewController.rotateSensitivity",
+      "line": 58,
+      "symbol": "InputViewController.cameraLocked",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
       "line": 60,
-      "symbol": "InputViewController.zoomSensitivity",
+      "symbol": "InputViewController.moveSensitivity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
+      "line": 61,
+      "symbol": "InputViewController.rotateSensitivity",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
       "line": 62,
+      "symbol": "InputViewController.zoomSensitivity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
+      "line": 64,
       "symbol": "InputViewController.inView(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 70,
+      "line": 69,
       "symbol": "InputViewController.otherMouseDragged(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 79,
-      "symbol": "InputViewController.rightMouseDragged(with:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 98,
-      "symbol": "InputViewController.mouseUp(with:)",
+      "line": 81,
+      "symbol": "InputViewController.mouseMoved(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
       "line": 107,
-      "symbol": "InputViewController.scrollWheel(with:)",
+      "symbol": "InputViewController.rightMouseDragged(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
       "line": 126,
+      "symbol": "InputViewController.mouseUp(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
+      "line": 184,
+      "symbol": "InputViewController.keyUp(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
+      "line": 193,
+      "symbol": "InputViewController.scrollWheel(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
+      "line": 212,
       "symbol": "InputViewController.magnify(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 134,
+      "line": 220,
       "symbol": "InputViewController.rotate(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 146,
+      "line": 234,
       "symbol": "InputViewController.awakeFromNib()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 159,
+      "line": 247,
       "symbol": "InputViewController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 164,
+      "line": 252,
       "symbol": "InputViewController.changeLabels(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 185,
+      "line": 273,
       "symbol": "InputViewController.mmMenuClicked(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 196,
+      "line": 284,
       "symbol": "InputViewController.inchMenuClicked(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 215,
+      "line": 303,
       "symbol": "InputViewController.lengthTextFieldDidChange(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 225,
+      "line": 313,
       "symbol": "InputViewController.unitSegmentedControl(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 240,
+      "line": 328,
       "symbol": "InputViewController.widthTextFieldDidChange(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 251,
+      "line": 339,
       "symbol": "InputViewController.heightTextFieldDidChange(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 262,
+      "line": 350,
       "symbol": "InputViewController.materialThicknessTextFieldDidChange(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 273,
+      "line": 361,
       "symbol": "InputViewController.innerOrOuterDimensionsSelected(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 282,
+      "line": 370,
       "symbol": "InputViewController.joinTypeSelected(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 294,
+      "line": 382,
       "symbol": "InputViewController.numberTabChanged(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 298,
+      "line": 386,
       "symbol": "InputViewController.setLid_On_Off(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 304,
+      "line": 392,
       "symbol": "InputViewController.menuFileOpenItemSelected(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 311,
+      "line": 399,
       "symbol": "InputViewController.menuFileSaveItemSelected(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 317,
+      "line": 405,
       "symbol": "InputViewController.exportButtonClicked(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 321,
+      "line": 409,
       "symbol": "InputViewController.updateModel(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 326,
+      "line": 414,
       "symbol": "InputViewController.plusButtonLengthwise(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 336,
+      "line": 424,
       "symbol": "InputViewController.minusButtonLengthwise(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/View Controllers/InputViewController.swift",
-      "line": 341,
+      "line": 429,
       "symbol": "InputViewController.manageMouseDrag(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/WallType.swift",
-      "line": 12,
-      "symbol": "WallType",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/WallType.swift",
-      "line": 24,
-      "symbol": "WallType.largeCorner",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/WallType.swift",
-      "line": 31,
-      "symbol": "WallType.smallCorner",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/audreyhorne/Desktop/Box-Designer/Box Designer/WallType.swift",
-      "line": 38,
-      "symbol": "WallType.longCorner",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     }
   ],

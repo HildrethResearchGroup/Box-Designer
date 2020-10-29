@@ -100,7 +100,8 @@ class FileHandlingControl {
         - boxModel: This is the parameter that the function will load the box model from.
         - window: This parameter ensures the box model is loaded into the current viewing window.
      
-     - Returns (BoxModel) : This function, if successfully completed, returns a BoxModel object that can be displayed in the applcation.
+     - Returns:
+        - BoxModel: This function, if successfully completed, returns a BoxModel object that can be displayed in the applcation.
      
      */
     func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel {

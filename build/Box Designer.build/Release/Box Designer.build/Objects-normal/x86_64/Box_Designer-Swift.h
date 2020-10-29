@@ -325,8 +325,10 @@ SWIFT_CLASS("_TtC12Box_Designer19InputViewController")
 @property (nonatomic, weak) IBOutlet NSButton * _Null_unspecified minusButtonLengthwise;
 @property (nonatomic, weak) IBOutlet NSButton * _Null_unspecified exportButton;
 - (void)otherMouseDragged:(NSEvent * _Nonnull)event;
+- (void)mouseMoved:(NSEvent * _Nonnull)event;
 - (void)rightMouseDragged:(NSEvent * _Nonnull)event;
 - (void)mouseUp:(NSEvent * _Nonnull)event;
+- (void)keyUp:(NSEvent * _Nonnull)event;
 - (void)scrollWheel:(NSEvent * _Nonnull)event;
 - (void)magnifyWithEvent:(NSEvent * _Nonnull)event;
 - (void)rotateWithEvent:(NSEvent * _Nonnull)event;

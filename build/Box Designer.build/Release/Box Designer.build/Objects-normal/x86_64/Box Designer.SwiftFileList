@@ -1,3 +1,4 @@
+/Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/Line.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/SelectionHandling.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/LineDrawing.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/Documentation.swift
@@ -10,9 +11,9 @@
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/BoxDesignerPDF.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/JoinType.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/PathGenerator.swift
-/Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/Line.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/Model/BoxModel.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/SceneGenerator.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/Model/WallModel.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/AppDelegate.swift
+/Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/Model/Ray.swift
 /Users/audreyhorne/Desktop/Box-Designer/Box\ Designer/View\ Controllers/InputViewController.swift

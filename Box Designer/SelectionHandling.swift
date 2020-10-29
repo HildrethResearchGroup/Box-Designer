@@ -9,7 +9,16 @@
 import Foundation
 import SceneKit
 import Cocoa
-
+/**
+ This class handles the selection and highlighting of components that the user wants to do something with.
+ 
+ - Authors:
+    - CSM Field Session Summer 2020 and Fall 2020.
+ 
+ - Copyright:
+    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ 
+ */
 class SelectionHandling{
     
     static let shared = SelectionHandling()

@@ -26,14 +26,15 @@ class PathGenerator {
      for generating a path (as of now, the choices are overlap or tab joins).
      
      - Parameters:
-            - width: this is the user-inputted box model width
-            - length: this is the user-inputted box model length
-            - materialThickness: this is the user-inputted box model material thickness
-            - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
-            - joinType: this is the type of join, which ensures the path is drawn according to the tab type or overlap type
-            - nTab: this is the user-inputted number of tabs for the tab join type
+        - width: this is the user-inputted box model width
+        - length: this is the user-inputted box model length
+        - materialThickness: this is the user-inputted box model material thickness
+        - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
+        - joinType: this is the type of join, which ensures the path is drawn according to the tab type or overlap type
+        - nTab: this is the user-inputted number of tabs for the tab join type
      
-     - Returns (NSBezierPath): this function returns a path that can be drawn in the scene
+     - Returns:
+        - NSBezierPath: this function returns a path that can be drawn in the scene
      */
     static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, nTab: Double?) -> NSBezierPath {
         // instantiate a new path
@@ -52,11 +53,12 @@ class PathGenerator {
     /**
      This function draws the necessary overlap join path for a specified wall type -- the output path is a single wall component that can be drawn in the view. The basics of this function are that the top and bottom components (largeCorner) should overlap all four sides, while the longCorner walls should be overlapped by largeCorner and should overlap smallCorner, and the smallCorner walls should be overlapped by both largeCorner and longCorner.
      - Parameters:
-            - width: this is the user-inputted box model width
-            - length: this is the user-inputted box model length
-            - materialThickness: this is the user-inputted box model material thickness
-            - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
-     - Returns (NSBezierPath): this function returns a path that can be drawn in the scene -- it draws a single wall
+        - width: this is the user-inputted box model width
+        - length: this is the user-inputted box model length
+        - materialThickness: this is the user-inputted box model material thickness
+        - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
+     - Returns:
+        - NSBezierPath: this function returns a path that can be drawn in the scene -- it draws a single wall
      */
     static func generateOverlapPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType) -> NSBezierPath {
         let path = NSBezierPath()
@@ -79,12 +81,13 @@ class PathGenerator {
     /**
      This function decides which function to use to draw the accurate tab join path for a specified wall type -- the output path is a single wall component that can be drawn in the view.
      - Parameters:
-            - width: this is the user-inputted box model width
-            - length: this is the user-inputted box model length
-            - materialThickness: this is the user-inputted box model material thickness
-            - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
-            - nTab: this is the user-inputted number of tabs for the interlocking structure
-     - Returns (NSBezierPath): this function returns a path that can be drawn in the scene -- it draws a single wall
+        - width: this is the user-inputted box model width
+        - length: this is the user-inputted box model length
+        - materialThickness: this is the user-inputted box model material thickness
+        - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
+        - nTab: this is the user-inputted number of tabs for the interlocking structure
+     - Returns:
+        - NSBezierPath: this function returns a path that can be drawn in the scene -- it draws a single wall
      */
     static func generateTabPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, nTab: Double) -> NSBezierPath {
         
@@ -104,12 +107,13 @@ class PathGenerator {
     /**
      This function draws both largeCorner and longCorner tab paths; their path construction is similar enough to be condensed into one function with a few conditionals. The output of this function is a path that encompasses a single wall.
      - Parameters:
-            - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
-            - width: this is the user-inputted box model width
-            - length: this is the user-inputted box model length
-            - materialThickness: this is the user-inputted box model material thickness
-            - nTab: this is the user-inputted number of tabs for the interlocking structure
-     - Returns (NSBezierPath): this function returns a path that can be drawn in the scene -- it draws a single wall
+        - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
+        - width: this is the user-inputted box model width
+        - length: this is the user-inputted box model length
+        - materialThickness: this is the user-inputted box model material thickness
+        - nTab: this is the user-inputted number of tabs for the interlocking structure
+     - Returns:
+        - NSBezierPath: this function returns a path that can be drawn in the scene -- it draws a single wall
      */
     static func generateTabLargeLongCornerPath(_ wallType: WallType, _ width: Double, _ length: Double, _ materialThickness: Double, _ nTab: Int) -> NSBezierPath {
         
@@ -165,11 +169,13 @@ class PathGenerator {
     /**
      This function draws smallCorner tab paths; its tab path construction is sufficiently different from largeCorner and longCorner that a separate function is necessary. This is essentially because it's the smallest piece (it has to account for the tabs from both the largeCorner and longCorner walls). The output of this function is a path that encompasses a single wall.
      - Parameters:
-            - width: this is the user-inputted box model width
-            - length: this is the user-inputted box model length
-            - materialThickness: this is the user-inputted box model material thickness
-            - nTab: this is the user-inputted number of tabs for the interlocking structure
-     - Returns (NSBezierPath): this function returns a path that can be drawn in the scene -- it draws a single wall
+        - width: this is the user-inputted box model width
+        - length: this is the user-inputted box model length
+        - materialThickness: this is the user-inputted box model material thickness
+        - nTab: this is the user-inputted number of tabs for the interlocking structure
+     
+     - Returns:
+        - NSBezierPath: this function returns a path that can be drawn in the scene -- it draws a single wall
      */
     static func generateTabSmallCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ nTab: Int) -> NSBezierPath {
         

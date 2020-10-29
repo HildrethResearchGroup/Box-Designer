@@ -17,7 +17,7 @@
     <a title="BoxModel Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (8% documented)</p>
+        <p><a href="../index.html"> Docs</a> (17% documented)</p>
         <p class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -73,6 +73,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/PathGenerator.html">PathGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Ray.html">Ray</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SceneGenerator.html">SceneGenerator</a>
@@ -480,33 +483,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12Box_Designer0A5ModelCyACSayAA04WallC0CG_S4dSbAA8JoinTypeOSdSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(_:_:_:_:_:_:_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12Box_Designer0A5ModelCyACSayAA04WallC0CG_S4dSbAA8JoinTypeOSdSgtcfc">init(_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">walls</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/WallModel.html">WallModel</a></span><span class="p">],</span> <span class="n">_</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">materialThickness</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">innerDimensions</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">joinType</span><span class="p">:</span> <span class="kt"><a href="../Enums/JoinType.html">JoinType</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">tabWidth</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:12Box_Designer0A5ModelCACycfc"></a>
                     <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
                     <a class="token" href="#/s:12Box_Designer0A5ModelCACycfc">init()</a>
@@ -531,12 +507,39 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelCyACSayAA04WallC0CG_S4dSbAA8JoinTypeOSdSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelCyACSayAA04WallC0CG_S4dSbAA8JoinTypeOSdSgtcfc">init(_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">walls</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/WallModel.html">WallModel</a></span><span class="p">],</span> <span class="n">_</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">height</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">materialThickness</span><span class="p">:</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">innerDimensions</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">joinType</span><span class="p">:</span> <span class="kt"><a href="../Enums/JoinType.html">JoinType</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">nTab</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-26)</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-10-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

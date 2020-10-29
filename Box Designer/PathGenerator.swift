@@ -97,10 +97,10 @@ class PathGenerator {
         switch (wallType) {
         case WallType.largeCorner:
             //path = NSBezierPath()
-            path = generateTabLargeCornerPath(width, length, materialThickness, Int(nTab))
+            path = generateTabLargeLongCornerPath(wallType,width, length, materialThickness, Int(nTab))
         case WallType.longCorner:
             //path = NSBezierPath()
-            path = generateTabLongCornerPath(width, length, materialThickness, Int(nTab))
+            path = generateTabLargeLongCornerPath(wallType,width, length, materialThickness, Int(nTab))
         case WallType.smallCorner:
             //path = NSBezierPath()
             path = generateTabSmallCornerPath(width, length, materialThickness, Int(nTab))
@@ -109,7 +109,53 @@ class PathGenerator {
     }
     
     /*we may be able to compress this down since the left and right sides are the same (exceptMaterialThickness is set to 0) and top and bottom are different*/
-    
+    static func generateTabLargeLongCornerPath(_ wallType: WallType, _ width: Double, _ length: Double, _ materialThickness: Double, _ nTabs: Int) -> NSBezierPath {
+        
+        let largeCorner = (wallType == WallType.largeCorner)
+        //the number of sections
+        var nSections : Int
+        if largeCorner { nSections = (nTabs * 2) - 1} else { nSections = (nTabs * 2) + 1}
+        
+        //the length of sections
+        var sectionLength : Double
+        if largeCorner {sectionLength = length/Double(nSections) } else {sectionLength = (length-(materialThickness*2))/Double(nSections - 2)}
+        var sectionWidth : Double
+        if largeCorner { sectionWidth = width/Double(nSections) } else { sectionWidth = width/Double(nSections - 2)}
+        
+        let path = NSBezierPath()
+        if largeCorner {path.move(to: CGPoint(x: 0.0, y: 0.0))} else {path.move(to: CGPoint(x: 0.0, y: materialThickness))}
+        
+        //left side
+        path.relativeLine(to: CGPoint(x: 0.0, y: sectionLength))
+        for _ in 0...(nTabs - 2){
+            createTabPath(path: path, point1: [materialThickness,0.0], point2: [0.0,sectionLength], point3: [-materialThickness,0.0], point4: [0.0,sectionLength])
+        }
+        
+        //top side
+        path.relativeLine(to: CGPoint(x: sectionWidth, y: 0.0))
+        for _ in 0...(nTabs - 2){
+            largeCorner ?
+                createTabPath(path: path, point1: [0.0,-materialThickness], point2: [sectionWidth,0.0], point3: [0.0,materialThickness], point4: [sectionWidth,0.0]) :
+                createTabPath(path: path, point1: [0.0,materialThickness], point2: [sectionWidth,0.0], point3: [0.0,-materialThickness], point4: [sectionWidth,0.0])
+        }
+        
+        //right side
+        path.relativeLine(to: CGPoint(x: 0.0, y: -sectionLength))
+        for _ in 0...(nTabs - 2){
+            createTabPath(path: path, point1: [-materialThickness,0.0], point2: [0.0,-sectionLength], point3: [materialThickness,0.0], point4: [0.0,-sectionLength])
+        }
+        
+        //bottom side
+        path.relativeLine(to: CGPoint(x: -sectionWidth, y: 0.0))
+        for _ in 0...(nTabs - 2){
+            largeCorner ?
+                createTabPath(path: path, point1: [0.0,materialThickness], point2: [-sectionWidth,0.0], point3: [0.0,-materialThickness], point4: [-sectionWidth,0.0]) :
+                createTabPath(path: path, point1: [0.0,-materialThickness], point2: [-sectionWidth,0.0], point3: [0.0,materialThickness], point4: [-sectionWidth,0.0])
+        }
+        
+        path.close()
+        return path
+    }
     static func generateTabLargeCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ nTabs: Int) -> NSBezierPath {
  
         //the number of sections

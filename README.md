@@ -45,3 +45,4 @@ Additionally, CTRL + D will open the dimensions window, CTRL + J will open the J
 * [sudo] gem install jazzy
 * If you run "jazzy --min-acl private" in your root project folder (private ensures your classes won't be skipped) and you have issues with xcodebuild, try:
 * jazzy --build-tool-arguments CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO --min-acl private
+* As of now, trying to publish the jazzy-generated documentation at https://hildrethresearchgroup.github.io/Box-Designer/ (our GitHub Pages URL)

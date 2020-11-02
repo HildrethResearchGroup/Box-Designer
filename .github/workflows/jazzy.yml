@@ -27,4 +27,4 @@ jobs:
         uses: steven0351/publish-jazzy-docs@v1
         with:
           personal_access_token: ${{ secrets.ACCESS_TOKEN }}
-          config: .jazzy.yml
+          args: "--build-tool-arguments CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO --min-acl private --theme fullwidth"

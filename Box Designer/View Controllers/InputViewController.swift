@@ -375,12 +375,12 @@ class InputViewController: NSViewController, NSTextDelegate {
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
             numberTabTextField.isEnabled = true
-            boxModel.nTab = numberTabTextField.doubleValue
+            boxModel.numberTabs = numberTabTextField.doubleValue
         }
     }
     
     @IBAction func numberTabChanged(_ sender: Any) {
-        boxModel.nTab = numberTabTextField.doubleValue
+        boxModel.numberTabs = numberTabTextField.doubleValue
     }
     
     @IBAction func setLid_On_Off(_ sender: Any) {
@@ -417,7 +417,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         // if there are already max separators, don't need to increment counterLength
         if boxModel.counterLength <  2 {
             boxModel.counterLength += 1
-            boxModel.lengthWall = true
+            boxModel.addInternalSeparator = true
         }
     }
     

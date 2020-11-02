@@ -9,14 +9,26 @@
 import Foundation
 import Cocoa
 import SceneKit
-
+/**
+ This class provides the structure for the compete box model.
+ 
+ - Authors:
+    - CSM Field Session Summer 2020 and Fall 2020.
+ 
+ - Copyright:
+    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ 
+ */
 class BoxModel {
+    /// This is a variable that's associated with internal separators. However, it would be wise to refactor how internal separators are dealt with.
     var counterLength = 0
+    /// This variable ensures the current box model has access to the scene, so that it can update its variables.
     let sceneGenerator = SceneGenerator.shared
+    /// This variable is an array of all the current walls that make up the box model.
     var walls: [WallModel]
-    //refers to box dimension along x axis
+    /// This variable refers to the box dimension along the x-axis.
     var boxWidth: Double {
-        
+        /// This updates the box width. If user wants their inputted box width to be the inner dimensions, box width is updated accordingly.
         willSet {
             if innerDimensions {
                 self.boxWidth = newValue + 2 * materialThickness
@@ -24,6 +36,7 @@ class BoxModel {
                 self.boxWidth = newValue
             }
         }
+        /// This updates all the current walls with the new box width, according to their wall type. It will also update a wall's position if necessary.
         didSet {
             if boxWidth != oldValue {
                 for wall in self.walls {
@@ -39,12 +52,13 @@ class BoxModel {
                     }
                 }
             }
-            //inform SceneGenerator
+            /// Make sure the scene updates after changes.
             sceneGenerator.generateScene(self)
         }
     }
-    //refers to box dimension along z axis
+    /// This variable refers to the box dimension along the z-axis.
     var boxLength: Double {
+        /// This updates the box lenth. If user wants their inputted box length to be the inner dimensions, box length is updated accordingly.
         willSet {
             if innerDimensions {
                 self.boxLength = newValue + 2 * materialThickness
@@ -52,6 +66,7 @@ class BoxModel {
                 self.boxLength = newValue
             }
         }
+        /// This updates all the current walls with the new box length, according to their wall type. It will also update a wall's position if necessary.
         didSet {
             if boxLength != oldValue {
                 for wall in self.walls {
@@ -71,20 +86,22 @@ class BoxModel {
                         wall.width = boxLength
                     }
                 }
-                //inform SceneGenerator
+                /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
         }
     }
-    //refers to box dimension along y axis
+    /// This variable refers to the  box dimension along the y-axis.
     var boxHeight: Double {
         willSet {
+            /// This updates the box height. If user wants their inputted box length to be the inner dimensions, box height is updated accordingly.
             if innerDimensions {
                 self.boxHeight = newValue + 2 * materialThickness
             } else {
                 self.boxHeight = newValue
             }
         }
+        /// This updates all the current walls with the new box length, according to their wall type. It will also update a wall's position if necessary.
         didSet {
             if boxHeight != oldValue {
                 for wall in self.walls {
@@ -98,12 +115,14 @@ class BoxModel {
                         wall.length = boxHeight
                     }
                 }
-                //inform SceneGenerator
+                /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
         }
     }
+    /// This variable refers to the material thickness. The material thickness is necessary for drawing the components the correct size on the PDF, to ensure the components fit together without spaces.
     var materialThickness: Double {
+        /// This updates the material thickness of the box model and its walls. It then updates the position of all the current walls to correctly display on the screen.
         didSet {
             if materialThickness != oldValue {
                 for wall in self.walls {
@@ -122,13 +141,14 @@ class BoxModel {
                         wall.position = SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness/2), 0.0)
                     }
                 }
-                //inform SceneGenerator
+                /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
         }
     }
-        
+    /// This variable indicates whether the current width, height, and length of the box model should indicate 1) only the space between components (true) or 2) the between components, along with the walls themselves (false).
     var innerDimensions: Bool {
+        /// This adjusts the box length, height, and width if the user wants those values to indicate the inner dimensions instead of the total dimensions.
         willSet {
             if innerDimensions != newValue {
                 if newValue {
@@ -143,11 +163,12 @@ class BoxModel {
                     self.boxWidth += 2 * materialThickness
                     self.boxHeight += 2 * materialThickness
                     
-                    //inform SceneGenerator
+                    /// Make sure the scene updates after changes.
                     sceneGenerator.generateScene(self)
                 }
             }
         }
+        /// This adjusts the box length, height, and width if the user wants those values to indicate the total dimensions instead of the inner dimensions.
         didSet {
             if innerDimensions != oldValue {
                 if oldValue {
@@ -162,38 +183,44 @@ class BoxModel {
                     self.boxWidth -= 2 * materialThickness
                     self.boxHeight -= 2 * materialThickness
                     
-                    //inform SceneGenerator
+                    /// Make sure the scene updates after changes.
                     sceneGenerator.generateScene(self)
                 }
             }
         }
     }
+    /// This variable indicates the join type between walls (tab, overlap, or slotted).
     var joinType: JoinType {
+        /// This updates all the current walls with the new join type.
         didSet {
             if joinType != oldValue {
                 for wall in self.walls {
                     wall.joinType = self.joinType
                 }
-                //inform SceneGenerator
+                /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
         }
     }
-    var nTab: Double? {
+    /// This variable indicates the number of tabs that the user wants, if the join type is "tab." **This may need to be refactored if we want to give the choice of number tabs or tab width.
+    var numberTabs: Double? {
         didSet {
-            if nTab != oldValue {
+            /// This updates the current walls' number of tabs.
+            if numberTabs != oldValue {
                 for wall in self.walls {
-                    wall.nTab = self.nTab
+                    wall.nTab = self.numberTabs
                 }
-                //inform SceneGenerator
+                /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
         }
     }
+    /// This variable indicates whether the top wall (the lid) should be included in the box model (true) or not (false).
     var lidOn: Bool {
+        /// This either adds or a removes the lid in the current box model.
         didSet {
             if lidOn != oldValue {
-                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), nTab: nTab)
+                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), nTab: numberTabs)
                 if (lidOn == false){
                     if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
                         walls.remove(at: index)
@@ -201,28 +228,35 @@ class BoxModel {
                 }else{
                     walls.append(wallLid)
                 }
-                //inform SceneGenerator
+                /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
         }
     }
-    var lengthWall : Bool {
+    /**
+     This variable adds an internal separator if there's room (true).
+     - Note: Right now, the model can only add two internal separators at pre-defined locations. We will need to refactor this so the user can 1) choose where to put the inner wall and 2) which plane it should be on.
+     */
+    var addInternalSeparator : Bool {
+        /// This adds a max of 2 internal separators on the x-z plane (I think), at 1/3 and 2/3 distance from the outer wall.
         didSet {
-            if lengthWall && counterLength == 1 {
+            if addInternalSeparator && counterLength == 1 {
                 // add separator in the box
-                let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), nTab: nTab)
-                if(lengthWall) {
+                let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), nTab: numberTabs)
+                if(addInternalSeparator) {
                     walls.append(innerWallModel)
-                    lengthWall = false
+                    addInternalSeparator = false
+                    /// Make sure the scene updates after changes.
                     sceneGenerator.generateScene(self)
                 }
             }
                 // add another separator in the box
-            else if lengthWall && counterLength == 2 {
-                let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), nTab: nTab)
-                    if(lengthWall) {
+            else if addInternalSeparator && counterLength == 2 {
+                let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), nTab: numberTabs)
+                    if(addInternalSeparator) {
                         walls.append(innerWallModel2)
-                        lengthWall  = false
+                        addInternalSeparator  = false
+                        /// Make sure the scene updates after changes.
                         sceneGenerator.generateScene(self)
                     }
                 }
@@ -231,6 +265,10 @@ class BoxModel {
         
     }
     
+    /**
+     This variable handles removing an internal separator (true).
+     - Note: This should become obsolete when we add the functionality to add or remove a selected wall. To do this, we need to be able to associate the selected wall with the its index in BoxModel.walls array.
+     */
     var removeInnerWall: Bool {
         didSet {
             
@@ -247,7 +285,7 @@ class BoxModel {
         
     }
     
-    //This initializer creates the default box model which is loaded whenever the application is launched
+    /// This initializer creates the default box model which is loaded whenever the application is launched
     init() {
         
         // initialize default values first so that they can be easily changed if you want to change the default
@@ -255,28 +293,45 @@ class BoxModel {
         self.boxLength = 4.0
         self.boxHeight = 4.0
         self.materialThickness = 0.50
-        self.nTab = 3
+        self.numberTabs = 3
         self.innerDimensions = false
         self.joinType = JoinType.overlap
         self.lidOn = true
-        self.lengthWall = false
+        self.addInternalSeparator = false
         self.removeInnerWall = false
         
-        // create the walls
-        let wallBottom = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, 0.25, 0.0), nTab: nTab)
-        let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, 3.75, 0.0), nTab: nTab)
+        // create variables for positioning the walls (because it's initially a box, offset2 could use the height, length, or width to create positions)
+        // if the default model is not a cube, this will not work
+        let offset1 = materialThickness/2
+        let offset2 = self.boxWidth - materialThickness/2
+        // create the bottom/top walls
+        let wallBottom = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset1), 0.0), nTab: numberTabs)
+        let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), nTab: numberTabs)
         //left and right walls
-        let wallLeft = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(0.25, 0.0, 0.0), nTab: nTab)
-        let wallRight = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(3.75, 0.0, 0.0), nTab: nTab)
+        let wallLeft = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset1), 0.0, 0.0), nTab: numberTabs)
+        let wallRight = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset2), 0.0, 0.0), nTab: numberTabs)
         //back and front walls
-        let wallFront = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, 0.25), nTab: nTab)
-        let wallBack = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, 3.75), nTab: nTab)
+        let wallFront = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset1)), nTab: numberTabs)
+        let wallBack = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset2)), nTab: numberTabs)
         let walls = [wallBottom,wallLeft, wallRight, wallFront, wallBack, wallLid]
+        // add walls to array
         self.walls = walls
     }
     
-    //This initializer can be used to create a box using data loaded from a file
-    init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ nTab: Double?) {
+    /**
+    This initializer can be used to create a box using its parameters. It is necessary for opening a box model saved in a JSON file into the application.
+     - Note:The functionality to load in a box model from a JSON file is not complete in JSONFileHandling.swift yet.
+     - Parameters:
+        - walls: an array walls that are included in the box model file
+        - width: the box width indicated in the file
+        - length: the box length indicated in the file
+        - height: the box height indicated in the file
+        - materialThickness: the box material thickness indicated in the file
+        - innerDimensions: the value indicating whether the box dimensions in the file refer to inner or outer
+        - joinType: the box join type indicated in the file
+        - numberTabs: the number of tabs the box has, as indicated in the file
+     */
+    init(_ walls: [WallModel], _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ numberTabs: Double?) {
         self.walls = walls
         self.boxWidth = width
         self.boxLength = length
@@ -284,9 +339,9 @@ class BoxModel {
         self.materialThickness = materialThickness
         self.innerDimensions = innerDimensions
         self.joinType = joinType
-        self.nTab = nTab
+        self.numberTabs = numberTabs
         self.lidOn = true
-        self.lengthWall = false
+        self.addInternalSeparator = false
         self.removeInnerWall = false
     }
     

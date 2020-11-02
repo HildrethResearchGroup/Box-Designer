@@ -121,7 +121,7 @@ class JSONFileHandler {
             textToWrite += "\t\"joinType\": \"\(model.joinType)\",\n"
             
             //tabWidth, which may be null
-            if let numberTabs = model.nTab {
+            if let numberTabs = model.numberTabs {
                 textToWrite += "\t\"tabWidth\": \(numberTabs),\n"
             } else {
                 textToWrite += "\t\"tabWidth\": null,\n"
@@ -131,7 +131,7 @@ class JSONFileHandler {
             textToWrite += "\t\"lidOn\": \"\(model.lidOn)\",\n"
             
             //has InnerWall as true or false
-            textToWrite += "\t\"lengthWall\": \"\(model.lengthWall)\"\n"
+            textToWrite += "\t\"lengthWall\": \"\(model.addInternalSeparator)\"\n"
             
             //end the boxModel object on same indentation
             textToWrite += "}"

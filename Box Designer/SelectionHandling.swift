@@ -10,7 +10,7 @@ import Foundation
 import SceneKit
 import Cocoa
 /**
- This class handles the selection and highlighting of components that the user wants to do something with.
+ This class handles the selection and highlighting of components that the user wants to do something with. 
  
  - Authors:
     - CSM Field Session Summer 2020 and Fall 2020.

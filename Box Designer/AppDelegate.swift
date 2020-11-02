@@ -1,28 +1,17 @@
-//
-//  AppDelegate.swift
-//  Box Designer
-//
-//  Created by Owen Hildreth on 5/22/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Cocoa
 
 /**
  
  AppDelegate for BoxDesigner application -- initializes application views.
  
- - Authors:
-    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
- 
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
  - Note:
+    - AppDelegate.swift was created on 5/22/2020.
     - Both functions in this class (applicationDidFinishLaunching and applicationWillTerminate) are accompanied by the Apple Developer Documentation in Quick Help and links to their documentation are provided.
     
  */
-/// - Tag: AppDelegate
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     

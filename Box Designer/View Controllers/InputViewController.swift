@@ -1,71 +1,101 @@
-//
-//  InputViewController.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/6/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 import SceneKit
-
-class InputViewController: NSViewController, NSTextDelegate { 
+/**
+ This class handles all user interactions with the application. We could potentially refactor to multiple ViewController classes.
+ 
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: InputViewController.swift was created on 6/6/2020.
+ 
+ */
+class InputViewController: NSViewController, NSTextDelegate {
+    /// This variable instantiates a new box model that will be updated by the user. It is instantiated with the default values found in the BoxModel class init().
     var boxModel = BoxModel()
-    let unitConversionFactor = 25.4
+    /// This variable is the conversion factor from inches to millimeters, used for unit conversion.
+    static let unitConversionFactor = 25.4
+    /// This variable is the selection handling singleton.
     let selectionHandling = SelectionHandling.shared
-    
-    
+    /// This variable is the file handling control singleton.
     var fileHandlingControl = FileHandlingControl.shared
-    
+    /// This variable is the view object that's displayed in the app.
     @IBOutlet weak var boxView: SCNView!
+    /// This variable is the accessory view object displayed in the save panel.
     @IBOutlet weak var pdfOptionsView: PDFOptionsView!
+    /// This variable is the millimeter option in the Taskbar -> Format -> Units.
     @IBOutlet weak var mmMenu: NSMenuItem!
+    /// This variable is the inches option in the Taskbar -> Format -> Units.
     @IBOutlet weak var inchMenu: NSMenuItem!
-    
-    // user-input text fields for dimensions
+    /// This variable is the textbox for box length that users can change in the main GUI.
     @IBOutlet weak var lengthTextField: NSTextField!
+    /// This variable is the textbox for box width that users can change in the main GUI.
     @IBOutlet weak var widthTextField: NSTextField!
+    /// This variable is the textbox for box height that users can change in the main GUI.
     @IBOutlet weak var heightTextField: NSTextField!
+    /// This variable is the textbox for box material thickness that users can change in the main GUI.
     @IBOutlet weak var materialThicknessTextField: NSTextField!
-    
+    /// This variable allows selection for the displayed dimensions to include (or not include) the walls themselves.
     @IBOutlet weak var innerOrOuterDimensionControl: NSSegmentedCell!
+    /// This variable allows for selection of user's desired join type (tab, overlap, slotted).
     @IBOutlet weak var joinTypeControl: NSSegmentedControl!
+    /// This variable allows for selection of dimension units (inches or millimeters).
     @IBOutlet weak var unitChoiceControl: NSSegmentedCell!
-    
-    @IBOutlet weak var numberTabLabel: NSTextField!
+    /// This variable is the textbox for number of tabs (if "Tab" join type is selected) that users can change in main GUI.
     @IBOutlet weak var numberTabTextField: NSTextField!
-    
+    /// This variable allows selection for the lid of the box to be on or off.
+    /// - TODO: when add/delete components functionality is introduced, this can be deleted.
     @IBOutlet weak var lidOn_Off: NSButton!
-    
-    // labels for respective text fields
+    /// This is the label for the number of tabs textbox. It must be a variable for the units to be displayed (and the units can change).
+    @IBOutlet weak var numberTabLabel: NSTextField!
+    /// This is the label for the box length textbox. It must be a variable for the units to be displayed (and the units can change).
     @IBOutlet weak var lengthLabel: NSTextField!
+    /// This is the label for the box width textbox. It must be a variable for the units to be displayed (and the units can change).
     @IBOutlet weak var widthLabel: NSTextField!
+    /// This is the label for the box height textbox. It must be a variable for the units to be displayed (and the units can change).
     @IBOutlet weak var heightLabel: NSTextField!
+    /// This is the label for the box material thickness textbox. It must be a variable for the units to be displayed (and the units can change).
     @IBOutlet weak var thicknessLabel: NSTextField!
-    
+    /// This variable allows user to add internal separators.
+    /// - TODO: this can be deleted with add/delete components functionality is introduced
     @IBOutlet weak var plusButtonLengthwise: NSButton!
+    /// This variable allows user to remove internal separators.
+    /// - TODO: this can be deleted with add/delete components functionality is introduced
     @IBOutlet weak var minusButtonLengthwise: NSButton!
-    
+    /// This variable allows users to export their box template directly from the main GUI (they can also do this from the taskbar).
     @IBOutlet weak var exportButton: NSButton!
-    
-    //mm is true and inch is false
+    /// This variable indicates which unit the user wants.
+    /// - Note: true indicates millimeters, false indicates inches.
     private var mmInch: Bool = false
-    private var mmInchDict : Dictionary<Bool, Double> = [false : 1.0, true : 25.4]
+    /// This variable maps the unit to their conversion factor. Inches don't need to be changed, but millimeters need to be converted from inches.
+    private var mmInchDict : Dictionary<Bool, Double> = [false : 1.0, true : unitConversionFactor]
     
     //====================Camera Controls=========================
-    var mouseDown: Bool = false
-    var cameraLocked: Bool = false
+    // var mouseDown: Bool = false
     
+    var cameraLocked: Bool = false
+    /// This variable gives wiggle room to the mouse event when clicking and dragging with right-click.
     let moveSensitivity:CGFloat = 0.01
+    /// This variable gives wiggle room to the mouse event when clicking and dragging with non-left and non-right clicks (like a side button).
     let rotateSensitivity:CGFloat = 0.01
+    /// This variable gives wiggle room to the mouse event when using the scroll bar.
     let zoomSensitivity:CGFloat = 0.1
     
+    /**
+     This function returns a boolean about whether the click event is within the view (true) or not (false).
+     - Parameters:
+        - event: an event that occured on the screen while the application is open
+     - Returns:
+        - Bool: this function returns a boolean on whether the event happened in the application view or not.
+     */
     func inView(_ event: NSEvent)->Bool {
         return (boxView.hitTest(event.locationInWindow) == boxView)
     }
     
-    // Handles mouse movement when dragging the camera view around
+    /**
+     This function handles mouse movement when dragging the camera view around -- it rotates the box model. See [Apple Documentation - otherMouseDragged()] for further information on the inherited function. (https://developer.apple.com/documentation/appkit/nsresponder/1529804-othermousedragged?language=objc)
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func otherMouseDragged(with event: NSEvent) {
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.y -= event.deltaX * rotateSensitivity
         boxModel.sceneGenerator.cameraOrbit.eulerAngles.x -= event.deltaY * rotateSensitivity
@@ -79,6 +109,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     override func mouseMoved(with event: NSEvent) {
+        // get the location of the cursor when clicked
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         
         var hitTestOptions = [SCNHitTestOption: Any]()
@@ -304,7 +335,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
-            boxModel.boxLength = lengthTextField.doubleValue * (1/unitConversionFactor)
+            boxModel.boxLength = lengthTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
             //if the setting is in inches
            boxModel.boxLength = lengthTextField.doubleValue
@@ -329,7 +360,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
-            boxModel.boxWidth = widthTextField.doubleValue * (1/unitConversionFactor)
+            boxModel.boxWidth = widthTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
             //if the setting is in inches
             boxModel.boxWidth = widthTextField.doubleValue
@@ -340,7 +371,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
             //if the setting is in mm
-            boxModel.boxHeight = heightTextField.doubleValue * (1/unitConversionFactor)
+            boxModel.boxHeight = heightTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
             //if the setting is in inches
             boxModel.boxHeight = heightTextField.doubleValue
@@ -350,7 +381,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBAction func materialThicknessTextFieldDidChange(_ sender: Any) {
         if mmInch{
             //if the setting is in mm
-            boxModel.materialThickness = materialThicknessTextField.doubleValue * (1/unitConversionFactor)
+            boxModel.materialThickness = materialThicknessTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
             //if the setting is in inches
             boxModel.materialThickness = materialThicknessTextField.doubleValue

@@ -1,22 +1,12 @@
-//
-//  SelectionHandling.swift
-//  Box Designer
-//
-//  Created by CSCI370 on 9/14/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import SceneKit
 import Cocoa
 /**
- This class handles the selection and highlighting of components that the user wants to do something with. 
- 
- - Authors:
-    - CSM Field Session Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ This class handles the selection and highlighting of components that the user wants to interact with.
+ - TODO: documenting this class
+ - Authors: CSM Field Session Fall 2020 and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: SelectionHandling.swift was created on 9/14/2020.
  
  */
 class SelectionHandling{
@@ -80,7 +70,7 @@ class SelectionHandling{
         let lineShape = LineDrawing(path, thickness, insideLine: insideSelection)
         
         let lines = [Line(NSMakePoint(0.0, 0.0), NSMakePoint(0.0, 1.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 1.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(2.0, 2.0)), Line(NSMakePoint(0.0, 1.0), NSMakePoint(1.0, 1.0))]
-        lineShape.findClosedPath(lines)
+        _ = lineShape.findClosedPath(lines)
         
         
         if(idvLines){

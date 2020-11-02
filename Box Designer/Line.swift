@@ -1,22 +1,23 @@
-//
-//  Line.swift
-//  Box Designer
-//
-//  Created by Michael Berg on 9/15/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import SceneKit
 import Cocoa
 
-
+/**
+ - TODO: documenting this enum
+ */
 enum linePos {
     case top
     case bottom
     case center
 }
 
+/**
+ - TODO: documenting this class
+ 
+ - Authors: CSM Field Session Fall 2020 and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: Line.swift was created on 9/15/2020.
+ */
 //technically this is a segment
 class Line: CustomStringConvertible{
     init(_ pointA: NSPoint, _ pointB: NSPoint, thickness: CGFloat = 0.01){
@@ -82,7 +83,7 @@ class Line: CustomStringConvertible{
     
     func intercept(_ otherLine:Line)->NSPoint?{
         let x = -((self.B * otherLine.C!) - (self.C! * otherLine.B))/((self.A * otherLine.B) - (self.B * otherLine.A))
-        let y = ((self.A * otherLine.C!) - (self.C! * otherLine.A))/((self.A * otherLine.B) - (self.B * otherLine.A))
+//        let _ = ((self.A * otherLine.C!) - (self.C! * otherLine.A))/((self.A * otherLine.B) - (self.B * otherLine.A))
         if(x <= self.bottomPoint.x && x >= self.topPoint.x){
             return nil
         }else{

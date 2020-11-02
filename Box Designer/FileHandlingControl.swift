@@ -1,11 +1,3 @@
-//
-//  FileHandlingControl.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/9/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 import SceneKit
@@ -13,11 +5,9 @@ import SceneKit
 /**
  This is the controlling class for exporting the custom box template to PDF or JSON, or opening a saved box template into the application via JSON file.
  
- - Authors:
-    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: FileHandlingControl.swift was created on 6/9/2020.
  
  */
 class FileHandlingControl {

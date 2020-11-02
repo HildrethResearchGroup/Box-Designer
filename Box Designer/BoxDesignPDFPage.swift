@@ -1,31 +1,42 @@
-//
-//  PDFFileSaver.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 5/27/20.
-//  Refactored by Field Session Fall 2020.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 import SceneKit
 import PDFKit
-
+/**
+ This class is the main driver for creating and drawing a single PDF page of the box model walls.
+ 
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: BoxDesignPDFPage.swift was created on 5/27/2020.
+ 
+ */
 class BoxDesignPDFPage : PDFPage {
-    
+    /// This variable is the singleton file handling control object.
     var fileHandlingControl = FileHandlingControl.shared
+    /// This variable is the array of walls that need to be drawn on the PDF page.
     var wallsToDraw : [WallModel]
+    /// This variable is the conversion from inches to pixels.
     let inchScale : Double = 100.0
+    /// This variable indicates whether the first line of the wall being drawn has been drawn (drawn is true, not drawn is false).
     var firstLineDrawn = false
-    
+    /**
+     This initializer sets up the walls that need to be drawn on the PDF page.
+     - Parameters:
+        - wallsToDraw: this input is an array of walls that should be drawn on the PDF page.
+     */
     init?(_ wallsToDraw : [WallModel]) {
         self.wallsToDraw = wallsToDraw
         super.init()
     }
-    // this method draws wall starting at the bottom left of the page and going up, it then moves to the right and starts drawing up from the bottom again
-    // it returns walls that would not fit on itself (the page)
+    /**
+     This function draws wall starting at the bottom left of the PDF page and going up, it then moves to the right and starts drawing up from the bottom again.
+     - Parameters:
+        - box: this is the display area the paths are drawn in
+     - Returns:
+        - [WallModel]: this functions returns any walls that would not fit on itself (the page) without getting cut off
+     */
     func drawPaths(for box: PDFDisplayBox)->[WallModel] {
+        // offsets from the edges of the PDF page
         var xOffset = fileHandlingControl.margin*inchScale
         var yOffset = fileHandlingControl.margin*inchScale
         var maxXSoFar = fileHandlingControl.margin*inchScale
@@ -38,7 +49,7 @@ class BoxDesignPDFPage : PDFPage {
             var lineToPoint = NSPoint()
             
             // if vertical space is used up, change xOffset to be beside it, and reset y-offset so drawing starts at bottom of page again
-            // only if there's still horizontal space
+            // only if there's still horizontal space though
             if (yOffset + wall.length * inchScale > fileHandlingControl.pdfHeight*inchScale - fileHandlingControl.margin*inchScale) {
                 // if horizontal space is used up, add the wall to leftover walls and break so that the remaining walls (if any) can also be added
                 if (maxXSoFar + wall.width * inchScale > fileHandlingControl.pdfWidth*inchScale - fileHandlingControl.margin*inchScale) {
@@ -102,7 +113,12 @@ class BoxDesignPDFPage : PDFPage {
         }
         return leftoverWalls
     }
-    
+    /**
+     This function does the actual drawing on the PDF page using the NSBezierPath.stroke() function.
+    - Parameters:
+        - fromPoint: the starting point for the line being drawn
+        - toPoint: the end point for the line being drawn
+     */
     func drawLine(fromPoint: NSPoint, toPoint: NSPoint) {
         let path = NSBezierPath()
         NSColor.black.set()

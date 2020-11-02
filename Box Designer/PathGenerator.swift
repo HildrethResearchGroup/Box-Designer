@@ -1,22 +1,12 @@
-//
-//  PathGenerator.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/6/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 
 /**
 This class is the driver behind rendering the user's desired box correctly on the screen. It handles the tab and overlap join types and ensures the paths are drawn correctly.
  
- - Authors:
-    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: PathGenerator.swift was created on 6/6/2020.
  
  */
 class PathGenerator {

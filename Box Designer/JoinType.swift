@@ -1,21 +1,11 @@
-//
-//  JoinType.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/6/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 /**
  This is the enumerated type for the way the box walls are joined together.
  
- - Authors:
-    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: JoinType.swift was created on 6/6/2020.
  
  */
 enum JoinType {

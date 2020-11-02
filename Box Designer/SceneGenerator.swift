@@ -1,22 +1,12 @@
-//
-//  SceneGenerator.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/7/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 import SceneKit
 /**
  This class handles the continual scene generation that is viewed in the application.
  
- - Authors:
-    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: SceneGenerator.swift was created on 6/7/2020.
  
  */
 class SceneGenerator {

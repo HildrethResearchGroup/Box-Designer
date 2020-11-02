@@ -1,22 +1,12 @@
-//
-//  JSONFileSaver.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/9/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 
 /**
  This class handles 1)  saving the box model data into a JSON file or 2) opening a saved JSON box model into the software.
  
- - Authors:
-    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: JSONFileHandler.swift was created on 6/9/2020.
  
  */
 class JSONFileHandler {

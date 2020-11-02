@@ -2,14 +2,20 @@
 //  LineDrawing.swift
 //  Box Designer
 //
-//  Created by Michael Berg on 9/15/20.
+//  Created by CSM Field Session Fall 2020 on 9/15/20.
 //  Copyright © 2020 Hildreth Research Group. All rights reserved.
 //
 
 import Foundation
 import SceneKit
 import Cocoa
-
+/**
+ - TODO: documenting this class
+ 
+ - Authors: CSM Field Session Fall 2020 and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: LineDrawing.swift was created on 9/15/2020.
+ */
 class LineDrawing{
     //this class is intended to make 3d shapes from paths
     //this will not work with paths with curves

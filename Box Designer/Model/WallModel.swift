@@ -1,23 +1,12 @@
-//
-//  WallModel.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/6/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 import SceneKit.SCNGeometry
 /**
  This class provides the structure a single wall in the box model.
  
- - Authors:
-    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
- 
- - Copyright:
-    - Copyright © 2020 Hildreth Research Group. All rights reserved.
- 
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: WallModel.swift was created on 6/6/2020.
  */
 class WallModel {
 

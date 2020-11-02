@@ -8,7 +8,7 @@ This is a box designer that is designed to be used with a Glowforge laser-cutter
 
 ### Usage
 
-The designer has 3 key tool sections: Dimensions, Joining, and Miscellaneous. The dimensions has four inputs and two option. You can change the length, width, height, and material thickness. Additionally, there is the option to change if these dimensions refer to the outside or inside of the box. The sides of the boxes can be joined differently, either through tabs or simple overlapping. The number of tabs can also be adjusted. In the Miscellaneous section, there are options to take the lid on and off as well as add or remove internal dividors.
+The designer has 3 key tool sections: Dimensions, Joining, and Miscellaneous. The dimensions has four inputs and two option. You can change the length, width, height, and material thickness. Additionally, there is the option to change if these dimensions refer to the outside or inside of the box. The sides of the boxes can be joined differently, either through tabs or simple overlapping. The number of tabs can also be adjusted. In the Miscellaneous section, there are options to take the lid on and off as well as add or remove internal dividers.
 
 ### Copyright
 Copyright © 2020 Hildreth Research Group. All rights reserved.
@@ -43,6 +43,6 @@ Additionally, CTRL + D will open the dimensions window, CTRL + J will open the J
 
 * The Apple Markdown syntax is used to document this project. The HTML rendering of the documentation is created using jazzy. To get jazzy on macOS:
 * [sudo] gem install jazzy
-* If you run "jazzy --min-acl private" in your root project folder (private ensures your classes won't be skipped) and you have issues with xcodebuild, try:
+* If you run "jazzy --min-acl private" in your root project folder from the command line and you have issues with xcodebuild, try:
 * jazzy --build-tool-arguments CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO --min-acl private
-* As of now, trying to publish the jazzy-generated documentation at https://hildrethresearchgroup.github.io/Box-Designer/ (our GitHub Pages URL)
+* The jazzy-generated documentation is published at https://hildrethresearchgroup.github.io/Box-Designer/ (HildrethResearchGroup's GitHub Pages URL)

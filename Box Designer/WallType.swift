@@ -14,7 +14,7 @@ import Cocoa
  WallType ensures that the walls will correctly fit together.
  
  - Authors:
-    - CSM Field Session Summer 2020 and Fall 2020.
+    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  
  - Copyright:
     - Copyright © 2020 Hildreth Research Group. All rights reserved.

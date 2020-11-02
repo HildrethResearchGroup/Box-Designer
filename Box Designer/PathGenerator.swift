@@ -13,7 +13,7 @@ import Cocoa
 This class is the driver behind rendering the user's desired box correctly on the screen. It handles the tab and overlap join types and ensures the paths are drawn correctly.
  
  - Authors:
-    - CSM Field Session Summer 2020 and Fall 2020.
+    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  
  - Copyright:
     - Copyright © 2020 Hildreth Research Group. All rights reserved.
@@ -36,7 +36,7 @@ class PathGenerator {
      - Returns:
         - NSBezierPath: this function returns a path that can be drawn in the scene
      */
-    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, nTab: Double?) -> NSBezierPath {
+    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, numberTabs: Double?) -> NSBezierPath {
         // instantiate a new path
         var path = NSBezierPath()
         
@@ -45,7 +45,7 @@ class PathGenerator {
         case JoinType.overlap:
             path = generateOverlapPath(width, length, materialThickness, wallType)
         case JoinType.tab:
-            path = generateTabPath(width, length, materialThickness, wallType, nTab: nTab!)
+            path = generateTabPath(width, length, materialThickness, wallType, nTab: numberTabs!)
         }
         return path
     }

@@ -14,7 +14,7 @@ import SceneKit
  This is the controlling class for exporting the custom box template to PDF or JSON, or opening a saved box template into the application via JSON file.
  
  - Authors:
-    - CSM Field Session Summer 2020 and Fall 2020.
+    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  
  - Copyright:
     - Copyright © 2020 Hildreth Research Group. All rights reserved.

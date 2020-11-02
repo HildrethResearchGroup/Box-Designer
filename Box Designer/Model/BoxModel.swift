@@ -13,7 +13,7 @@ import SceneKit
  This class provides the structure for the compete box model.
  
  - Authors:
-    - CSM Field Session Summer 2020 and Fall 2020.
+    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  
  - Copyright:
     - Copyright © 2020 Hildreth Research Group. All rights reserved.
@@ -208,7 +208,7 @@ class BoxModel {
             /// This updates the current walls' number of tabs.
             if numberTabs != oldValue {
                 for wall in self.walls {
-                    wall.nTab = self.numberTabs
+                    wall.numberTabs = self.numberTabs
                 }
                 /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
@@ -220,7 +220,7 @@ class BoxModel {
         /// This either adds or a removes the lid in the current box model.
         didSet {
             if lidOn != oldValue {
-                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), nTab: numberTabs)
+                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), numberTabs: numberTabs)
                 if (lidOn == false){
                     if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
                         walls.remove(at: index)
@@ -242,7 +242,7 @@ class BoxModel {
         didSet {
             if addInternalSeparator && counterLength == 1 {
                 // add separator in the box
-                let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), nTab: numberTabs)
+                let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), numberTabs: numberTabs)
                 if(addInternalSeparator) {
                     walls.append(innerWallModel)
                     addInternalSeparator = false
@@ -252,7 +252,7 @@ class BoxModel {
             }
                 // add another separator in the box
             else if addInternalSeparator && counterLength == 2 {
-                let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), nTab: numberTabs)
+                let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), numberTabs: numberTabs)
                     if(addInternalSeparator) {
                         walls.append(innerWallModel2)
                         addInternalSeparator  = false
@@ -305,14 +305,14 @@ class BoxModel {
         let offset1 = materialThickness/2
         let offset2 = self.boxWidth - materialThickness/2
         // create the bottom/top walls
-        let wallBottom = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset1), 0.0), nTab: numberTabs)
-        let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), nTab: numberTabs)
+        let wallBottom = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset1), 0.0), numberTabs: numberTabs)
+        let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), numberTabs: numberTabs)
         //left and right walls
-        let wallLeft = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset1), 0.0, 0.0), nTab: numberTabs)
-        let wallRight = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset2), 0.0, 0.0), nTab: numberTabs)
+        let wallLeft = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset1), 0.0, 0.0), numberTabs: numberTabs)
+        let wallRight = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset2), 0.0, 0.0), numberTabs: numberTabs)
         //back and front walls
-        let wallFront = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset1)), nTab: numberTabs)
-        let wallBack = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset2)), nTab: numberTabs)
+        let wallFront = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset1)), numberTabs: numberTabs)
+        let wallBack = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset2)), numberTabs: numberTabs)
         let walls = [wallBottom,wallLeft, wallRight, wallFront, wallBack, wallLid]
         // add walls to array
         self.walls = walls

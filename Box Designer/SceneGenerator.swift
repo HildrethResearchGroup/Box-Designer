@@ -13,7 +13,7 @@ import SceneKit
  This class handles the continual scene generation that is viewed in the application.
  
  - Authors:
-    - CSM Field Session Summer 2020 and Fall 2020.
+    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  
  - Copyright:
     - Copyright © 2020 Hildreth Research Group. All rights reserved.

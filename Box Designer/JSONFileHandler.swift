@@ -13,7 +13,7 @@ import Cocoa
  This class handles 1)  saving the box model data into a JSON file or 2) opening a saved JSON box model into the software.
  
  - Authors:
-    - CSM Field Session Summer 2020 and Fall 2020.
+    - CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  
  - Copyright:
     - Copyright © 2020 Hildreth Research Group. All rights reserved.
@@ -92,7 +92,7 @@ class JSONFileHandler {
                 textToWrite += "\t\t\"joinType\": \"\(model.walls[wall].joinType)\",\n"
                 
                 //tabWidth, which may be nil (null for JSON)
-                if let tabWidth = model.walls[wall].nTab {
+                if let tabWidth = model.walls[wall].numberTabs {
                     textToWrite += "\t\t\"tabWidth\": \(tabWidth)\n"
                 } else {
                     textToWrite += "\t\t\"tabWidth\": null\n"

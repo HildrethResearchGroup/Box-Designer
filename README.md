@@ -39,3 +39,9 @@ Additionally, CTRL + D will open the dimensions window, CTRL + J will open the J
 * Storage: 2 MB Available Space
 * Sound Card: None
 
+### Notes
+
+* The Apple Markdown syntax is used to document this project. The HTML rendering of the documentation is created using jazzy. To get jazzy on macOS:
+* [sudo] gem install jazzy
+* If you run "jazzy --min-acl private" in your root project folder (private ensures your classes won't be skipped) and you have issues with xcodebuild, try:
+* jazzy --build-tool-arguments CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO --min-acl private

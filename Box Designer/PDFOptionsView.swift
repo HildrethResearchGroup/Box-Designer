@@ -36,7 +36,7 @@ class PDFOptionsView: NSView {
     /// This variable is the check box that indicates whether the user wants each component on a separate page, or the default layout (checked = one component on each page).
     @IBOutlet weak var oneComponentButton: NSButton!
     /**
-     This is an inherited initializer. See [Apple Documentation - NSVIew.init()] (https://developer.apple.com/documentation/appkit/nsview/1483458-init) for more information.
+     This is an inherited initializer. See [Apple Documentation - NSView.init()] (https://developer.apple.com/documentation/appkit/nsview/1483458-init) for more information.
      - Parameters:
         - frame: this is the area the view will be constrained to.
      */

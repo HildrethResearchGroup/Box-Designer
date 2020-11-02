@@ -141,5 +141,8 @@ class SceneGenerator {
  This is a custom protocol whose sole purpose is to update the scene whenever the user adjusts the inputs in the app.
  */
 protocol SceneGeneratorDelegate {
+    /**
+     This function updates the singleton scene object that is viewed in the app.
+     */
     func updateScene()
 }

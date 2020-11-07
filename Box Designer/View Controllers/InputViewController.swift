@@ -16,6 +16,8 @@ class InputViewController: NSViewController, NSTextDelegate {
     static let unitConversionFactor = 25.4
     /// This variable determines the minimum number of tabs that can be made, as the path generation can only handle more than this number of tabs.
     let minTabs = 3.0
+    /// Records the previous amount of tabs entered by the user.
+    var previousTabEntry = 0.0
     /// This variable is the selection handling singleton.
     let selectionHandling = SelectionHandling.shared
     /// This variable is the file handling control singleton.
@@ -270,6 +272,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         
         numberTabTextField.isEnabled = false
         numberTabTextField.doubleValue = 3
+        previousTabEntry = minTabs
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
         
@@ -413,21 +416,25 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     
     @IBAction func numberTabChanged(_ sender: Any) {
-        if numberTabTextField.doubleValue < 3.0 {
+        // If the number of tabs is too low, display a warning dialog
+        // Warning dialog gives the user the choice to either:
+        if numberTabTextField.doubleValue < minTabs {
+            // Default to the minimum number of tabs
             if tabDialog() {
+                boxModel.numberTabs = minTabs
                 numberTabTextField.doubleValue = minTabs
-        if numberTabTextField.doubleValue < 3.0 {
-            if tabDialog() {
-                numberTabTextField.doubleValue = minTabs
-                boxModel.nTab = minTabs
+                boxModel.lidOn = !boxModel.lidOn
+            }
+            // Cancel the tab operation, reseting the tab count to its previous number
+            else {
+                numberTabTextField.doubleValue = previousTabEntry
             }
         }
         else {
-            boxModel.nTab = numberTabTextField.doubleValue
+            boxModel.numberTabs = numberTabTextField.doubleValue
+            boxModel.lidOn = !boxModel.lidOn
+            previousTabEntry = numberTabTextField.doubleValue
         }
-
-        boxModel.lidOn = !boxModel.lidOn
-
     }
     
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {

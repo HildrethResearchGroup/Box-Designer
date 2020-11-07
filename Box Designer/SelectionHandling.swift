@@ -1,18 +1,17 @@
-//
-//  SelectionHandeling.swift
-//  Box Designer
-//
-//  Created by CSCI370 on 9/14/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import SceneKit
 import Cocoa
-
-class SelectionHandeling{
+/**
+ This class handles the selection and highlighting of components that the user wants to interact with.
+ - TODO: documenting this class
+ - Authors: CSM Field Session Fall 2020 and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: SelectionHandling.swift was created on 9/14/2020.
+ 
+ */
+class SelectionHandling{
     
-    static let shared = SelectionHandeling()
+    static let shared = SelectionHandling()
     let shapeDepth: CGFloat = 0.0001
     var inside: Bool = false
     
@@ -21,14 +20,31 @@ class SelectionHandeling{
         willSet{
             
             //reset the color
-            if(nodeColor != nil){
+            if(nodeColor != nil && selectedNode != nil){
                 selectedNode!.enumerateChildNodes { (node, stop) in
                     node.removeFromParentNode()
                 }
                 selectedNode!.geometry?.firstMaterial?.diffuse.contents = nodeColor
-                nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                if(newValue != nil){
+                    nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                }
             }else{
-                nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                if(newValue != nil){
+                    nodeColor = newValue!.geometry?.firstMaterial?.diffuse.contents as? NSColor
+                }
+            }
+        }
+    }
+    
+    var hoverNode: SCNNode?{
+        willSet{
+            if(hoverNode == nil){
+                newValue?.isHidden = false
+            }else{
+                if(newValue != hoverNode){
+                    newValue?.isHidden = false
+                    hoverNode?.isHidden = true
+                }
             }
         }
     }
@@ -52,11 +68,17 @@ class SelectionHandeling{
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
         let lineShape = LineDrawing(path, thickness, insideLine: insideSelection)
+        
+        let lines = [Line(NSMakePoint(0.0, 0.0), NSMakePoint(0.0, 1.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 1.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(2.0, 2.0)), Line(NSMakePoint(0.0, 1.0), NSMakePoint(1.0, 1.0))]
+        _ = lineShape.findClosedPath(lines)
+        
+        
         if(idvLines){
             let shapes = lineShape.generateIndv()
             for shape in shapes{
                 let locNode = SCNNode(geometry: shape)
                 locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+                locNode.isHidden = true
                 self._addChild(locNode)
             }
         }else{

@@ -1,19 +1,22 @@
-//
-//  JSONFileSaver.swift
-//  Box Designer
-//
-//  Created by Grace Clark on 6/9/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import Cocoa
 
+/**
+ This class handles 1)  saving the box model data into a JSON file or 2) opening a saved JSON box model into the software.
+ 
+ - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: JSONFileHandler.swift was created on 6/9/2020.
+ 
+ */
 class JSONFileHandler {
     
-    /*
-     As the BoxModel's state contains more variables, these functions also need to ensure that they are
-     a) saving all state and b) reading in proper variables from the JSON file for the incoming model.
+    /**
+     This function is called by FileHandlingControl when the user indicates they want to save as .json.
+     - Parameters:
+        - targetURL: this is the path the user wants to save at, as indicated in the NSSavePanel
+        - model: this ensures the current box model is being saved
+     - Throws: if String.write(to: atomically: encoding:) does not work, throw an exception
      */
     
     
@@ -79,7 +82,7 @@ class JSONFileHandler {
                 textToWrite += "\t\t\"joinType\": \"\(model.walls[wall].joinType)\",\n"
                 
                 //tabWidth, which may be nil (null for JSON)
-                if let tabWidth = model.walls[wall].nTab {
+                if let tabWidth = model.walls[wall].numberTabs {
                     textToWrite += "\t\t\"tabWidth\": \(tabWidth)\n"
                 } else {
                     textToWrite += "\t\t\"tabWidth\": null\n"
@@ -108,8 +111,8 @@ class JSONFileHandler {
             textToWrite += "\t\"joinType\": \"\(model.joinType)\",\n"
             
             //tabWidth, which may be null
-            if let tabWidth = model.nTab {
-                textToWrite += "\t\"tabWidth\": \(tabWidth),\n"
+            if let numberTabs = model.numberTabs {
+                textToWrite += "\t\"tabWidth\": \(numberTabs),\n"
             } else {
                 textToWrite += "\t\"tabWidth\": null,\n"
             }
@@ -118,7 +121,7 @@ class JSONFileHandler {
             textToWrite += "\t\"lidOn\": \"\(model.lidOn)\",\n"
             
             //has InnerWall as true or false
-            textToWrite += "\t\"lengthWall\": \"\(model.lengthWall)\"\n"
+            textToWrite += "\t\"lengthWall\": \"\(model.addInternalSeparator)\"\n"
             
             //end the boxModel object on same indentation
             textToWrite += "}"
@@ -130,6 +133,13 @@ class JSONFileHandler {
         }
     }
     
+    /**
+     This function is not finished. When finished, it attempts to take in a JSON file and convert it into a box model that can be displayed in the application.
+     - Parameters:
+        - targetURL: this is the location of the saved JSON file that will be used to create a BoxModel
+     - Returns:
+        - BoxModel: if all goes well, this function returns a BoxModel
+    */
     func convertJSONToBoxModel(_ targetURL: URL) throws -> BoxModel {
         
         var textToRead = String()
@@ -190,7 +200,7 @@ class JSONFileHandler {
                     //get the joinType
                 }
                 
-                if newLine.starts(with: "\t\t\"tabWidth\":") {
+                if newLine.starts(with: "\t\t\"numberTabs\":") {
                     //get the tabWidth
                     //may be null
                 }

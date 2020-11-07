@@ -2,14 +2,20 @@
 //  LineDrawing.swift
 //  Box Designer
 //
-//  Created by Michael Berg on 9/15/20.
+//  Created by CSM Field Session Fall 2020 on 9/15/20.
 //  Copyright © 2020 Hildreth Research Group. All rights reserved.
 //
 
 import Foundation
 import SceneKit
 import Cocoa
-
+/**
+ - TODO: documenting this class
+ 
+ - Authors: CSM Field Session Fall 2020 and Dr. Owen Hildreth.
+ - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
+ - Note: LineDrawing.swift was created on 9/15/2020.
+ */
 class LineDrawing{
     //this class is intended to make 3d shapes from paths
     //this will not work with paths with curves
@@ -28,6 +34,7 @@ class LineDrawing{
     private var lineThickness: CGFloat
     private var path: NSBezierPath
     
+    var snapSize: CGFloat = 0.1
     var shape:SCNShape = SCNShape()
     
     var insidePath = NSBezierPath()
@@ -48,11 +55,10 @@ class LineDrawing{
         for x in 0...(pointArray.count - 2){
             if(pointArray[x] != pointArray[x+1]){
                 let tempLine = Line(pointArray[x], pointArray[x+1], thickness: self.lineThickness)
+                //ensure that no points are added
                 if(!tempLine.point()){
                     returnValue.append(tempLine)
-                    print(tempLine)
-                }
-                
+                } 
             }
         }
         return returnValue
@@ -188,6 +194,113 @@ class LineDrawing{
         grandPath.append(outsidePath)
     }
     
+    func findClosedPath(_ lines:[Line])->[[NSPoint]]{
+        var points: [NSPoint] = []
+        var connections: [Int: Set<Int>] = [:]
+        
+
+        for idvLine in lines{
+            points.append(idvLine.topPoint)
+            points.append(idvLine.bottomPoint)
+        }
+        //the dictionary index for the points corispond to the index of points in unique points
+        var uniquePoints: [NSPoint] = []
+        for x in NSSet(array: points){uniquePoints.append(x as! NSPoint)}
+        print(uniquePoints)
+        for x in 0..<uniquePoints.count{
+            
+            let corner = uniquePoints[x]
+            var connectionSet = Set<Int>()
+            
+            for idvLine in lines{
+                if(idvLine.topPoint == corner){
+                    connectionSet.insert(uniquePoints.firstIndex(of: idvLine.bottomPoint)!)
+                }else if(idvLine.bottomPoint == corner){
+                    connectionSet.insert(uniquePoints.firstIndex(of: idvLine.topPoint)!)
+                }
+            }
+            connections[x] = connectionSet
+        }
+        for (index, nodes) in connections{
+            if(nodes.count <= 1){
+                connections.removeValue(forKey: index)
+                for (indexS, _) in connections{
+                    connections[indexS]?.remove(index)
+                }
+            }
+        }
+        print(connections)
+        var currentPath:[Int]
+        for (index, _) in connections{
+            currentPath = [index]
+            recursiveSearch(currentPath, connections)
+        }
+        currentPaths = removeDuplicates(currentPaths)
+        
+        //put the cordinates back in the array
+        var returnValue:[[NSPoint]] = []
+        for indvPath in currentPaths{
+            var pointArray:[NSPoint] = []
+            for index in 0..<indvPath.count{
+                pointArray.append(uniquePoints[indvPath[index]])
+            }
+            returnValue.append(pointArray)
+        }
+        return returnValue
+    }
+    //may want to refactor this design
+    var currentPaths:Set<[Int]> = Set()
+    
+    func recursiveSearch(_ currentPath:[Int], _ connections: [Int: Set<Int>]){
+        var returnValue = currentPath
+        for locConnection in connections[currentPath.last!]!{
+            if (returnValue.contains(locConnection)){continue}
+            returnValue.append(locConnection)
+            if(isValidLoop(returnValue, connections)){
+                currentPaths.insert(returnValue)
+            }
+            recursiveSearch(returnValue, connections)
+            _ = returnValue.popLast()
+        }
+        //Does not run if empty
+    }
+    
+    func removeDuplicates(_ paths:Set<[Int]>)->Set<[Int]>{
+        var returnValue = paths
+        for path in returnValue{
+            var delete = false
+            for comparePath in returnValue{
+                if(Set(path) == Set(comparePath) && path != comparePath){
+                    delete = true
+                }
+            }
+            if(delete){
+                returnValue.remove(path)
+                delete = false
+            }
+            
+        }
+        return returnValue
+    }
+    
+    func isValidLoop(_ currentPath:[Int], _ connections: [Int: Set<Int>])->Bool{
+        //verify correct size
+        if(currentPath.count <= 2){return false}
+        for a1 in 0..<currentPath.count{
+            if(a1 == (currentPath.count - 1)){
+                if(!(connections[currentPath.first!]!.contains(currentPath.last!))){
+                    return false
+                }
+            }else{
+                if(!(connections[currentPath[a1]]!.contains(currentPath[a1+1]))){
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+    
     func generateShape(shapeExtrusionDepth:CGFloat = 0.001)->SCNShape{
         var returnValue: SCNShape
         if(insideLine){
@@ -223,17 +336,31 @@ class LineDrawing{
             self.updatePaths(self.getLines(self.path))
         }else{
             let lines = self.getLines(self.path)
+            var points: [NSPoint] = []
+
             for idvLine in lines{
-                print(idvLine)
+                points.append(idvLine.topPoint)
+                points.append(idvLine.bottomPoint)
                 let shapePath = idvLine.rectanglePath()
-                let point: NSPointPointer = UnsafeMutablePointer<NSPoint>.allocate(capacity: 3)
-                    //gets the points in a path
-                for x in 0..<shapePath.elementCount{
-                    shapePath.element(at: x, associatedPoints: point)
-                    print(point[0])
-               }
+                shapes.append(SCNShape(path: shapePath, extrusionDepth: 0.0001))
                 
-               shapes.append(SCNShape(path: shapePath, extrusionDepth: 0.0001))
+                //draw midpoint triangle
+                let center = idvLine.midpoint()
+                let trianglePath = NSBezierPath()
+                
+                trianglePath.move(to: NSMakePoint(center.x - snapSize/2, center.y - snapSize/2))
+                trianglePath.relativeLine(to: NSMakePoint(snapSize/2, snapSize))
+                trianglePath.relativeLine(to: NSMakePoint(snapSize/2, -snapSize))
+                trianglePath.close()
+                shapes.append(SCNShape(path: trianglePath, extrusionDepth: 0.0001))
+            }
+            //eliminates duplicates
+            let uniquePoints = Array(NSSet(array: points))
+            for point in uniquePoints{
+                //draw corner squares
+                let corner = point as! NSPoint
+                let circlePath = NSBezierPath(rect: NSMakeRect(corner.x - (snapSize/2), corner.y - (snapSize/2), snapSize, snapSize))
+                shapes.append(SCNShape(path: circlePath, extrusionDepth: 0.0001))
             }
         }
         return shapes

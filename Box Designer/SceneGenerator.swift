@@ -56,7 +56,7 @@ class SceneGenerator {
             //adjust position and rotation
             newNode.position = wall.position
             switch (wall.wallType) {
-            case WallType.largeCorner:
+            case WallType.topSide, WallType.bottomSide:
                 //rotate 90 degrees around +x axis
                 newNode.rotation = SCNVector4Make(1, 0, 0, CGFloat.pi/2)
             case WallType.smallCorner:

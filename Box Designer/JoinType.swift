@@ -12,4 +12,5 @@ import Cocoa
 enum JoinType {
     case tab
     case overlap
+    case slot
 }

@@ -28,7 +28,7 @@ class BoxModel {
         didSet {
             if boxWidth != oldValue {
                 for wall in self.walls {
-                    if (wall.wallType == WallType.largeCorner) {
+                    if (wall.wallType == WallType.topSide || wall.wallType == WallType.bottomSide) {
                         wall.width = boxWidth
                     } else if (wall.wallType == WallType.smallCorner) {
                         wall.width = boxWidth
@@ -56,7 +56,7 @@ class BoxModel {
         didSet {
             if boxLength != oldValue {
                 for wall in self.walls {
-                    if (wall.wallType == WallType.largeCorner) {
+                    if (wall.wallType == WallType.topSide || wall.wallType == WallType.bottomSide) {
                         wall.length = boxLength
                     } else if (wall.wallType == WallType.smallCorner) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue - materialThickness/2))) {
@@ -89,7 +89,7 @@ class BoxModel {
         didSet {
             if boxHeight != oldValue {
                 for wall in self.walls {
-                    if (wall.wallType == WallType.largeCorner) {
+                    if (wall.wallType == WallType.topSide || wall.wallType == WallType.bottomSide) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(oldValue - materialThickness/2), 0.0)) {
                             wall.position = SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness/2), 0.0)
                         }
@@ -194,9 +194,9 @@ class BoxModel {
     var lidOn: Bool {
         didSet {
             if lidOn != oldValue {
-                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), tabWidth: nTab)
+                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.topSide, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), tabWidth: nTab)
                 if (lidOn == false){
-                    if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
+                    if let index = walls.lastIndex(where: {$0.wallType == WallType.topSide}) {
                         walls.remove(at: index)
                     }
                 }else{
@@ -267,8 +267,18 @@ class BoxModel {
     //This initializer creates the default box model which is loaded whenever the application is launched
     init() {
         //bottom and top walls
+        let wallBottom = WallModel(4.0, 4.0, 0.50, WallType.bottomSide, JoinType.overlap, SCNVector3Make(0.0, 0.25, 0.0), tabWidth: nil)
+        let wallLid = WallModel(4.0, 4.0, 0.50, WallType.topSide, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
+        
+        /*
+         - TEST NEW WALL INIT METHOD
+         - These vars are old code saved in case I need them
+         - DELETE AFTER SOLUTION FOUND
+         
         let wallBottom = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 0.25, 0.0), tabWidth: nil)
         let wallLid = WallModel(4.0, 4.0, 0.50, WallType.largeCorner, JoinType.overlap, SCNVector3Make(0.0, 3.75, 0.0), tabWidth: nil)
+        */
+        
         //left and right walls
         let wallLeft = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(0.25, 0.0, 0.0), tabWidth: nil)
         let wallRight = WallModel(4.0, 4.0, 0.50, WallType.longCorner, JoinType.overlap, SCNVector3Make(3.75, 0.0, 0.0), tabWidth: nil)

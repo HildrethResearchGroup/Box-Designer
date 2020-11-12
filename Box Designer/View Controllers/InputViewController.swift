@@ -321,6 +321,9 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
             tabWidthSlider.isEnabled = true
+        } else if choice == 2 {
+            boxModel.joinType = JoinType.slot
+            tabWidthSlider.isEnabled = false
         }
     }
     
@@ -369,9 +372,29 @@ class InputViewController: NSViewController, NSTextDelegate { // modelUpdatingDe
     @IBAction func minusButtonLengthwise(_ sender: Any) {
         boxModel.removeInnerWall = true
     }
+    
+    //ADD CONTEXT MENU
+    //functions to add and remove interior walls
+    
+    var contextMenu: NSMenu = {
+        let rightClickMenu = NSMenu()
+        rightClickMenu.addItem(withTitle: "Add Interior Wall", action: #selector(plusButtonLengthwise(_:)), keyEquivalent: "")
+        rightClickMenu.addItem(withTitle: "Remove Interior Wall", action: #selector(minusButtonLengthwise(_:)), keyEquivalent: "")
+        return rightClickMenu
+    }()
+    
+    override func rightMouseDown(with event: NSEvent) {
+        NSMenu.popUpContextMenu(contextMenu, with: event, for: boxView)
+    }
+    
+    //ADD ABILITY TO DRAG WALLS
+    
+//    override func leftMouseDragged(){
+//
 }
 
 protocol FileHandlingDelegate {
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?)
     func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel
 }
+

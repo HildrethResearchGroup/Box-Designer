@@ -21,6 +21,7 @@ class BoxViewController: NSViewController, SceneGeneratorDelegate {
         self.boxView.allowsCameraControl = false
         self.boxView.scene = sceneGenerator.scene
         self.boxView.needsDisplay = true
+        
     }
     
     override func viewDidLoad() {

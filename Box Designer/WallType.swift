@@ -21,7 +21,7 @@ enum WallType {
      if overlapping join, this corresponds to the wall that "covers" all of its side
      if tabbed join, this corresponds to the wall whose corners have an outward tab in both directions
      */
-    case largeCorner
+    //case largeCorner
     
     /*
      case smallCorner: parallel to the x-y plane
@@ -36,4 +36,16 @@ enum WallType {
      if tabbed join, this corresponds to the wall whose corners have an outward tab in one direction and an outward tab in the other direction
      */
     case longCorner
+    
+    /*
+     case bottomSide: bottom of box
+     added as quickfix to accomodate slotted join and future box designs
+     */
+    case bottomSide
+    
+    /*
+     case topSide: top of box
+     added as quickfix to accomodate slotted join and future box designs
+     */
+    case topSide
 }

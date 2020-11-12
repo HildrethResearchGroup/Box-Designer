@@ -31,6 +31,92 @@ class PathGenerator {
                  */
                 path = generateOverlapPath(width, length, materialThickness, wallType)
             }
+        case JoinType.slot:
+            path = generateSlotPath(width, length, materialThickness, wallType)
+        }
+        return path
+    }
+    
+    //Slot Join path generation handler
+    static func generateSlotPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType) -> NSBezierPath {
+        let path = NSBezierPath()
+        switch(wallType) {
+        //top & bottom slide slots
+        case WallType.topSide:
+            path.move(to: CGPoint(x: 0.0-materialThickness, y: 0.0-materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: 0.0-materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: 0.0))
+            path.line(to: CGPoint(x: width/2, y: 0.0))
+            path.line(to: CGPoint(x: width/2, y: 0.0 + materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: 0.0 + materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: length - materialThickness))
+            path.line(to: CGPoint(x: width/2, y: length - materialThickness))
+            path.line(to: CGPoint(x: width/2, y: length))
+            path.line(to: CGPoint(x: width+materialThickness, y: length))
+            path.line(to: CGPoint(x: width+materialThickness, y: length+materialThickness))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: length+materialThickness))
+            path.close()
+            
+        case WallType.bottomSide:
+            path.move(to: CGPoint(x: 0.0-materialThickness, y: 0.0-materialThickness))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: length+materialThickness))
+            path.line(to: CGPoint(x: 0.0, y: length+materialThickness))
+            path.line(to: CGPoint(x: 0.0, y: length/2))
+            path.line(to: CGPoint(x: 0.0+materialThickness, y: length/2))
+            path.line(to: CGPoint(x: 0.0+materialThickness, y: length+materialThickness))
+            
+            
+            path.line(to: CGPoint(x: width - materialThickness, y: length+materialThickness))
+            path.line(to: CGPoint(x: width - materialThickness, y: length/2))
+            path.line(to: CGPoint(x: width, y: length/2))
+            path.line(to: CGPoint(x: width, y: length + materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: length+materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: 0.0-materialThickness))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: 0.0-materialThickness))
+            path.close()
+           
+        //sides running widthwise
+        case WallType.smallCorner:
+            path.move(to: CGPoint(x: 0.0-materialThickness, y: materialThickness))
+            path.line(to: CGPoint(x: 0.0, y: materialThickness))
+            path.line(to: CGPoint(x: 0.0, y: length/2))
+            path.line(to: CGPoint(x: materialThickness, y:length/2))
+            path.line(to: CGPoint(x: materialThickness, y:materialThickness))
+            path.line(to: CGPoint(x: width-materialThickness, y:materialThickness))
+            path.line(to: CGPoint(x: width-materialThickness, y:length/2))
+            path.line(to: CGPoint(x: width, y: length/2))
+            path.line(to: CGPoint(x: width, y: materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: length+materialThickness))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: length+materialThickness))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: length))
+            path.line(to: CGPoint(x: width/2, y: length))
+            path.line(to: CGPoint(x: width/2, y: length-materialThickness))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: length-materialThickness))
+            path.close()
+           
+        
+        //sides running lengthwise
+        case WallType.longCorner:
+            path.move(to: CGPoint(x: 0.0-materialThickness, y: materialThickness))
+            path.line(to: CGPoint(x: width/2, y: materialThickness))
+            path.line(to: CGPoint(x: width/2, y: 0.0))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: 0.0))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: 0.0-materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: 0.0-materialThickness))
+            path.line(to: CGPoint(x: width+materialThickness, y: length-materialThickness))
+            path.line(to: CGPoint(x: width, y: length-materialThickness))
+            path.line(to: CGPoint(x: width, y: length/2))
+            path.line(to: CGPoint(x: width - materialThickness, y: length/2))
+            path.line(to: CGPoint(x: width - materialThickness, y: length-materialThickness))
+            path.line(to: CGPoint(x: 0.0 + materialThickness, y: length-materialThickness))
+            path.line(to: CGPoint(x: 0.0 + materialThickness, y: length/2))
+            path.line(to: CGPoint(x: 0.0 , y: length/2))
+            path.line(to: CGPoint(x: 0.0 , y: length-materialThickness))
+            path.line(to: CGPoint(x: 0.0-materialThickness, y: length-materialThickness))
+            path.close()
+            
+
         }
         return path
     }
@@ -38,7 +124,8 @@ class PathGenerator {
     static func generateOverlapPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType) -> NSBezierPath {
         let path = NSBezierPath()
         switch (wallType) {
-        case WallType.largeCorner:
+        case WallType.topSide, WallType.bottomSide:
+       // case Walltype.bottomSide:
             path.move(to: CGPoint(x: 0.0, y: 0.0))
             path.line(to: CGPoint(x: 0.0, y: length))
             path.line(to: CGPoint(x: width, y: length))
@@ -66,7 +153,7 @@ class PathGenerator {
     static func generateTabPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, tabWidth internalTabWidth: Double) -> NSBezierPath {
         var path = NSBezierPath()
         switch (wallType) {
-        case WallType.largeCorner:
+        case WallType.topSide, WallType.bottomSide:
             //path = NSBezierPath()
             path = generateTabLargeCornerPath(width, length, materialThickness, Int(internalTabWidth))
         case WallType.longCorner:

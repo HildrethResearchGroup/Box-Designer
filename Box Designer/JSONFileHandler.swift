@@ -22,6 +22,10 @@ class JSONFileHandler {
     
     func saveAsJSON(to targetURL: URL, _ model: BoxModel) throws {
         do {
+            var walls = [WallModel]()
+            for wall in model.walls.values {
+                walls.append(wall)
+            }
             var textToWrite = String() //this will hold the eventual finished string
             
             //start the boxModel object
@@ -35,10 +39,10 @@ class JSONFileHandler {
                 
                 //path
                 textToWrite += "\t\t\"path\": {\n"
-                for element in 0 ..< model.walls[wall].path.elementCount {
+                for element in 0 ..< model.walls[wall]!.path.elementCount {
                     
                     var point = NSPoint()
-                    let elementType = model.walls[wall].path.element(at: element, associatedPoints: &point)
+                    let elementType = model.walls[wall]!.path.element(at: element, associatedPoints: &point)
                     
                     /*
                      Points in the path are stored as CGFloat.
@@ -64,25 +68,25 @@ class JSONFileHandler {
                 textToWrite += "\t\t}\n"
                 
                 //materialThickness
-                textToWrite += "\t\t\"materialThickness\": \(model.walls[wall].materialThickness),\n"
+                textToWrite += "\t\t\"materialThickness\": \(model.walls[wall]!.materialThickness),\n"
                 
-                //position, stored as an array
-                textToWrite += "\t\t\"position\": [\(model.walls[wall].position.x), \(model.walls[wall].position.y), \(model.walls[wall].position.z)],\n"
+                //position, sto?red as an array
+                textToWrite += "\t\t\"position\": ![\(model.walls[wall]!.position.x), \(model.walls[wall]!.position.y), \(model.walls[wall]!.position.z)],\n"
                 
                 //width
-                textToWrite += "\t\t\"width\": \(model.walls[wall].width),\n"
+                textToWrite += "\t\t\"width\": \(model.walls[wall]!.width),\n"
                 
                 //length
-                textToWrite += "\t\t\"length\": \(model.walls[wall].length),\n"
+                textToWrite += "\t\t\"length\": \(model.walls[wall]!.length),\n"
                 
                 //wallType
-                textToWrite += "\t\t\"wallType\": \"\(model.walls[wall].wallType)\",\n"
+                textToWrite += "\t\t\"wallType\": \"\(model.walls[wall]!.wallType)\",\n"
                 
                 //joinType
-                textToWrite += "\t\t\"joinType\": \"\(model.walls[wall].joinType)\",\n"
+                textToWrite += "\t\t\"joinType\": \"\(model.walls[wall]!.joinType)\",\n"
                 
                 //tabWidth, which may be nil (null for JSON)
-                if let tabWidth = model.walls[wall].numberTabs {
+                if let tabWidth = model.walls[wall]!.numberTabs {
                     textToWrite += "\t\t\"tabWidth\": \(tabWidth)\n"
                 } else {
                     textToWrite += "\t\t\"tabWidth\": null\n"
@@ -117,11 +121,11 @@ class JSONFileHandler {
                 textToWrite += "\t\"tabWidth\": null,\n"
             }
             
-            //lidOn as true or false
-            textToWrite += "\t\"lidOn\": \"\(model.lidOn)\",\n"
-            
-            //has InnerWall as true or false
-            textToWrite += "\t\"lengthWall\": \"\(model.addInternalSeparator)\"\n"
+//            //lidOn as true or false
+//            textToWrite += "\t\"lidOn\": \"\(model.lidOn)\",\n"
+//            
+//            //has InnerWall as true or false
+//            textToWrite += "\t\"lengthWall\": \"\(model.addInternalSeparator)\"\n"
             
             //end the boxModel object on same indentation
             textToWrite += "}"

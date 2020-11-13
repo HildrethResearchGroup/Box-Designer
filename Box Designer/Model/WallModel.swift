@@ -9,7 +9,8 @@ import SceneKit.SCNGeometry
  - Note: WallModel.swift was created on 6/6/2020.
  */
 class WallModel {
-
+    /// This variable indicates the index a wall is in the BoxModel.walls array (in order to delete it)
+    private let index : Int
     /*
      These attributes are those strictly necessary for
      1) drawing the wall's outline as a pdf
@@ -82,6 +83,10 @@ class WallModel {
         self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, numberTabs: self.numberTabs)
     }
     
+    func getIndex() -> Int {
+        return self.index
+    }
+    
     /**
      This initializer creates a wall from its parameters.
     - Note: The wall does not need a third dimension, as (for a single wall), the third dimension is technically material thickness.
@@ -103,5 +108,7 @@ class WallModel {
         self.numberTabs = numberTabs
         self.position = position
         self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs)
+        self.index = BoxModel.wallIndex
+        BoxModel.wallIndex += 1
     }
 }

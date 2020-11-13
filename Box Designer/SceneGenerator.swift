@@ -48,13 +48,14 @@ class SceneGenerator {
         - boxModel: The scene generation needs to be on the current box model desired by the user so that it can render accurately.
      */
     func generateScene(_ boxModel: BoxModel) {
+        
         self.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
         //ensure that the camera stays on the center on the box
         cameraOrbit.position = SCNVector3Make(CGFloat(boxModel.boxWidth/2), CGFloat(boxModel.boxHeight/2), CGFloat(boxModel.boxLength/2))
         var wallNumber = 0
-        for wall in boxModel.walls {
+        for wall in boxModel.walls.values {
             //create node from wall data
             let newShape = SCNShape(path: wall.path, extrusionDepth: CGFloat(wall.materialThickness))
             let newNode = SCNNode(geometry: newShape)
@@ -75,7 +76,8 @@ class SceneGenerator {
             //adjust colors for ease in differentiating walls
             let brightness = CGFloat(1.0 - Double(wallNumber) / Double(boxModel.walls.count))
             newNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.90, brightness: brightness, alpha: 1.0)
-            
+            // name the node to be able to delete selected component from BoxModel.walls array
+            newNode.name = String(wall.getIndex())
             //add to the rootNode
             scene.rootNode.addChildNode(newNode)
             wallNumber += 1

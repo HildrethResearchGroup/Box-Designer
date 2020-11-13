@@ -14,7 +14,7 @@ class SelectionHandling{
     static let shared = SelectionHandling()
     let shapeDepth: CGFloat = 0.0001
     var inside: Bool = false
-    
+    static var indexOfSelectedWall : Int? = nil
     private var nodeColor: NSColor?
     var selectedNode: SCNNode?{
         willSet{
@@ -68,7 +68,6 @@ class SelectionHandling{
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
         let lineShape = LineDrawing(path, thickness, insideLine: insideSelection)
-        
         let lines = [Line(NSMakePoint(0.0, 0.0), NSMakePoint(0.0, 1.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(0.0, 0.0), NSMakePoint(1.0, 1.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(1.0, 0.0)), Line(NSMakePoint(1.0, 1.0), NSMakePoint(2.0, 2.0)), Line(NSMakePoint(0.0, 1.0), NSMakePoint(1.0, 1.0))]
         _ = lineShape.findClosedPath(lines)
         

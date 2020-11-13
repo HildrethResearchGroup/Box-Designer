@@ -80,7 +80,7 @@ class BoxDesignerPDF {
      */
     func oneComponentPerPageLayout() {
 
-        for wall in boxModel.walls {
+        for wall in boxModel.walls.values {
             // don't need to save walls that weren't drawn for this function because the for loop will ensure all walls are drawn
             var _ = addPage([wall])
         }
@@ -91,8 +91,10 @@ class BoxDesignerPDF {
      - TODO: error handling if the wall components are all too big for the user-inputted size of the PDF
      */
     func defaultPDFDisplay() {
-        
-        var wallsToDraw = boxModel.walls
+        var wallsToDraw = [WallModel]()
+        for wall in boxModel.walls.values {
+            wallsToDraw.append(wall)
+        }
         // keep adding a new page until all walls are drawn
         while !wallsToDraw.isEmpty {
             wallsToDraw = addPage(wallsToDraw)

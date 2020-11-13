@@ -25,7 +25,7 @@ class Ray {
     
     /**
      - TODO:
-     - Note: the angle is based of the x axis going counter clockwise
+     - Note: the angle is based off the x axis going counter clockwise
      - Parameters:
         - distance:
      */

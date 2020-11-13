@@ -67,6 +67,8 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var minusButtonLengthwise: NSButton!
     /// This variable allows users to export their box template directly from the main GUI (they can also do this from the taskbar).
     @IBOutlet weak var exportButton: NSButton!
+    /// This variable allows users to delete the component that is selected in the view.
+    @IBOutlet weak var deleteSelected: NSButton!
     /// This variable indicates which unit the user wants.
     /// - Note: true indicates millimeters, false indicates inches.
     private var mmInch: Bool = false
@@ -160,6 +162,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     // When the mouse button is released, update the camera view of the box
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+        
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
@@ -268,7 +271,7 @@ class InputViewController: NSViewController, NSTextDelegate {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        boxModel = BoxModel()
+        //boxModel = BoxModel()
         
         numberTabTextField.isEnabled = false
         numberTabTextField.doubleValue = 3
@@ -423,7 +426,6 @@ class InputViewController: NSViewController, NSTextDelegate {
             if tabDialog() {
                 boxModel.numberTabs = minTabs
                 numberTabTextField.doubleValue = minTabs
-                boxModel.lidOn = !boxModel.lidOn
             }
             // Cancel the tab operation, reseting the tab count to its previous number
             else {
@@ -432,7 +434,6 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
         else {
             boxModel.numberTabs = numberTabTextField.doubleValue
-            boxModel.lidOn = !boxModel.lidOn
             previousTabEntry = numberTabTextField.doubleValue
         }
     }
@@ -459,19 +460,25 @@ class InputViewController: NSViewController, NSTextDelegate {
         boxModel.sceneGenerator.generateScene(boxModel)
     }
 
-    @IBAction func plusButtonLengthwise(_ sender: Any) {
-        // for now, only allow two separators
-        // this conditional accounts for the fact that the user may click the '+' button multiple times, even if it's not doing anything
-        // if there are already max separators, don't need to increment counterLength
-        if boxModel.counterLength <  2 {
-            boxModel.counterLength += 1
-            boxModel.addInternalSeparator = true
-        }
-    }
+//    @IBAction func plusButtonLengthwise(_ sender: Any) {
+//        // for now, only allow two separators
+//        // this conditional accounts for the fact that the user may click the '+' button multiple times, even if it's not doing anything
+//        // if there are already max separators, don't need to increment counterLength
+//        if boxModel.counterLength <  2 {
+//            boxModel.counterLength += 1
+//            boxModel.addInternalSeparator = true
+//        }
+//    }
     
-    @IBAction func minusButtonLengthwise(_ sender: Any) {
-        boxModel.removeInnerWall = true
+    @IBAction func deleteSelectedComponent(_ sender: Any) {
+        if let node = selectionHandling.selectedNode {
+            boxModel.walls.removeValue(forKey: Int(node.name!)!)
+        }
+        updateModel(boxModel)
     }
+//    @IBAction func minusButtonLengthwise(_ sender: Any) {
+//        boxModel.removeInnerWall = true
+//    }
     
     // Manages camera angles as the mouse drags the box around
     func manageMouseDrag(_ direction: inout CGFloat) {

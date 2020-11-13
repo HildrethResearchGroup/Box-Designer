@@ -67,7 +67,7 @@ class BoxModel {
                     } else if (wall.innerWall && wall.innerPlane == WallType.smallCorner){
                         let originalPlacement = wall.position.z/CGFloat(oldValue)
                         wall.position = SCNVector3Make(0.0, 0.0,CGFloat(Double(originalPlacement)*boxLength))
-                    } else if (wall.wallType == WallType.smallCorner && (wall.innerWall && wall.innerPlane == WallType.smallCorner)) {
+                    } else if (wall.wallType == WallType.smallCorner) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue - materialThickness/2))) {
                             wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength - materialThickness/2))
                         }

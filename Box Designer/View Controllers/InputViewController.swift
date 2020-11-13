@@ -73,7 +73,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     /// - TODO: refactor this so that you just add an arbitrary wall, but can rotate/drag it to where the user wants it to be
     @IBOutlet weak var addWallPlane: NSPopUpButton!
     /// This variable indicates the placement of the internal separator along the axis.
-    @IBOutlet weak var addInnerPlacement: NSTextField!
+    @IBOutlet weak var addPlacement: NSTextField!
     /// This variable allows use to add a wall according to their selected specifications.
     @IBOutlet weak var addWallButton: NSButton!
     /// This variable allows users to delete the component that is selected in the view.
@@ -289,8 +289,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         joinTypeControl.selectSegment(withTag: 0)
         addWallType.selectItem(at: 0)
         addWallPlane.selectItem(at: 0)
-        addInnerPlacement.isEnabled = false
-        addInnerPlacement.doubleValue = 0.5
+        addPlacement.isEnabled = true
+        addPlacement.doubleValue = 0.5
         addWallButton.isEnabled = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
@@ -477,23 +477,24 @@ class InputViewController: NSViewController, NSTextDelegate {
         /// only let users add wall if external or internal is selected
         if addWallType.indexOfSelectedItem == 0 {
             addWallButton.isEnabled = false
-        } else {addWallButton.isEnabled = true}
-        // only enable inner placement text field if "Internal" is selected
-        if addWallType.indexOfSelectedItem == 0 || addWallType.indexOfSelectedItem == 1 {
-            addInnerPlacement.isEnabled = false
-        } else {addInnerPlacement.isEnabled = true}
+        } else {
+            addWallButton.isEnabled = true
+            addPlacement.isEnabled = true
+        }
+        
     }
+    
     @IBAction func addWall(_ sender: Any) {
         var inner = false
         var type : WallType
-        var innerPlacement : Double
+        let placement = addPlacement.doubleValue
         
         // get inner or outer wall, disable "Add Wall" button if user hasn't decided
         if addWallType.indexOfSelectedItem == 1 {
             inner = false
         }else if addWallType.indexOfSelectedItem == 2 {
             inner = true
-        } else {addWallButton.isEnabled = false}
+        }
         
         // get wall plane, convert to wall type
         if addWallPlane.indexOfSelectedItem == 0 {
@@ -504,9 +505,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             type = WallType.largeCorner
         }
         
-        // get inner wall placement
-        addInnerPlacement.isEnabled ? (innerPlacement = addInnerPlacement.doubleValue) : (innerPlacement = 0.0)
-        boxModel.addWall(inner: inner, type: type, innerPlacement: innerPlacement)
+        boxModel.addWall(inner: inner, type: type, innerPlacement: placement)
         updateModel(boxModel)
     }
     @IBAction func deleteSelectedComponent(_ sender: Any) {

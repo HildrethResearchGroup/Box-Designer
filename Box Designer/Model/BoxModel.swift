@@ -14,7 +14,7 @@ class BoxModel {
     var counterLength = 0
     /// This variable ensures the current box model has access to the scene, so that it can update its variables.
     let sceneGenerator = SceneGenerator.shared
-    /// This variable is an array of all the current walls that make up the box model.
+    /// This variable is a dictionary of all the current walls that make up the box model. Its key is the wall number, and its value is the associated wall.
     var walls: Dictionary<Int,WallModel>
     /// This variable refers to the box dimension along the x-axis.
     var boxWidth: Double {
@@ -208,8 +208,8 @@ class BoxModel {
         }
     }
     
-    /// This variable allows the walls to be deleted from the BoxModel.walls dictionary -- it essentialy names the walls as they're created.
-    static var wallIndex = 0
+    /// This variable allows the walls to be deleted from the BoxModel.walls dictionary -- it essentialy names the walls as they're created. It is static so that each new instance of a wall can grab the next number and then increment it for the next wall.
+    static var wallNumberStatic = 0
     
     /// This initializer creates the default box model which is loaded whenever the application is launched
     init() {
@@ -237,13 +237,14 @@ class BoxModel {
         let wallBack = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset2)), numberTabs: numberTabs)
         let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), numberTabs: numberTabs)
         
-        let walls = [wallBottom.getIndex() : wallBottom,wallLeft.getIndex() : wallLeft, wallRight.getIndex() : wallRight, wallFront.getIndex() : wallFront, wallBack.getIndex() : wallBack, wallLid.getIndex() : wallLid]
+        let walls = [wallBottom.getWallNumber() : wallBottom,wallLeft.getWallNumber() : wallLeft, wallRight.getWallNumber() : wallRight, wallFront.getWallNumber() : wallFront, wallBack.getWallNumber() : wallBack, wallLid.getWallNumber() : wallLid]
         
         // add walls to array
         self.walls = walls
     }
     
     func addWall(inner: Bool, type: WallType, innerPlacement: Double) {
+        
         var newWall = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(0.0), 0.0), numberTabs: numberTabs)
         if inner {
             switch (type) {
@@ -254,12 +255,26 @@ class BoxModel {
             case WallType.smallCorner:
                 newWall = WallModel(boxWidth, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, CGFloat(innerPlacement*boxLength)), numberTabs: numberTabs, innerWall : true, innerPlane: type)
             }
+        } else {
+            var offset3 = 0.0
+            
+            switch (type) {
+            case WallType.largeCorner:
+                innerPlacement == 1.0 ? (offset3 = self.boxHeight - materialThickness/2) : (offset3 = materialThickness/2)
+                newWall = WallModel(boxWidth, boxLength, materialThickness, type, self.joinType, SCNVector3Make(0.0, CGFloat(offset3), 0.0), numberTabs: numberTabs)
+            case WallType.longCorner:
+                innerPlacement == 1.0 ? (offset3 = self.boxWidth - materialThickness/2) : (offset3 = materialThickness/2)
+                newWall = WallModel(boxLength, boxHeight, materialThickness, type, self.joinType, SCNVector3Make(CGFloat(offset3), 0.0, 0.0), numberTabs: numberTabs)
+            case WallType.smallCorner:
+                innerPlacement == 1.0 ? (offset3 = self.boxLength - materialThickness/2) : (offset3 = materialThickness/2)
+                newWall = WallModel(boxWidth, boxHeight, materialThickness, type, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset3)), numberTabs: numberTabs)
+            }
         }
         // if wall is already in same place, don't add it
         for wall in self.walls.values {
             if SCNVector3EqualToVector3(wall.position, newWall.position) {return}
         }
-        self.walls[newWall.getIndex()] = newWall
+        self.walls[newWall.getWallNumber()] = newWall
     }
     /**
     This initializer can be used to create a box using its parameters. It is necessary for opening a box model saved in a JSON file into the application.

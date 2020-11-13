@@ -83,7 +83,7 @@ class SceneGenerator {
             let brightness = CGFloat(1.0 - Double(wallNumber) / Double(boxModel.walls.count))
             newNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.90, brightness: brightness, alpha: 1.0)
             // name the node to be able to delete selected component from BoxModel.walls array
-            newNode.name = String(wall.getIndex())
+            newNode.name = String(wall.getWallNumber())
             //add to the rootNode
             scene.rootNode.addChildNode(newNode)
             wallNumber += 1

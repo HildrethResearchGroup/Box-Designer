@@ -29,7 +29,7 @@
         </viewController>
         <viewController id="SYY-Aa-HfQ" customClass="InputViewController" customModule="Box_Designer" customModuleProvider="target">
             <connections>
-                <outlet property="addInnerPlacement" destination="iC8-Z6-S0w" id="1bG-qA-0ql"/>
+                <outlet property="addPlacement" destination="iC8-Z6-S0w" id="1bG-qA-0ql"/>
                 <outlet property="addWallButton" destination="FX5-Pg-gHZ" id="e2h-Xn-Pl0"/>
                 <outlet property="addWallPlane" destination="sZ1-qg-mKG" id="dgM-oK-7zR"/>
                 <outlet property="addWallType" destination="gPh-ne-W7A" id="3S4-Sj-XWj"/>
@@ -264,13 +264,13 @@
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="284" y="400" width="813" height="795"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" misplaced="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="813" height="729"/>
+                <rect key="frame" x="0.0" y="0.0" width="813" height="795"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <sceneView allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-Mt-ukC">
-                        <rect key="frame" x="0.0" y="185" width="813" height="522"/>
+                        <rect key="frame" x="0.0" y="185" width="813" height="588"/>
                     </sceneView>
                     <box borderType="line" title="Add Components" id="VC0-1w-I5m" userLabel="Add Components">
                         <rect key="frame" x="628" y="4" width="180" height="193"/>
@@ -282,7 +282,7 @@
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uLZ-ju-lXG">
                                     <rect key="frame" x="19" y="62" width="135" height="37"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" selectable="YES" alignment="center" title="Inner Wall Placement (Decimal, 0-1):" id="528-GP-FGi">
+                                    <textFieldCell key="cell" selectable="YES" alignment="center" title="Wall Placement (Decimal, 0-1):" id="528-GP-FGi">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -309,13 +309,13 @@
                                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gPh-ne-W7A">
                                     <rect key="frame" x="76" y="139" width="88" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <popUpButtonCell key="cell" type="push" title="External" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Xbq-TD-F1C" id="h6U-l8-YyA">
+                                    <popUpButtonCell key="cell" type="push" title="External" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Xbq-TD-F1C" id="h6U-l8-YyA">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
                                         <menu key="menu" id="hct-vO-cL0">
                                             <items>
-                                                <menuItem title="Type" state="on" id="qis-MY-Kic"/>
-                                                <menuItem title="External" id="Xbq-TD-F1C"/>
+                                                <menuItem title="Type" id="qis-MY-Kic"/>
+                                                <menuItem title="External" state="on" id="Xbq-TD-F1C"/>
                                                 <menuItem title="Internal" id="fI8-pb-rDw"/>
                                             </items>
                                         </menu>
@@ -336,14 +336,14 @@
                                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZ1-qg-mKG">
                                     <rect key="frame" x="76" y="106" width="88" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <popUpButtonCell key="cell" type="push" title="X-Z" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fdz-Na-tcT" id="Hex-FS-f2S">
+                                    <popUpButtonCell key="cell" type="push" title="X-Z" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fdz-Na-tcT" id="Hex-FS-f2S">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
                                         <menu key="menu" id="zJC-14-gks">
                                             <items>
-                                                <menuItem title="X-Y" state="on" id="0Yc-3c-hzs"/>
+                                                <menuItem title="X-Y" id="0Yc-3c-hzs"/>
                                                 <menuItem title="Y-Z" id="XYs-hV-Fgx"/>
-                                                <menuItem title="X-Z" id="fdz-Na-tcT"/>
+                                                <menuItem title="X-Z" state="on" id="fdz-Na-tcT"/>
                                             </items>
                                         </menu>
                                     </popUpButtonCell>
@@ -629,7 +629,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B3B-a2-e8l">
-                        <rect key="frame" x="504" y="1" width="115" height="32"/>
+                        <rect key="frame" x="504" y="67" width="115" height="32"/>
                         <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dGa-5p-E0j">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>

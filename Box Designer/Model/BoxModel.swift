@@ -207,76 +207,8 @@ class BoxModel {
             }
         }
     }
-    /// This variable indicates whether the top wall (the lid) should be included in the box model (true) or not (false).
-//    var lidOn: Bool {
-//        /// This either adds or a removes the lid in the current box model.
-//        didSet {
-//            if lidOn != oldValue {
-//                let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness / 2), 0.0), numberTabs: numberTabs)
-//                if (lidOn == false){
-//                    if let index = walls.lastIndex(where: {$0.wallType == WallType.largeCorner}) {
-//                        walls.remove(at: index)
-//                    }
-//                }else{
-//                    walls.append(wallLid)
-//                }
-//                /// Make sure the scene updates after changes.
-//                sceneGenerator.generateScene(self)
-//            }
-//        }
-//    }
-    /**
-     This variable adds an internal separator if there's room (true).
-     - Note: Right now, the model can only add two internal separators at pre-defined locations. We will need to refactor this so the user can 1) choose where to put the inner wall and 2) which plane it should be on.
-     */
-//    var addInternalSeparator : Bool {
-//        /// This adds a max of 2 internal separators on the x-z plane (I think), at 1/3 and 2/3 distance from the outer wall.
-//        didSet {
-//            if addInternalSeparator && counterLength == 1 {
-//                // add separator in the box
-//                let innerWallModel = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength) ), numberTabs: numberTabs)
-//                if(addInternalSeparator) {
-//                    walls.append(innerWallModel)
-//                    addInternalSeparator = false
-//                    /// Make sure the scene updates after changes.
-//                    sceneGenerator.generateScene(self)
-//                }
-//            }
-//                // add another separator in the box
-//            else if addInternalSeparator && counterLength == 2 {
-//                let innerWallModel2 = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, self.joinType, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * self.boxLength)), numberTabs: numberTabs)
-//                    if(addInternalSeparator) {
-//                        walls.append(innerWallModel2)
-//                        addInternalSeparator  = false
-//                        /// Make sure the scene updates after changes.
-//                        sceneGenerator.generateScene(self)
-//                    }
-//                }
-//
-//            }
-//
-//    }
     
-    /**
-     This variable handles removing an internal separator (true).
-     - Note: This should become obsolete when we add the functionality to add or remove a selected wall. To do this, we need to be able to associate the selected wall with the its index in BoxModel.walls array.
-     */
-//    var removeInnerWall: Bool {
-//        didSet {
-//
-//            if removeInnerWall && (counterLength > 0) {
-//                counterLength -= 1
-//                if let index = walls.lastIndex(where: {$0.wallType == WallType.smallCorner}){
-//                     walls.remove(at: index)
-//                 }
-//                removeInnerWall = false
-//                sceneGenerator.generateScene(self)
-//            }
-//
-//        }
-//
-//    }
-    /// This variable allows the walls to be deleted from the BoxModel.walls array (and thus, the box model)
+    /// This variable allows the walls to be deleted from the BoxModel.walls dictionary -- it essentialy names the walls as they're created.
     static var wallIndex = 0
     
     /// This initializer creates the default box model which is loaded whenever the application is launched
@@ -290,9 +222,6 @@ class BoxModel {
         self.numberTabs = 3
         self.innerDimensions = false
         self.joinType = JoinType.overlap
-//        self.lidOn = true
-//        self.addInternalSeparator = false
-//        self.removeInnerWall = false
         
         // create variables for positioning the walls (because it's initially a box, offset2 could use the height, length, or width to create positions)
         // if the default model is not a cube, this will not work
@@ -354,9 +283,7 @@ class BoxModel {
         self.innerDimensions = innerDimensions
         self.joinType = joinType
         self.numberTabs = numberTabs
-//        self.lidOn = true
-//        self.addInternalSeparator = false
-//        self.removeInnerWall = false
+
     }
     
 }

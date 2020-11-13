@@ -66,7 +66,13 @@ class SceneGenerator {
                 //rotate 90 degrees around +x axis
                 newNode.rotation = SCNVector4Make(1, 0, 0, CGFloat.pi/2)
             case WallType.smallCorner:
-                //is correctly rotated to begin with
+                // adjust inner wall rotation, as they are always smallCorner types
+                if wall.innerWall && wall.innerPlane == WallType.largeCorner {
+                    newNode.rotation = SCNVector4Make(1, 0, 0, CGFloat.pi/2)
+                } else if wall.innerWall && wall.innerPlane == WallType.longCorner {
+                    newNode.rotation = SCNVector4Make(0, 1, 0, -CGFloat.pi/2)
+                }
+                // non-inner small corners and inner small corners are correctly rotated to begin with
                 break
             case WallType.longCorner:
                 //rotate -90 degrees around +y axis

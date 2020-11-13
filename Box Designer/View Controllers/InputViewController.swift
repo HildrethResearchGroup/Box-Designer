@@ -67,6 +67,15 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var minusButtonLengthwise: NSButton!
     /// This variable allows users to export their box template directly from the main GUI (they can also do this from the taskbar).
     @IBOutlet weak var exportButton: NSButton!
+    /// This variable indicates whether the added component should be an external wall or internal separator.
+    @IBOutlet weak var addWallType: NSPopUpButton!
+    /// This variable indicates the plane that the added wall component should align with.
+    /// - TODO: refactor this so that you just add an arbitrary wall, but can rotate/drag it to where the user wants it to be
+    @IBOutlet weak var addWallPlane: NSPopUpButton!
+    /// This variable indicates the placement of the internal separator along the axis.
+    @IBOutlet weak var addInnerPlacement: NSTextField!
+    /// This variable allows use to add a wall according to their selected specifications.
+    @IBOutlet weak var addWallButton: NSButton!
     /// This variable allows users to delete the component that is selected in the view.
     @IBOutlet weak var deleteSelected: NSButton!
     /// This variable indicates which unit the user wants.
@@ -278,7 +287,11 @@ class InputViewController: NSViewController, NSTextDelegate {
         previousTabEntry = minTabs
         innerOrOuterDimensionControl.selectSegment(withTag: 0)
         joinTypeControl.selectSegment(withTag: 0)
-        
+        addWallType.selectItem(at: 0)
+        addWallPlane.selectItem(at: 0)
+        addInnerPlacement.isEnabled = false
+        addInnerPlacement.doubleValue = 0.5
+        addWallButton.isEnabled = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }
@@ -459,26 +472,49 @@ class InputViewController: NSViewController, NSTextDelegate {
         self.boxModel = boxModel
         boxModel.sceneGenerator.generateScene(boxModel)
     }
-
-//    @IBAction func plusButtonLengthwise(_ sender: Any) {
-//        // for now, only allow two separators
-//        // this conditional accounts for the fact that the user may click the '+' button multiple times, even if it's not doing anything
-//        // if there are already max separators, don't need to increment counterLength
-//        if boxModel.counterLength <  2 {
-//            boxModel.counterLength += 1
-//            boxModel.addInternalSeparator = true
-//        }
-//    }
     
+    @IBAction func disableInnerPlacement(_ sender: Any) {
+        /// only let users add wall if external or internal is selected
+        if addWallType.indexOfSelectedItem == 0 {
+            addWallButton.isEnabled = false
+        } else {addWallButton.isEnabled = true}
+        // only enable inner placement text field if "Internal" is selected
+        if addWallType.indexOfSelectedItem == 0 || addWallType.indexOfSelectedItem == 1 {
+            addInnerPlacement.isEnabled = false
+        } else {addInnerPlacement.isEnabled = true}
+    }
+    @IBAction func addWall(_ sender: Any) {
+        var inner = false
+        var type : WallType
+        var innerPlacement : Double
+        
+        // get inner or outer wall, disable "Add Wall" button if user hasn't decided
+        if addWallType.indexOfSelectedItem == 1 {
+            inner = false
+        }else if addWallType.indexOfSelectedItem == 2 {
+            inner = true
+        } else {addWallButton.isEnabled = false}
+        
+        // get wall plane, convert to wall type
+        if addWallPlane.indexOfSelectedItem == 0 {
+            type = WallType.longCorner
+        } else if addWallPlane.indexOfSelectedItem == 1 {
+            type = WallType.smallCorner
+        } else {
+            type = WallType.largeCorner
+        }
+        
+        // get inner wall placement
+        addInnerPlacement.isEnabled ? (innerPlacement = addInnerPlacement.doubleValue) : (innerPlacement = 0.0)
+        boxModel.addWall(inner: inner, type: type, innerPlacement: innerPlacement)
+        updateModel(boxModel)
+    }
     @IBAction func deleteSelectedComponent(_ sender: Any) {
         if let node = selectionHandling.selectedNode {
             boxModel.walls.removeValue(forKey: Int(node.name!)!)
         }
         updateModel(boxModel)
     }
-//    @IBAction func minusButtonLengthwise(_ sender: Any) {
-//        boxModel.removeInnerWall = true
-//    }
     
     // Manages camera angles as the mouse drags the box around
     func manageMouseDrag(_ direction: inout CGFloat) {

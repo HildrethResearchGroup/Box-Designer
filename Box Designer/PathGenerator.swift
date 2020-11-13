@@ -162,15 +162,15 @@ class PathGenerator {
         - width: this is the user-inputted box model width
         - length: this is the user-inputted box model length
         - materialThickness: this is the user-inputted box model material thickness
-        - nTab: this is the user-inputted number of tabs for the interlocking structure
+        - numberTabs: this is the user-inputted number of tabs for the interlocking structure
      
      - Returns:
         - NSBezierPath: this function returns a path that can be drawn in the scene -- it draws a single wall
      */
-    static func generateTabSmallCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ nTab: Int) -> NSBezierPath {
+    static func generateTabSmallCornerPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ numberTabs: Int) -> NSBezierPath {
         
         //the number, length, and width of sections
-        let nSections = (nTab * 2) + 1
+        let nSections = (numberTabs * 2) + 1
         let sectionLength = (length-(materialThickness*2))/Double(nSections - 2)
         let sectionWidth = width/Double(nSections - 2)
         let gap = sectionWidth - materialThickness
@@ -181,26 +181,26 @@ class PathGenerator {
         //left side
         path.relativeLine(to: CGPoint(x: 0.0, y: materialThickness))
         path.relativeLine(to: CGPoint(x: -gap, y: 0.0))
-        for _ in 0...(nTab - 2){
+        for _ in 0...(numberTabs - 2){
             createTabPath(path: path, point1: [0.0,sectionLength], point2: [-materialThickness,0.0], point3: [0.0,sectionLength], point4: [materialThickness,0.0])
         }
         
         // top side
         createTabPath(path: path, point1: [0.0,sectionLength], point2: [gap,0.0], point3: [0.0,materialThickness], point4: [sectionWidth,0.0])
-        for _ in 0...(nTab - 3){ //here 3
+        for _ in 0...(numberTabs - 3){ //here 3
             createTabPath(path: path, point1: [0.0,-materialThickness], point2: [sectionWidth,0.0], point3: [0.0,materialThickness], point4: [sectionWidth,0.0])
         }
         
         // right side
         path.relativeLine(to: CGPoint(x: 0.0, y: -materialThickness))
         path.relativeLine(to: CGPoint(x: gap, y: 0.0))
-        for _ in 0...(nTab - 2){
+        for _ in 0...(numberTabs - 2){
             createTabPath(path: path, point1: [0.0,-sectionLength], point2: [materialThickness,0.0], point3: [0.0,-sectionLength], point4: [-materialThickness,0.0])
         }
         
         //bottom side
         createTabPath(path: path, point1: [0.0,-sectionLength], point2: [-gap,0.0], point3: [0.0,-materialThickness], point4: [-sectionWidth,0.0])
-        for _ in 0...(nTab - 3){ // here 3
+        for _ in 0...(numberTabs - 3){ // here 3
             createTabPath(path: path, point1: [0.0,materialThickness], point2: [-sectionWidth,0.0], point3: [0.0,-materialThickness], point4: [-sectionWidth,0.0])
         }
         

@@ -32,13 +32,15 @@ class BoxModel {
                 for wall in self.walls.values {
                     if (wall.wallType == WallType.largeCorner) {
                         wall.width = boxWidth
+                    } else if (wall.innerWall && wall.innerPlane == WallType.longCorner) {
+                        let originalPlacement = wall.position.x/CGFloat(oldValue)
+                        wall.position = SCNVector3Make(CGFloat(Double(originalPlacement)*boxWidth), 0.0,0.0)
                     } else if (wall.wallType == WallType.smallCorner) {
                         wall.width = boxWidth
                     } else if (wall.wallType == WallType.longCorner) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(CGFloat(oldValue - materialThickness/2), 0.0, 0.0)) {
                             wall.position = SCNVector3Make(CGFloat(boxWidth - materialThickness/2), 0.0, 0.0)
                         }
-                        
                     }
                 }
             }
@@ -60,19 +62,16 @@ class BoxModel {
         didSet {
             if boxLength != oldValue {
                 for wall in self.walls.values {
-                    if (wall.wallType == WallType.largeCorner) {
+                    if (wall.wallType == WallType.largeCorner || (wall.innerWall && wall.innerPlane == WallType.largeCorner)) {
                         wall.length = boxLength
-                    } else if (wall.wallType == WallType.smallCorner) {
+                    } else if (wall.innerWall && wall.innerPlane == WallType.smallCorner){
+                        let originalPlacement = wall.position.z/CGFloat(oldValue)
+                        wall.position = SCNVector3Make(0.0, 0.0,CGFloat(Double(originalPlacement)*boxLength))
+                    } else if (wall.wallType == WallType.smallCorner && (wall.innerWall && wall.innerPlane == WallType.smallCorner)) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue - materialThickness/2))) {
                             wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength - materialThickness/2))
                         }
-                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0,CGFloat((1/3) * oldValue))){
-                           wall.position = SCNVector3Make(0.0, 0.0, CGFloat((1/3) * self.boxLength))
-                        }
-                        if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0,CGFloat((2/3) * oldValue))){
-                           wall.position = SCNVector3Make(0.0, 0.0, CGFloat((2/3) * self.boxLength))
-                        }
-                    } else if (wall.wallType == WallType.longCorner) {
+                    } else if (wall.wallType == WallType.longCorner || (wall.innerWall && wall.innerPlane == WallType.longCorner)) {
                         wall.width = boxLength
                     }
                 }
@@ -99,7 +98,10 @@ class BoxModel {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(oldValue - materialThickness/2), 0.0)) {
                             wall.position = SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness/2), 0.0)
                         }
-                    } else if (wall.wallType == WallType.smallCorner) {
+                    } else if (wall.innerWall && wall.innerPlane == WallType.largeCorner){
+                        let originalPlacement = wall.position.y/CGFloat(oldValue)
+                        wall.position = SCNVector3Make(0.0, CGFloat(Double(originalPlacement)*boxHeight), 0.0)
+                    }else if (wall.wallType == WallType.smallCorner) {
                         wall.length = boxHeight
                     } else if (wall.wallType == WallType.longCorner) {
                         wall.length = boxHeight
@@ -312,6 +314,24 @@ class BoxModel {
         self.walls = walls
     }
     
+    func addWall(inner: Bool, type: WallType, innerPlacement: Double) {
+        var newWall = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(0.0), 0.0), numberTabs: numberTabs)
+        if inner {
+            switch (type) {
+            case WallType.largeCorner:
+                newWall = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, CGFloat(innerPlacement*boxHeight), 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
+            case WallType.longCorner:
+                newWall = WallModel(boxLength, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(CGFloat(innerPlacement*boxWidth), 0.0, 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
+            case WallType.smallCorner:
+                newWall = WallModel(boxWidth, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, CGFloat(innerPlacement*boxLength)), numberTabs: numberTabs, innerWall : true, innerPlane: type)
+            }
+        }
+        // if wall is already in same place, don't add it
+        for wall in self.walls.values {
+            if SCNVector3EqualToVector3(wall.position, newWall.position) {return}
+        }
+        self.walls[newWall.getIndex()] = newWall
+    }
     /**
     This initializer can be used to create a box using its parameters. It is necessary for opening a box model saved in a JSON file into the application.
      - Note:The functionality to load in a box model from a JSON file is not complete in JSONFileHandling.swift yet.

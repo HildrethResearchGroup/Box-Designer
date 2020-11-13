@@ -9,7 +9,7 @@ import SceneKit.SCNGeometry
  - Note: WallModel.swift was created on 6/6/2020.
  */
 class WallModel {
-    /// This variable indicates the index a wall is in the BoxModel.walls array (in order to delete it)
+    /// This variable indicates the key of a wall is in the BoxModel.walls dictionary (in order to delete it)
     private let index : Int
     /*
      These attributes are those strictly necessary for
@@ -64,6 +64,8 @@ class WallModel {
         /// Update the wall's path if the joinType changes.
         didSet {
             if joinType != oldValue {
+                // inner walls should never have tabs
+                if innerWall {joinType = JoinType.overlap}
                 updatePath()
             }
         }
@@ -77,6 +79,10 @@ class WallModel {
             }
         }
     }
+    /// This variable indicates if the wall is an internal separator, as these should never be JoinType.tab
+    var innerWall: Bool
+    /// This variable indicates the plane that the inner wall should be oriented on -- the WallTypes are associated with planes (see WallType.swift).
+    var innerPlane : WallType
     
     /// This function sets the wall's path from the return of PathGenerator's generatePath function, using its self-updating variables.
     private func updatePath(){
@@ -99,7 +105,7 @@ class WallModel {
         - position: this is where the path of the wall starts
         - numberTabs: this is the number of tabs for the wall
      */
-    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, numberTabs: Double?) {
+    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, numberTabs: Double?, innerWall : Bool = false, innerPlane : WallType = WallType.smallCorner) {
         self.width = width
         self.length = length
         self.materialThickness = materialThickness
@@ -109,6 +115,8 @@ class WallModel {
         self.position = position
         self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs)
         self.index = BoxModel.wallIndex
+        self.innerWall = innerWall
+        self.innerPlane = innerPlane
         BoxModel.wallIndex += 1
     }
 }

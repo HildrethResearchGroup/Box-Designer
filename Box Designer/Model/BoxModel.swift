@@ -16,6 +16,8 @@ class BoxModel {
     let sceneGenerator = SceneGenerator.shared
     /// This variable is a dictionary of all the current walls that make up the box model. Its key is the wall number, and its value is the associated wall.
     var walls: Dictionary<Int,WallModel>
+    /// This variable contains the pairs of intersecting walls in the box model (for internal separator dimensions adjustments). The key is the wall that needs to adjust accordin g to the walls in
+    var intersectingWalls = Dictionary<WallModel,[WallModel]>()
     /// This variable refers to the box dimension along the x-axis.
     var boxWidth: Double {
         /// This updates the box width. If user wants their inputted box width to be the inner dimensions, box width is updated accordingly.
@@ -44,6 +46,7 @@ class BoxModel {
                     }
                 }
             }
+            self.adjustAllIntersections()
             /// Make sure the scene updates after changes.
             sceneGenerator.generateScene(self)
         }
@@ -67,14 +70,15 @@ class BoxModel {
                     } else if (wall.innerWall && wall.innerPlane == WallType.smallCorner){
                         let originalPlacement = wall.position.z/CGFloat(oldValue)
                         wall.position = SCNVector3Make(0.0, 0.0,CGFloat(Double(originalPlacement)*boxLength))
+                    } else if (wall.wallType == WallType.longCorner || (wall.innerWall && wall.innerPlane == WallType.longCorner)) {
+                        wall.width = boxLength
                     } else if (wall.wallType == WallType.smallCorner) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, 0.0, CGFloat(oldValue - materialThickness/2))) {
                             wall.position = SCNVector3Make(0.0, 0.0, CGFloat(boxLength - materialThickness/2))
                         }
-                    } else if (wall.wallType == WallType.longCorner || (wall.innerWall && wall.innerPlane == WallType.longCorner)) {
-                        wall.width = boxLength
                     }
                 }
+                self.adjustAllIntersections()
                 /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
@@ -107,6 +111,7 @@ class BoxModel {
                         wall.length = boxHeight
                     }
                 }
+                self.adjustAllIntersections()
                 /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
@@ -133,6 +138,7 @@ class BoxModel {
                         wall.position = SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness/2), 0.0)
                     }
                 }
+                self.adjustAllIntersections()
                 /// Make sure the scene updates after changes.
                 sceneGenerator.generateScene(self)
             }
@@ -247,6 +253,7 @@ class BoxModel {
         
         var newWall = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(0.0), 0.0), numberTabs: numberTabs)
         if inner {
+            /// add internal separators
             switch (type) {
             case WallType.largeCorner:
                 newWall = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, CGFloat(innerPlacement*boxHeight), 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
@@ -255,7 +262,17 @@ class BoxModel {
             case WallType.smallCorner:
                 newWall = WallModel(boxWidth, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, CGFloat(innerPlacement*boxLength)), numberTabs: numberTabs, innerWall : true, innerPlane: type)
             }
+            // if other inner walls that would intersect, deal with that
+            for wall in walls.values {
+                if wall.innerWall && !SCNVector3EqualToVector3(wall.position, newWall.position){
+                    /// add entry to intersecting walls dictionary
+                    if intersectingWalls[newWall] == nil {
+                        intersectingWalls[newWall] = [wall]
+                    } else {intersectingWalls[newWall]?.append(wall)}
+                }
+            }
         } else {
+            /// add external walls
             var offset3 = 0.0
             
             switch (type) {
@@ -274,7 +291,48 @@ class BoxModel {
         for wall in self.walls.values {
             if SCNVector3EqualToVector3(wall.position, newWall.position) {return}
         }
+        self.adjustAllIntersections()
         self.walls[newWall.getWallNumber()] = newWall
+    }
+    func updateIntersectingWalls() {
+        /// If internal intersecting walls are deleted, the dictionary should be updated.
+        for intersecting in self.intersectingWalls.keys {
+            if self.walls[intersecting.getWallNumber()] == nil {
+                self.intersectingWalls[intersecting] = nil
+                break
+            }
+            for (index,intersected) in self.intersectingWalls[intersecting]!.enumerated() {
+                if self.walls[intersected.getWallNumber()] == nil {
+                    self.intersectingWalls[intersecting]?.remove(at: index)
+                }
+            }
+        }
+        /// adjust dimensions for new intersecting wall dictionary
+        self.adjustAllIntersections()
+    }
+    private func adjustForIntersection(_ currentWall: WallModel, _ addedWall : WallModel) {
+        
+        if (currentWall.innerPlane == WallType.longCorner && addedWall.innerPlane == WallType.smallCorner) {
+            addedWall.width = Double(currentWall.position.x) + materialThickness/2
+        } else if (currentWall.innerPlane == WallType.longCorner && addedWall.innerPlane == WallType.largeCorner) {
+            addedWall.width = Double(currentWall.position.x) + materialThickness/2
+        } else if (currentWall.innerPlane == WallType.smallCorner && addedWall.innerPlane == WallType.longCorner) {
+            addedWall.width = Double(currentWall.position.z) + materialThickness/2
+        } else if (currentWall.innerPlane == WallType.smallCorner && addedWall.innerPlane == WallType.largeCorner) {
+            addedWall.length = Double(currentWall.position.z) + materialThickness/2
+        } else if (currentWall.innerPlane == WallType.largeCorner && addedWall.innerPlane == WallType.smallCorner) {
+            addedWall.length = Double(currentWall.position.y) + materialThickness/2
+        } else if (currentWall.innerPlane == WallType.largeCorner && addedWall.innerPlane == WallType.longCorner) {
+            addedWall.length = Double(currentWall.position.y) + materialThickness/2
+        }
+    }
+    private func adjustAllIntersections() {
+        /// If internal intersecting walls, their dimensions should be updated.
+        for intersecting in self.intersectingWalls.keys {
+            for intersected in self.intersectingWalls[intersecting]! {
+                adjustForIntersection(intersected, intersecting)
+            }
+        }
     }
     /**
     This initializer can be used to create a box using its parameters. It is necessary for opening a box model saved in a JSON file into the application.

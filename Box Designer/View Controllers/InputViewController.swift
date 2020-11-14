@@ -46,9 +46,6 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var unitChoiceControl: NSSegmentedCell!
     /// This variable is the textbox for number of tabs (if "Tab" join type is selected) that users can change in main GUI.
     @IBOutlet weak var numberTabTextField: NSTextField!
-    /// This variable allows selection for the lid of the box to be on or off.
-    /// - TODO: when add/delete components functionality is introduced, this can be deleted.
-    @IBOutlet weak var lidOn_Off: NSButton!
     /// This is the label for the number of tabs textbox. It must be a variable for the units to be displayed (and the units can change).
     @IBOutlet weak var numberTabLabel: NSTextField!
     /// This is the label for the box length textbox. It must be a variable for the units to be displayed (and the units can change).
@@ -59,18 +56,13 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var heightLabel: NSTextField!
     /// This is the label for the box material thickness textbox. It must be a variable for the units to be displayed (and the units can change).
     @IBOutlet weak var thicknessLabel: NSTextField!
-    /// This variable allows user to add internal separators.
-    /// - TODO: this can be deleted with add/delete components functionality is introduced
-    @IBOutlet weak var plusButtonLengthwise: NSButton!
-    /// This variable allows user to remove internal separators.
-    /// - TODO: this can be deleted with add/delete components functionality is introduced
-    @IBOutlet weak var minusButtonLengthwise: NSButton!
     /// This variable allows users to export their box template directly from the main GUI (they can also do this from the taskbar).
     @IBOutlet weak var exportButton: NSButton!
     /// This variable indicates whether the added component should be an external wall or internal separator.
     @IBOutlet weak var addWallType: NSPopUpButton!
-    /// This variable indicates the plane that the added wall component should align with.
-    /// - TODO: refactor this so that you just add an arbitrary wall, but can rotate/drag it to where the user wants it to be
+    /// This variable outputs the plane that the selected wall is on.
+    @IBOutlet weak var selectedWallPlane: NSTextField!
+    /// This variable indicates the plane that the added wall component should align with. It changes when you select a wall, to indicate the plane the wall is oriented on.
     @IBOutlet weak var addWallPlane: NSPopUpButton!
     /// This variable indicates the placement of the internal separator along the axis.
     @IBOutlet weak var addPlacement: NSTextField!
@@ -171,11 +163,12 @@ class InputViewController: NSViewController, NSTextDelegate {
     // When the mouse button is released, update the camera view of the box
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
-        
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
+        
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()
+            updateSelectedWallPlane()
         }else if(event.clickCount == 2){
             selectionHandling.selectedNode = result.node
             
@@ -232,6 +225,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         if(event.keyCode == 53){
             cameraLocked = false
             selectionHandling.selectedNode = nil
+            addWallPlane.selectItem(at: 0)
+            selectedWallPlane.stringValue = "Selected wall: None Selected"
         }
         
     }
@@ -473,13 +468,13 @@ class InputViewController: NSViewController, NSTextDelegate {
         boxModel.sceneGenerator.generateScene(boxModel)
     }
     
-    @IBAction func disableInnerPlacement(_ sender: Any) {
+    @IBAction func disableAddWall(_ sender: Any) {
+        
         /// only let users add wall if external or internal is selected
         if addWallType.indexOfSelectedItem == 0 {
             addWallButton.isEnabled = false
         } else {
             addWallButton.isEnabled = true
-            addPlacement.isEnabled = true
         }
         
     }
@@ -508,10 +503,27 @@ class InputViewController: NSViewController, NSTextDelegate {
         boxModel.addWall(inner: inner, type: type, innerPlacement: placement)
         updateModel(boxModel)
     }
+    func updateSelectedWallPlane() {
+        /// Select the plane of the selected component in Add Components menu and in display in the label
+        if selectionHandling.selectedNode != nil {
+            let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
+            if (selectedWall?.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.largeCorner)) {
+                addWallPlane.selectItem(at: 2)
+                selectedWallPlane.stringValue = "Selected wall: X-Z Plane"
+            } else if (selectedWall?.wallType == WallType.longCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.longCorner)) {
+                addWallPlane.selectItem(at: 0)
+                selectedWallPlane.stringValue = "Selected wall: X-Y Plane"
+            } else if selectedWall?.wallType == WallType.smallCorner {
+                addWallPlane.selectItem(at: 1)
+                selectedWallPlane.stringValue = "Selected wall: Y-Z Plane"
+            }
+        }
+    }
     @IBAction func deleteSelectedComponent(_ sender: Any) {
         if let node = selectionHandling.selectedNode {
             boxModel.walls.removeValue(forKey: Int(node.name!)!)
-        }
+            boxModel.updateIntersectingWalls()
+        }        
         updateModel(boxModel)
     }
     

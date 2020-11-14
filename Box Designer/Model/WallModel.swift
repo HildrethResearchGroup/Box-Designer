@@ -8,7 +8,15 @@ import SceneKit.SCNGeometry
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
  - Note: WallModel.swift was created on 6/6/2020.
  */
-class WallModel {
+class WallModel : Equatable {
+    /// Add equality functionality to walls.
+    static func == (lhs: WallModel, rhs: WallModel) -> Bool {
+        /// For our purposes, a wall is "equal" to another if it's in the same position. This function must be implemented for WallModel to be Hashable for a Dictionary.
+        if SCNVector3EqualToVector3(lhs.position, rhs.position) {
+            return true
+        } else {return false}
+    }
+    
     /// This variable indicates the key of a wall  in the BoxModel.walls dictionary -- it is intended to be the name of a wall.
     private let wallNumber : Int
     /*
@@ -119,5 +127,11 @@ class WallModel {
         self.innerWall = innerWall
         self.innerPlane = innerPlane
         BoxModel.wallNumberStatic += 1
+    }
+}
+
+extension WallModel : Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self).hashValue)
     }
 }

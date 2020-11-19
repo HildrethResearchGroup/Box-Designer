@@ -18,7 +18,7 @@ class BoxModel {
     var walls: Dictionary<Int,WallModel>
     /// This variable contains the pairs of intersecting walls in the box model (for internal separator dimension adjustments). The key is the wall that needs to adjust according to the walls in its value array. Put another way: the key is the intersecting wall, and its values are the walls it's intersecting.
     var intersectingWalls = Dictionary<WallModel,[WallModel]>()
-    /// This variable refers to the box dimension along the z-axis. Adjusting it changes the width of walls on the Y-Z and X-Z plane and the position of walls on the X-Y plane.
+    /// This variable refers to the box dimension along the x-axis. Adjusting it changes the width of walls on the Y-Z and X-Z plane and the position of walls on the X-Y plane.
     var boxWidth: Double {
         /// This updates the box width. If user wants their inputted box width to be the inner dimensions, box width is updated accordingly.
         willSet {
@@ -52,7 +52,7 @@ class BoxModel {
             sceneGenerator.generateScene(self)
         }
     }
-    /// This variable refers to the box dimension along the x-axis. Adjusting it changes the length of walls on the X-Z and Y-Z planes and the position of walls on the X-Y plane.
+    /// This variable refers to the box dimension along the z-axis. Adjusting it changes the length of walls on the X-Z and Y-Z planes and the position of walls on the X-Y plane.
     var boxLength: Double {
         /// This updates the box lenth. If user wants their inputted box length to be the inner dimensions, box length is updated accordingly.
         willSet {
@@ -260,7 +260,7 @@ class BoxModel {
             }
             /// if other inner walls that would intersect, deal with that
             for wall in walls.values {
-                if wall.innerWall && !SCNVector3EqualToVector3(wall.position, newWall.position){
+                if wall.innerWall && !SCNVector3EqualToVector3(wall.position, newWall.position) && wall.innerPlane != newWall.innerPlane {
                     /// add entry to intersecting walls dictionary
                     if intersectingWalls[newWall] == nil {
                         intersectingWalls[newWall] = [wall]
@@ -300,11 +300,13 @@ class BoxModel {
         for intersecting in self.intersectingWalls.keys {
             if self.walls[intersecting.getWallNumber()] == nil {
                 self.intersectingWalls[intersecting] = nil
-                break
-            }
-            for (index,intersected) in self.intersectingWalls[intersecting]!.enumerated() {
-                if self.walls[intersected.getWallNumber()] == nil {
-                    self.intersectingWalls[intersecting]?.remove(at: index)
+                
+            } else {
+                for (index,intersected) in self.intersectingWalls[intersecting]!.enumerated() {
+                    if self.walls[intersected.getWallNumber()] == nil {
+                        if index < self.intersectingWalls[intersecting]!.count {
+                            self.intersectingWalls[intersecting]!.remove(at: index)}
+                    }
                 }
             }
         }
@@ -315,17 +317,17 @@ class BoxModel {
     private func adjustForIntersection(_ currentWall: WallModel, _ addedWall : WallModel) {
         
         if (currentWall.innerPlane == WallType.longCorner && addedWall.innerPlane == WallType.smallCorner) {
-            addedWall.width = Double(currentWall.position.x) + materialThickness/2
+            if currentWall.width > Double(addedWall.position.z) {addedWall.width = Double(currentWall.position.x) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.longCorner && addedWall.innerPlane == WallType.largeCorner) {
-            addedWall.width = Double(currentWall.position.x) + materialThickness/2
+            if currentWall.length > Double(addedWall.position.y) {addedWall.width = Double(currentWall.position.x) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.smallCorner && addedWall.innerPlane == WallType.longCorner) {
-            addedWall.width = Double(currentWall.position.z) + materialThickness/2
+            if currentWall.width > Double(addedWall.position.x) {addedWall.width = Double(currentWall.position.z) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.smallCorner && addedWall.innerPlane == WallType.largeCorner) {
-            addedWall.length = Double(currentWall.position.z) + materialThickness/2
+            if currentWall.length > Double(addedWall.position.y) {addedWall.length = Double(currentWall.position.z) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.largeCorner && addedWall.innerPlane == WallType.smallCorner) {
-            addedWall.length = Double(currentWall.position.y) + materialThickness/2
+            if currentWall.length > Double(addedWall.position.z) {addedWall.length = Double(currentWall.position.y) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.largeCorner && addedWall.innerPlane == WallType.longCorner) {
-            addedWall.length = Double(currentWall.position.y) + materialThickness/2
+            if currentWall.width > Double(addedWall.position.x) {addedWall.length = Double(currentWall.position.y) + materialThickness/2}
         }
     }
     private func adjustAllIntersections() {
@@ -333,9 +335,10 @@ class BoxModel {
         for intersecting in self.intersectingWalls.keys {
             for intersected in self.intersectingWalls[intersecting]! {
                 adjustForIntersection(intersected, intersecting)
+                
             }
         }
-        
+        sceneGenerator.generateScene(self)
     }
     /**
     This initializer can be used to create a box using its parameters. It is necessary for opening a box model saved in a JSON file into the application.

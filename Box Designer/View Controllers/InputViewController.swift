@@ -68,6 +68,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var addPlacement: NSTextField!
     /// This variable allows use to add a wall according to their selected specifications.
     @IBOutlet weak var addWallButton: NSButton!
+    @IBOutlet weak var externalWallPlacement: NSSegmentedControl!
     /// This variable allows users to delete the component that is selected in the view.
     @IBOutlet weak var deleteSelected: NSButton!
     /// This variable indicates which unit the user wants.
@@ -284,8 +285,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         joinTypeControl.selectSegment(withTag: 0)
         addWallType.selectItem(at: 0)
         addWallPlane.selectItem(at: 0)
-        addPlacement.isEnabled = true
-        addPlacement.doubleValue = 0.5
+        addPlacement.isHidden = true
+        externalWallPlacement.isHidden = true
         addWallButton.isEnabled = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
@@ -468,27 +469,62 @@ class InputViewController: NSViewController, NSTextDelegate {
         boxModel.sceneGenerator.generateScene(boxModel)
     }
     
-    @IBAction func disableAddWall(_ sender: Any) {
+    @IBAction func wallTypeorPlaneChanged(_ sender: Any) {
         
-        /// only let users add wall if external or internal is selected
+        /// only let users add wall if external or internal is selected; adjust placement input according to wall type
         if addWallType.indexOfSelectedItem == 0 {
             addWallButton.isEnabled = false
+            addPlacement.isHidden = true
+            externalWallPlacement.isHidden = true
+        } else if addWallType.indexOfSelectedItem == 1 {
+            /// automatically select the placement of the missing wall, if there is one, for external walls
+            externalWallPlacement.isHidden = false
+            addPlacement.isHidden = true
+            var missing = [Double]()
+            print("hi")
+            if addWallPlane.indexOfSelectedItem == 0 {
+                missing = findMissingExternalWalls(WallType.longCorner)
+            } else if addWallPlane.indexOfSelectedItem == 1 {
+                missing = findMissingExternalWalls(WallType.smallCorner)
+            } else { missing = findMissingExternalWalls(WallType.largeCorner) }
+            if !missing.isEmpty { externalWallPlacement.selectedSegment = Int(missing[0]) } else { externalWallPlacement.selectedSegment = 0 }
+            addWallButton.isEnabled = true
         } else {
+            externalWallPlacement.isHidden = true
+            addPlacement.isHidden = false
+            addPlacement.doubleValue = 0.5
             addWallButton.isEnabled = true
         }
         
     }
     
+    func findMissingExternalWalls(_ type: WallType) -> [Double] {
+        var current = [Double]()
+        var missing = [Double]()
+        /// find external walls on the right plane that are there
+        for wall in boxModel.walls.values {
+            if wall.wallType == type && !wall.innerWall {
+                let length = sqrt(pow(wall.position.x,2) + pow(wall.position.y,2) + pow(wall.position.z,2))
+                if Double(length) < (boxModel.materialThickness + 1.0) {
+                    current.append(0.0)
+                } else { current.append(1.0) }
+            }
+        }
+        if current.contains(0.0) && current.contains(1.0) {return missing}
+        if current.contains(0.0) {missing.append(1.0); return missing}
+        if current.contains(1.0) {missing.append(0.0); return missing}
+        return missing
+    }
     @IBAction func addWall(_ sender: Any) {
         var inner = false
         var type : WallType
-        let placement = addPlacement.doubleValue
+        var placement = 0.0
         
-        // get inner or outer wall, disable "Add Wall" button if user hasn't decided
-        if addWallType.indexOfSelectedItem == 1 {
-            inner = false
-        }else if addWallType.indexOfSelectedItem == 2 {
+        if addWallType.indexOfSelectedItem == 2 {
             inner = true
+            placement = addPlacement.doubleValue
+        } else if addWallType.indexOfSelectedItem == 1 {
+            placement = Double(externalWallPlacement.selectedSegment)
         }
         
         // get wall plane, convert to wall type
@@ -507,16 +543,27 @@ class InputViewController: NSViewController, NSTextDelegate {
         /// Select the plane of the selected component in Add Components menu and in display in the label
         if selectionHandling.selectedNode != nil {
             let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
-            if (selectedWall?.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.largeCorner)) {
+            let length = Double(sqrt(pow(selectedWall!.position.x,2) + pow(selectedWall!.position.y,2) + pow(selectedWall!.position.z,2)))
+            var placement = 0.0
+            var plane = ""
+            if (selectedWall!.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall!.innerPlane == WallType.largeCorner)) {
+                plane = "X-Z"
                 addWallPlane.selectItem(at: 2)
-                selectedWallPlane.stringValue = "Selected wall: X-Z Plane"
-            } else if (selectedWall?.wallType == WallType.longCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.longCorner)) {
+            } else if (selectedWall!.wallType == WallType.longCorner || (selectedWall!.innerWall && selectedWall!.innerPlane == WallType.longCorner)) {
                 addWallPlane.selectItem(at: 0)
-                selectedWallPlane.stringValue = "Selected wall: X-Y Plane"
-            } else if selectedWall?.wallType == WallType.smallCorner {
+                plane = "X-Y"
+            } else if selectedWall!.wallType == WallType.smallCorner {
                 addWallPlane.selectItem(at: 1)
-                selectedWallPlane.stringValue = "Selected wall: Y-Z Plane"
+                plane = "Y-Z"
             }
+            if !selectedWall!.innerWall {
+                length < boxModel.materialThickness + 1 ? (externalWallPlacement.selectedSegment = 0) : (externalWallPlacement.selectedSegment = 1)
+                length < boxModel.materialThickness + 1 ? (placement = Double(0.0)) : (placement = Double(1.0))
+            } else {
+                placement = length/boxModel.boxHeight
+                addPlacement.doubleValue = length/boxModel.boxHeight
+            }
+            selectedWallPlane.stringValue = "Selected wall: \(plane) Plane, \(placement) placement"
         }
     }
     @IBAction func deleteSelectedComponent(_ sender: Any) {

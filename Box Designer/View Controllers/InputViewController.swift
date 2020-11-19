@@ -481,7 +481,6 @@ class InputViewController: NSViewController, NSTextDelegate {
             externalWallPlacement.isHidden = false
             addPlacement.isHidden = true
             var missing = [Double]()
-            print("hi")
             if addWallPlane.indexOfSelectedItem == 0 {
                 missing = findMissingExternalWalls(WallType.longCorner)
             } else if addWallPlane.indexOfSelectedItem == 1 {
@@ -547,21 +546,23 @@ class InputViewController: NSViewController, NSTextDelegate {
             var placement = 0.0
             var plane = ""
             if (selectedWall!.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall!.innerPlane == WallType.largeCorner)) {
-                plane = "X-Z"
                 addWallPlane.selectItem(at: 2)
+                plane = "X-Z"
+                placement = (length/boxModel.boxHeight*100).rounded()/100
             } else if (selectedWall!.wallType == WallType.longCorner || (selectedWall!.innerWall && selectedWall!.innerPlane == WallType.longCorner)) {
                 addWallPlane.selectItem(at: 0)
                 plane = "X-Y"
+                placement = (length/boxModel.boxWidth*100).rounded()/100
             } else if selectedWall!.wallType == WallType.smallCorner {
                 addWallPlane.selectItem(at: 1)
                 plane = "Y-Z"
+                placement = (length/boxModel.boxLength*100).rounded()/100
             }
             if !selectedWall!.innerWall {
                 length < boxModel.materialThickness + 1 ? (externalWallPlacement.selectedSegment = 0) : (externalWallPlacement.selectedSegment = 1)
                 length < boxModel.materialThickness + 1 ? (placement = Double(0.0)) : (placement = Double(1.0))
             } else {
-                placement = length/boxModel.boxHeight
-                addPlacement.doubleValue = length/boxModel.boxHeight
+                addPlacement.doubleValue = (length/boxModel.boxHeight*100).rounded()/100
             }
             selectedWallPlane.stringValue = "Selected wall: \(plane) Plane, \(placement) placement"
         }

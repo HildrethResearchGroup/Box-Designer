@@ -16,7 +16,7 @@ class BoxModel {
     let sceneGenerator = SceneGenerator.shared
     /// This variable is a dictionary of all the current walls that make up the box model. Its key is the wall number, and its value is the associated wall.
     var walls: Dictionary<Int,WallModel>
-    /// This variable contains the pairs of intersecting walls in the box model (for internal separator dimensions adjustments). The key is the wall that needs to adjust accordin g to the walls in
+    /// This variable contains the pairs of intersecting walls in the box model (for internal separator dimensions adjustments). The key is the wall that needs to adjust according to the walls in
     var intersectingWalls = Dictionary<WallModel,[WallModel]>()
     /// This variable refers to the box dimension along the x-axis.
     var boxWidth: Double {
@@ -356,7 +356,5 @@ class BoxModel {
         self.innerDimensions = innerDimensions
         self.joinType = joinType
         self.numberTabs = numberTabs
-
     }
-    
 }

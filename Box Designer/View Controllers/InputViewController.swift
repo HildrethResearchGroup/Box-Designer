@@ -66,10 +66,12 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var addWallPlane: NSPopUpButton!
     /// This variable indicates the placement of the internal separator along the axis.
     @IBOutlet weak var addPlacement: NSTextField!
-    /// This variable allows use to add a wall according to their selected specifications.
+    /// This variable allows users to add a wall according to their selected specifications.
     @IBOutlet weak var addWallButton: NSButton!
     /// This variable allows users to delete the component that is selected in the view.
     @IBOutlet weak var deleteSelected: NSButton!
+    /// This variable allows users to add a handle cutout on the selected wall.
+    @IBOutlet weak var handleCheckMark: NSButton!
     /// This variable indicates which unit the user wants.
     /// - Note: true indicates millimeters, false indicates inches.
     private var mmInch: Bool = false
@@ -220,13 +222,15 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
         
     }
-    
+    // When escape key is pressed, unlocks the camera view
     override func keyUp(with event: NSEvent) {
+        // Keycode 53: Esc
         if(event.keyCode == 53){
             cameraLocked = false
+            handleCheckMark.isEnabled = false
             selectionHandling.selectedNode = nil
             addWallPlane.selectItem(at: 0)
-            selectedWallPlane.stringValue = "Selected wall: None Selected"
+            selectedWallPlane.stringValue = "Selected wall: None"
         }
         
     }
@@ -287,6 +291,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         addPlacement.isEnabled = true
         addPlacement.doubleValue = 0.5
         addWallButton.isEnabled = false
+        handleCheckMark.isEnabled = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }
@@ -324,7 +329,6 @@ class InputViewController: NSViewController, NSTextDelegate {
             unitChoiceControl.selectedSegment = 1
             mmInch = true
             changeLabels(mmInch)
-
         }
     }
     
@@ -476,7 +480,6 @@ class InputViewController: NSViewController, NSTextDelegate {
         } else {
             addWallButton.isEnabled = true
         }
-        
     }
     
     @IBAction func addWall(_ sender: Any) {
@@ -506,6 +509,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     func updateSelectedWallPlane() {
         /// Select the plane of the selected component in Add Components menu and in display in the label
         if selectionHandling.selectedNode != nil {
+            handleCheckMark.isEnabled = true
             let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
             if (selectedWall?.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.largeCorner)) {
                 addWallPlane.selectItem(at: 2)
@@ -526,7 +530,15 @@ class InputViewController: NSViewController, NSTextDelegate {
         }        
         updateModel(boxModel)
     }
-    
+    /// Creates a handle cutout on the selected component
+    @IBAction func createHandle(_ sender: Any) {
+        if selectionHandling.selectedNode != nil {
+            // Enable the checkmark if/when a wall is selected
+            let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
+            
+        }
+        updateModel(boxModel)
+    }
     // Manages camera angles as the mouse drags the box around
     func manageMouseDrag(_ direction: inout CGFloat) {
         let deg: CGFloat = 180
@@ -539,7 +551,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
     }
     
-    // Prevents the user from implementing fewer tabs than is allowed
+    /// Prevents the user from implementing fewer tabs than is allowed
     func tabDialog() -> Bool {
         let tabAlert = NSAlert()
         tabAlert.messageText = "Invalid tab selection."

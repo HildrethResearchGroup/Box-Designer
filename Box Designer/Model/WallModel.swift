@@ -17,7 +17,7 @@ class WallModel : Equatable {
         } else {return false}
     }
     
-    /// This variable indicates the key of a wall  in the BoxModel.walls dictionary -- it is intended to be the name of a wall.
+    /// This variable indicates the key of a wall in the BoxModel.walls dictionary -- it is intended to be the name of a wall.
     private let wallNumber : Int
     /*
      These attributes are those strictly necessary for

@@ -36,6 +36,7 @@
                 <outlet property="boxView" destination="xX1-Mt-ukC" id="zjT-Ea-BU5"/>
                 <outlet property="deleteSelected" destination="6k5-PN-M7M" id="yvd-yS-Re8"/>
                 <outlet property="exportButton" destination="B3B-a2-e8l" id="Crv-he-lo9"/>
+                <outlet property="handleCheckMark" destination="4ux-Oo-Bza" id="6YB-ZJ-qdm"/>
                 <outlet property="heightLabel" destination="TQQ-QV-qyz" id="cmf-lR-o5T"/>
                 <outlet property="heightTextField" destination="G72-Xd-nTU" id="oKo-3N-ePO"/>
                 <outlet property="inchMenu" destination="pJz-17-zPr" id="Mub-cU-X8r"/>
@@ -265,13 +266,13 @@
         <window title="Box Designer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="284" y="400" width="813" height="795"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" misplaced="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="813" height="773"/>
+                <rect key="frame" x="0.0" y="0.0" width="813" height="795"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <sceneView allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xX1-Mt-ukC">
-                        <rect key="frame" x="0.0" y="185" width="813" height="566"/>
+                        <rect key="frame" x="0.0" y="188" width="813" height="588"/>
                     </sceneView>
                     <box borderType="line" title="Add Components" id="VC0-1w-I5m" userLabel="Add Components">
                         <rect key="frame" x="628" y="4" width="180" height="193"/>
@@ -620,7 +621,7 @@
                         </constraints>
                     </box>
                     <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6k5-PN-M7M">
-                        <rect key="frame" x="292" y="-1" width="211" height="32"/>
+                        <rect key="frame" x="292" y="2" width="211" height="32"/>
                         <buttonCell key="cell" type="push" title="Delete Selected Component" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="njw-Ih-PkF">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -630,7 +631,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B3B-a2-e8l">
-                        <rect key="frame" x="504" y="45" width="115" height="32"/>
+                        <rect key="frame" x="504" y="67" width="115" height="32"/>
                         <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dGa-5p-E0j">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -640,8 +641,8 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZZr-sW-zun" userLabel="WallPlane">
-                        <rect key="frame" x="298" y="41" width="179" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Selected wall: None selected" id="p3v-f3-Cfr">
+                        <rect key="frame" x="298" y="44" width="124" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Selected wall: None" id="p3v-f3-Cfr">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -650,6 +651,17 @@
                             <action selector="updateSelectedWallPlane" target="SYY-Aa-HfQ" id="0av-pg-A3Q"/>
                         </connections>
                     </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ux-Oo-Bza">
+                        <rect key="frame" x="544" y="42" width="65" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Handle" bezelStyle="regularSquare" imagePosition="left" enabled="NO" inset="2" id="6cm-0f-9mr">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <connections>
+                                <action selector="createHandle:" target="SYY-Aa-HfQ" id="LMl-Ex-MWP"/>
+                            </connections>
+                        </buttonCell>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="VC0-1w-I5m" firstAttribute="leading" secondItem="xZO-ci-QXt" secondAttribute="trailing" constant="20" id="269-XZ-Kdd"/>
@@ -664,7 +676,7 @@
                     <constraint firstItem="6k5-PN-M7M" firstAttribute="leading" secondItem="3Q9-g8-i8C" secondAttribute="trailing" constant="13" id="Sm7-Da-mU5"/>
                     <constraint firstItem="1JE-Yf-tAW" firstAttribute="top" secondItem="xX1-Mt-ukC" secondAttribute="bottom" constant="10" id="Wy4-9c-CCi"/>
                     <constraint firstItem="6k5-PN-M7M" firstAttribute="top" secondItem="ZZr-sW-zun" secondAttribute="bottom" constant="14" id="bvk-oh-QTZ"/>
-                    <constraint firstAttribute="bottom" secondItem="6k5-PN-M7M" secondAttribute="bottom" constant="6" id="diA-83-dVm"/>
+                    <constraint firstAttribute="bottom" secondItem="6k5-PN-M7M" secondAttribute="bottom" constant="9" id="diA-83-dVm"/>
                     <constraint firstItem="xX1-Mt-ukC" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="lwq-vn-uEc"/>
                     <constraint firstAttribute="trailing" secondItem="xX1-Mt-ukC" secondAttribute="trailing" id="pgc-Qn-iWy"/>
                     <constraint firstItem="3Q9-g8-i8C" firstAttribute="top" secondItem="xX1-Mt-ukC" secondAttribute="bottom" constant="10" id="sJZ-Do-kxt"/>

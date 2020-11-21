@@ -495,6 +495,9 @@ class InputViewController: NSViewController, NSTextDelegate {
             boxModel.joinType = JoinType.tab
             numberTabTextField.isEnabled = true
             boxModel.numberTabs = numberTabTextField.doubleValue
+        } else if choice == 2 {
+            boxModel.joinType = JoinType.slot
+            numberTabTextField.isEnabled = false
         }
     }
     /**
@@ -636,7 +639,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         } else if addWallPlane.indexOfSelectedItem == 1 {
             type = WallType.smallCorner
         } else {
-            type = WallType.largeCorner
+        
+            placement == 0.0 ? (type = WallType.bottomSide) : (type = WallType.topSide)
         }
         
         boxModel.addWall(inner: inner, type: type, placement: placement)
@@ -653,7 +657,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             let length = Double(sqrt(pow(selectedWall!.position.x,2) + pow(selectedWall!.position.y,2) + pow(selectedWall!.position.z,2)))
             var placement = 0.0
             var plane = ""
-            if (selectedWall!.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall!.innerPlane == WallType.largeCorner)) {
+            if (selectedWall?.wallType == WallType.topSide || selectedWall?.wallType == WallType.bottomSide || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.topSide || selectedWall?.innerPlane == WallType.bottomSide)) {
                 addWallPlane.selectItem(at: 2)
                 plane = "X-Z"
                 placement = (length/boxModel.boxHeight*100).rounded()/100

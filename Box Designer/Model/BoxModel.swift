@@ -31,7 +31,7 @@ class BoxModel : Codable {
         didSet {
             if boxWidth != oldValue {
                 for wall in self.walls.values {
-                    if (wall.wallType == WallType.largeCorner) {
+                    if (wall.wallType == WallType.topSide || wall.wallType == WallType.bottomSide) {
                         wall.width = boxWidth
                     } else if (wall.innerWall && wall.innerPlane == WallType.longCorner) {
                         /// If internal wall, change position according to its previous placement.
@@ -64,7 +64,7 @@ class BoxModel : Codable {
         didSet {
             if boxLength != oldValue {
                 for wall in self.walls.values {
-                    if (wall.wallType == WallType.largeCorner || (wall.innerWall && wall.innerPlane == WallType.largeCorner)) {
+                    if (wall.wallType == WallType.topSide || wall.wallType == WallType.bottomSide || (wall.innerWall && wall.innerPlane == WallType.topSide || wall.innerPlane == WallType.bottomSide)) {
                         wall.length = boxLength
                     } else if (wall.innerWall && wall.innerPlane == WallType.smallCorner){
                         /// If internal wall, change position according to its previous placement.
@@ -97,12 +97,11 @@ class BoxModel : Codable {
         didSet {
             if boxHeight != oldValue {
                 for wall in self.walls.values {
-                    if (wall.wallType == WallType.largeCorner) {
+                    if (wall.wallType == WallType.topSide || wall.wallType == WallType.bottomSide) {
                         if SCNVector3EqualToVector3(wall.position, SCNVector3Make(0.0, CGFloat(oldValue - materialThickness/2), 0.0)) {
                             wall.position = SCNVector3Make(0.0, CGFloat(boxHeight - materialThickness/2), 0.0)
                         }
-                    } else if (wall.innerWall && wall.innerPlane == WallType.largeCorner){
-                        /// If internal wall, change position according to its previous placement.
+                    } else if (wall.innerWall && (wall.innerPlane == WallType.topSide || wall.innerPlane == WallType.bottomSide)){
                         let originalPlacement = wall.position.y/CGFloat(oldValue)
                         wall.position = SCNVector3Make(0.0, CGFloat(Double(originalPlacement)*boxHeight), 0.0)
                     }else if (wall.wallType == WallType.smallCorner) {
@@ -222,12 +221,12 @@ class BoxModel : Codable {
         
         /// create the initial walls for viewing; global variable wallNumberStatic is incremented in WallModel init()
         
-        let wallBottom = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset1), 0.0), numberTabs: numberTabs)
+        let wallBottom = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.bottomSide, joinType, SCNVector3Make(0.0, CGFloat(offset1), 0.0), numberTabs: numberTabs)
         let wallLeft = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset1), 0.0, 0.0), numberTabs: numberTabs)
         let wallRight = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset2), 0.0, 0.0), numberTabs: numberTabs)
         let wallFront = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset1)), numberTabs: numberTabs)
         let wallBack = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset2)), numberTabs: numberTabs)
-        let wallLid = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), numberTabs: numberTabs)
+        let wallLid = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.topSide, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), numberTabs: numberTabs)
         
         /// add walls to dictionary
         self.walls = [wallBottom.getWallNumber() : wallBottom,wallLeft.getWallNumber() : wallLeft, wallRight.getWallNumber() : wallRight, wallFront.getWallNumber() : wallFront, wallBack.getWallNumber() : wallBack, wallLid.getWallNumber() : wallLid]
@@ -241,11 +240,11 @@ class BoxModel : Codable {
     */
     func addWall(inner: Bool, type: WallType, placement: Double) {
         /// dummy wall to be changed
-        var newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(0.0), 0.0), numberTabs: numberTabs)
+        var newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.topSide, joinType, SCNVector3Make(0.0, CGFloat(0.0), 0.0), numberTabs: numberTabs)
         if inner {
             /// add internal separators
             switch (type) {
-            case WallType.largeCorner:
+            case WallType.topSide, WallType.bottomSide:
                 newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, CGFloat(placement*boxHeight), 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
             case WallType.longCorner:
                 newWall = WallModel(BoxModel.wallNumberStatic,boxLength, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(CGFloat(placement*boxWidth), 0.0, 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
@@ -266,7 +265,7 @@ class BoxModel : Codable {
             var offset3 = 0.0
             
             switch (type) {
-            case WallType.largeCorner:
+            case WallType.topSide, WallType.bottomSide:
                 placement == 1.0 ? (offset3 = self.boxHeight - materialThickness/2) : (offset3 = materialThickness/2)
                 newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, type, self.joinType, SCNVector3Make(0.0, CGFloat(offset3), 0.0), numberTabs: numberTabs)
             case WallType.longCorner:
@@ -320,15 +319,15 @@ class BoxModel : Codable {
         /// These adjustments take into account that, even though two internal walls are on separate planes, they might not necessarily intersect (if the old wall is already adjusted to accomadate an intersection, the new wall might not intersect it).
         if (currentWall.innerPlane == WallType.longCorner && addedWall.innerPlane == WallType.smallCorner) {
             if currentWall.width > Double(addedWall.position.z) {addedWall.width = Double(currentWall.position.x) + materialThickness/2}
-        } else if (currentWall.innerPlane == WallType.longCorner && addedWall.innerPlane == WallType.largeCorner) {
+        } else if (currentWall.innerPlane == WallType.longCorner && WallType.topSide || addedWall.innerPlane == WallType.bottomSide) {
             if currentWall.length > Double(addedWall.position.y) {addedWall.width = Double(currentWall.position.x) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.smallCorner && addedWall.innerPlane == WallType.longCorner) {
             if currentWall.width > Double(addedWall.position.x) {addedWall.width = Double(currentWall.position.z) + materialThickness/2}
-        } else if (currentWall.innerPlane == WallType.smallCorner && addedWall.innerPlane == WallType.largeCorner) {
+        } else if (currentWall.innerPlane == WallType.smallCorner && WallType.topSide || addedWall.innerPlane == WallType.bottomSide) {
             if currentWall.length > Double(addedWall.position.y) {addedWall.length = Double(currentWall.position.z) + materialThickness/2}
-        } else if (currentWall.innerPlane == WallType.largeCorner && addedWall.innerPlane == WallType.smallCorner) {
+        } else if (currentWall.innerPlane == WallType.topSide || currentWall.innerPlane == WallType.bottomSide && addedWall.innerPlane == WallType.smallCorner) {
             if currentWall.length > Double(addedWall.position.z) {addedWall.length = Double(currentWall.position.y) + materialThickness/2}
-        } else if (currentWall.innerPlane == WallType.largeCorner && addedWall.innerPlane == WallType.longCorner) {
+        } else if (currentWall.innerPlane == WallType.topSide || currentWall.innerPlane == WallType.bottomSide && addedWall.innerPlane == WallType.longCorner) {
             if currentWall.width > Double(addedWall.position.x) {addedWall.length = Double(currentWall.position.y) + materialThickness/2}
         }
     }

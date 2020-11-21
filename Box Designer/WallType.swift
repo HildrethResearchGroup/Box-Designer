@@ -17,7 +17,7 @@ enum WallType : String, Codable {
      if overlapping join, this corresponds to the wall that "covers" all of its side
      if tabbed join, this corresponds to the wall whose corners have an outward tab in both directions
      */
-    case largeCorner = "largeCorner"
+    //case largeCorner
     
     /**
      case smallCorner: parallel to the x-y plane
@@ -32,4 +32,8 @@ enum WallType : String, Codable {
      if tabbed join, this corresponds to the wall whose corners have an outward tab in one direction and an outward tab in the other direction
      */
     case longCorner = "longCorner"
+    
+    case topSide = "topSide"
+    
+    case bottomSide = "bottomSide"
 }

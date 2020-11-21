@@ -500,10 +500,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         } else if addWallPlane.indexOfSelectedItem == 1 {
             type = WallType.smallCorner
         } else {
-            /*
-             THIS IM NOT SURE ABOUT!!!!!!!!!!!!!!!!!!!!!!!!
-             */
-            type = WallType.topSide
+        
+            placement == 0.0 ? (type = WallType.bottomSide) : (type = WallType.topSide)
         }
         
         boxModel.addWall(inner: inner, type: type, innerPlacement: placement)

@@ -34,7 +34,7 @@ class BoxViewController: NSViewController, SceneGeneratorDelegate {
         
     }
     /**
-     This function ensures the SCNView(boxView).scene is updated with the generated scene from our code.
+     This function ensures the SCNView(boxView).scene is updated with the generated scene from the code.
      */
     func updateScene() {
         self.boxView.scene = sceneGenerator.scene

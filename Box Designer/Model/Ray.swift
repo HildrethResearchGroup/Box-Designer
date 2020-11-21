@@ -1,5 +1,3 @@
-//
-//  Ray.swift
 import Foundation
 import SceneKit
 import Cocoa

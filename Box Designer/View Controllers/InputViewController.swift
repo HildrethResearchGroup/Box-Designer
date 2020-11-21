@@ -2,19 +2,19 @@ import Foundation
 import Cocoa
 import SceneKit
 /**
- This class handles all user interactions with the application. We could potentially refactor to multiple ViewController classes.
+ This class handles all user interactions with the application.
  
  - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
- - Note: InputViewController.swift was created on 6/6/2020.
+ - Note: InputViewController.swift was created on 6/6/2020. Additonally, we could potentially refactor to multiple ViewController classes, as this one is very meaty..
  
  */
 class InputViewController: NSViewController, NSTextDelegate {
-    /// This variable instantiates a new box model that will be updated by the user. It is instantiated with the default values found in the BoxModel class init().
+    /// This variable instantiates a new box model that will be updated by the user. It is instantiated with the default values found in BoxModel init().
     var boxModel = BoxModel()
     /// This variable is the conversion factor from inches to millimeters, used for unit conversion.
     static let unitConversionFactor = 25.4
-    /// This variable determines the minimum number of tabs that can be made, as the path generation can only handle more than this number of tabs.
+    /// This variable determines the minimum number of tabs that can be made, as the path generation can only handle more than this number of tabs due to how path generation works.
     let minTabs = 3.0
     /// Records the previous amount of tabs entered by the user.
     var previousTabEntry = 0.0
@@ -46,8 +46,6 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var unitChoiceControl: NSSegmentedCell!
     /// This variable is the textbox for number of tabs (if "Tab" join type is selected) that users can change in main GUI.
     @IBOutlet weak var numberTabTextField: NSTextField!
-    /// This is the label for the number of tabs textbox. It must be a variable for the units to be displayed (and the units can change).
-    @IBOutlet weak var numberTabLabel: NSTextField!
     /// This is the label for the box length textbox. It must be a variable for the units to be displayed (and the units can change).
     @IBOutlet weak var lengthLabel: NSTextField!
     /// This is the label for the box width textbox. It must be a variable for the units to be displayed (and the units can change).
@@ -60,7 +58,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var exportButton: NSButton!
     /// This variable indicates whether the added component should be an external wall or internal separator.
     @IBOutlet weak var addWallType: NSPopUpButton!
-    /// This variable outputs the plane that the selected wall is on.
+    /// This variable outputs the plane that the selected wall is on and its placement.
     @IBOutlet weak var selectedWallPlane: NSTextField!
     /// This variable indicates the plane that the added wall component should align with. It changes when you select a wall, to indicate the plane the wall is oriented on.
     @IBOutlet weak var addWallPlane: NSPopUpButton!
@@ -68,18 +66,49 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var addPlacement: NSTextField!
     /// This variable allows use to add a wall according to their selected specifications.
     @IBOutlet weak var addWallButton: NSButton!
+    /// This variable forces users to select only 0 or 1 for external wall placement, as fractions don't make sense for external walls.
     @IBOutlet weak var externalWallPlacement: NSSegmentedControl!
     /// This variable allows users to delete the component that is selected in the view.
     @IBOutlet weak var deleteSelected: NSButton!
     /// This variable indicates which unit the user wants.
-    /// - Note: true indicates millimeters, false indicates inches.
+    /// - Note: True indicates millimeters, false indicates inches.
     private var mmInch: Bool = false
-    /// This variable maps the unit to their conversion factor. Inches don't need to be changed, but millimeters need to be converted from inches.
+    /// This variable maps the mmInch boolean to their conversion factor. Inches don't need to be changed converted, but millimeters need to be converted from inches.
     private var mmInchDict : Dictionary<Bool, Double> = [false : 1.0, true : unitConversionFactor]
     
-    //====================Camera Controls=========================
-    // var mouseDown: Bool = false
-    
+    /// This function is inherited from NSViewController. It changes any settings that you want when the view initially loads, or a box model is loaded into the session from a JSON.
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        /// get values from current box model -- when user opens a box model from a JSON file, the values need to change in the GUI to the loaded box model's values
+        lengthTextField.doubleValue = boxModel.boxLength
+        widthTextField.doubleValue = boxModel.boxWidth
+        heightTextField.doubleValue = boxModel.boxHeight
+        materialThicknessTextField.doubleValue = boxModel.materialThickness
+        boxModel.joinType == JoinType.tab ? (numberTabTextField.isEnabled = true) : (numberTabTextField.isEnabled = false)
+        numberTabTextField.doubleValue = boxModel.numberTabs!
+        previousTabEntry = minTabs
+        boxModel.innerDimensions ? (innerOrOuterDimensionControl.selectedSegment = 1) : (innerOrOuterDimensionControl.selectedSegment = 0)
+        boxModel.joinType == JoinType.overlap ? (joinTypeControl.selectedSegment = 0) : (joinTypeControl.selectedSegment = 1)
+        /// Make sure adding components panel is at its default state (especially when loading a box model into session).
+        addWallType.selectItem(at: 0)
+        addWallPlane.selectItem(at: 0)
+        addPlacement.isHidden = true
+        addPlacement.doubleValue = 0.5
+        externalWallPlacement.isHidden = true
+        addWallButton.isEnabled = false
+        
+        /// begin with inch units
+        unitChoiceControl.selectedSegment = 0
+        mmInch = false
+        changeLabels(mmInch)
+        boxModel.sceneGenerator.generateScene(boxModel)
+    }
+    /// This function is inherited from NSViewController.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    //====================Camera Controls===========================//
+    /// This variable indicates when the camera is locked onto a wall.
     var cameraLocked: Bool = false
     /// This variable gives wiggle room to the mouse event when clicking and dragging with right-click.
     let moveSensitivity:CGFloat = 0.01
@@ -89,18 +118,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     let zoomSensitivity:CGFloat = 0.1
     
     /**
-     This function returns a boolean about whether the click event is within the view (true) or not (false).
-     - Parameters:
-        - event: an event that occured on the screen while the application is open
-     - Returns:
-        - Bool: this function returns a boolean on whether the event happened in the application view or not.
-     */
-    func inView(_ event: NSEvent)->Bool {
-        return (boxView.hitTest(event.locationInWindow) == boxView)
-    }
-    
-    /**
-     This function handles mouse movement when dragging the camera view around -- it rotates the box model. See [Apple Documentation - otherMouseDragged()] for further information on the inherited function. (https://developer.apple.com/documentation/appkit/nsresponder/1529804-othermousedragged?language=objc)
+     This function handles mouse movement when dragging the camera view around -- it rotates the box model. See [Apple Documentation - otherMouseDragged()]. (https://developer.apple.com/documentation/appkit/nsresponder/1529804-othermousedragged?language=objc)
      - Parameters:
         - event: an event that occured in the application with the mouse
      */
@@ -115,16 +133,20 @@ class InputViewController: NSViewController, NSTextDelegate {
             manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
         }
     }
-    
+    /**
+     This function handles snap points and edge highlighting appearance when user is in "focused" view and hovering their cursor above the correct spot -- camera locked on wall. See [Apple Documentation - mouseMoved()]. (https://developer.apple.com/documentation/appkit/nsresponder/1525114-mousemoved)
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func mouseMoved(with event: NSEvent) {
-        // get the location of the cursor when clicked
+        /// get the location of the cursor when clicked and perform hit test
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         
         var hitTestOptions = [SCNHitTestOption: Any]()
         hitTestOptions[SCNHitTestOption.ignoreHiddenNodes] = false
         
         let result = boxView.hitTest(clickCord, options: hitTestOptions)
-        
+        /// if no hit test result, return
         if (result.count == 0){
             selectionHandling.hoverNode = nil
             selectionHandling.hoverNode?.isHidden = true
@@ -141,8 +163,11 @@ class InputViewController: NSViewController, NSTextDelegate {
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
     }
-    
-    // Handling right click events with the mouse or trackpad
+    /**
+     This function handles right click events with the mouse or trackpad (right-click and drag moves the box model around). See [Apple Documentation - rightMouseDragged()]. https://developer.apple.com/documentation/appkit/nsresponder/1529135-rightmousedragged)
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func rightMouseDragged(with event: NSEvent) {
         // If using a mouse, translate the camera relative to the box
         if (event.subtype == .mouseEvent) {
@@ -160,12 +185,16 @@ class InputViewController: NSViewController, NSTextDelegate {
             manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
         }
     }
-    
-    // When the mouse button is released, update the camera view of the box
+    /**
+     This function handles camera updates from clicks by either highlighting a wall (if one click on correct area), or focusing on a double-clicked wall for drawing. See [Apple Documentation - mouseUp()]. (https://developer.apple.com/documentation/swiftui/nshostingview/mouseup(with:))
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
+        /// highlight selected wall if there's a hit on one click, otherwise go into "focus" view on the double-clicked wall
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()
@@ -221,8 +250,13 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
         
     }
-    
+    /**
+     This function handles key board input from user. See [Apple Documentation - keyUp()]. (https://developer.apple.com/documentation/appkit/nsgesturerecognizer/1526578-keyup)
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func keyUp(with event: NSEvent) {
+        /// this is the escape key
         if(event.keyCode == 53){
             cameraLocked = false
             selectionHandling.selectedNode = nil
@@ -232,16 +266,20 @@ class InputViewController: NSViewController, NSTextDelegate {
         
     }
     
-    // Handling scroll wheel events with the mouse/trackpad
+    /**
+     This function handles mouse scrolling to zoom in and out of the view. See [Apple Documentation - scrollWheel()]. (https://developer.apple.com/documentation/swiftui/nshostingview/scrollwheel(with:))
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func scrollWheel(with event: NSEvent) {
-        // If the scrolling event is from a mouse, zoom in/out
+        /// If the scrolling event is from a mouse, zoom in/out
         if (event.subtype == .mouseEvent) {
             boxView.pointOfView!.camera?.orthographicScale += Double(event.scrollingDeltaY * zoomSensitivity)
             if (boxView.pointOfView!.camera!.orthographicScale < 0.1){
                 boxView.pointOfView!.camera?.orthographicScale = 0.1
             }
         }
-        // Otherwise, If the scrolling event is from a trackpad, make it translate the camera relative to the box
+        /// Otherwise, If the scrolling event is from a trackpad, make it translate the camera relative to the box
         else {
             var currentPos:SCNVector3 = boxView.pointOfView!.position
             currentPos.x -= event.deltaX * (moveSensitivity*10)
@@ -250,8 +288,11 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
     }
     
-    // Handling trackpad events
-    // Allows users to zoom in and out with the trackpad
+    /**
+     This function handles trackpad zoom. See [Apple Documentation - magnify()]. (https://developer.apple.com/documentation/appkit/nsresponder/1525862-magnify)
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func magnify (with event: NSEvent) {
         boxView.pointOfView!.camera?.orthographicScale -= Double(event.magnification/zoomSensitivity)
         if(boxView.pointOfView!.camera!.orthographicScale < 0.1){
@@ -259,7 +300,11 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
     }
     
-    // Allows users to rotate the view of the box with the trackpad
+    /**
+     This function handles trackpad view rotation. See [Apple Documentation - rotate()]. (https://developer.apple.com/documentation/appkit/nsresponder/1525572-rotate)
+     - Parameters:
+        - event: an event that occured in the application with the mouse
+     */
     override func rotate (with event: NSEvent) {
         if(!cameraLocked){
             boxModel.sceneGenerator.cameraOrbit.eulerAngles.x += CGFloat(event.rotation) * (rotateSensitivity*4)
@@ -269,65 +314,52 @@ class InputViewController: NSViewController, NSTextDelegate {
             manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
         }
     }
-    
-    
-    //============================================================
-    
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        //boxModel = BoxModel()
-        // get values from current box model -- when user opens a box model from a JSON file, the values need to change
-        lengthTextField.doubleValue = boxModel.boxLength
-        widthTextField.doubleValue = boxModel.boxWidth
-        heightTextField.doubleValue = boxModel.boxHeight
-        materialThicknessTextField.doubleValue = boxModel.materialThickness
-        boxModel.joinType == JoinType.tab ? (numberTabTextField.isEnabled = true) : (numberTabTextField.isEnabled = false)
-        numberTabTextField.doubleValue = boxModel.numberTabs!
-        previousTabEntry = minTabs
-        boxModel.innerDimensions ? (innerOrOuterDimensionControl.selectedSegment = 1) : (innerOrOuterDimensionControl.selectedSegment = 0)
-        boxModel.joinType == JoinType.overlap ? (joinTypeControl.selectedSegment = 0) : (joinTypeControl.selectedSegment = 1)
-        // reset add components panel to original values
-        addWallType.selectItem(at: 0)
-        addWallPlane.selectItem(at: 0)
-        addPlacement.isHidden = true
-        addPlacement.doubleValue = 0.5
-        externalWallPlacement.isHidden = true
-        addWallButton.isEnabled = false
-        
-        // begin with inch units
-        unitChoiceControl.selectedSegment = 0
-        mmInch = false
-        changeLabels(mmInch)
-        boxModel.sceneGenerator.generateScene(boxModel)
+    /// This function manages camera angles as the mouse drags the box around.
+    func manageMouseDrag(_ direction: inout CGFloat) {
+        let deg: CGFloat = 180
+        //this needs to be refactored
+        if(direction/CGFloat.pi * deg > deg){
+            direction = (((direction/CGFloat.pi * deg) - deg * 2)/deg) * CGFloat.pi
+        }
+        if(direction/CGFloat.pi * deg < -deg){
+            direction = (((direction/CGFloat.pi * deg) + deg * 2)/deg) * CGFloat.pi
+        }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
-    // function to update labels according to user selection
+    //=======================Panel and Menu Interaction Controls=========================//
+    
+    /**
+     This function updates the label of any dimension in the view -- inches or millimeters.
+     - Parameters:
+        - unit: this is a boolean indicating whether the user's desired unit is inches or millimeters
+     */
     func changeLabels(_ unit : Bool) {
         var unitString: String
-        // false is inches, true is mm
+        /// false is inches, true is mm
         if unit{
             unitString = "(mm)"
         } else{
             unitString = "(in)"
         }
-        // change label units for user reference
+        /// change label units for user reference
         lengthLabel.stringValue = "Length " + unitString
         widthLabel.stringValue = "Width " + unitString
         heightLabel.stringValue = "Height " + unitString
         thicknessLabel.stringValue = "Material Thickness " + unitString
         
-        // change text field according to units, with convFactor
+        /// change text field according to units, with convFactor
         lengthTextField.doubleValue = boxModel.boxLength * mmInchDict[mmInch]!
         widthTextField.doubleValue = boxModel.boxWidth * mmInchDict[mmInch]!
         heightTextField.doubleValue = boxModel.boxHeight * mmInchDict[mmInch]!
         materialThicknessTextField.doubleValue = boxModel.materialThickness * mmInchDict[mmInch]!
     }
     
+    /**
+     This recieves input from the app's menu that the user wants millimeters as their unit.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func mmMenuClicked(_ sender: Any) {
         if !mmInch{
             mmMenu.state = NSControl.StateValue.on
@@ -335,12 +367,15 @@ class InputViewController: NSViewController, NSTextDelegate {
             unitChoiceControl.selectedSegment = 1
             mmInch = true
             changeLabels(mmInch)
-
         }
     }
-    
+    /**
+     This recieves input from the app's menu that the user wants inches as their unit.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func inchMenuClicked(_ sender: Any) {
-        //changing the units only changes the displayed amount not the model size
+        /// changing the units only changes the displayed amount not the model size
         if mmInch{
             mmMenu.state = NSControl.StateValue.off
             inchMenu.state = NSControl.StateValue.on
@@ -352,21 +387,28 @@ class InputViewController: NSViewController, NSTextDelegate {
             materialThicknessTextField.doubleValue = boxModel.materialThickness
             mmInch = false
             changeLabels(mmInch)
-            //set the limits second because otherwise the adjustment is incorrect
         }
     }
-    
-    /// Changing the dimensions of the box pushes the camera closer or farther away from the box
+    /**
+     This recieves input from the app's dimensions panel that the user wants a different box length.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
-            //if the setting is in mm
+            /// if the setting is in mm
             boxModel.boxLength = lengthTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
-            //if the setting is in inches
+            /// if the setting is in inches
            boxModel.boxLength = lengthTextField.doubleValue
         }
     }
+    /**
+     This recieves input from the app's dimensions panel that the user wants a specific unit (inch or mm).
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func unitSegmentedControl(_ sender: Any) {
         let choice = unitChoiceControl.selectedSegment
         if choice == 0 {
@@ -381,40 +423,56 @@ class InputViewController: NSViewController, NSTextDelegate {
             inchMenu.state = NSControl.StateValue.off
         }
     }
-    
+    /**
+     This recieves input from the app's dimensions panel that the user wants a different box width.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func widthTextFieldDidChange(_ sender: Any) {
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
-            //if the setting is in mm
+            /// if the setting is in mm
             boxModel.boxWidth = widthTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
-            //if the setting is in inches
+            /// if the setting is in inches
             boxModel.boxWidth = widthTextField.doubleValue
         }
     }
-    
+    /**
+     This recieves input from the app's dimensions panel that the user wants a different box height.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func heightTextFieldDidChange(_ sender: Any) {
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
-            //if the setting is in mm
+            /// if the setting is in mm
             boxModel.boxHeight = heightTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
-            //if the setting is in inches
+            /// if the setting is in inches
             boxModel.boxHeight = heightTextField.doubleValue
         }
     }
-    
+    /**
+     This recieves input from the app's dimensions panel that the user wants a different box material thickness.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func materialThicknessTextFieldDidChange(_ sender: Any) {
         if mmInch{
-            //if the setting is in mm
+            /// if the setting is in mm
             boxModel.materialThickness = materialThicknessTextField.doubleValue * (1/InputViewController.unitConversionFactor)
         }else{
-            //if the setting is in inches
+            /// if the setting is in inches
             boxModel.materialThickness = materialThicknessTextField.doubleValue
         }
         
     }
-    
+    /**
+     This recieves input from the app's dimensions panel that the user wants the dimensions to be either inner or outer (see BoxModel.innerDimension for description).
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func innerOrOuterDimensionsSelected(_ sender: Any) {
         let choice = innerOrOuterDimensionControl.selectedSegment
         if choice == 0 {
@@ -423,7 +481,11 @@ class InputViewController: NSViewController, NSTextDelegate {
             boxModel.innerDimensions = true
         }
     }
-    
+    /**
+     This recieves input from the app's join panel that the user wants a different box join type.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func joinTypeSelected(_ sender: Any) {
         let choice = joinTypeControl.selectedSegment
         if choice == 0 {
@@ -435,17 +497,20 @@ class InputViewController: NSViewController, NSTextDelegate {
             boxModel.numberTabs = numberTabTextField.doubleValue
         }
     }
-    
+    /**
+     This recieves input from the app's join panel that the user wants a different number of tabs.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func numberTabChanged(_ sender: Any) {
-        // If the number of tabs is too low, display a warning dialog
-        // Warning dialog gives the user the choice to either:
+        /// If the number of tabs is too low, display a warning dialog
         if numberTabTextField.doubleValue < minTabs {
-            // Default to the minimum number of tabs
+            /// Default to the minimum number of tabs
             if tabDialog() {
                 boxModel.numberTabs = minTabs
                 numberTabTextField.doubleValue = minTabs
             }
-            // Cancel the tab operation, reseting the tab count to its previous number
+            /// Cancel the tab operation, reseting the tab count to its previous number
             else {
                 numberTabTextField.doubleValue = previousTabEntry
             }
@@ -455,42 +520,60 @@ class InputViewController: NSViewController, NSTextDelegate {
             previousTabEntry = numberTabTextField.doubleValue
         }
     }
-    
+    /// This alert pops up if the user inputs fewer tabs than is allowed.
+    func tabDialog() -> Bool {
+        let tabAlert = NSAlert()
+        tabAlert.messageText = "Invalid tab selection."
+        tabAlert.informativeText = "Press 'OK' to default to the minimum number of tabs \(Int(minTabs)), or press 'Cancel' to abort the operation."
+        tabAlert.alertStyle = .warning
+        tabAlert.addButton(withTitle: "OK")
+        tabAlert.addButton(withTitle: "Cancel")
+        return tabAlert.runModal() == .alertFirstButtonReturn
+    }
+    /**
+     This recieves input from the app's menu that the user wants to open a box model into the session from a selected JSON file.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {
-        let newBoxModel = fileHandlingControl.openModel(boxModel, self.view.window)
+        let newBoxModel = fileHandlingControl.openModel()
+        /// reset box view and GUI values according to loaded box model
         updateModel(newBoxModel)
-        print(newBoxModel.boxHeight,newBoxModel.boxWidth,newBoxModel.boxLength)
-        //reset box view and GUI values according to new box model
         self.awakeFromNib()
-        
     }
-    
-    @IBAction func menuFileSaveItemSelected(_ sender: Any) {
+    /**
+     This recieves input from the app's menu and the export button in the view that the user wants to save their box model.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
+    @IBAction func saveModel(_ sender: Any) {
         fileHandlingControl.saveModel(boxModel, self.view.window)
     }
-    
-    // right now, the button just does the same as the menu option
-    // the functionality in this will be changed for one of the requirements (swift archiving capabilities)
-    @IBAction func exportButtonClicked(_ sender: Any) {
-        fileHandlingControl.saveModel(boxModel, self.view.window)
-    }
-    
+    /**
+     This update the InputViewController's boxModel after changes were made.
+     - Parameters:
+        - boxModel: the updated box model
+     */
     func updateModel(_ boxModel: BoxModel) {
         self.boxModel = boxModel
         boxModel.sceneGenerator.generateScene(boxModel)
     }
-    
-    @IBAction func wallTypeorPlaneChanged(_ sender: Any) {
-        
-        /// only let users add wall if external or internal is selected; adjust placement input according to wall type
+    /**
+     This recieves input from the app's add components panel that the user updated the wall type or the wall plane. It is used to make sure the correct placement input is not hidden, and hides the correct one. It also disables the add wall button unless something other than the default "Type" is selected.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
+    @IBAction func wallTypeOrPlaneChanged(_ sender: Any) {
+        /// only let users add wall if external or internal is selected; hide both placement inputs if "Type" is selected, or just un-hide one if the correct wall type is selected
         if addWallType.indexOfSelectedItem == 0 {
             addWallButton.isEnabled = false
             addPlacement.isHidden = true
             externalWallPlacement.isHidden = true
         } else if addWallType.indexOfSelectedItem == 1 {
-            /// automatically select the placement of the missing wall, if there is one, for external walls
             externalWallPlacement.isHidden = false
             addPlacement.isHidden = true
+            addWallButton.isEnabled = true
+            /// update externalWallPlacement selection with missing walls of that plane
             var missing = [Double]()
             if addWallPlane.indexOfSelectedItem == 0 {
                 missing = findMissingExternalWalls(WallType.longCorner)
@@ -498,7 +581,6 @@ class InputViewController: NSViewController, NSTextDelegate {
                 missing = findMissingExternalWalls(WallType.smallCorner)
             } else { missing = findMissingExternalWalls(WallType.largeCorner) }
             if !missing.isEmpty { externalWallPlacement.selectedSegment = Int(missing[0]) } else { externalWallPlacement.selectedSegment = 0 }
-            addWallButton.isEnabled = true
         } else {
             externalWallPlacement.isHidden = true
             addPlacement.isHidden = false
@@ -507,7 +589,12 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
         
     }
-    
+    /**
+     This function finds the placements of the missing external walls in the box model, for user-friendly external wall adding.
+     - Parameters:
+        - type: the plane on which the missing walls should be searched for
+     - Returns: This function returns an array of double/s that indicate the placement of a missing wall -- it can have a max of two values, and values can only be 0.0 or 1.0
+     */
     func findMissingExternalWalls(_ type: WallType) -> [Double] {
         var current = [Double]()
         var missing = [Double]()
@@ -525,6 +612,12 @@ class InputViewController: NSViewController, NSTextDelegate {
         if current.contains(1.0) {missing.append(0.0); return missing}
         return missing
     }
+    /**
+     This function takes in user input about the orientation, placement, and type of wall they want to add, and then sends those parameters off to BoxModel for the wall to be added to the template.
+     - Parameters:
+        - sender: typical @IBAction input
+     - Note: As of now, internal walls can only be added from the origin. This could be updated by accepting a negative number so BoxModel knows to draw from the boundary opposite the origin.
+     */
     @IBAction func addWall(_ sender: Any) {
         var inner = false
         var type : WallType
@@ -537,7 +630,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             placement = Double(externalWallPlacement.selectedSegment)
         }
         
-        // get wall plane, convert to wall type
+        /// get wall plane, convert to wall type
         if addWallPlane.indexOfSelectedItem == 0 {
             type = WallType.longCorner
         } else if addWallPlane.indexOfSelectedItem == 1 {
@@ -546,11 +639,15 @@ class InputViewController: NSViewController, NSTextDelegate {
             type = WallType.largeCorner
         }
         
-        boxModel.addWall(inner: inner, type: type, innerPlacement: placement)
+        boxModel.addWall(inner: inner, type: type, placement: placement)
         updateModel(boxModel)
     }
+    /**
+     This function is purely to make the Add Components more user friendly. All it does is update the label output in GUI to show the selected wall's (highlighted wall's) plane and placement, if one is selected. If adding walls is refactored, you probably won't need this. The other idea is to add a coordinate system that adjusts according to the camera.
+     */
     func updateSelectedWallPlane() {
-        /// Select the plane of the selected component in Add Components menu and in display in the label
+        /// Select the plane of the selected component in Add Components menu and display in the label. If external wall is selected, update externalWallPlacement to be the missing wall (if any).
+        var missing = [Double]()
         if selectionHandling.selectedNode != nil {
             let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
             let length = Double(sqrt(pow(selectedWall!.position.x,2) + pow(selectedWall!.position.y,2) + pow(selectedWall!.position.z,2)))
@@ -560,17 +657,20 @@ class InputViewController: NSViewController, NSTextDelegate {
                 addWallPlane.selectItem(at: 2)
                 plane = "X-Z"
                 placement = (length/boxModel.boxHeight*100).rounded()/100
+                missing = findMissingExternalWalls(WallType.largeCorner)
             } else if (selectedWall!.wallType == WallType.longCorner || (selectedWall!.innerWall && selectedWall!.innerPlane == WallType.longCorner)) {
                 addWallPlane.selectItem(at: 0)
                 plane = "X-Y"
                 placement = (length/boxModel.boxWidth*100).rounded()/100
+                missing = findMissingExternalWalls(WallType.longCorner)
             } else if selectedWall!.wallType == WallType.smallCorner {
                 addWallPlane.selectItem(at: 1)
                 plane = "Y-Z"
                 placement = (length/boxModel.boxLength*100).rounded()/100
+                missing = findMissingExternalWalls(WallType.smallCorner)
             }
             if !selectedWall!.innerWall {
-                length < boxModel.materialThickness + 1 ? (externalWallPlacement.selectedSegment = 0) : (externalWallPlacement.selectedSegment = 1)
+                if !missing.isEmpty && externalWallPlacement.isHidden == false { externalWallPlacement.selectedSegment = Int(missing[0]) }
                 length < boxModel.materialThickness + 1 ? (placement = Double(0.0)) : (placement = Double(1.0))
             } else {
                 addPlacement.doubleValue = (length/boxModel.boxHeight*100).rounded()/100
@@ -578,35 +678,17 @@ class InputViewController: NSViewController, NSTextDelegate {
             selectedWallPlane.stringValue = "Selected wall: \(plane) Plane, \(placement) placement"
         }
     }
+    /**
+     This function simply tells the box model to delete the wall that is selected by the user. It also updates the intersectingWalls dictionary if one of the keys or values is the wall that is deleted.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func deleteSelectedComponent(_ sender: Any) {
         if let node = selectionHandling.selectedNode {
             boxModel.walls.removeValue(forKey: Int(node.name!)!)
             boxModel.updateIntersectingWalls()
         }        
         updateModel(boxModel)
-    }
-    
-    // Manages camera angles as the mouse drags the box around
-    func manageMouseDrag(_ direction: inout CGFloat) {
-        let deg: CGFloat = 180
-        //this needs to be refactored
-        if(direction/CGFloat.pi * deg > deg){
-            direction = (((direction/CGFloat.pi * deg) - deg * 2)/deg) * CGFloat.pi
-        }
-        if(direction/CGFloat.pi * deg < -deg){
-            direction = (((direction/CGFloat.pi * deg) + deg * 2)/deg) * CGFloat.pi
-        }
-    }
-    
-    // Prevents the user from implementing fewer tabs than is allowed
-    func tabDialog() -> Bool {
-        let tabAlert = NSAlert()
-        tabAlert.messageText = "Invalid tab selection."
-        tabAlert.informativeText = "Press 'OK' to default to the minimum number of tabs \(Int(minTabs)), or press 'Cancel' to abort the operation."
-        tabAlert.alertStyle = .warning
-        tabAlert.addButton(withTitle: "OK")
-        tabAlert.addButton(withTitle: "Cancel")
-        return tabAlert.runModal() == .alertFirstButtonReturn
     }
 }
 

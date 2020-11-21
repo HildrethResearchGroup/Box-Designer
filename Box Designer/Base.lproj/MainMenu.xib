@@ -46,7 +46,6 @@
                 <outlet property="lengthTextField" destination="ej6-We-03q" id="0AL-08-AoL"/>
                 <outlet property="materialThicknessTextField" destination="JAJ-yv-jkR" id="D2m-hM-jd8"/>
                 <outlet property="mmMenu" destination="6oz-WZ-lag" id="m6Z-Ur-32H"/>
-                <outlet property="numberTabLabel" destination="SOV-kb-V2U" id="UxZ-2g-Uet"/>
                 <outlet property="numberTabTextField" destination="OQ8-j6-eeU" id="Mhj-yB-JiR"/>
                 <outlet property="pdfOptionsView" destination="84M-x9-aDz" id="6Ve-r8-JqM"/>
                 <outlet property="selectedWallPlane" destination="ZZr-sW-zun" id="p1d-bi-RQY"/>
@@ -112,6 +111,7 @@
                                     <action selector="newDocument:" target="-1" id="4Si-XN-c54"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="menuFileOpenItemSelected:" target="SYY-Aa-HfQ" id="r5y-qA-76m"/>
@@ -131,21 +131,19 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
-                            <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
-                                <connections>
-                                    <action selector="performClose:" target="-1" id="HmO-Ls-i7Q"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Save" keyEquivalent="s" id="pxx-59-PXV">
                                 <connections>
-                                    <action selector="menuFileSaveItemSelected:" target="SYY-Aa-HfQ" id="Kkb-Un-Ksi"/>
+                                    <action selector="saveModel:" target="SYY-Aa-HfQ" id="a53-7l-vPg"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Save As Pdf" keyEquivalent="S" id="18W-oC-Zj8"/>
-                            <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
                             <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                 <connections>
                                     <action selector="print:" target="-1" id="qaZ-4w-aoO"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="HmO-Ls-i7Q"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -326,7 +324,7 @@
                                         </menu>
                                     </popUpButtonCell>
                                     <connections>
-                                        <action selector="wallTypeorPlaneChanged:" target="SYY-Aa-HfQ" id="28L-SD-Vze"/>
+                                        <action selector="wallTypeOrPlaneChanged:" target="SYY-Aa-HfQ" id="28L-SD-Vze"/>
                                     </connections>
                                 </popUpButton>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V6m-U8-iZC">
@@ -375,7 +373,7 @@
                                         </menu>
                                     </popUpButtonCell>
                                     <connections>
-                                        <action selector="wallTypeorPlaneChanged:" target="SYY-Aa-HfQ" id="N0Z-J5-8Ao"/>
+                                        <action selector="wallTypeOrPlaneChanged:" target="SYY-Aa-HfQ" id="N0Z-J5-8Ao"/>
                                     </connections>
                                 </popUpButton>
                             </subviews>
@@ -654,7 +652,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="exportButtonClicked:" target="SYY-Aa-HfQ" id="Cjd-Yg-0iq"/>
+                            <action selector="saveModel:" target="SYY-Aa-HfQ" id="Cjd-Yg-0iq"/>
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZZr-sW-zun" userLabel="WallPlane">

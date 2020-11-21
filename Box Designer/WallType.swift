@@ -3,7 +3,7 @@ import Cocoa
 /**
  These enum cases correspond to the three types of wall construction commonly used when designing
  laser-cut box templates.  Creating walls so that those in the same plane have the same
- WallType ensures that the walls will correctly fit together.
+ WallType ensures that the walls will correctly fit together.  Associated strings are for WallType to conform to Codable.
  
  - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.

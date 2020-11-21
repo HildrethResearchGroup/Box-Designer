@@ -43,7 +43,7 @@ class SceneGenerator {
     }
     
     /**
-     This function renders the display in the view, ensuring that all components are drawn, the camera view is correct, and colors are as desired.
+     This function renders the display in the view, ensuring that all components are drawn, the camera view is correct, and colors are as desired. This is where the 2-D walls are turned into 3-D SCNNodes via extrustion of the materialThickness.
      - Parameters:
         - boxModel: The scene generation needs to be on the current box model desired by the user so that it can render accurately.
      */
@@ -52,39 +52,38 @@ class SceneGenerator {
         self.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
-        //ensure that the camera stays on the center on the box
+        /// ensure that the camera stays on the center on the box
         cameraOrbit.position = SCNVector3Make(CGFloat(boxModel.boxWidth/2), CGFloat(boxModel.boxHeight/2), CGFloat(boxModel.boxLength/2))
         var wallNumber = 0
         for wall in boxModel.walls.values {
-            //create node from wall data
+            /// create node from wall data
             let newShape = SCNShape(path: wall.path, extrusionDepth: CGFloat(wall.materialThickness))
             let newNode = SCNNode(geometry: newShape)
-            //adjust position and rotation
+            /// adjust position and rotation
             newNode.position = wall.position
             switch (wall.wallType) {
             case WallType.largeCorner:
-                //rotate 90 degrees around +x axis
+                /// rotate 90 degrees around +x axis
                 newNode.rotation = SCNVector4Make(1, 0, 0, CGFloat.pi/2)
             case WallType.smallCorner:
-                // adjust inner wall rotation, as they are always smallCorner types
+                /// adjust inner wall rotation, as they are always smallCorner types
                 if wall.innerWall && wall.innerPlane == WallType.largeCorner {
                     newNode.rotation = SCNVector4Make(1, 0, 0, CGFloat.pi/2)
                 } else if wall.innerWall && wall.innerPlane == WallType.longCorner {
                     newNode.rotation = SCNVector4Make(0, 1, 0, -CGFloat.pi/2)
                 }
-                // non-inner small corners and inner small corners are correctly rotated to begin with
+                /// non-inner small corners and inner small corners are correctly rotated to begin with
                 break
             case WallType.longCorner:
                 //rotate -90 degrees around +y axis
                 newNode.rotation = SCNVector4Make(0, 1, 0, -CGFloat.pi/2)
             }
-            
-            //adjust colors for ease in differentiating walls
+            /// adjust colors for ease in differentiating walls
             let brightness = CGFloat(1.0 - Double(wallNumber) / Double(boxModel.walls.count))
             newNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.90, brightness: brightness, alpha: 1.0)
-            // name the node to be able to delete selected component from BoxModel.walls array
+            /// name the node to be able to delete selected component from BoxModel.walls array
             newNode.name = String(wall.getWallNumber())
-            //add to the rootNode
+            /// add to the rootNode
             scene.rootNode.addChildNode(newNode)
             wallNumber += 1
         }
@@ -97,15 +96,15 @@ class SceneGenerator {
      */
     func adjustLighting() {
         
-        // this section denotes the color for the background (more white would be 1.0) behind the cube
+        /// this section denotes the color for the background (whitest would be 1.0) behind the cube
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
         ambientLightNode.light!.type = SCNLight.LightType.ambient
         ambientLightNode.light!.color = NSColor(white: 0.67, alpha: 1.0)
         scene.rootNode.addChildNode(ambientLightNode)
         
-        // this section ensures the box rendering looks like a cube instead of a 2d shape
-        // basically, the shading on the different components
+        /// this section ensures the box rendering looks like a cube instead of a 2d shape
+        /// basically, the shading on the different components
         let omniLightNode = SCNNode()
         omniLightNode.light = SCNLight()
         omniLightNode.light!.type = SCNLight.LightType.omni
@@ -144,7 +143,6 @@ class SceneGenerator {
 
     }
 }
-
 /**
  This is a custom protocol whose sole purpose is to update the scene whenever the user adjusts the inputs in the app.
  */

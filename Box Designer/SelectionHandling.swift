@@ -2,7 +2,7 @@ import Foundation
 import SceneKit
 import Cocoa
 /**
- This class handles the selection and highlighting of components that the user wants to interact with.
+ This class handles the selection and highlighting of components that the user wants to interact with, as well as snap point and edge highlighting when user is in "focus" mode.
  - TODO: documenting this class
  - Authors: CSM Field Session Fall 2020 and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.

@@ -3,7 +3,7 @@ import Cocoa
 import SceneKit
 
 /**
- This is the controlling class for exporting the custom box template to PDF or JSON, or opening a saved box template into the application via JSON file.
+ This is the controlling class for exporting the custom box template to PDF or JSON, or opening a saved box template into the application via JSON file (JSON capabilities are implemented via native Swift Encoding/Decoding functionality).
  
  - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
@@ -27,7 +27,6 @@ class FileHandlingControl {
     /// This is the default PDF document stroke for the option menu when saving. It is the line thickness.
     var stroke = 3.0
     
-    
     /**
      This is the function that instantiates a save panel in the desired window so that the user can save to their desired directory.
      - Parameters:
@@ -35,9 +34,8 @@ class FileHandlingControl {
         - window: This parameter ensures the save panel is viewable in the application's window.
      */
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?) {
-        /// Ensure the window is available.
+        /// Ensure the window is available and instantiate save panel.
         guard let displayWindow = window else { return }
-        /// Instantiate an NSSavePanel for the user to save the export to their desired location
         let panel = NSSavePanel()
         
         /// Set up panel attributes
@@ -46,10 +44,8 @@ class FileHandlingControl {
         panel.allowedFileTypes = ["pdf", "json"]
         panel.allowsOtherFileTypes = false
         
-        
         /// This instantiates an accessory view for the NSSavePanel -- it is a custom view outlined in this project (PDFOptionsView). It has hard-coded restraints (this could be changed to create the CGRect with constraints from the view).
         let accView = PDFOptionsView(frame: CGRect(x: 0, y: 0, width: 310, height: 267))
-        /// Add the accessory view to the save panel.
         panel.accessoryView = accView
         
         /// Open the view for the user to interact with
@@ -60,22 +56,19 @@ class FileHandlingControl {
                 let pathExtension = url.pathExtension
                 switch (pathExtension) {
                 case "json":
-                    /// If user chooses to save as JSON, instantiate JSONFileHandler().
+                    /// If user chooses to save as JSON, instantiate JSONEncoder().
                     let encoder = JSONEncoder()
                     var data = Data()
                     do {
                         data = try encoder.encode(boxModel)
                         let string = String(data: data, encoding: .utf8)
                         try string!.write(to: url, atomically: false, encoding: String.Encoding.utf8)
-                        
-                        print(string!)
                     } catch {
                         print("Failed to save as a JSON file.")
                     }
                 case "pdf":
-                    /// If user chooses to save as PDF, instantiate BoxDesignerPDF() with the current box model and user's desired location, and then call it's saveAsPDF() method.
+                    /// If user chooses to save as PDF, instantiate BoxDesignerPDF() with the current box model and user's desired location, and then call its saveAsPDF() method.
                     BoxDesignerPDF(targetURL: url, boxModel).saveAsPDF()
-                    
                 default:
                     break
                 }
@@ -84,15 +77,11 @@ class FileHandlingControl {
     }
     
     /**
-     This is the function that opens a previously-saved box model (JSON format) into the application. It uses the JSONDecoder().
-     - Parameters:
-        - boxModel: This is the parameter that the function will load the box model from.
-        - window: This parameter ensures the box model is loaded into the current viewing window.
-     
+     This is the function that opens a previously-saved box model (JSON format) into the application. It utilizes the JSONDecoder().
      - Returns:
-        - BoxModel: This function, if successfully completed, returns a BoxModel object that can be displayed in the applcation.
+        - BoxModel: This function, if successfully completed, returns a BoxModel object that can be displayed in the application.
      */
-    func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel {
+    func openModel() -> BoxModel {
         
         let panel = NSOpenPanel()
         /// Instantiate a BoxModel that will be adjusted according to the loading file's data.
@@ -107,7 +96,7 @@ class FileHandlingControl {
         /// Open a file if the user clicks "OK" in the open panel.
         if response == NSApplication.ModalResponse.OK {
             /// Get the URL to the user's chosen file.
-            guard let url = panel.url else {return boxModel}
+            guard let url = panel.url else {return newBoxModel}
             var data = Data()
             /// try to get data from json file
             do {

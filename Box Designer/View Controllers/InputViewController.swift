@@ -534,10 +534,15 @@ class InputViewController: NSViewController, NSTextDelegate {
         // If the handle button is pressed, place a handle on the selected box component
         if (handleCheckMark.state.rawValue == 1) {
             // Enable the checkmark if/when a wall is selected
-            let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
-            selectedWall?.handle = true
+            boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]?.handle = true
             updateModel(boxModel)
-            
+        }
+        // If the handle button is pressed off, then remove the handle
+        else if (handleCheckMark.state.rawValue == 0){
+            if (selectionHandling.selectedNode != nil) {
+                boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]?.handle = false
+                updateModel(boxModel)
+            }
         }
     }
     // Manages camera angles as the mouse drags the box around

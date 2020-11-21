@@ -215,13 +215,19 @@ class PathGenerator {
 
     static func createHandle(path: NSBezierPath, width: Double, length: Double, materialThickness: Double) {
         // Length and width of the handle in inches
-        let handleLength = 3.5
+        let handleLength = 2.0
         let handleWidth = 1.0
+        // TODO: Adapt handle position to box dimensions
+        let handleShape1 = NSRect(x: 0.75, y: 1, width: handleWidth, height: handleLength)
+        let handleShape2 = NSRect(x: 2, y: 1, width: handleWidth, height: handleLength)
         
-        path.move(to: CGPoint(x: 0.0, y: 0.0))
-        path.relativeLine(to: CGPoint(x: 0.0, y: handleWidth))
-        path.relativeLine(to: CGPoint(x: handleLength, y: handleWidth))
-        path.relativeLine(to: CGPoint(x: handleLength, y: 0.0))
+        let handlePath = NSBezierPath()
+        handlePath.appendRoundedRect(handleShape1, xRadius: CGFloat(handleWidth)/8, yRadius: CGFloat(handleLength)/8)
+        handlePath.appendRoundedRect(handleShape2, xRadius: CGFloat(handleWidth)/8, yRadius: CGFloat(handleLength)/8)
+        handlePath.fill()
+    
+        path.append(handlePath.reversed)
+        handlePath.setClip()
     }
     /**
      This function alters an overlap-type path according to its inputs, which are dependent on wallType and decided in generateOverlapPath function. It does not return a path, simply alters the NSBezierPath that's passed in.

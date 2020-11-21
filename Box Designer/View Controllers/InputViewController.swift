@@ -88,6 +88,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         numberTabTextField.doubleValue = boxModel.numberTabs!
         previousTabEntry = minTabs
         boxModel.innerDimensions ? (innerOrOuterDimensionControl.selectedSegment = 1) : (innerOrOuterDimensionControl.selectedSegment = 0)
+        /// - TODO: need to update for slot
         boxModel.joinType == JoinType.overlap ? (joinTypeControl.selectedSegment = 0) : (joinTypeControl.selectedSegment = 1)
         /// Make sure adding components panel is at its default state (especially when loading a box model into session).
         addWallType.selectItem(at: 0)

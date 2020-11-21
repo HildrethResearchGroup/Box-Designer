@@ -167,7 +167,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
-        handleCheckMark.isEnabled = true
+        if (boxModel.boxHeight >= 5 && boxModel.boxWidth >= 4 && boxModel.boxLength >= 4) { handleCheckMark.isEnabled = true
+        }
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()

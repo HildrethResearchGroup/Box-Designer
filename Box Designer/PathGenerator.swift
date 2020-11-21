@@ -215,18 +215,19 @@ class PathGenerator {
 
     static func createHandle(path: NSBezierPath, width: Double, length: Double, materialThickness: Double) {
         // Length and width of the handle in inches
-        let handleLength = 2.0
+        let handleLength = 3.5
         let handleWidth = 1.0
+        let startX = width/2.0 - handleWidth - 0.1
+        let startY = length/2.0 - handleLength/2.0
         // TODO: Adapt handle position to box dimensions
-        let handleShape1 = NSRect(x: 0.75, y: 1, width: handleWidth, height: handleLength)
-        let handleShape2 = NSRect(x: 2, y: 1, width: handleWidth, height: handleLength)
+        let handleShape1 = NSRect(x: startX, y: startY, width: handleWidth, height: handleLength)
+        let handleShape2 = NSRect(x: startX + handleWidth + 0.25, y: startY, width: handleWidth, height: handleLength)
         
         let handlePath = NSBezierPath()
-        handlePath.appendRoundedRect(handleShape1, xRadius: CGFloat(handleWidth)/8, yRadius: CGFloat(handleLength)/8)
-        handlePath.appendRoundedRect(handleShape2, xRadius: CGFloat(handleWidth)/8, yRadius: CGFloat(handleLength)/8)
-        handlePath.fill()
-    
-        path.append(handlePath.reversed)
+        handlePath.appendRect(handleShape1)
+        handlePath.appendRect(handleShape2)
+        
+        path.append(handlePath)
         handlePath.setClip()
     }
     /**

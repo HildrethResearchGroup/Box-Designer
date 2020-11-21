@@ -89,7 +89,7 @@ class FileHandlingControl {
     
     /**
      
-     This is the function that opens a previously-saved box model into the application. As of now, it only works with JSON files.
+     This is the function that opens a previously-saved box model (JSON format) into the application. It uses the JSONDecoder().
      
      - Parameters:
         - boxModel: This is the parameter that the function will load the box model from.
@@ -100,46 +100,39 @@ class FileHandlingControl {
      
      */
     func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel {
-        /// Ensure the window is available.
-        guard let displayWindow = window else { return boxModel }
-        /// Instantiate an open panel. See [NSOpenPanel().] (https://developer.apple.com/documentation/appkit/nsopenpanel)
+        
         let panel = NSOpenPanel()
         /// Instantiate a BoxModel that will be adjusted according to the loading file's data.
-        var boxModel = BoxModel()
-        
-        /// Allow user to choose a file.
+        var newBoxModel = BoxModel()
+        /// Set up panel attributes
         panel.canChooseFiles = true
-        /// Do not allow user to choose a directory.
         panel.canChooseDirectories = false
-        /// Do not allow user to choose multiple files.
         panel.allowsMultipleSelection = false
-        /// Ensure user can only choose a file that is of type JSON.
         panel.allowedFileTypes = ["json"]
-        /// Do not allow user to choose any other type of file, other than JSON.
         panel.allowsOtherFileTypes = false
+        let response = panel.runModal()
         /// Open a file if the user clicks "OK" in the open panel.
-        panel.beginSheetModal(for: displayWindow) { (response) in
-            if response == NSApplication.ModalResponse.OK {
-                /// Get the URL to the user's chosen file.
-                guard let url = panel.url else {return}
-                var data = Data()
-                do {
-                    data = try Data(String(contentsOf: url).utf8)
-                } catch {
-                    print("Could not decode JSON.")
-                }
-                /// Instantiate the JSONDecoder.
-                let decoder = JSONDecoder()
-                
-                do {
-                    boxModel = try decoder.decode(BoxModel.self, from: data)
-                } catch {
-                    print("Could not open the desired Box Model.")
-                }
+        if response == NSApplication.ModalResponse.OK {
+            /// Get the URL to the user's chosen file.
+            guard let url = panel.url else {return boxModel}
+            var data = Data()
+            /// try to get data from json file
+            do {
+                data = try Data(String(contentsOf: url).utf8)
+            } catch {
+                print("Could not decode JSON.")
+            }
+            /// Instantiate the JSONDecoder and try to decode the data from the json file
+            let decoder = JSONDecoder()
+            do {
+                newBoxModel = try decoder.decode(BoxModel.self, from: data)
+            } catch {
+                print("Could not open the desired Box Model.")
             }
         }
-        /// Return the loaded box model for user viewing in the application.
-        return boxModel
+       // }
+        /// Return the loaded box model  (or default) for user viewing in the application.
+        return newBoxModel
     }
 }
 

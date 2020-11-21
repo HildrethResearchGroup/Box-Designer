@@ -10,7 +10,7 @@ import SceneKit
  
  */
 class BoxModel : Codable {
-
+    
     /// This variable ensures the current box model has access to the scene, so that it can update its variables.
     let sceneGenerator = SceneGenerator.shared
     /// This variable is a dictionary of all the current walls that make up the box model. Its key is the wall number (a global variable), and its value is the associated wall.
@@ -351,6 +351,7 @@ class BoxModel : Codable {
         - joinType: the box join type indicated in the file
         - numberTabs: the number of tabs the box has, as indicated in the file
      */
+    
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         walls = try values.decode(Dictionary.self, forKey: .walls)

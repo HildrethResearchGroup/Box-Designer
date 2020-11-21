@@ -458,9 +458,9 @@ class InputViewController: NSViewController, NSTextDelegate {
     
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {
         let newBoxModel = fileHandlingControl.openModel(boxModel, self.view.window)
-        self.boxModel = newBoxModel
+        updateModel(newBoxModel)
+        print(newBoxModel.boxHeight,newBoxModel.boxWidth,newBoxModel.boxLength)
         //reset box view and GUI values according to new box model
-        boxModel.sceneGenerator.generateScene(self.boxModel)
         self.awakeFromNib()
         
     }

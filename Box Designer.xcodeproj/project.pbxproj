@@ -113,7 +113,6 @@
 				67ACA14325476462003D4905 /* Documentation.swift */,
 				C0E65E72247851C0009D90F1 /* Model */,
 				C0E65E6A247842D6009D90F1 /* View Controllers */,
-				C0E65E6D24784D70009D90F1 /* Views */,
 				C0E65E4E2478426D009D90F1 /* AppDelegate.swift */,
 				C0E65E522478426E009D90F1 /* MainMenu.xib */,
 				C0E65E502478426E009D90F1 /* Assets.xcassets */,
@@ -151,13 +150,6 @@
 				02043C50248C310A00F595A1 /* InputViewController.swift */,
 			);
 			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		C0E65E6D24784D70009D90F1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		C0E65E72247851C0009D90F1 /* Model */ = {

@@ -319,11 +319,11 @@ class BoxModel : Codable {
         /// These adjustments take into account that, even though two internal walls are on separate planes, they might not necessarily intersect (if the old wall is already adjusted to accomadate an intersection, the new wall might not intersect it).
         if (currentWall.innerPlane == WallType.longCorner && addedWall.innerPlane == WallType.smallCorner) {
             if currentWall.width > Double(addedWall.position.z) {addedWall.width = Double(currentWall.position.x) + materialThickness/2}
-        } else if (currentWall.innerPlane == WallType.longCorner && WallType.topSide || addedWall.innerPlane == WallType.bottomSide) {
+        } else if (currentWall.innerPlane == WallType.longCorner && (addedWall.innerPlane == WallType.topSide || addedWall.innerPlane == WallType.bottomSide)) {
             if currentWall.length > Double(addedWall.position.y) {addedWall.width = Double(currentWall.position.x) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.smallCorner && addedWall.innerPlane == WallType.longCorner) {
             if currentWall.width > Double(addedWall.position.x) {addedWall.width = Double(currentWall.position.z) + materialThickness/2}
-        } else if (currentWall.innerPlane == WallType.smallCorner && WallType.topSide || addedWall.innerPlane == WallType.bottomSide) {
+        } else if (currentWall.innerPlane == WallType.smallCorner && (addedWall.innerPlane == WallType.topSide || addedWall.innerPlane == WallType.bottomSide)) {
             if currentWall.length > Double(addedWall.position.y) {addedWall.length = Double(currentWall.position.z) + materialThickness/2}
         } else if (currentWall.innerPlane == WallType.topSide || currentWall.innerPlane == WallType.bottomSide && addedWall.innerPlane == WallType.smallCorner) {
             if currentWall.length > Double(addedWall.position.z) {addedWall.length = Double(currentWall.position.y) + materialThickness/2}

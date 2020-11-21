@@ -582,7 +582,10 @@ class InputViewController: NSViewController, NSTextDelegate {
                 missing = findMissingExternalWalls(WallType.longCorner)
             } else if addWallPlane.indexOfSelectedItem == 1 {
                 missing = findMissingExternalWalls(WallType.smallCorner)
-            } else { missing = findMissingExternalWalls(WallType.largeCorner) }
+            } else {
+                /// can fo either topSide or bottomSide here, just need the correct plane
+                missing = findMissingExternalWalls(WallType.topSide)
+            }
             if !missing.isEmpty { externalWallPlacement.selectedSegment = Int(missing[0]) } else { externalWallPlacement.selectedSegment = 0 }
         } else {
             externalWallPlacement.isHidden = true
@@ -604,10 +607,16 @@ class InputViewController: NSViewController, NSTextDelegate {
         /// find external walls on the right plane that are there
         for wall in boxModel.walls.values {
             if wall.wallType == type && !wall.innerWall {
-                let length = sqrt(pow(wall.position.x,2) + pow(wall.position.y,2) + pow(wall.position.z,2))
-                if Double(length) < (boxModel.materialThickness + 1.0) {
+                if wall.wallType == WallType.bottomSide {
                     current.append(0.0)
-                } else { current.append(1.0) }
+                } else if wall.wallType == WallType.topSide {
+                    current.append(1.0)
+                } else{
+                    let length = sqrt(pow(wall.position.x,2) + pow(wall.position.y,2) + pow(wall.position.z,2))
+                    if Double(length) < (boxModel.materialThickness + 1.0) {
+                        current.append(0.0)
+                    } else { current.append(1.0) }
+                }
             }
         }
         if current.contains(0.0) && current.contains(1.0) {return missing}
@@ -661,7 +670,8 @@ class InputViewController: NSViewController, NSTextDelegate {
                 addWallPlane.selectItem(at: 2)
                 plane = "X-Z"
                 placement = (length/boxModel.boxHeight*100).rounded()/100
-                missing = findMissingExternalWalls(WallType.largeCorner)
+                missing = findMissingExternalWalls(WallType.topSide)
+                
             } else if (selectedWall!.wallType == WallType.longCorner || (selectedWall!.innerWall && selectedWall!.innerPlane == WallType.longCorner)) {
                 addWallPlane.selectItem(at: 0)
                 plane = "X-Y"

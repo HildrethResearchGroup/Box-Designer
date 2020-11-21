@@ -423,6 +423,9 @@ class InputViewController: NSViewController, NSTextDelegate {
             boxModel.joinType = JoinType.tab
             numberTabTextField.isEnabled = true
             boxModel.numberTabs = numberTabTextField.doubleValue
+        } else if choice == 2 {
+            boxModel.joinType = JoinType.slot
+            numberTabTextField.isEnabled = false
         }
     }
     

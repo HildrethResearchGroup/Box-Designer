@@ -8,16 +8,10 @@ This is a box designer that is designed to be used with a Glowforge laser-cutter
 
 ### Usage
 
-The designer has 3 key tool sections: Dimensions, Joining, and Miscellaneous. The dimensions has four inputs and two option. You can change the length, width, height, and material thickness. Additionally, there is the option to change if these dimensions refer to the outside or inside of the box. The sides of the boxes can be joined differently, either through tabs or simple overlapping. The number of tabs can also be adjusted. In the Miscellaneous section, there are options to take the lid on and off as well as add or remove internal dividers.
+The designer has 3 key tool sections: Dimensions, Joining, and Add Components. The dimensions has four inputs and two options. You can change the length, width, height, and material thickness. Additionally, there is the option to change if these dimensions refer to the outside or inside of the box and the option to change the units between inches and millimeters. The sides of the boxes can be joined differently, either through tabs, simple overlapping, or slots. The number of tabs can also be adjusted. In the Add Components section, there are options to choose whether the wall to be added is internal or external, the plane it should be oriented on, and where it should be placed.
 
 ### Copyright
 Copyright © 2020 Hildreth Research Group. All rights reserved.
-
-### Settings
-Units can be changed though Format > Units or in the GUI "Dimensions" section.
-Color blind color options are also available under Format > Color Change.
-Low Vision windows with larger text to adjust the settings are available under View > Low Vision.
-Additionally, CTRL + D will open the dimensions window, CTRL + J will open the Joining window, and CTRL + M will open the Miscellaneous window.
 
 ### Box-Designer Minimum System Requirements
 
@@ -41,8 +35,8 @@ Additionally, CTRL + D will open the dimensions window, CTRL + J will open the J
 
 ### Notes
 
-* The Apple Markdown syntax is used to document this project. The HTML rendering of the documentation is created using jazzy. To get jazzy on macOS:
+* Apple Markdown syntax is used to document this project. The HTML rendering of the documentation is created using jazzy. To get jazzy on macOS:
 * [sudo] gem install jazzy
 * If you run "jazzy --min-acl private" in your root project folder from the command line and you have issues with xcodebuild, try:
 * jazzy --build-tool-arguments CODE_SIGN_IDENTITY=,CODE_SIGNING_REQUIRED=NO,CODE_SIGNING_ALLOWED=NO --min-acl private
-* The jazzy-generated documentation is published at https://hildrethresearchgroup.github.io/Box-Designer/ (HildrethResearchGroup's GitHub Pages URL)
+* The jazzy-generated documentation is published at https://hildrethresearchgroup.github.io/Box-Designer/ (HildrethResearchGroup's GitHub Pages URL); there is a WorkFlow set up in GitHub so that our GitHubPages is updated any time someone pushes to the master branch.

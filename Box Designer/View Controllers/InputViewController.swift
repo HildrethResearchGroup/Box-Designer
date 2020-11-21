@@ -497,7 +497,10 @@ class InputViewController: NSViewController, NSTextDelegate {
         } else if addWallPlane.indexOfSelectedItem == 1 {
             type = WallType.smallCorner
         } else {
-            type = WallType.largeCorner
+            /*
+             THIS IM NOT SURE ABOUT!!!!!!!!!!!!!!!!!!!!!!!!
+             */
+            type = WallType.topSide
         }
         
         boxModel.addWall(inner: inner, type: type, innerPlacement: placement)
@@ -507,7 +510,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         /// Select the plane of the selected component in Add Components menu and in display in the label
         if selectionHandling.selectedNode != nil {
             let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
-            if (selectedWall?.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.largeCorner)) {
+            if (selectedWall?.wallType == WallType.topSide || selectedWall?.wallType == WallType.bottomSide || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.topSide || selectedWall?.innerPlane == WallType.bottomSide)) {
                 addWallPlane.selectItem(at: 2)
                 selectedWallPlane.stringValue = "Selected wall: X-Z Plane"
             } else if (selectedWall?.wallType == WallType.longCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.longCorner)) {

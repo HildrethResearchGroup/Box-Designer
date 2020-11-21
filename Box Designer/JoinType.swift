@@ -13,4 +13,6 @@ enum JoinType {
     case tab
     /// The overlap join requires some type of adhesive after being laser-cut in order to construct the box. The construction of this type of join is dependent on the material thickness, as the box shouldn't have overhanging sides.
     case overlap
+    
+    case slot
 }

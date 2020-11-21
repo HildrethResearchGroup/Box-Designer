@@ -2,7 +2,7 @@ import Foundation
 import Cocoa
 import SceneKit.SCNGeometry
 /**
- This class provides the structure a single wall in the box model.
+ This class provides the structure for a single wall in the box model.
  
  - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
@@ -92,9 +92,18 @@ class WallModel : Equatable {
     /// This variable indicates the plane that the inner wall should be oriented on -- the WallTypes are associated with planes (see WallType.swift).
     var innerPlane : WallType
     
+    /// This variable determines if the selected wall should have a handle or not on it
+    var handle : Bool {
+        didSet {
+            if handle != oldValue {
+                updatePath()
+            }
+        }
+    }
+    
     /// This function sets the wall's path from the return of PathGenerator's generatePath function, using its self-updating variables.
     private func updatePath(){
-        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, numberTabs: self.numberTabs)
+        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, numberTabs: self.numberTabs, handle: self.handle)
     }
     
     /// This function returns the wall number of itself.
@@ -114,7 +123,7 @@ class WallModel : Equatable {
         - position: this is where the path of the wall starts
         - numberTabs: this is the number of tabs for the wall
      */
-    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, numberTabs: Double?, innerWall : Bool = false, innerPlane : WallType = WallType.smallCorner) {
+    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, numberTabs: Double?, innerWall : Bool = false, innerPlane : WallType = WallType.smallCorner, handle: Bool = false) {
         self.width = width
         self.length = length
         self.materialThickness = materialThickness
@@ -122,7 +131,8 @@ class WallModel : Equatable {
         self.joinType = joinType
         self.numberTabs = numberTabs
         self.position = position
-        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs)
+        self.handle = false
+        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: self.handle)
         self.wallNumber = BoxModel.wallNumberStatic
         self.innerWall = innerWall
         self.innerPlane = innerPlane

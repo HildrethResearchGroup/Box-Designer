@@ -26,7 +26,7 @@ class PathGenerator {
      - Returns:
         - NSBezierPath: this function returns a path that can be drawn in the scene
      */
-    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, numberTabs: Double?) -> NSBezierPath {
+    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, numberTabs: Double?, handle: Bool) -> NSBezierPath {
         // instantiate a new path
         var path = NSBezierPath()
         
@@ -37,6 +37,12 @@ class PathGenerator {
         case JoinType.tab:
             path = generateTabPath(width, length, materialThickness, wallType, nTab: numberTabs!)
         }
+        
+        // Creates a handle on the wall if specified by the user
+        if (handle) {
+            createHandle(path: path, width: width, length: length, materialThickness: materialThickness)
+        }
+    
         return path
     }
     
@@ -90,7 +96,6 @@ class PathGenerator {
         } else {
             path = generateTabLargeLongCornerPath(wallType,width, length, materialThickness, Int(nTab))
         }
-
         return path
     }
     
@@ -207,6 +212,17 @@ class PathGenerator {
         path.close()
         return path
     }
+
+    static func createHandle(path: NSBezierPath, width: Double, length: Double, materialThickness: Double) {
+        // Length and width of the handle in inches
+        let handleLength = 3.5
+        let handleWidth = 1.0
+        
+        path.move(to: CGPoint(x: 0.0, y: 0.0))
+        path.relativeLine(to: CGPoint(x: 0.0, y: handleWidth))
+        path.relativeLine(to: CGPoint(x: handleLength, y: handleWidth))
+        path.relativeLine(to: CGPoint(x: handleLength, y: 0.0))
+    }
     /**
      This function alters an overlap-type path according to its inputs, which are dependent on wallType and decided in generateOverlapPath function. It does not return a path, simply alters the NSBezierPath that's passed in.
     - Parameters:
@@ -222,7 +238,6 @@ class PathGenerator {
         path.line(to: CGPoint(x: x34, y: y23))
         path.line(to: CGPoint(x: x34, y: y14))
         path.close()
-        
     }
     /**
      This function alters a tab-type path according to its inputs. It does not return a path, simply alters the NSBezierPath that's passed in. It creates one singular tab, with dimensions according to the distance between its points.

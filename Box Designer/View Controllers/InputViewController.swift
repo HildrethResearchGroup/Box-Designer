@@ -167,6 +167,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
+        handleCheckMark.isEnabled = true
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()
@@ -220,7 +221,6 @@ class InputViewController: NSViewController, NSTextDelegate {
             }
             print(result.node.position)
         }
-        
     }
     // When escape key is pressed, unlocks the camera view
     override func keyUp(with event: NSEvent) {
@@ -509,7 +509,6 @@ class InputViewController: NSViewController, NSTextDelegate {
     func updateSelectedWallPlane() {
         /// Select the plane of the selected component in Add Components menu and in display in the label
         if selectionHandling.selectedNode != nil {
-            handleCheckMark.isEnabled = true
             let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
             if (selectedWall?.wallType == WallType.largeCorner || (selectedWall!.innerWall && selectedWall?.innerPlane == WallType.largeCorner)) {
                 addWallPlane.selectItem(at: 2)
@@ -532,12 +531,14 @@ class InputViewController: NSViewController, NSTextDelegate {
     }
     /// Creates a handle cutout on the selected component
     @IBAction func createHandle(_ sender: Any) {
-        if selectionHandling.selectedNode != nil {
+        // If the handle button is pressed, place a handle on the selected box component
+        if (handleCheckMark.state.rawValue == 1) {
             // Enable the checkmark if/when a wall is selected
             let selectedWall = boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]
+            selectedWall?.handle = true
+            updateModel(boxModel)
             
         }
-        updateModel(boxModel)
     }
     // Manages camera angles as the mouse drags the box around
     func manageMouseDrag(_ direction: inout CGFloat) {

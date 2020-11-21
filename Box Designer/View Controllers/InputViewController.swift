@@ -277,17 +277,27 @@ class InputViewController: NSViewController, NSTextDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         //boxModel = BoxModel()
-        
-        numberTabTextField.isEnabled = false
-        numberTabTextField.doubleValue = 3
+        // get values from current box model -- when user opens a box model from a JSON file, the values need to change
+        lengthTextField.doubleValue = boxModel.boxLength
+        widthTextField.doubleValue = boxModel.boxWidth
+        heightTextField.doubleValue = boxModel.boxHeight
+        materialThicknessTextField.doubleValue = boxModel.materialThickness
+        boxModel.joinType == JoinType.tab ? (numberTabTextField.isEnabled = true) : (numberTabTextField.isEnabled = false)
+        numberTabTextField.doubleValue = boxModel.numberTabs!
         previousTabEntry = minTabs
-        innerOrOuterDimensionControl.selectSegment(withTag: 0)
-        joinTypeControl.selectSegment(withTag: 0)
+        boxModel.innerDimensions ? (innerOrOuterDimensionControl.selectedSegment = 1) : (innerOrOuterDimensionControl.selectedSegment = 0)
+        boxModel.joinType == JoinType.overlap ? (joinTypeControl.selectedSegment = 0) : (joinTypeControl.selectedSegment = 1)
+        // reset add components panel to original values
         addWallType.selectItem(at: 0)
         addWallPlane.selectItem(at: 0)
         addPlacement.isHidden = true
+        addPlacement.doubleValue = 0.5
         externalWallPlacement.isHidden = true
         addWallButton.isEnabled = false
+        
+        // begin with inch units
+        unitChoiceControl.selectedSegment = 0
+        mmInch = false
         changeLabels(mmInch)
         boxModel.sceneGenerator.generateScene(boxModel)
     }
@@ -346,8 +356,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         }
     }
     
-    // Changing the dimensions of the box
-    // Changing the dimensions of the box pushes the camera closer or farther away from the box
+    /// Changing the dimensions of the box pushes the camera closer or farther away from the box
     @IBAction func lengthTextFieldDidChange(_ sender: Any) {
         SceneGenerator.shared.generateScene(boxModel)
         if mmInch{
@@ -450,8 +459,10 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBAction func menuFileOpenItemSelected(_ sender: Any) {
         let newBoxModel = fileHandlingControl.openModel(boxModel, self.view.window)
         self.boxModel = newBoxModel
-        //reset all displays to be correct
+        //reset box view and GUI values according to new box model
         boxModel.sceneGenerator.generateScene(self.boxModel)
+        self.awakeFromNib()
+        
     }
     
     @IBAction func menuFileSaveItemSelected(_ sender: Any) {

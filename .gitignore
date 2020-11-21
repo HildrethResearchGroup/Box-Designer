@@ -1,4 +1,12 @@
 .xcuserstate
+<<<<<<< Updated upstream
 Box Designer.xcodeproj/project.xcworkspace/xcuserdata/csfsstudent.xcuserdatad/
 Box Designer.xcodeproj/xcuserdata/csfsstudent.xcuserdatad/
 
+=======
+.DS_Store
+"Box Designer".xcodeproj/project.xcworkspace/xcuserdata/audreyhorne.xcuserdatad/UserInterfaceState.xcuserstate
+docs/
+build/
+Box Designer.xcodeproj/project.xcworkspace/xcuserdata/csfsstudent.xcuserdatad/UserInterfaceState.xcuserstate
+>>>>>>> Stashed changes

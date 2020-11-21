@@ -8,9 +8,9 @@ import Cocoa
  - Note: JoinType.swift was created on 6/6/2020.
  
  */
-enum JoinType {
+enum JoinType : String, Codable {
     /// The tab join is interlocking; for now, the application allows for the number of tabs to be changed by the user. The construction of this type of join is dependent on material thickness, as the box shouldn't have overhanging sides.
-    case tab
+    case tab = "tab"
     /// The overlap join requires some type of adhesive after being laser-cut in order to construct the box. The construction of this type of join is dependent on the material thickness, as the box shouldn't have overhanging sides.
-    case overlap
+    case overlap = "overlap"
 }

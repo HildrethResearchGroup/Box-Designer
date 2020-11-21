@@ -9,9 +9,8 @@ import SceneKit
  - Note: BoxModel.swift was created on 6/6/2020.
  
  */
-class BoxModel {
-    /// This is a variable that's associated with internal separators. However, it would be wise to refactor how internal separators are dealt with.
-    var counterLength = 0
+class BoxModel : Codable {
+
     /// This variable ensures the current box model has access to the scene, so that it can update its variables.
     let sceneGenerator = SceneGenerator.shared
     /// This variable is a dictionary of all the current walls that make up the box model. Its key is the wall number, and its value is the associated wall.
@@ -214,9 +213,8 @@ class BoxModel {
         }
     }
     
-    /// This variable allows the walls to be deleted from the BoxModel.walls dictionary -- it essentialy names the walls as they're created. It is static so that each new instance of a wall can grab the next number and then increment it for the next wall.
+    /// This variable allows the walls and their associated nodes be associated -- the node is named the same as the wall when they are instantiated in SceneGenerator. This helps with organizing and deleting walls. It also associates the user's selection with the WallModel class. It is a global variable so that walls can get a unique identifier each time one is instantiated.
     static var wallNumberStatic = 0
-    
     /// This initializer creates the default box model which is loaded whenever the application is launched
     init() {
         
@@ -236,12 +234,12 @@ class BoxModel {
         
         // create the initial walls for viewing
         
-        let wallBottom = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset1), 0.0), numberTabs: numberTabs)
-        let wallLeft = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset1), 0.0, 0.0), numberTabs: numberTabs)
-        let wallRight = WallModel(boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset2), 0.0, 0.0), numberTabs: numberTabs)
-        let wallFront = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset1)), numberTabs: numberTabs)
-        let wallBack = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset2)), numberTabs: numberTabs)
-        let wallLid = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), numberTabs: numberTabs)
+        let wallBottom = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset1), 0.0), numberTabs: numberTabs)
+        let wallLeft = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset1), 0.0, 0.0), numberTabs: numberTabs)
+        let wallRight = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.longCorner, joinType, SCNVector3Make(CGFloat(offset2), 0.0, 0.0), numberTabs: numberTabs)
+        let wallFront = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset1)), numberTabs: numberTabs)
+        let wallBack = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.smallCorner, joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset2)), numberTabs: numberTabs)
+        let wallLid = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(offset2), 0.0), numberTabs: numberTabs)
         
         let walls = [wallBottom.getWallNumber() : wallBottom,wallLeft.getWallNumber() : wallLeft, wallRight.getWallNumber() : wallRight, wallFront.getWallNumber() : wallFront, wallBack.getWallNumber() : wallBack, wallLid.getWallNumber() : wallLid]
         
@@ -251,16 +249,16 @@ class BoxModel {
     
     func addWall(inner: Bool, type: WallType, innerPlacement: Double) {
         
-        var newWall = WallModel(boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(0.0), 0.0), numberTabs: numberTabs)
+        var newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.largeCorner, joinType, SCNVector3Make(0.0, CGFloat(0.0), 0.0), numberTabs: numberTabs)
         if inner {
             /// add internal separators
             switch (type) {
             case WallType.largeCorner:
-                newWall = WallModel(boxWidth, boxLength, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, CGFloat(innerPlacement*boxHeight), 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
+                newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, CGFloat(innerPlacement*boxHeight), 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
             case WallType.longCorner:
-                newWall = WallModel(boxLength, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(CGFloat(innerPlacement*boxWidth), 0.0, 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
+                newWall = WallModel(BoxModel.wallNumberStatic,boxLength, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(CGFloat(innerPlacement*boxWidth), 0.0, 0.0), numberTabs: numberTabs, innerWall : true, innerPlane: type)
             case WallType.smallCorner:
-                newWall = WallModel(boxWidth, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, CGFloat(innerPlacement*boxLength)), numberTabs: numberTabs, innerWall : true, innerPlane: type)
+                newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxHeight, materialThickness, WallType.smallCorner, JoinType.overlap, SCNVector3Make(0.0, 0.0, CGFloat(innerPlacement*boxLength)), numberTabs: numberTabs, innerWall : true, innerPlane: type)
             }
             // if other inner walls that would intersect, deal with that
             for wall in walls.values {
@@ -278,13 +276,13 @@ class BoxModel {
             switch (type) {
             case WallType.largeCorner:
                 innerPlacement == 1.0 ? (offset3 = self.boxHeight - materialThickness/2) : (offset3 = materialThickness/2)
-                newWall = WallModel(boxWidth, boxLength, materialThickness, type, self.joinType, SCNVector3Make(0.0, CGFloat(offset3), 0.0), numberTabs: numberTabs)
+                newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxLength, materialThickness, type, self.joinType, SCNVector3Make(0.0, CGFloat(offset3), 0.0), numberTabs: numberTabs)
             case WallType.longCorner:
                 innerPlacement == 1.0 ? (offset3 = self.boxWidth - materialThickness/2) : (offset3 = materialThickness/2)
-                newWall = WallModel(boxLength, boxHeight, materialThickness, type, self.joinType, SCNVector3Make(CGFloat(offset3), 0.0, 0.0), numberTabs: numberTabs)
+                newWall = WallModel(BoxModel.wallNumberStatic,boxLength, boxHeight, materialThickness, type, self.joinType, SCNVector3Make(CGFloat(offset3), 0.0, 0.0), numberTabs: numberTabs)
             case WallType.smallCorner:
                 innerPlacement == 1.0 ? (offset3 = self.boxLength - materialThickness/2) : (offset3 = materialThickness/2)
-                newWall = WallModel(boxWidth, boxHeight, materialThickness, type, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset3)), numberTabs: numberTabs)
+                newWall = WallModel(BoxModel.wallNumberStatic,boxWidth, boxHeight, materialThickness, type, self.joinType, SCNVector3Make(0.0, 0.0, CGFloat(offset3)), numberTabs: numberTabs)
             }
         }
         // if wall is already in same place, don't add it
@@ -347,16 +345,49 @@ class BoxModel {
         - joinType: the box join type indicated in the file
         - numberTabs: the number of tabs the box has, as indicated in the file
      */
-    init(_ walls: Dictionary<Int,WallModel>, _ width: Double, _ length: Double, _ height: Double, _ materialThickness: Double, _ innerDimensions: Bool, _ joinType: JoinType, _ numberTabs: Double?) {
-        self.walls = walls
-        self.boxWidth = width
-        self.boxLength = length
-        self.boxHeight = height
-        self.materialThickness = materialThickness
-        self.innerDimensions = innerDimensions
-        self.joinType = joinType
-        self.numberTabs = numberTabs
-
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        walls = try values.decode(Dictionary.self, forKey: .walls)
+        intersectingWalls = try values.decode(Dictionary.self, forKey: .intersectingWalls)
+        boxWidth = try values.decode(Double.self,forKey: .boxWidth)
+        boxLength = try values.decode(Double.self, forKey: .boxLength)
+        boxHeight = try values.decode(Double.self,forKey: .boxHeight)
+        materialThickness = try values.decode(Double.self, forKey: .materialThickness)
+        numberTabs = try values.decode(Double.self, forKey: .numberTabs)
+        innerDimensions = try values.decode(Bool.self, forKey: .innerDimensions)
+        joinType = try values.decode(JoinType.self, forKey: .joinType)
+        BoxModel.wallNumberStatic = try values.decode(Int.self, forKey: .wallNumberStatic)
+        sceneGenerator.generateScene(self)
     }
-    
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(walls,forKey: .walls)
+        try container.encode(intersectingWalls,forKey: .intersectingWalls)
+        try container.encode(boxWidth,forKey: .boxWidth)
+        try container.encode(boxLength,forKey: .boxLength)
+        try container.encode(boxHeight,forKey: .boxHeight)
+        try container.encode(materialThickness,forKey: .materialThickness)
+        try container.encode(numberTabs,forKey: .numberTabs)
+        try container.encode(innerDimensions,forKey: .innerDimensions)
+        try container.encode(joinType,forKey: .joinType)
+        try container.encode(BoxModel.wallNumberStatic,forKey: .wallNumberStatic)
+        
+    }
+    enum CodingKeys: CodingKey {
+        case walls
+        case intersectingWalls
+        case boxWidth
+        case boxLength
+        case boxHeight
+        case materialThickness
+        case numberTabs
+        case innerDimensions
+        case joinType
+        case wallNumberStatic
+        
+    }
 }
+
+
+

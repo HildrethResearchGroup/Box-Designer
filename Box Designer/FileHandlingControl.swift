@@ -65,9 +65,14 @@ class FileHandlingControl {
                 switch (pathExtension) {
                 case "json":
                     /// If user chooses to save as JSON, instantiate JSONFileHandler().
-                    let fileSaver = JSONFileHandler()
+                    let encoder = JSONEncoder()
+                    var data = Data()
                     do {
-                        try fileSaver.saveAsJSON(to: url, boxModel)
+                        data = try encoder.encode(boxModel)
+                        let string = String(data: data, encoding: .utf8)
+                        try string!.write(to: url, atomically: false, encoding: String.Encoding.utf8)
+                        
+                        print(string!)
                     } catch {
                         print("Failed to save as a JSON file.")
                     }
@@ -117,13 +122,19 @@ class FileHandlingControl {
             if response == NSApplication.ModalResponse.OK {
                 /// Get the URL to the user's chosen file.
                 guard let url = panel.url else {return}
-                
-                /// Instantiate the JSONFileHandler().
-                let fileOpener = JSONFileHandler()
+                var data = Data()
                 do {
-                    try boxModel = fileOpener.convertJSONToBoxModel(url)
+                    data = try Data(String(contentsOf: url).utf8)
                 } catch {
-                    print("Could not open as a json file.")
+                    print("Could not decode JSON.")
+                }
+                /// Instantiate the JSONDecoder.
+                let decoder = JSONDecoder()
+                
+                do {
+                    boxModel = try decoder.decode(BoxModel.self, from: data)
+                } catch {
+                    print("Could not open the desired Box Model.")
                 }
             }
         }

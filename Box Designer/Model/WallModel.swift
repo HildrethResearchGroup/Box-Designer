@@ -8,7 +8,7 @@ import SceneKit.SCNGeometry
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
  - Note: WallModel.swift was created on 6/6/2020.
  */
-class WallModel : Equatable {
+class WallModel : Equatable, Codable {
     /// Add equality functionality to walls.
     static func == (lhs: WallModel, rhs: WallModel) -> Bool {
         /// For our purposes, a wall is "equal" to another if it's in the same position. This function must be implemented for WallModel to be Hashable for a Dictionary.
@@ -24,7 +24,7 @@ class WallModel : Equatable {
      1) drawing the wall's outline as a pdf
      2) displaying the wall within a SCNView
     */
-    /// This variable is essentialy the wall in vector form.
+    /// This variable is essentially the wall in vector form.
     var path: NSBezierPath
     /// This variable is the material thickness, as indicated by the user. It is mainly necessary to correctly display the model in the app and to correctly draw the walls in a PDF.
     var materialThickness: Double {
@@ -114,7 +114,7 @@ class WallModel : Equatable {
         - position: this is where the path of the wall starts
         - numberTabs: this is the number of tabs for the wall
      */
-    init(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, numberTabs: Double?, innerWall : Bool = false, innerPlane : WallType = WallType.smallCorner) {
+    init(_ wallNumber: Int,_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, _ position: SCNVector3, numberTabs: Double?, innerWall : Bool = false, innerPlane : WallType = WallType.smallCorner) {
         self.width = width
         self.length = length
         self.materialThickness = materialThickness
@@ -123,15 +123,71 @@ class WallModel : Equatable {
         self.numberTabs = numberTabs
         self.position = position
         self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs)
-        self.wallNumber = BoxModel.wallNumberStatic
+        self.wallNumber = wallNumber
         self.innerWall = innerWall
         self.innerPlane = innerPlane
         BoxModel.wallNumberStatic += 1
     }
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        width = try container.decode(Double.self,forKey: .width)
+        length = try container.decode(Double.self, forKey: .length)
+        wallType = try container.decode(WallType.self, forKey: .wallType)
+        joinType = try container.decode(JoinType.self,forKey: .joinType)
+        position = try container.decode(SCNVector3.self,forKey: .position)
+        innerWall = try container.decode(Bool.self, forKey: .innerWall)
+        innerPlane = try container.decode(WallType.self, forKey: .innerPlane)
+        wallNumber = try container.decode(Int.self, forKey: .wallNumber)
+        materialThickness = try container.decode(Double.self, forKey: .materialThickness)
+        numberTabs = try container.decode(Double.self, forKey: .numberTabs)
+        path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs)
+    }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(width, forKey: .width)
+        try container.encode(length,forKey: .length)
+        try container.encode(wallType,forKey: .wallType)
+        try container.encode(joinType,forKey: .joinType)
+        try container.encode(position,forKey: .position)
+        try container.encode(innerWall,forKey: .innerWall)
+        try container.encode(innerPlane,forKey: .innerPlane)
+        try container.encode(wallNumber,forKey: .wallNumber)
+        try container.encode(materialThickness,forKey: .materialThickness)
+        try container.encode(numberTabs,forKey: .numberTabs)
+    }
+    enum CodingKeys : CodingKey {
+        case width
+        case length
+        case wallType
+        case joinType
+        case position
+        case innerWall
+        case innerPlane
+        case wallNumber
+        case materialThickness
+        case numberTabs
+    }
 }
-
+extension SCNVector3: Codable {
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        self.init()
+        self.x = try container.decode(CGFloat.self)
+        self.y = try container.decode(CGFloat.self)
+        self.z = try container.decode(CGFloat.self)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(self.x)
+        try container.encode(self.y)
+        try container.encode(self.z)
+    }
+}
 extension WallModel : Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(ObjectIdentifier(self).hashValue)
     }
 }
+
+

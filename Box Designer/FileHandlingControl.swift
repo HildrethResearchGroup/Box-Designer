@@ -37,30 +37,26 @@ class FileHandlingControl {
     func saveModel(_ boxModel: BoxModel, _ window: NSWindow?) {
         /// Ensure the window is available.
         guard let displayWindow = window else { return }
-        /// Instantiate an NSSavePanel for the user to save the export to their desired location. See [NSSavePanel().] (https://developer.apple.com/documentation/appkit/nssavepanel)
+        /// Instantiate an NSSavePanel for the user to save the export to their desired location
         let panel = NSSavePanel()
         
-        /// Allow user to create a directory to save in.
+        /// Set up panel attributes
         panel.canCreateDirectories = true
-        /// Do not hide the extension when saving.
         panel.isExtensionHidden = false
-        /// Only allow user to save as a PDF or JSON, and have PDF be the default (this is because it's first in the list).
         panel.allowedFileTypes = ["pdf", "json"]
-        /// Do not allow user to save as a different file type, as there is not functionality for saving anything other than a PDF or JSON.
         panel.allowsOtherFileTypes = false
         
         
-        /// This instantiates an accessory view for the NSSavePanel -- it is a custom view outlined in this project. It has hard-coded restraints (this could be changed to create the CGRect with constraints from the view).
+        /// This instantiates an accessory view for the NSSavePanel -- it is a custom view outlined in this project (PDFOptionsView). It has hard-coded restraints (this could be changed to create the CGRect with constraints from the view).
         let accView = PDFOptionsView(frame: CGRect(x: 0, y: 0, width: 310, height: 267))
         /// Add the accessory view to the save panel.
         panel.accessoryView = accView
         
-        /// This saves the the box model if the user presses "OK" in the save panel, according to their chosen extension.
+        /// Open the view for the user to interact with
         panel.beginSheetModal(for: displayWindow) { (response) in
             if response == NSApplication.ModalResponse.OK {
                 /// This gets the the user's desired location from the save panel in URL form.
                 guard let url = panel.url else { return }
-                /// This changes the URL location to a path extension.
                 let pathExtension = url.pathExtension
                 switch (pathExtension) {
                 case "json":
@@ -88,16 +84,13 @@ class FileHandlingControl {
     }
     
     /**
-     
      This is the function that opens a previously-saved box model (JSON format) into the application. It uses the JSONDecoder().
-     
      - Parameters:
         - boxModel: This is the parameter that the function will load the box model from.
         - window: This parameter ensures the box model is loaded into the current viewing window.
      
      - Returns:
         - BoxModel: This function, if successfully completed, returns a BoxModel object that can be displayed in the applcation.
-     
      */
     func openModel(_ boxModel: BoxModel, _ window: NSWindow?) -> BoxModel {
         

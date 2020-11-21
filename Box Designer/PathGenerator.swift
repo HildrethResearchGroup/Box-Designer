@@ -26,7 +26,7 @@ class PathGenerator {
      - Returns:
         - NSBezierPath: this function returns a path that can be drawn in the scene
      */
-    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, numberTabs: Double?) -> NSBezierPath {
+    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, numberTabs: Double?, handle: Bool) -> NSBezierPath {
         // instantiate a new path
         var path = NSBezierPath()
         
@@ -39,6 +39,12 @@ class PathGenerator {
         case JoinType.slot:
             path = generateSlotPath(width, length, materialThickness, wallType)
         }
+        
+        // Creates a handle on the wall if specified by the user
+        if (handle) {
+            createHandle(path: path, width: width, length: length, materialThickness: materialThickness)
+        }
+    
         return path
     }
     
@@ -92,7 +98,6 @@ class PathGenerator {
         } else {
             path = generateTabLargeLongCornerPath(wallType,width, length, materialThickness, Int(nTab))
         }
-
         return path
     }
     
@@ -210,6 +215,24 @@ class PathGenerator {
         path.close()
         return path
     }
+
+    static func createHandle(path: NSBezierPath, width: Double, length: Double, materialThickness: Double) {
+        // Length and width of the handle in inches
+        let handleLength = 3.5
+        let handleWidth = 1.0
+        let startX = width/2.0 - handleWidth - 0.1
+        let startY = length/2.0 - handleLength/2.0
+        // TODO: Adapt handle position to box dimensions
+        let handleShape1 = NSRect(x: startX, y: startY, width: handleWidth, height: handleLength)
+        let handleShape2 = NSRect(x: startX + handleWidth + 0.25, y: startY, width: handleWidth, height: handleLength)
+        
+        let handlePath = NSBezierPath()
+        handlePath.appendRect(handleShape1)
+        handlePath.appendRect(handleShape2)
+        
+        path.append(handlePath)
+        handlePath.setClip()
+    }
     /**
      This function alters an overlap-type path according to its inputs, which are dependent on wallType and decided in generateOverlapPath function. It does not return a path, simply alters the NSBezierPath that's passed in.
     - Parameters:
@@ -225,7 +248,6 @@ class PathGenerator {
         path.line(to: CGPoint(x: x34, y: y23))
         path.line(to: CGPoint(x: x34, y: y14))
         path.close()
-        
     }
     /**
      This function alters a tab-type path according to its inputs. It does not return a path, simply alters the NSBezierPath that's passed in. It creates one singular tab, with dimensions according to the distance between its points.

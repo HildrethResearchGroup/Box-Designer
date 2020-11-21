@@ -64,12 +64,14 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var addWallPlane: NSPopUpButton!
     /// This variable indicates the placement of the internal separator along the axis.
     @IBOutlet weak var addPlacement: NSTextField!
-    /// This variable allows use to add a wall according to their selected specifications.
+    /// This variable allows users to add a wall according to their selected specifications.
     @IBOutlet weak var addWallButton: NSButton!
     /// This variable forces users to select only 0 or 1 for external wall placement, as fractions don't make sense for external walls.
     @IBOutlet weak var externalWallPlacement: NSSegmentedControl!
     /// This variable allows users to delete the component that is selected in the view.
     @IBOutlet weak var deleteSelected: NSButton!
+    /// This variable allows users to add a handle cutout on the selected wall.
+    @IBOutlet weak var handleCheckMark: NSButton!
     /// This variable indicates which unit the user wants.
     /// - Note: True indicates millimeters, false indicates inches.
     private var mmInch: Bool = false
@@ -97,7 +99,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         addPlacement.doubleValue = 0.5
         externalWallPlacement.isHidden = true
         addWallButton.isEnabled = false
-        
+        handleCheckMark.isEnabled = false
         /// begin with inch units
         unitChoiceControl.selectedSegment = 0
         mmInch = false
@@ -196,6 +198,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
         /// highlight selected wall if there's a hit on one click, otherwise go into "focus" view on the double-clicked wall
+        if (boxModel.boxHeight >= 5 && boxModel.boxWidth >= 4 && boxModel.boxLength >= 4) { handleCheckMark.isEnabled = true
+        }
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()
@@ -249,7 +253,6 @@ class InputViewController: NSViewController, NSTextDelegate {
             }
             print(result.node.position)
         }
-        
     }
     /**
      This function handles key board input from user. See [Apple Documentation - keyUp()]. (https://developer.apple.com/documentation/appkit/nsgesturerecognizer/1526578-keyup)
@@ -260,9 +263,10 @@ class InputViewController: NSViewController, NSTextDelegate {
         /// this is the escape key
         if(event.keyCode == 53){
             cameraLocked = false
+            handleCheckMark.isEnabled = false
             selectionHandling.selectedNode = nil
             addWallPlane.selectItem(at: 0)
-            selectedWallPlane.stringValue = "Selected wall: None Selected"
+            selectedWallPlane.stringValue = "Selected wall: None"
         }
         
     }
@@ -594,7 +598,6 @@ class InputViewController: NSViewController, NSTextDelegate {
             addPlacement.doubleValue = 0.5
             addWallButton.isEnabled = true
         }
-        
     }
     /**
      This function finds the placements of the missing external walls in the box model, for user-friendly external wall adding.
@@ -705,5 +708,22 @@ class InputViewController: NSViewController, NSTextDelegate {
         }        
         updateModel(boxModel)
     }
+    /// Creates a handle cutout on the selected component
+    @IBAction func createHandle(_ sender: Any) {
+        // If the handle button is pressed, place a handle on the selected box component
+        if (handleCheckMark.state.rawValue == 1) {
+            // Enable the checkmark if/when a wall is selected
+            boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]?.handle = true
+            updateModel(boxModel)
+        }
+        // If the handle button is pressed off, then remove the handle
+        else if (handleCheckMark.state.rawValue == 0){
+            if (selectionHandling.selectedNode != nil) {
+                boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]?.handle = false
+                updateModel(boxModel)
+            }
+        }
+    }
+
 }
 

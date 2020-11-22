@@ -68,9 +68,9 @@ class BoxDesignPDFPage : PDFPage {
                 var point = NSPoint()
                 let elementType = path.element(at: element, associatedPoints: &point)
                 
-                // if this is the beginning of a wall, reset boolean so that the moveToPoint
+                // if this is the beginning of a wall, or the wall has a handle to draw, reset boolean so that the moveToPoint
                 // isn't reset in the switch lineTo statement
-                if element == 0 {
+                if element == 0 || element == 5 || element == 10 || element == 15 {
                     firstLineDrawn = false
                 }
                 

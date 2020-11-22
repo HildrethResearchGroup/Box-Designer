@@ -231,6 +231,7 @@ class PathGenerator {
         handlePath.appendRect(handleShape2)
         
         path.append(handlePath)
+        print(path)
         handlePath.setClip()
     }
     /**

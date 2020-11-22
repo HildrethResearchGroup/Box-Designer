@@ -209,6 +209,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             
             //make sure that it is part of the cube
             if(result.node.parent != boxView.scene?.rootNode){return}
+            print("hi")
             selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
@@ -260,7 +261,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         - event: an event that occured in the application with the mouse
      */
     override func keyUp(with event: NSEvent) {
-        /// this is the escape key
+        /// this is the escape keyCode
         if(event.keyCode == 53){
             cameraLocked = false
             handleCheckMark.isEnabled = false
@@ -610,16 +611,14 @@ class InputViewController: NSViewController, NSTextDelegate {
         var missing = [Double]()
         /// find external walls on the right plane that are there
         for wall in boxModel.walls.values {
-            if wall.wallType == type && !wall.innerWall {
-                if wall.wallType == WallType.bottomSide {
+            if !wall.innerWall {
+                if wall.wallType == WallType.bottomSide && (type == WallType.topSide || type == WallType.bottomSide){
                     current.append(0.0)
-                } else if wall.wallType == WallType.topSide {
+                } else if wall.wallType == WallType.topSide && (type == WallType.topSide || type == WallType.bottomSide) {
                     current.append(1.0)
-                } else{
+                } else if wall.wallType == type {
                     let length = sqrt(pow(wall.position.x,2) + pow(wall.position.y,2) + pow(wall.position.z,2))
-                    if Double(length) < (boxModel.materialThickness + 1.0) {
-                        current.append(0.0)
-                    } else { current.append(1.0) }
+                    Double(length) < (boxModel.materialThickness + 1.0) ? (current.append(0.0)) : (current.append(1.0))
                 }
             }
         }

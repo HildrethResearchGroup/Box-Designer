@@ -68,8 +68,8 @@ class BoxDesignPDFPage : PDFPage {
                 var point = NSPoint()
                 let elementType = path.element(at: element, associatedPoints: &point)
                 
-                // if this is the beginning of a wall, or the wall has a handle to draw, reset boolean so that the moveToPoint
-                // isn't reset in the switch lineTo statement
+                // if this is a "moveTo" element, then reset the boolean so that the line isn't continuously drawn
+                // essentially, make sure the pencil is "picked up" and moved to the next starting point
                 if elementType == NSBezierPath.ElementType.moveTo {
                     firstLineDrawn = false
                 }

@@ -694,6 +694,8 @@ class InputViewController: NSViewController, NSTextDelegate {
                 addPlacement.doubleValue = (length/boxModel.boxHeight*100).rounded()/100
             }
             selectedWallPlane.stringValue = "Selected wall: \(plane) Plane, \(placement) placement"
+            /// Update handle checkbox depending on whether selected wall has handle or not
+            selectedWall?.handle == true ? (handleCheckMark.state = NSButton.StateValue.on) : (handleCheckMark.state = NSButton.StateValue.off)
         }
     }
     /**
@@ -703,6 +705,7 @@ class InputViewController: NSViewController, NSTextDelegate {
      */
     @IBAction func deleteSelectedComponent(_ sender: Any) {
         if let node = selectionHandling.selectedNode {
+            handleCheckMark.state = NSButton.StateValue.off
             boxModel.walls.removeValue(forKey: Int(node.name!)!)
             boxModel.updateIntersectingWalls()
         }        

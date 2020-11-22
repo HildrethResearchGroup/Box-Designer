@@ -61,7 +61,7 @@ class PathGenerator {
     static func generateOverlapPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType) -> NSBezierPath {
         let path = NSBezierPath()
         switch (wallType) {
-        case WallType.topSide,WallType.bottomSide:
+        case WallType.topSide, WallType.bottomSide:
             // top and bottom cover the other sides (this type overlaps all walls and will be the true dimensions of the desired box)
             createOverlapPath(path: path, x12: 0.0, x34: width, y14: 0.0, y23: length)
         case WallType.longCorner:

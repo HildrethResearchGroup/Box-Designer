@@ -152,7 +152,8 @@ class WallModel : Equatable, Codable {
         wallNumber = try container.decode(Int.self, forKey: .wallNumber)
         materialThickness = try container.decode(Double.self, forKey: .materialThickness)
         numberTabs = try container.decode(Double.self, forKey: .numberTabs)
-        path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs)
+        handle = try container.decode(Bool.self, forKey: .handle)
+        path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: handle)
     }
     /**
      This function enables BoxModel to conform to Codable (specifically, the Encodable protocol). It outputs Data, which is then converted to a string and saved at specific location (see FileHandlingControl.swift).
@@ -169,6 +170,7 @@ class WallModel : Equatable, Codable {
         try container.encode(wallNumber,forKey: .wallNumber)
         try container.encode(materialThickness,forKey: .materialThickness)
         try container.encode(numberTabs,forKey: .numberTabs)
+        try container.encode(handle,forKey: .handle)
     }
     /**
      This enum allows WallModel to be encoded and decoded without needing to encode/decode all its variables -- specifically, the path variable does not need to be saved, as it would be a little harder to make an NSBezierPath conform to Codable, and it's not necessary anyway. The path is simply generated when all the inputs to PathGenerator.generatePath() are decoded. The "cases" are the variables you want to be encoded/decoded.
@@ -184,6 +186,7 @@ class WallModel : Equatable, Codable {
         case wallNumber
         case materialThickness
         case numberTabs
+        case handle
     }
 }
 /**

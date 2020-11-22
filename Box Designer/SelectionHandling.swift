@@ -76,6 +76,7 @@ class SelectionHandling{
             let shapes = lineShape.generateIndv()
             for shape in shapes{
                 let locNode = SCNNode(geometry: shape)
+                locNode.name = shape.name
                 locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
                 locNode.isHidden = true
                 self._addChild(locNode)

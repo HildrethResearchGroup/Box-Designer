@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "250"
             endingLineNumber = "250"
-            landmarkName = "recursiveSearch(_:_:)"
+            landmarkName = "findClosedPath(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -342,7 +342,9 @@ class LineDrawing{
                 points.append(idvLine.topPoint)
                 points.append(idvLine.bottomPoint)
                 let shapePath = idvLine.rectanglePath()
-                shapes.append(SCNShape(path: shapePath, extrusionDepth: 0.0001))
+                let lineShape = SCNShape(path: shapePath, extrusionDepth: 0.0001)
+                lineShape.name = "line"
+                shapes.append(lineShape)
                 
                 //draw midpoint triangle
                 let center = idvLine.midpoint()
@@ -352,7 +354,9 @@ class LineDrawing{
                 trianglePath.relativeLine(to: NSMakePoint(snapSize/2, snapSize))
                 trianglePath.relativeLine(to: NSMakePoint(snapSize/2, -snapSize))
                 trianglePath.close()
-                shapes.append(SCNShape(path: trianglePath, extrusionDepth: 0.0001))
+                let triangleShape = SCNShape(path: trianglePath, extrusionDepth: 0.0001)
+                triangleShape.name = "mid"
+                shapes.append(triangleShape)
             }
             //eliminates duplicates
             let uniquePoints = Array(NSSet(array: points))
@@ -360,7 +364,9 @@ class LineDrawing{
                 //draw corner squares
                 let corner = point as! NSPoint
                 let circlePath = NSBezierPath(rect: NSMakeRect(corner.x - (snapSize/2), corner.y - (snapSize/2), snapSize, snapSize))
-                shapes.append(SCNShape(path: circlePath, extrusionDepth: 0.0001))
+                let circleShape = SCNShape(path: circlePath, extrusionDepth: 0.0001)
+                circleShape.name = "end"
+                shapes.append(circleShape)
             }
         }
         return shapes

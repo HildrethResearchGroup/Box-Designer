@@ -173,7 +173,7 @@ class InputViewController: NSViewController, NSTextDelegate {
      */
     override func rightMouseDragged(with event: NSEvent) {
         // If using a mouse, translate the camera relative to the box
-        if (event.subtype == .mouseEvent) {
+        if (event.subtype == .mouseEvent && !cameraLocked) {
             var currentPos:SCNVector3 = boxView.pointOfView!.position
             currentPos.x += event.deltaX * -moveSensitivity
             currentPos.y += event.deltaY * moveSensitivity
@@ -205,6 +205,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             selectionHandling.higlight()
             updateSelectedWallPlane()
         }else if(event.clickCount == 2){
+            cameraLocked = true
             selectionHandling.selectedNode = result.node
             
             //make sure that it is part of the cube
@@ -214,7 +215,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
             
-            cameraLocked = true
+            
             //we may want to refactor this into a function
             //the math can be simplified but isn't for readability
             if(result.node.position.x != 0.0){
@@ -286,7 +287,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             }
         }
         /// Otherwise, If the scrolling event is from a trackpad, make it translate the camera relative to the box
-        else {
+        else if(!cameraLocked){
             var currentPos:SCNVector3 = boxView.pointOfView!.position
             currentPos.x -= event.deltaX * (moveSensitivity*10)
             currentPos.y += event.deltaY * (moveSensitivity*10)

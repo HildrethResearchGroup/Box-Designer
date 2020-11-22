@@ -7,7 +7,7 @@ import PDFKit
  
  - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
- - Note: BoxDesignPDFPage.swift was created on 5/27/2020.
+ - Note: BoxDesignPDFPage.swift was created on 5/27/2020. Additionally, curved paths are not able to be drawn with how this code is written -- the NSBezierPath.ElementType.curveTo is just drawn like a line right now.
  
  */
 class BoxDesignPDFPage : PDFPage {
@@ -61,14 +61,12 @@ class BoxDesignPDFPage : PDFPage {
                     yOffset = fileHandlingControl.margin*inchScale
                 }
             }
-
             // draw wall by breaking each each line into its own path and drawing it (drawLine function)
             for element in 0..<path.elementCount {
 
                 var points = [NSPoint(),NSPoint(),NSPoint()]
-                
                 let elementType = path.element(at: element, associatedPoints: &points)
-                print(points)
+                
                 // if this is the beginning of a wall, or the wall has a handle to draw, reset boolean so that the moveToPoint
                 // isn't reset in the switch lineTo statement
                 if elementType == NSBezierPath.ElementType.moveTo {
@@ -79,7 +77,7 @@ class BoxDesignPDFPage : PDFPage {
                 case NSBezierPath.ElementType.moveTo:
                     moveToPoint.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
                     moveToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
-        
+                /// right now, curveTo points are not enabled for PDF drawing (but we can't get curved paths to extrude anyway, so didn't try too hard to fix this)
                 case NSBezierPath.ElementType.lineTo, NSBezierPath.ElementType.curveTo, NSBezierPath.ElementType.closePath:
                     if (firstLineDrawn) {
                         moveToPoint.x = lineToPoint.x
@@ -87,18 +85,8 @@ class BoxDesignPDFPage : PDFPage {
                     }
                     lineToPoint.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
                     lineToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
-                    if elementType == NSBezierPath.ElementType.curveTo {
-                        var controlPoint1 = NSPoint()
-                        var controlPoint2 = NSPoint()
-                        controlPoint1.x = points[1].x * CGFloat(inchScale) + CGFloat(xOffset)
-                        controlPoint1.y = points[1].y * CGFloat(inchScale) + CGFloat(yOffset)
-                        controlPoint2.x = points[2].x * CGFloat(inchScale) + CGFloat(xOffset)
-                        controlPoint2.y = points[2].y * CGFloat(inchScale) + CGFloat(yOffset)
-                        drawLine(fromPoint: moveToPoint, toPoint: lineToPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
-                    } else {
-                        drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
-                    }
-                
+                    
+                    drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
                 @unknown default:
                     break
                 }
@@ -118,19 +106,13 @@ class BoxDesignPDFPage : PDFPage {
         - fromPoint: the starting point for the line being drawn
         - toPoint: the end point for the line being drawn
      */
-    func drawLine(fromPoint: NSPoint, toPoint: NSPoint, controlPoint1: NSPoint = NSZeroPoint, controlPoint2: NSPoint = NSZeroPoint) {
+    func drawLine(fromPoint: NSPoint, toPoint: NSPoint) {
         let path = NSBezierPath()
         NSColor.black.set()
         path.lineWidth = CGFloat(fileHandlingControl.stroke)
         firstLineDrawn = true
         path.move(to: fromPoint)
-        if !NSEqualPoints(controlPoint1, NSZeroPoint) && !NSEqualPoints(controlPoint2, NSZeroPoint) {
-            path.curve(to: toPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
-        } else {
-            
-            path.line(to: toPoint)
-        }
-        
+        path.line(to: toPoint)
         path.stroke()
         
     }

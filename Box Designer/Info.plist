@@ -32,5 +32,7 @@
 	<true/>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>CFAppleHelpAnchor</key>
+	<string>UserGuide.html</string>
 </dict>
 </plist>

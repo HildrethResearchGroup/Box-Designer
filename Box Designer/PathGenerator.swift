@@ -225,11 +225,13 @@ class PathGenerator {
         // TODO: Adapt handle position to box dimensions
         let handleShape1 = NSRect(x: startX, y: startY, width: handleWidth, height: handleLength)
         let handleShape2 = NSRect(x: startX + handleWidth + 0.25, y: startY, width: handleWidth, height: handleLength)
-        
+        let handleShape3 = NSRect(x: 2, y: 2, width: 2, height: 2)
         let handlePath = NSBezierPath()
-        handlePath.appendRect(handleShape1)
-        handlePath.appendRect(handleShape2)
-        
+        //handlePath.appendRect(handleShape1)
+        //handlePath.appendRect(handleShape2)
+        //handlePath.appendOval(in: handleShape1)
+        handlePath.appendOval(in: handleShape3)
+        print(handlePath)
         path.append(handlePath)
         print(path)
         handlePath.setClip()

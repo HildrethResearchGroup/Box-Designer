@@ -65,41 +65,40 @@ class BoxDesignPDFPage : PDFPage {
             // draw wall by breaking each each line into its own path and drawing it (drawLine function)
             for element in 0..<path.elementCount {
 
-                var point = NSPoint()
-                let elementType = path.element(at: element, associatedPoints: &point)
+                var points = [NSPoint(),NSPoint(),NSPoint()]
                 
+                let elementType = path.element(at: element, associatedPoints: &points)
+                print(points)
                 // if this is the beginning of a wall, or the wall has a handle to draw, reset boolean so that the moveToPoint
                 // isn't reset in the switch lineTo statement
-                if element == 0 || element == 5 || element == 10 || element == 15 {
+                if elementType == NSBezierPath.ElementType.moveTo {
                     firstLineDrawn = false
                 }
                 
                 switch (elementType) {
                 case NSBezierPath.ElementType.moveTo:
-                    moveToPoint.x = point.x * CGFloat(inchScale) + CGFloat(xOffset)
-                    moveToPoint.y = point.y * CGFloat(inchScale) + CGFloat(yOffset)
-                
-                case NSBezierPath.ElementType.lineTo:
+                    moveToPoint.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
+                    moveToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
+        
+                case NSBezierPath.ElementType.lineTo, NSBezierPath.ElementType.curveTo, NSBezierPath.ElementType.closePath:
                     if (firstLineDrawn) {
                         moveToPoint.x = lineToPoint.x
                         moveToPoint.y = lineToPoint.y
                     }
-                    lineToPoint.x = point.x * CGFloat(inchScale) + CGFloat(xOffset)
-                    lineToPoint.y = point.y * CGFloat(inchScale) + CGFloat(yOffset)
-                    
-                    drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
-                
-                case NSBezierPath.ElementType.closePath:
-                    if (firstLineDrawn) {
-                        moveToPoint.x = lineToPoint.x
-                        moveToPoint.y = lineToPoint.y
+                    lineToPoint.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
+                    lineToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
+                    if elementType == NSBezierPath.ElementType.curveTo {
+                        var controlPoint1 = NSPoint()
+                        var controlPoint2 = NSPoint()
+                        controlPoint1.x = points[1].x * CGFloat(inchScale) + CGFloat(xOffset)
+                        controlPoint1.y = points[1].y * CGFloat(inchScale) + CGFloat(yOffset)
+                        controlPoint2.x = points[2].x * CGFloat(inchScale) + CGFloat(xOffset)
+                        controlPoint2.y = points[2].y * CGFloat(inchScale) + CGFloat(yOffset)
+                        drawLine(fromPoint: moveToPoint, toPoint: lineToPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
+                    } else {
+                        drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
                     }
-                    lineToPoint.x = point.x * CGFloat(inchScale) + CGFloat(xOffset)
-                    lineToPoint.y = point.y * CGFloat(inchScale) + CGFloat(yOffset)
-                    
-                    drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
-                case NSBezierPath.ElementType.curveTo:
-                    break
+                
                 @unknown default:
                     break
                 }
@@ -119,14 +118,21 @@ class BoxDesignPDFPage : PDFPage {
         - fromPoint: the starting point for the line being drawn
         - toPoint: the end point for the line being drawn
      */
-    func drawLine(fromPoint: NSPoint, toPoint: NSPoint) {
+    func drawLine(fromPoint: NSPoint, toPoint: NSPoint, controlPoint1: NSPoint = NSZeroPoint, controlPoint2: NSPoint = NSZeroPoint) {
         let path = NSBezierPath()
         NSColor.black.set()
-        path.move(to: fromPoint)
-        path.line(to: toPoint)
         path.lineWidth = CGFloat(fileHandlingControl.stroke)
-        path.stroke()
         firstLineDrawn = true
+        path.move(to: fromPoint)
+        if !NSEqualPoints(controlPoint1, NSZeroPoint) && !NSEqualPoints(controlPoint2, NSZeroPoint) {
+            path.curve(to: toPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
+        } else {
+            
+            path.line(to: toPoint)
+        }
+        
+        path.stroke()
+        
     }
 
 }

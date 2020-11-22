@@ -70,7 +70,7 @@ class BoxDesignPDFPage : PDFPage {
                 
                 // if this is the beginning of a wall, or the wall has a handle to draw, reset boolean so that the moveToPoint
                 // isn't reset in the switch lineTo statement
-                if element == 0 || element == 5 || element == 10 || element == 15 {
+                if elementType == NSBezierPath.ElementType.moveTo {
                     firstLineDrawn = false
                 }
                 

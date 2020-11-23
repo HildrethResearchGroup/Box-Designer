@@ -156,7 +156,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             return
         }
         
-        selectionHandling.addClickPoint(result[0], false)
+        selectionHandling.addClickPoint(result[0], false, boxModel)
         
         if(result[0].node.parent != boxView.scene?.rootNode){
             selectionHandling.hoverNode = result[0].node
@@ -208,7 +208,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             updateSelectedWallPlane()
         }else if(event.clickCount == 1 && cameraLocked){
             
-            selectionHandling.addClickPoint(result, true)
+            selectionHandling.addClickPoint(result, true, boxModel)
             
         }else if(event.clickCount == 2){
             cameraLocked = true
@@ -283,14 +283,28 @@ class InputViewController: NSViewController, NSTextDelegate {
             }
             
         }else if(event.keyCode == 30){
+            //]
             selectionHandling.shapeSelection += 1
             if (result.count == 0){ return }
-            selectionHandling.addClickPoint(result[0], false)
+            selectionHandling.addClickPoint(result[0], false, boxModel)
         }else if(event.keyCode == 33){
+            //[
             selectionHandling.shapeSelection -= 1
             if (result.count == 0){ return }
-            selectionHandling.addClickPoint(result[0], false)
+            selectionHandling.addClickPoint(result[0], false, boxModel)
+        }else if(event.keyCode == 24){
+            //+
+            selectionHandling.roundedRadius += CGFloat(0.1)
+            if (result.count == 0){ return }
+            selectionHandling.addClickPoint(result[0], false, boxModel)
+        }else if(event.keyCode == 27){
+            //-
+            selectionHandling.roundedRadius -= CGFloat(0.1)
+            if (result.count == 0){ return }
+            selectionHandling.addClickPoint(result[0], false, boxModel)
         }
+        
+        print(event.keyCode)
         
     }
     

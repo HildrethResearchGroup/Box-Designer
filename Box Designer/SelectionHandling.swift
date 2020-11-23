@@ -14,6 +14,13 @@ class SelectionHandling{
     static let shared = SelectionHandling()
     let shapeDepth: CGFloat = 0.0001
     var inside: Bool = false
+    var roundedRadius: CGFloat = 0.1{
+        didSet{
+            if(roundedRadius < 0 ){
+                roundedRadius = 0
+            }
+        }
+    }
     var shapeSelection = 0{
         didSet{
             if(shapeSelection > 2){
@@ -88,7 +95,7 @@ class SelectionHandling{
         return lastDrawn == nil
     }
     
-    func addClickPoint(_ result: SCNHitTestResult,_ click: Bool){
+    func addClickPoint(_ result: SCNHitTestResult,_ click: Bool, _ curBoxModel: BoxModel){
         if(lastClick == nil && click){
             lastClick = result
         }else if(lastClick == nil){
@@ -108,7 +115,7 @@ class SelectionHandling{
         var MasterPath = NSBezierPath()
         let currentCord = result.localCoordinates
         let lastCord = lastClick?.localCoordinates
-        
+        print(currentCord, lastCord)
         
         if(drawingclicks == 1){
             
@@ -117,12 +124,12 @@ class SelectionHandling{
                 MasterPath = NSBezierPath(rect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
             }else if(shapeSelection == 1){
                 //rounded rectangle
-                MasterPath = NSBezierPath(roundedRect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: 0.1, yRadius: 0.1)
+                MasterPath = NSBezierPath(roundedRect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: roundedRadius, yRadius: roundedRadius)
             }else if(shapeSelection == 2){
                 //circle
                 MasterPath = NSBezierPath(ovalIn: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
             }
-            MasterPath.flatness = 0.01
+            MasterPath.flatness = 0.0001
             
             
             
@@ -143,15 +150,15 @@ class SelectionHandling{
                 shapePath?.appendRect(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
             }else if(shapeSelection == 1){
                 //rounded rectangle
-                shapePath?.appendRoundedRect(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: 0.1, yRadius: 0.1)
+                shapePath?.appendRoundedRect(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: roundedRadius, yRadius: roundedRadius)
             }else if(shapeSelection == 2){
                 //circle
                 shapePath?.appendOval(in: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
             }
-            shapePath?.flatness = 0.01
-            
+            shapePath?.flatness = 0.0001
+            curBoxModel.walls[Int((selectedNode?.name!)!)!]!.path = shapePath!
             (selectedNode?.geometry as! SCNShape).path = shapePath
-
+                
         }
  
     }

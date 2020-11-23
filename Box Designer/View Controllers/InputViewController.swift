@@ -270,11 +270,15 @@ class InputViewController: NSViewController, NSTextDelegate {
     override func keyUp(with event: NSEvent) {
         /// this is the escape keyCode
         if(event.keyCode == 53){
-            cameraLocked = false
-            handleCheckMark.isEnabled = false
-            selectionHandling.selectedNode = nil
-            addWallPlane.selectItem(at: 0)
-            selectedWallPlane.stringValue = "Selected wall: None"
+            selectionHandling.removeDrawing()
+            if(selectionHandling.drawing()){
+                cameraLocked = false
+                handleCheckMark.isEnabled = false
+                selectionHandling.selectedNode = nil
+                addWallPlane.selectItem(at: 0)
+                selectedWallPlane.stringValue = "Selected wall: None"
+            }
+            
         }
         
     }

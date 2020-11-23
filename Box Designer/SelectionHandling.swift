@@ -68,6 +68,17 @@ class SelectionHandling{
         selectedNode!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
     }
     
+    func removeDrawing(){
+        lastDrawn?.removeFromParentNode()
+        lastDrawn = nil
+        lastClick = nil
+        drawingclicks = 0
+    }
+    
+    func drawing() -> Bool{
+        return lastDrawn != nil
+    }
+    
     func addClickPoint(_ result: SCNHitTestResult,_ click: Bool){
         if(lastClick == nil && click){
             lastClick = result
@@ -76,18 +87,20 @@ class SelectionHandling{
         }
         
         if(click){
-            lastClick = result
             drawingclicks+=1
+            if(drawingclicks != 2){
+                lastClick = result
+            }
         }else if (lastDrawn != nil && drawingclicks != 2){
             //stops continuous drawing
             lastDrawn?.removeFromParentNode()
         }
         var MasterPath = NSBezierPath()
+        let currentCord = result.localCoordinates
+        let lastCord = lastClick?.localCoordinates
+        
         
         if(drawingclicks == 1){
-            let currentCord = result.localCoordinates
-            let lastCord = lastClick?.localCoordinates
-            
             MasterPath = NSBezierPath(rect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
             
             let shape = SCNShape(path: MasterPath, extrusionDepth: 0.0001)
@@ -96,13 +109,14 @@ class SelectionHandling{
             locNode.name = "click"
             self._addChild(locNode)
             lastDrawn = locNode
-        }else{
+        }else if(drawingclicks > 1){
             drawingclicks = 0
-            if(MasterPath.elementCount != 0){
-                print("some")
-                (selectedNode?.geometry as! SCNShape).path?.append(MasterPath)
-            }
+            let shapePath = (selectedNode?.geometry as! SCNShape).path
+
+            shapePath?.appendRect((NSMakeRect(lastCord!.x, lastCord!.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y)))
             
+            (selectedNode?.geometry as! SCNShape).path = shapePath
+
         }
  
     }

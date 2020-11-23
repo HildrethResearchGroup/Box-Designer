@@ -41,7 +41,7 @@ class SelectionHandling{
             if(hoverNode == nil){
                 newValue?.isHidden = false
             }else{
-                if(newValue != hoverNode){
+                if(newValue != hoverNode && hoverNode!.name != "click"){
                     newValue?.isHidden = false
                     hoverNode?.isHidden = true
                 }
@@ -63,6 +63,15 @@ class SelectionHandling{
     
     func higlight(){
         selectedNode!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
+    }
+    
+    func addClickPoint(result: SCNHitTestResult){
+        let path = NSBezierPath(ovalIn: NSMakeRect(result.localCoordinates.x-0.1, result.localCoordinates.y-0.1,0.2,0.2))
+        let shape = SCNShape(path: path, extrusionDepth: 0.0001)
+        let locNode = SCNNode(geometry: shape)
+        locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+        locNode.name = "click"
+        self._addChild(locNode)
     }
     
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){

@@ -104,6 +104,7 @@ class SelectionHandling{
             //stops continuous drawing
             lastDrawn?.removeFromParentNode()
         }
+        
         var MasterPath = NSBezierPath()
         let currentCord = result.localCoordinates
         let lastCord = lastClick?.localCoordinates

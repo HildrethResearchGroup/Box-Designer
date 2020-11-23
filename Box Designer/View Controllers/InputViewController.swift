@@ -216,8 +216,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             
             //make sure that it is part of the cube
             if(result.node.parent != boxView.scene?.rootNode){return}
-            print("hi")
-            selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
+            //selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
             
@@ -273,13 +272,14 @@ class InputViewController: NSViewController, NSTextDelegate {
         
         /// this is the escape keyCode
         if(event.keyCode == 53){
-            selectionHandling.removeDrawing()
-            if(!selectionHandling.drawing()){
+            if(selectionHandling.drawing()){
                 cameraLocked = false
                 handleCheckMark.isEnabled = false
                 selectionHandling.selectedNode = nil
                 addWallPlane.selectItem(at: 0)
                 selectedWallPlane.stringValue = "Selected wall: None"
+            }else{
+                selectionHandling.removeDrawing()
             }
             
         }else if(event.keyCode == 30){

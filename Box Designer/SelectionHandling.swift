@@ -14,8 +14,11 @@ class SelectionHandling{
     static let shared = SelectionHandling()
     let shapeDepth: CGFloat = 0.0001
     var inside: Bool = false
+    private var drawingclicks = 0
     static var indexOfSelectedWall : Int? = nil
     private var nodeColor: NSColor?
+    private var lastDrawn: SCNNode?
+    private var lastClick: SCNHitTestResult?
     var selectedNode: SCNNode?{
         willSet{
             
@@ -65,13 +68,43 @@ class SelectionHandling{
         selectedNode!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
     }
     
-    func addClickPoint(result: SCNHitTestResult){
-        let path = NSBezierPath(ovalIn: NSMakeRect(result.localCoordinates.x-0.1, result.localCoordinates.y-0.1,0.2,0.2))
-        let shape = SCNShape(path: path, extrusionDepth: 0.0001)
-        let locNode = SCNNode(geometry: shape)
-        locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
-        locNode.name = "click"
-        self._addChild(locNode)
+    func addClickPoint(_ result: SCNHitTestResult,_ click: Bool){
+        if(lastClick == nil && click){
+            lastClick = result
+        }else if(lastClick == nil){
+            return
+        }
+        
+        if(click){
+            lastClick = result
+            drawingclicks+=1
+        }else if (lastDrawn != nil && drawingclicks != 2){
+            //stops continuous drawing
+            lastDrawn?.removeFromParentNode()
+        }
+        var MasterPath = NSBezierPath()
+        
+        if(drawingclicks == 1){
+            let currentCord = result.localCoordinates
+            let lastCord = lastClick?.localCoordinates
+            
+            MasterPath = NSBezierPath(rect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+            
+            let shape = SCNShape(path: MasterPath, extrusionDepth: 0.0001)
+            let locNode = SCNNode(geometry: shape)
+            locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
+            locNode.name = "click"
+            self._addChild(locNode)
+            lastDrawn = locNode
+        }else{
+            drawingclicks = 0
+            if(MasterPath.elementCount != 0){
+                print("some")
+                (selectedNode?.geometry as! SCNShape).path?.append(MasterPath)
+            }
+            
+        }
+ 
     }
     
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){

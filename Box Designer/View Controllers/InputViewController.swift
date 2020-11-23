@@ -156,7 +156,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             return
         }
         
-        selectionHandling.addClickPoint(result: result[0])
+        selectionHandling.addClickPoint(result[0], false)
         
         if(result[0].node.parent != boxView.scene?.rootNode){
             selectionHandling.hoverNode = result[0].node
@@ -207,8 +207,9 @@ class InputViewController: NSViewController, NSTextDelegate {
             selectionHandling.higlight()
             updateSelectedWallPlane()
         }else if(event.clickCount == 1 && cameraLocked){
-            print(result.localCoordinates)
-            selectionHandling.addClickPoint(result: result)
+            
+            selectionHandling.addClickPoint(result, true)
+            
         }else if(event.clickCount == 2){
             cameraLocked = true
             selectionHandling.selectedNode = result.node

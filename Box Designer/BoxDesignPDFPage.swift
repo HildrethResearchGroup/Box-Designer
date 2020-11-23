@@ -7,7 +7,7 @@ import PDFKit
  
  - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
- - Note: BoxDesignPDFPage.swift was created on 5/27/2020.
+ - Note: BoxDesignPDFPage.swift was created on 5/27/2020. Additionally, curved paths are not able to be drawn with how this code is written -- the NSBezierPath.ElementType.curveTo is just drawn like a line right now.
  
  */
 class BoxDesignPDFPage : PDFPage {
@@ -61,12 +61,11 @@ class BoxDesignPDFPage : PDFPage {
                     yOffset = fileHandlingControl.margin*inchScale
                 }
             }
-
             // draw wall by breaking each each line into its own path and drawing it (drawLine function)
             for element in 0..<path.elementCount {
 
-                var point = NSPoint()
-                let elementType = path.element(at: element, associatedPoints: &point)
+                var points = [NSPoint(),NSPoint(),NSPoint()]
+                let elementType = path.element(at: element, associatedPoints: &points)
                 
                 // if this is a "moveTo" element, then reset the boolean so that the line isn't continuously drawn
                 // essentially, make sure the pencil is "picked up" and moved to the next starting point
@@ -76,30 +75,18 @@ class BoxDesignPDFPage : PDFPage {
                 
                 switch (elementType) {
                 case NSBezierPath.ElementType.moveTo:
-                    moveToPoint.x = point.x * CGFloat(inchScale) + CGFloat(xOffset)
-                    moveToPoint.y = point.y * CGFloat(inchScale) + CGFloat(yOffset)
-                
-                case NSBezierPath.ElementType.lineTo:
+                    moveToPoint.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
+                    moveToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
+                /// right now, curveTo points are not enabled for PDF drawing (but we can't get curved paths to extrude anyway, so didn't try too hard to fix this)
+                case NSBezierPath.ElementType.lineTo, NSBezierPath.ElementType.curveTo, NSBezierPath.ElementType.closePath:
                     if (firstLineDrawn) {
                         moveToPoint.x = lineToPoint.x
                         moveToPoint.y = lineToPoint.y
                     }
-                    lineToPoint.x = point.x * CGFloat(inchScale) + CGFloat(xOffset)
-                    lineToPoint.y = point.y * CGFloat(inchScale) + CGFloat(yOffset)
+                    lineToPoint.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
+                    lineToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
                     
                     drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
-                
-                case NSBezierPath.ElementType.closePath:
-                    if (firstLineDrawn) {
-                        moveToPoint.x = lineToPoint.x
-                        moveToPoint.y = lineToPoint.y
-                    }
-                    lineToPoint.x = point.x * CGFloat(inchScale) + CGFloat(xOffset)
-                    lineToPoint.y = point.y * CGFloat(inchScale) + CGFloat(yOffset)
-                    
-                    drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
-                case NSBezierPath.ElementType.curveTo:
-                    break
                 @unknown default:
                     break
                 }
@@ -122,11 +109,12 @@ class BoxDesignPDFPage : PDFPage {
     func drawLine(fromPoint: NSPoint, toPoint: NSPoint) {
         let path = NSBezierPath()
         NSColor.black.set()
+        path.lineWidth = CGFloat(fileHandlingControl.stroke)
+        firstLineDrawn = true
         path.move(to: fromPoint)
         path.line(to: toPoint)
-        path.lineWidth = CGFloat(fileHandlingControl.stroke)
         path.stroke()
-        firstLineDrawn = true
+        
     }
 
 }

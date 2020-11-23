@@ -90,8 +90,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         numberTabTextField.doubleValue = boxModel.numberTabs!
         previousTabEntry = minTabs
         boxModel.innerDimensions ? (innerOrOuterDimensionControl.selectedSegment = 1) : (innerOrOuterDimensionControl.selectedSegment = 0)
-        /// - TODO: need to update for slot
-        boxModel.joinType == JoinType.overlap ? (joinTypeControl.selectedSegment = 0) : (joinTypeControl.selectedSegment = 1)
+        boxModel.joinType == JoinType.overlap ? (joinTypeControl.selectedSegment = 0) : (boxModel.joinType == JoinType.tab ? (joinTypeControl.selectedSegment = 1) : (joinTypeControl.selectedSegment = 2))
         /// Make sure adding components panel is at its default state (especially when loading a box model into session).
         addWallType.selectItem(at: 0)
         addWallPlane.selectItem(at: 0)
@@ -209,7 +208,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             
             //make sure that it is part of the cube
             if(result.node.parent != boxView.scene?.rootNode){return}
-            print("hi")
+            
             selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
@@ -710,7 +709,11 @@ class InputViewController: NSViewController, NSTextDelegate {
         }        
         updateModel(boxModel)
     }
-    /// Creates a handle cutout on the selected component
+    /**
+     This function creates a handle cutout on the selected component.
+     - Parameters:
+        - sender: typical @IBAction input
+     */
     @IBAction func createHandle(_ sender: Any) {
         // If the handle button is pressed, place a handle on the selected box component
         if (handleCheckMark.state.rawValue == 1) {

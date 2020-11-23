@@ -13,6 +13,6 @@ enum JoinType : String, Codable {
     case tab = "tab"
     /// The overlap join requires some type of adhesive after being laser-cut in order to construct the box. The construction of this type of join is dependent on the material thickness, as the box shouldn't have overhanging sides.
     case overlap = "overlap"
-    
+    /// The slot join does not require adhesive to be put together. It essentially has half slits on two opposite sides of each wall, creating an interlocking structure.
     case slot = "slot"
 }

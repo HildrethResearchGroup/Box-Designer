@@ -6,5 +6,9 @@ build/
 "Box Designer".xcodeproj/project.xcworkspace/xcuserdata/audreyhorne.xcuserdatad/UserInterfaceState.xcuserstate
 "Box Designer".xcodeproj/project.xcworkspace/xcuserdata/csfsstudent.xcuserdatad/UserInterfaceState.xcuserstate
 "Box Designer".xcodeproj/project.xcworkspace/xcuserdata/csfsstudent.xcuserdatad/UserInterfaceState.xcuserstate
+<<<<<<< HEAD
 "Box Designer".xcodeproj/xcshareddata/
+=======
+xcshareddata/
+>>>>>>> Audrey
 

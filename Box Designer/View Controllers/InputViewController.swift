@@ -268,10 +268,13 @@ class InputViewController: NSViewController, NSTextDelegate {
         - event: an event that occured in the application with the mouse
      */
     override func keyUp(with event: NSEvent) {
+        let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+        let result: [SCNHitTestResult] = boxView.hitTest(clickCord, options: [ : ])
+        
         /// this is the escape keyCode
         if(event.keyCode == 53){
             selectionHandling.removeDrawing()
-            if(selectionHandling.drawing()){
+            if(!selectionHandling.drawing()){
                 cameraLocked = false
                 handleCheckMark.isEnabled = false
                 selectionHandling.selectedNode = nil
@@ -279,6 +282,14 @@ class InputViewController: NSViewController, NSTextDelegate {
                 selectedWallPlane.stringValue = "Selected wall: None"
             }
             
+        }else if(event.keyCode == 30){
+            selectionHandling.shapeSelection += 1
+            if (result.count == 0){ return }
+            selectionHandling.addClickPoint(result[0], false)
+        }else if(event.keyCode == 33){
+            selectionHandling.shapeSelection -= 1
+            if (result.count == 0){ return }
+            selectionHandling.addClickPoint(result[0], false)
         }
         
     }

@@ -14,6 +14,15 @@ class SelectionHandling{
     static let shared = SelectionHandling()
     let shapeDepth: CGFloat = 0.0001
     var inside: Bool = false
+    var shapeSelection = 0{
+        didSet{
+            if(shapeSelection > 2){
+                shapeSelection = 0
+            }else if(shapeSelection < 0){
+                shapeSelection = 2
+            }
+        }
+    }
     private var drawingclicks = 0
     static var indexOfSelectedWall : Int? = nil
     private var nodeColor: NSColor?
@@ -76,7 +85,7 @@ class SelectionHandling{
     }
     
     func drawing() -> Bool{
-        return lastDrawn != nil
+        return lastDrawn == nil
     }
     
     func addClickPoint(_ result: SCNHitTestResult,_ click: Bool){
@@ -101,7 +110,20 @@ class SelectionHandling{
         
         
         if(drawingclicks == 1){
-            MasterPath = NSBezierPath(rect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+            
+            if(shapeSelection == 0){
+                //rectangle
+                MasterPath = NSBezierPath(rect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+            }else if(shapeSelection == 1){
+                //rounded rectangle
+                MasterPath = NSBezierPath(roundedRect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: 0.1, yRadius: 0.1)
+            }else if(shapeSelection == 2){
+                //circle
+                MasterPath = NSBezierPath(ovalIn: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+            }
+            MasterPath.flatness = 0.01
+            
+            
             
             let shape = SCNShape(path: MasterPath, extrusionDepth: 0.0001)
             let locNode = SCNNode(geometry: shape)
@@ -109,11 +131,23 @@ class SelectionHandling{
             locNode.name = "click"
             self._addChild(locNode)
             lastDrawn = locNode
+
         }else if(drawingclicks > 1){
             drawingclicks = 0
             let shapePath = (selectedNode?.geometry as! SCNShape).path
-
-            shapePath?.appendRect((NSMakeRect(lastCord!.x, lastCord!.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y)))
+            
+            
+            if(shapeSelection == 0){
+                //rectangle
+                shapePath?.appendRect(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+            }else if(shapeSelection == 1){
+                //rounded rectangle
+                shapePath?.appendRoundedRect(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: 0.1, yRadius: 0.1)
+            }else if(shapeSelection == 2){
+                //circle
+                shapePath?.appendOval(in: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+            }
+            shapePath?.flatness = 0.01
             
             (selectedNode?.geometry as! SCNShape).path = shapePath
 

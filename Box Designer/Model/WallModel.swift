@@ -2,7 +2,7 @@ import Foundation
 import Cocoa
 import SceneKit.SCNGeometry
 /**
- This class provides the structure for a single wall in the box model.
+ This class provides the structure for a single wall in the box model. It conforms to Codable in order to save/load box templates in the session. However, as of now, cutouts cannot be loaded back in. This is because NSBezierPath does not to conform to Codable, and we have not figured out how to provide an extension of NSBezierPath in order to save its properties in a JSON.
  
  - Authors: CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
  - Copyright: Copyright © 2020 Hildreth Research Group. All rights reserved.
@@ -171,6 +171,7 @@ class WallModel : Equatable, Codable {
         try container.encode(materialThickness,forKey: .materialThickness)
         try container.encode(numberTabs,forKey: .numberTabs)
         try container.encode(handle,forKey: .handle)
+        
     }
     /**
      This enum allows WallModel to be encoded and decoded without needing to encode/decode all its variables -- specifically, the path variable does not need to be saved, as it would be a little harder to make an NSBezierPath conform to Codable, and it's not necessary anyway. The path is simply generated when all the inputs to PathGenerator.generatePath() are decoded. The "cases" are the variables you want to be encoded/decoded.
@@ -208,6 +209,7 @@ extension SCNVector3: Codable {
         try container.encode(self.z)
     }
 }
+
 /**
  This allows WallModel to conform to the Hashable protocol, which is necessary for the dictionary data structures in BoxModel that include WallModel as a key or value.
  */

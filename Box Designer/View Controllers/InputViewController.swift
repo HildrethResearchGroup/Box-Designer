@@ -118,6 +118,14 @@ class InputViewController: NSViewController, NSTextDelegate {
     let rotateSensitivity:CGFloat = 0.01
     /// This variable gives wiggle room to the mouse event when using the scroll bar.
     let zoomSensitivity:CGFloat = 0.1
+    var circleMode: Bool = false
+    var rectMode: Bool = false
+    var roundedRectMode : Bool = false
+    var shapeRectArray = [SCNVector3]()
+    var drawMode : Bool = false
+    var downClickTime = TimeInterval()
+    var upClickTime = TimeInterval()
+    var clippedOutline = [SCNVector3]()
     
     /**
      This function handles mouse movement when dragging the camera view around -- it rotates the box model. See [Apple Documentation - otherMouseDragged()]. (https://developer.apple.com/documentation/appkit/nsresponder/1529804-othermousedragged?language=objc)
@@ -133,7 +141,14 @@ class InputViewController: NSViewController, NSTextDelegate {
             
             manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.x)
             manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
-        }
+        } else { updateDrawMode() }
+    }
+    func updateDrawMode() {
+        circleMode = false
+        rectMode = false
+        roundedRectMode = false
+        drawMode = false
+        shapeRectArray = []
     }
     /**
      This function handles snap points and edge highlighting appearance when user is in "focused" view and hovering their cursor above the correct spot -- camera locked on wall. See [Apple Documentation - mouseMoved()]. (https://developer.apple.com/documentation/appkit/nsresponder/1525114-mousemoved)
@@ -166,7 +181,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
     }
     /**
-     This function handles right click events with the mouse or trackpad (right-click and drag moves the box model around). See [Apple Documentation - rightMouseDragged()]. https://developer.apple.com/documentation/appkit/nsresponder/1529135-rightmousedragged)
+     This function handles right click-and-drag events with the mouse or trackpad (right-click and drag moves the box model around). See [Apple Documentation - rightMouseDragged()]. https://developer.apple.com/documentation/appkit/nsresponder/1529135-rightmousedragged)
      - Parameters:
         - event: an event that occured in the application with the mouse
      */
@@ -187,6 +202,14 @@ class InputViewController: NSViewController, NSTextDelegate {
             manageMouseDrag(&SceneGenerator.shared.cameraOrbit.eulerAngles.y)
         }
     }
+    override func mouseDown(with event: NSEvent) {
+        if cameraLocked {
+            let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+            let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
+            shapeRectArray.append(result.localCoordinates)
+            downClickTime = event.timestamp
+        }
+    }
     /**
      This function handles camera updates from clicks by either highlighting a wall (if one click on correct area), or focusing on a double-clicked wall for drawing. See [Apple Documentation - mouseUp()]. (https://developer.apple.com/documentation/swiftui/nshostingview/mouseup(with:))
      - Parameters:
@@ -195,21 +218,53 @@ class InputViewController: NSViewController, NSTextDelegate {
     override func mouseUp(with event: NSEvent) {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
-        
-        /// highlight selected wall if there's a hit on one click, otherwise go into "focus" view on the double-clicked wall
-        if (boxModel.boxHeight >= 5 && boxModel.boxWidth >= 4 && boxModel.boxLength >= 4) { handleCheckMark.isEnabled = true
+        if cameraLocked {
+            upClickTime = event.timestamp
+            let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
+            let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
+            shapeRectArray.append(result.localCoordinates)
+            if (upClickTime - downClickTime > 0.1) && drawMode {
+                let rectWidth = abs(shapeRectArray.last!.x - shapeRectArray.first!.x)
+                let rectHeight = abs(shapeRectArray.last!.y - shapeRectArray.first!.y)
+                var rect = NSRect()
+                /// coordinate systems are weird when in focus view, need to adjust starting points of the rectangle before appending to the wall's path
+                if (shapeRectArray.first!.z > 0 ) {
+                    rect = NSMakeRect(shapeRectArray.first!.x, shapeRectArray.last!.y, rectWidth, rectHeight)
+                } else if addWallPlane.indexOfSelectedItem == 2 {
+                    rect = NSMakeRect(shapeRectArray.first!.x, shapeRectArray.first!.y, rectWidth, rectHeight)
+                } else {
+                    rect = NSMakeRect(shapeRectArray.last!.x, shapeRectArray.last!.y, rectWidth, rectHeight)
+                }
+            
+                if circleMode {
+                    boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]?.path.appendOval(in: rect)
+                    shapeRectArray = []
+                }
+                if roundedRectMode {
+                    boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]?.path.appendRoundedRect(rect, xRadius: 0.2, yRadius: 0.2)
+                    shapeRectArray = []
+                }
+                if rectMode {
+                    boxModel.walls[Int(selectionHandling.selectedNode!.name!)!]?.path.appendRect(rect)
+                    shapeRectArray = []
+                }
+                updateModel(boxModel)
+            }
         }
+        /// highlight selected wall if there's a hit on one click, otherwise go into "focus" view on the double-clicked wall
+        if (boxModel.boxHeight >= 4 && boxModel.boxWidth >= 4 && boxModel.boxLength >= 4) { handleCheckMark.isEnabled = true }
+        
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()
             updateSelectedWallPlane()
-        }else if(event.clickCount == 2){
+        } else if(event.clickCount == 2){
             selectionHandling.selectedNode = result.node
             
             //make sure that it is part of the cube
             if(result.node.parent != boxView.scene?.rootNode){return}
             
-            selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
+            //selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
             
@@ -251,7 +306,6 @@ class InputViewController: NSViewController, NSTextDelegate {
                     SceneGenerator.shared.cameraOrbit.eulerAngles.y = (0)/180 * CGFloat.pi
                 }
             }
-            print(result.node.position)
         }
     }
     /**
@@ -267,6 +321,24 @@ class InputViewController: NSViewController, NSTextDelegate {
             selectionHandling.selectedNode = nil
             addWallPlane.selectItem(at: 0)
             selectedWallPlane.stringValue = "Selected wall: None"
+            updateDrawMode()
+        }
+        if cameraLocked {
+            if (event.keyCode == 8) {
+                updateDrawMode()
+                circleMode = true
+                drawMode = true
+            }
+            if (event.keyCode == 15) {
+                updateDrawMode()
+                rectMode = true
+                drawMode = true
+            }
+            if (event.keyCode == 31) {
+                updateDrawMode()
+                roundedRectMode = true
+                drawMode = true
+            }
         }
         
     }

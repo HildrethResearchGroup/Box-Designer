@@ -47,7 +47,7 @@ class BoxDesignPDFPage : PDFPage {
             let path = wall.path
             var moveToPoint = NSPoint()
             var lineToPoint = NSPoint()
-            
+            print(path)
             // if vertical space is used up, change xOffset to be beside it, and reset y-offset so drawing starts at bottom of page again
             // only if there's still horizontal space though
             if (yOffset + wall.length * inchScale > fileHandlingControl.pdfHeight*inchScale - fileHandlingControl.margin*inchScale) {
@@ -78,7 +78,7 @@ class BoxDesignPDFPage : PDFPage {
                     moveToPoint.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
                     moveToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
                 /// right now, curveTo points are not enabled for PDF drawing (but we can't get curved paths to extrude anyway, so didn't try too hard to fix this)
-                case NSBezierPath.ElementType.lineTo, NSBezierPath.ElementType.curveTo, NSBezierPath.ElementType.closePath:
+                case NSBezierPath.ElementType.lineTo, NSBezierPath.ElementType.closePath:
                     if (firstLineDrawn) {
                         moveToPoint.x = lineToPoint.x
                         moveToPoint.y = lineToPoint.y
@@ -87,6 +87,20 @@ class BoxDesignPDFPage : PDFPage {
                     lineToPoint.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
                     
                     drawLine(fromPoint: moveToPoint, toPoint: lineToPoint)
+                case NSBezierPath.ElementType.curveTo:
+                    if (firstLineDrawn) {
+                        moveToPoint.x = lineToPoint.x
+                        moveToPoint.y = lineToPoint.y
+                    }
+                    lineToPoint.x = points[2].x * CGFloat(inchScale) + CGFloat(xOffset)
+                    lineToPoint.y = points[2].y * CGFloat(inchScale) + CGFloat(yOffset)
+                    var controlpoint1 = NSZeroPoint
+                    var controlpoint2 = NSZeroPoint
+                    controlpoint1.x = points[0].x * CGFloat(inchScale) + CGFloat(xOffset)
+                    controlpoint1.y = points[0].y * CGFloat(inchScale) + CGFloat(yOffset)
+                    controlpoint2.x = points[1].x * CGFloat(inchScale) + CGFloat(xOffset)
+                    controlpoint2.y = points[1].y * CGFloat(inchScale) + CGFloat(yOffset)
+                    drawLine(fromPoint: moveToPoint, toPoint: lineToPoint, controlPoint1: controlpoint1, controlPoint2: controlpoint2)
                 @unknown default:
                     break
                 }
@@ -106,13 +120,18 @@ class BoxDesignPDFPage : PDFPage {
         - fromPoint: the starting point for the line being drawn
         - toPoint: the end point for the line being drawn
      */
-    func drawLine(fromPoint: NSPoint, toPoint: NSPoint) {
+    func drawLine(fromPoint: NSPoint, toPoint: NSPoint, controlPoint1 : NSPoint = NSZeroPoint, controlPoint2: NSPoint = NSZeroPoint) {
         let path = NSBezierPath()
         NSColor.black.set()
         path.lineWidth = CGFloat(fileHandlingControl.stroke)
         firstLineDrawn = true
+        path.flatness = 0.005
         path.move(to: fromPoint)
-        path.line(to: toPoint)
+        if !NSEqualPoints(controlPoint1, NSZeroPoint) && !NSEqualPoints(controlPoint2, NSZeroPoint) {
+            path.curve(to: toPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)
+        } else {
+            path.line(to: toPoint)
+        }
         path.stroke()
         
     }

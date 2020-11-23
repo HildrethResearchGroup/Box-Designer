@@ -48,7 +48,13 @@ class SceneGenerator {
         - boxModel: The scene generation needs to be on the current box model desired by the user so that it can render accurately.
      */
     func generateScene(_ boxModel: BoxModel) {
+        let text = SCNText(string: "hello", extrusionDepth: 0.1)
         
+        text.flatness = 0.1
+        text.font = NSFont(name: "Avenir", size: 0.5)
+        text.firstMaterial?.diffuse.contents = NSColor.black
+        text.chamferRadius = 0.5
+        let textPath = text.chamferProfile?.flattened
         self.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
@@ -57,7 +63,10 @@ class SceneGenerator {
         var wallNumber = 0
         for wall in boxModel.walls.values {
             /// create node from wall data
-            // wall.path.flatness = 0.01 use if want to properly extrude curved paths
+            wall.path.flatness = 0.005
+            
+            //wall.path.append(textPath!)
+            //wall.path.append(withCGGlyph: glyph!, in: NSFont(name: "Avenir", size: 5)!)
             let newShape = SCNShape(path: wall.path, extrusionDepth: CGFloat(wall.materialThickness))
             let newNode = SCNNode(geometry: newShape)
             /// adjust position and rotation
@@ -88,6 +97,17 @@ class SceneGenerator {
             scene.rootNode.addChildNode(newNode)
             wallNumber += 1
         }
+//        let text = SCNText(string: "hello", extrusionDepth: 0.1)
+//        text.flatness = 0.1
+//        text.font = NSFont(name: "Avenir", size: 0.5)
+//        text.firstMaterial?.diffuse.contents = NSColor.black
+//        text.chamferRadius = 0.5
+//        var textPath = text.chamferProfile
+//        let textNode = SCNNode()
+//        textNode.geometry = text
+//        textNode.position = SCNVector3(0,0,0.35)
+//        textNode.rotation = SCNVector4Make(0, 1, 0, -CGFloat.pi/2)
+//        scene.rootNode.addChildNode(textNode)
         adjustLighting()
         adjustCamera(boxModel)
     }

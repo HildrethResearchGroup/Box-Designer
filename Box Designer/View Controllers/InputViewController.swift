@@ -72,6 +72,8 @@ class InputViewController: NSViewController, NSTextDelegate {
     @IBOutlet weak var deleteSelected: NSButton!
     /// This variable allows users to add a handle cutout on the selected wall.
     @IBOutlet weak var handleCheckMark: NSButton!
+    /// This variable changes current tab width
+    @IBOutlet weak var tabWidthControl: NSSegmentedControl!
     /// This variable indicates which unit the user wants.
     /// - Note: True indicates millimeters, false indicates inches.
     private var mmInch: Bool = false
@@ -87,8 +89,8 @@ class InputViewController: NSViewController, NSTextDelegate {
         widthTextField.doubleValue = boxModel.boxWidth
         heightTextField.doubleValue = boxModel.boxHeight
         materialThicknessTextField.doubleValue = boxModel.materialThickness
-        boxModel.joinType == JoinType.tab ? (numberTabTextField.isEnabled = true) : (numberTabTextField.isEnabled = false)
-        numberTabTextField.doubleValue = boxModel.numberTabs!
+        boxModel.joinType == JoinType.tab ? (tabWidthControl.isEnabled = true) : (tabWidthControl.isEnabled = false)
+        //numberTabTextField.doubleValue = boxModel.numberTabs!
         previousTabEntry = minTabs
         boxModel.innerDimensions ? (innerOrOuterDimensionControl.selectedSegment = 1) : (innerOrOuterDimensionControl.selectedSegment = 0)
         boxModel.joinType == JoinType.overlap ? (joinTypeControl.selectedSegment = 0) : (boxModel.joinType == JoinType.tab ? (joinTypeControl.selectedSegment = 1) : (joinTypeControl.selectedSegment = 2))
@@ -532,14 +534,14 @@ class InputViewController: NSViewController, NSTextDelegate {
         let choice = joinTypeControl.selectedSegment
         if choice == 0 {
             boxModel.joinType = JoinType.overlap
-            numberTabTextField.isEnabled = false
+            tabWidthControl.isEnabled = false
         } else if choice == 1 {
             boxModel.joinType = JoinType.tab
-            numberTabTextField.isEnabled = true
-            boxModel.numberTabs = numberTabTextField.doubleValue
+            tabWidthControl.isEnabled = true
+            //boxModel.numberTabs = numberTabTextField.doubleValue
         } else if choice == 2 {
             boxModel.joinType = JoinType.slot
-            numberTabTextField.isEnabled = false
+            tabWidthControl.isEnabled = false
         }
     }
     /**
@@ -547,32 +549,47 @@ class InputViewController: NSViewController, NSTextDelegate {
      - Parameters:
         - sender: typical @IBAction input
      */
-    @IBAction func numberTabChanged(_ sender: Any) {
-        /// If the number of tabs is too low, display a warning dialog
-        if numberTabTextField.doubleValue < minTabs {
-            /// Default to the minimum number of tabs
-            if tabDialog() {
-                boxModel.numberTabs = minTabs
-                numberTabTextField.doubleValue = minTabs
+    @IBAction func tabWidthChanged(_ sender: Any) {
+        if tabWidthControl.selectedSegment == 1 {
+            let newTabs = boxModel.numberTabs! - 1
+            if newTabs <= minTabs {
+                tabWidthControl.setEnabled(false, forSegment: 1)
+                boxModel.numberTabs! = minTabs
+            } else {
+                boxModel.numberTabs = newTabs
             }
-            /// Cancel the tab operation, reseting the tab count to its previous number
-            else {
-                numberTabTextField.doubleValue = previousTabEntry
-            }
-        }
-        else {
-            boxModel.numberTabs = numberTabTextField.doubleValue
-            previousTabEntry = numberTabTextField.doubleValue
+        } else if tabWidthControl.selectedSegment == 0 {
+            boxModel.numberTabs! += 1
+            tabWidthControl.setEnabled(true, forSegment: 1)
         }
     }
+    
+//    @IBAction func numberTabChanged(_ sender: Any) {
+//        /// If the number of tabs is too low, display a warning dialog
+//        if numberTabTextField.doubleValue < minTabs {
+//            /// Default to the minimum number of tabs
+//            if tabDialog() {
+//                boxModel.numberTabs = minTabs
+//                numberTabTextField.doubleValue = minTabs
+//            }
+//            /// Cancel the tab operation, reseting the tab count to its previous number
+//            else {
+//                numberTabTextField.doubleValue = previousTabEntry
+//            }
+//        }
+//        else {
+//            boxModel.numberTabs = numberTabTextField.doubleValue
+//            previousTabEntry = numberTabTextField.doubleValue
+//        }
+//    }
     /// This alert pops up if the user inputs fewer tabs than is allowed.
     func tabDialog() -> Bool {
         let tabAlert = NSAlert()
-        tabAlert.messageText = "Invalid tab selection."
-        tabAlert.informativeText = "Press 'OK' to default to the minimum number of tabs \(Int(minTabs)), or press 'Cancel' to abort the operation."
+        tabAlert.messageText = "Already At Maximum Width"
+        tabAlert.informativeText = "Press 'OK'" //\(Int(minTabs)), or press 'Cancel' to abort the operation."
         tabAlert.alertStyle = .warning
         tabAlert.addButton(withTitle: "OK")
-        tabAlert.addButton(withTitle: "Cancel")
+        //tabAlert.addButton(withTitle: "Cancel")
         return tabAlert.runModal() == .alertFirstButtonReturn
     }
     /**

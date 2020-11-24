@@ -161,36 +161,34 @@ class SelectionHandling{
         }else if(drawingclicks > 1){
             drawingclicks = 0
             
-            let curWall = curBoxModel.walls[Int((selectedNode?.name!)!)!]!
+            let curWall = boxModel!.walls[Int((selectedNode?.name!)!)!]!
             
             if(shapeSelection == 0){
                 //rectangle
                 curWall.wallShapes.append(Rectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.rectangle))
             }else if(shapeSelection == 1){
                 //rounded rectangle
-                //rounded rectangle
                 let xOffset = abs(currentCord.x - lastCord!.x)
                 let yOffset = abs(currentCord.y - lastCord!.y)
                 
                 
                 if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y >= 0){
-                    shapePath?.appendRoundedRect(NSMakeRect(lastCord!.x, lastCord!.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastCord!.x, lastCord!.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
                 }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y < 0){
-                    shapePath?.appendRoundedRect(NSMakeRect(currentCord.x, currentCord.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(currentCord.x, currentCord.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
                 }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y >= 0){
-                    shapePath?.appendRoundedRect(NSMakeRect(currentCord.x, lastCord!.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(currentCord.x, lastCord!.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
                 }else if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y < 0){
-                    shapePath?.appendRoundedRect(NSMakeRect(lastCord!.x, currentCord.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastCord!.x, currentCord.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
                 }
                 
-                curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
             }else if(shapeSelection == 2){
                 //circle
                 curWall.wallShapes.append(Circle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.circle))
             }
             /// update wall's path after adding the shape
             curWall.updatePath()
-            curBoxModel.sceneGenerator.generateScene(curBoxModel)
+            boxModel!.sceneGenerator.generateScene(boxModel!)
                 
         }
  

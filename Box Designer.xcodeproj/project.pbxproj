@@ -24,6 +24,7 @@
 		6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */; };
 		675C27EA251A7E070022359A /* PDFOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675C27E9251A7E070022359A /* PDFOptionsView.swift */; };
 		675C27EE251C21250022359A /* PDFOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 675C27ED251C21240022359A /* PDFOptionsView.xib */; };
+		67973BAC256C8AD8004AF6D4 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67973BAB256C8AD8004AF6D4 /* ShapeType.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -59,6 +60,7 @@
 		675C27E9251A7E070022359A /* PDFOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFOptionsView.swift; sourceTree = "<group>"; };
 		675C27ED251C21240022359A /* PDFOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFOptionsView.xib; sourceTree = "<group>"; };
 		67973B80256B3CDD004AF6D4 /* Box DesignerHelp.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Box DesignerHelp.help"; sourceTree = BUILT_PRODUCTS_DIR; };
+		67973BAB256C8AD8004AF6D4 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				675C27E9251A7E070022359A /* PDFOptionsView.swift */,
 				675C27ED251C21240022359A /* PDFOptionsView.xib */,
 				23B37C7325110AEA00105D87 /* Line.swift */,
+				67973BAB256C8AD8004AF6D4 /* ShapeType.swift */,
 			);
 			path = "Box Designer";
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */,
 				02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */,
 				02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */,
+				67973BAC256C8AD8004AF6D4 /* ShapeType.swift in Sources */,
 				02043C55248C74EC00F595A1 /* WallModel.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
 				23283E06251D61920067D20E /* Ray.swift in Sources */,

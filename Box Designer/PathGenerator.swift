@@ -357,4 +357,21 @@ class PathGenerator {
         }
         return path
     }
+    
+    static func generateShapePaths(_ path: NSBezierPath, _ shapes : Dictionary<ShapeType,[NSRect]>) {
+        for shapeType in shapes.keys {
+            if !shapes[shapeType]!.isEmpty {
+                for shape in shapes[shapeType]! {
+                    if shapeType == ShapeType.circle {
+                        path.appendOval(in: shape)
+                    } else if shapeType == ShapeType.rectangle {
+                        path.appendRect(shape)
+                    } else if shapeType == ShapeType.roundedRectangle {
+                        /// - TODO: figure out a way to get the radii information from this dictionary
+                        path.appendRoundedRect(shape, xRadius: 0.1, yRadius: 0.1)
+                    }
+                }
+            }
+        }
+    }
 }

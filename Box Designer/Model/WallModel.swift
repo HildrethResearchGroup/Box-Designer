@@ -92,6 +92,14 @@ class WallModel : Equatable, Codable {
     /// This function sets the wall's path from the return of PathGenerator's generatePath function, using its self-updating variables.
     func updatePath(){
         self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, numberTabs: self.numberTabs, handle: self.handle,self.wallShapes)
+        
+        for (index,shape) in wallShapes.enumerated() {
+            /// If cutout lies outside the updated box, remove it
+            if (shape.areaRectangle.minX + shape.areaRectangle.width == self.path.bounds.maxX) || (shape.areaRectangle.minY + shape.areaRectangle.height == self.path.bounds.maxY) {
+                wallShapes.remove(at: index)
+                updatePath()
+            }
+        }
     }
     
     /// This function returns the wall number of itself, as it's a private variable.

@@ -38,6 +38,7 @@ class SelectionHandling{
     private var nodeColor: NSColor?
     private var lastDrawn: SCNNode?
     private var lastClick: SCNHitTestResult?
+
     /// This variable is the associated node of the selected wall from the user.
     var selectedNode: SCNNode?{
         willSet{
@@ -95,6 +96,7 @@ class SelectionHandling{
         lastDrawn = nil
         lastClick = nil
         drawingclicks = 0
+
     }
     
     func drawing() -> Bool{
@@ -132,7 +134,6 @@ class SelectionHandling{
                 let xOffset = abs(currentCord.x - lastCord!.x)
                 let yOffset = abs(currentCord.y - lastCord!.y)
                 
-                
                 if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y >= 0){
                     MasterPath = NSBezierPath(roundedRect: NSMakeRect(lastCord!.x, lastCord!.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
                 }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y < 0){
@@ -157,49 +158,49 @@ class SelectionHandling{
             locNode.name = "click"
             self._addChild(locNode)
             lastDrawn = locNode
-
+            
         }else if(drawingclicks > 1){
             drawingclicks = 0
             
-            let curWall = boxModel!.walls[Int((selectedNode?.name!)!)!]!
-            
-            if(shapeSelection == 0){
-                //rectangle
-                curWall.wallShapes.append(Rectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.rectangle))
-            }else if(shapeSelection == 1){
-                //rounded rectangle
-                let xOffset = abs(currentCord.x - lastCord!.x)
-                let yOffset = abs(currentCord.y - lastCord!.y)
+            if let curWall = boxModel!.walls[(Int(((selectedNode?.name!))!))!] as WallModel? {
                 
-                
-                if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y >= 0){
-                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastCord!.x, lastCord!.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
-                }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y < 0){
-                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(currentCord.x, currentCord.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
-                }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y >= 0){
-                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(currentCord.x, lastCord!.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
-                }else if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y < 0){
-                    curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastCord!.x, currentCord.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
+                if(shapeSelection == 0){
+                    //rectangle
+                    curWall.wallShapes.append(Rectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.rectangle))
+                }else if(shapeSelection == 1){
+                    //rounded rectangle
+                    let xOffset = abs(currentCord.x - lastCord!.x)
+                    let yOffset = abs(currentCord.y - lastCord!.y)
+                    
+                    
+                    if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y >= 0){
+                        curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastCord!.x, lastCord!.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
+                    }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y < 0){
+                        curWall.wallShapes.append(RoundedRectangle(NSMakeRect(currentCord.x, currentCord.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
+                    }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y >= 0){
+                        curWall.wallShapes.append(RoundedRectangle(NSMakeRect(currentCord.x, lastCord!.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
+                    }else if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y < 0){
+                        curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastCord!.x, currentCord.y,xOffset,yOffset),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
+                    }
+                    
+                }else if(shapeSelection == 2){
+                    //circle
+                    curWall.wallShapes.append(Circle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.circle))
                 }
-                
-            }else if(shapeSelection == 2){
-                //circle
-                curWall.wallShapes.append(Circle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.circle))
-            }
-            /// update wall's path after adding the shape
-            curWall.updatePath()
-            boxModel!.sceneGenerator.generateScene(boxModel!)
-                
+                /// update wall's path after adding the shape
+                curWall.updatePath()
+                boxModel!.sceneGenerator.generateScene(boxModel!)
+            } else { print("Error: no selected wall.") }
         }
- 
+        
     }
     
     /**
      This function is to thinly highlight the edge of a wall when it is in double-click focus mode.
      - Parameters:
-        - thickness: this is how thick the line appears in the view
-        - insideSelection: this is whether the highlighted line is on the inner or outer face of the focused wall
-        - idvLines: unsure
+     - thickness: this is how thick the line appears in the view
+     - insideSelection: this is whether the highlighted line is on the inner or outer face of the focused wall
+     - idvLines: unsure
      */
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
@@ -233,7 +234,7 @@ class SelectionHandling{
         
         self._addChild(hightlightFace!)
     }
-
+    
     private func _addChild(_ node:SCNNode){
         //Since its isometric select the side that is being looked at
         //what side is being looked at is calculated by the camera angle ¬

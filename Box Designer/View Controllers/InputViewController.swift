@@ -304,9 +304,9 @@ class InputViewController: NSViewController, NSTextDelegate {
             selectionHandling.roundedRadius -= CGFloat(0.05)
             if (result.count == 0){ return }
             selectionHandling.addClickPoint(result[0], false)
+        }else if (event.keyCode == 51 && selectionHandling.selectedNode != nil && !cameraLocked) {
+            deleteSelectedComponent(self)
         }
-        
-        print(event.keyCode)
         
     }
     

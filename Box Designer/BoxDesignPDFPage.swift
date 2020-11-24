@@ -47,7 +47,7 @@ class BoxDesignPDFPage : PDFPage {
             let path = wall.path
             var moveToPoint = NSPoint()
             var lineToPoint = NSPoint()
-            print(path)
+            
             // if vertical space is used up, change xOffset to be beside it, and reset y-offset so drawing starts at bottom of page again
             // only if there's still horizontal space though
             if (yOffset + wall.length * inchScale > fileHandlingControl.pdfHeight*inchScale - fileHandlingControl.margin*inchScale) {

@@ -81,6 +81,7 @@ class InputViewController: NSViewController, NSTextDelegate {
     /// This function is inherited from NSViewController. It changes any settings that you want when the view initially loads, or a box model is loaded into the session from a JSON.
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionHandling.boxModel = boxModel
         /// get values from current box model -- when user opens a box model from a JSON file, the values need to change in the GUI to the loaded box model's values
         lengthTextField.doubleValue = boxModel.boxLength
         widthTextField.doubleValue = boxModel.boxWidth
@@ -155,7 +156,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             return
         }
         
-        selectionHandling.addClickPoint(result[0], false, boxModel)
+        selectionHandling.addClickPoint(result[0], false)
         
         if(result[0].node.parent != boxView.scene?.rootNode){
             selectionHandling.hoverNode = result[0].node
@@ -207,7 +208,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             updateSelectedWallPlane()
         }else if(event.clickCount == 1 && cameraLocked){
             
-            selectionHandling.addClickPoint(result, true, boxModel)
+            selectionHandling.addClickPoint(result, true)
             
         }else if(event.clickCount == 2){
             cameraLocked = true
@@ -285,22 +286,22 @@ class InputViewController: NSViewController, NSTextDelegate {
             //]
             selectionHandling.shapeSelection += 1
             if (result.count == 0){ return }
-            selectionHandling.addClickPoint(result[0], false, boxModel)
+            selectionHandling.addClickPoint(result[0], false)
         }else if(event.keyCode == 33){
             //[
             selectionHandling.shapeSelection -= 1
             if (result.count == 0){ return }
-            selectionHandling.addClickPoint(result[0], false, boxModel)
+            selectionHandling.addClickPoint(result[0], false)
         }else if(event.keyCode == 24){
             //+
-            selectionHandling.roundedRadius += CGFloat(0.1)
+            selectionHandling.roundedRadius += CGFloat(0.05)
             if (result.count == 0){ return }
-            selectionHandling.addClickPoint(result[0], false, boxModel)
+            selectionHandling.addClickPoint(result[0], false)
         }else if(event.keyCode == 27){
             //-
-            selectionHandling.roundedRadius -= CGFloat(0.1)
+            selectionHandling.roundedRadius -= CGFloat(0.05)
             if (result.count == 0){ return }
-            selectionHandling.addClickPoint(result[0], false, boxModel)
+            selectionHandling.addClickPoint(result[0], false)
         }
         
         print(event.keyCode)

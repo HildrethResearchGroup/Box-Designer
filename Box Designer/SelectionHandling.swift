@@ -12,7 +12,7 @@ import Cocoa
 class SelectionHandling{
     /// This variable enables SelectionHandling to be a singleton.
     static let shared = SelectionHandling()
-    /// This is the extrusion depth for edge highlighting when user is in double-click "focus" mode.
+    var boxModel:BoxModel?
     let shapeDepth: CGFloat = 0.0001
     
     var inside: Bool = false
@@ -101,10 +101,10 @@ class SelectionHandling{
         return lastDrawn == nil
     }
     
-    func addClickPoint(_ result: SCNHitTestResult,_ click: Bool, _ curBoxModel: BoxModel){
+    func addClickPoint(_ result: SCNHitTestResult,_ click: Bool){
         if(lastClick == nil && click){
             lastClick = result
-        }else if(lastClick == nil){
+        }else if(lastClick == nil || lastClick!.node != result.node){
             return
         }
         
@@ -129,7 +129,20 @@ class SelectionHandling{
                 MasterPath = NSBezierPath(rect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
             }else if(shapeSelection == 1){
                 //rounded rectangle
-                MasterPath = NSBezierPath(roundedRect: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: roundedRadius, yRadius: roundedRadius)
+                let xOffset = abs(currentCord.x - lastCord!.x)
+                let yOffset = abs(currentCord.y - lastCord!.y)
+                
+                
+                if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y >= 0){
+                    MasterPath = NSBezierPath(roundedRect: NSMakeRect(lastCord!.x, lastCord!.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y < 0){
+                    MasterPath = NSBezierPath(roundedRect: NSMakeRect(currentCord.x, currentCord.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y >= 0){
+                    MasterPath = NSBezierPath(roundedRect: NSMakeRect(currentCord.x, lastCord!.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }else if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y < 0){
+                    MasterPath = NSBezierPath(roundedRect: NSMakeRect(lastCord!.x, currentCord.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }
+                
             }else if(shapeSelection == 2){
                 //circle
                 MasterPath = NSBezierPath(ovalIn: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
@@ -155,6 +168,21 @@ class SelectionHandling{
                 curWall.wallShapes.append(Rectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.rectangle))
             }else if(shapeSelection == 1){
                 //rounded rectangle
+                //rounded rectangle
+                let xOffset = abs(currentCord.x - lastCord!.x)
+                let yOffset = abs(currentCord.y - lastCord!.y)
+                
+                
+                if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y >= 0){
+                    shapePath?.appendRoundedRect(NSMakeRect(lastCord!.x, lastCord!.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y < 0){
+                    shapePath?.appendRoundedRect(NSMakeRect(currentCord.x, currentCord.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }else if(currentCord.x - lastCord!.x < 0 && currentCord.y - lastCord!.y >= 0){
+                    shapePath?.appendRoundedRect(NSMakeRect(currentCord.x, lastCord!.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }else if(currentCord.x - lastCord!.x >= 0 && currentCord.y - lastCord!.y < 0){
+                    shapePath?.appendRoundedRect(NSMakeRect(lastCord!.x, currentCord.y,xOffset,yOffset), xRadius: roundedRadius, yRadius: roundedRadius)
+                }
+                
                 curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
             }else if(shapeSelection == 2){
                 //circle
@@ -213,21 +241,21 @@ class SelectionHandling{
         //what side is being looked at is calculated by the camera angle ¬
         if(selectedNode?.position.x != 0.0){
             if(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180 > 0){
-                node.position.z -= (0.25 + shapeDepth)
+                node.position.z -= (CGFloat(boxModel!.materialThickness) + shapeDepth)
             }else{
-                node.position.z += (0.25 + shapeDepth)
+                node.position.z += (CGFloat(boxModel!.materialThickness) + shapeDepth)
             }
         }else if(selectedNode?.position.y != 0.0){
             if(SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180 > 0){
-                node.position.z += (0.25 + shapeDepth)
+                node.position.z += (CGFloat(boxModel!.materialThickness) + shapeDepth)
             }else{
-                node.position.z -= (0.25 + shapeDepth)
+                node.position.z -= (CGFloat(boxModel!.materialThickness) + shapeDepth)
             }
         }else if(selectedNode?.position.z != 0.0){
             if(abs(SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180) > 90){
-                node.position.z -= (0.25 + shapeDepth)
+                node.position.z -= (CGFloat(boxModel!.materialThickness) + shapeDepth)
             }else{
-                node.position.z += (0.25 + shapeDepth)
+                node.position.z += (CGFloat(boxModel!.materialThickness) + shapeDepth)
             }
         }
         

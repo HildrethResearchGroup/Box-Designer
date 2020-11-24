@@ -161,8 +161,8 @@ class SelectionHandling{
             
         }else if(drawingclicks > 1){
             drawingclicks = 0
-            
-            if let curWall = boxModel!.walls[(Int(((selectedNode?.name!))!))!] as WallModel? {
+            if let wallInt = Int(((selectedNode?.name!))!) as Int? {
+            if let curWall = boxModel!.walls[wallInt] as WallModel? {
                 
                 if(shapeSelection == 0){
                     //rectangle
@@ -191,6 +191,7 @@ class SelectionHandling{
                 curWall.updatePath()
                 boxModel!.sceneGenerator.generateScene(boxModel!)
             } else { print("Error: no selected wall.") }
+            }
         }
         
     }

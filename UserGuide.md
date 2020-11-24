@@ -18,7 +18,7 @@ This document explains the camera and panel controls for the Box Designer macOS 
 
 * Selection: A single left-click on a wall highlights that wall.
 
-* Focus: A double left-click on a wall focuses the camera only on that wall (for drawing cutouts and placing text).
+* Focus: A double left-click on a wall focuses the camera only on that wall (for drawing cutouts).
 
 * Abort Focus: The escape key gets the user out of “focus mode” and enables the user to highlight walls again.
 
@@ -43,6 +43,9 @@ This document explains the camera and panel controls for the Box Designer macOS 
 * Abort Selection: The escape key will also abort selection mode — if a wall is highlighted, the escape key will return the box to an un-highlighted state.
 
 
+### Cutout Controls
+* To cut out shapes, the wall must be in focus mode (double-clicking on the desired wall).
+* After the wall is in focus mode, click once and move the mouse around to see the projected shape to cut out (this will be viewed as a pink overlayed shape on the wall). The '['' key filters through the allowed shapes (circle, rectangle, and rounded rectangle) backwards, while the ']' filters through the shapes forward. For rounded rectangles, the "rounded radius" can be changed by using the '+' and '-' keys. If the starting click was not where the user wanted the shape, press 'Esc' once to remove it from the view, and click in the new spot to start drawing again. If the pink shape looks like the desired cutout, click once more where the cursor currently is to cut out the shape on the wall. To be able to select walls again, press the 'Esc' key twice. The user will know they are in "Selection" mode again when the "Selected wall: " output reads "None" in the panel area. Final note: as of now, if the user wants to draw two shapes on the same wall, they must get out of Drawing and Focus mode (double-press 'Esc' key), and then re-focus on that wall. This is a bug that we have yet to find the issue for. Technically, the user can still cut-out a second shape in the same "Focus" session, but the second cut-out does not highlight where/what the shape looks like -- it just cuts it out after two clicks.
 
 # Application Menu:
 
@@ -144,7 +147,7 @@ This document explains the camera and panel controls for the Box Designer macOS 
 
 * Selected Wall Text Output: For user-friendliness, this text outputs 1) the plane of the selected wall and 2) the placement of the selected wall. If no wall is selected, it defaults to “None selected”
 
-* Delete Selected Component: This button allows users to delete the wall that is currently selected. It does nothing if no wall is selected.
+* Delete Selected Component: This button allows users to delete the wall that is currently selected. It does nothing if no wall is selected. Deleting the selected wall can also be accomplished by the "Back-space" key.
 
 * Export: This button allows users to save their current box model as a PDF or JSON. The user can also save via the menu taskbar at File -> Save.
 

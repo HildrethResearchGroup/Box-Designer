@@ -201,9 +201,9 @@ class InputViewController: NSViewController, NSTextDelegate {
         let clickCord = boxView.convert(event.locationInWindow, from: boxView.window?.contentView)
         let result: SCNHitTestResult = boxView.hitTest(clickCord, options: [ : ])[0]
         
+        /// Only allow handles on walls that are large enough
+        if (boxModel.boxHeight >= 4 && boxModel.boxWidth >= 4 && boxModel.boxLength >= 4) { handleCheckMark.isEnabled = true }
         /// highlight selected wall if there's a hit on one click, otherwise go into "focus" view on the double-clicked wall
-        if (boxModel.boxHeight >= 5 && boxModel.boxWidth >= 4 && boxModel.boxLength >= 4) { handleCheckMark.isEnabled = true
-        }
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()
@@ -218,7 +218,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             
             //make sure that it is part of the cube
             if(result.node.parent != boxView.scene?.rootNode){return}
-            //selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
+            // selectionHandling.highlightEdges(thickness: 0.01, insideSelection: false, idvLines: true)
             let yAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.y/CGFloat.pi*180
             let xAngle = SceneGenerator.shared.cameraOrbit.eulerAngles.x/CGFloat.pi*180
             
@@ -260,7 +260,7 @@ class InputViewController: NSViewController, NSTextDelegate {
                     SceneGenerator.shared.cameraOrbit.eulerAngles.y = (0)/180 * CGFloat.pi
                 }
             }
-            print(result.node.position)
+    
         }
     }
     /**

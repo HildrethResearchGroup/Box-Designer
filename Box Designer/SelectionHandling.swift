@@ -10,9 +10,11 @@ import Cocoa
  
  */
 class SelectionHandling{
-    
+    /// This variable enables SelectionHandling to be a singleton.
     static let shared = SelectionHandling()
+    /// This is the extrusion depth for edge highlighting when user is in double-click "focus" mode.
     let shapeDepth: CGFloat = 0.0001
+    
     var inside: Bool = false
     var roundedRadius: CGFloat = 0.1{
         didSet{
@@ -32,9 +34,11 @@ class SelectionHandling{
     }
     private var drawingclicks = 0
     static var indexOfSelectedWall : Int? = nil
+    /// This variable is the SCNNode's material color.
     private var nodeColor: NSColor?
     private var lastDrawn: SCNNode?
     private var lastClick: SCNHitTestResult?
+    /// This variable is the associated node of the selected wall from the user.
     var selectedNode: SCNNode?{
         willSet{
             
@@ -54,7 +58,7 @@ class SelectionHandling{
             }
         }
     }
-    
+    /// This variable is the snap point when the user is in double-click focus mode. Right now, there are snap points at endpoints and midway points.
     var hoverNode: SCNNode?{
         willSet{
             if(hoverNode == nil){
@@ -67,7 +71,8 @@ class SelectionHandling{
             }
         }
     }
-    
+    /// This variable is the highlighted wall.
+    /// - TODO: change spelling
     var hightlightFace : SCNNode?{
         willSet{
             if(nodeColor != nil){
@@ -79,7 +84,8 @@ class SelectionHandling{
     func deleteNode(){
         selectedNode?.removeFromParentNode()
     }
-    
+    /// This function highlights a whole selected node face.
+    /// - TODO: change spelling
     func higlight(){
         selectedNode!.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.59, saturation: 0.20, brightness: 1, alpha: 1.0)
     }
@@ -163,6 +169,13 @@ class SelectionHandling{
  
     }
     
+    /**
+     This function is to thinly highlight the edge of a wall when it is in double-click focus mode.
+     - Parameters:
+        - thickness: this is how thick the line appears in the view
+        - insideSelection: this is whether the highlighted line is on the inner or outer face of the focused wall
+        - idvLines: unsure
+     */
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){
         let path = ((selectedNode?.geometry as! SCNShape).path!)
         let lineShape = LineDrawing(path, thickness, insideLine: insideSelection)

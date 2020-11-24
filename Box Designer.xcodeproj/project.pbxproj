@@ -24,7 +24,7 @@
 		6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */; };
 		675C27EA251A7E070022359A /* PDFOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675C27E9251A7E070022359A /* PDFOptionsView.swift */; };
 		675C27EE251C21250022359A /* PDFOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 675C27ED251C21240022359A /* PDFOptionsView.xib */; };
-		67ACA14425476462003D4905 /* Documentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67ACA14325476462003D4905 /* Documentation.swift */; };
+		67973BAC256C8AD8004AF6D4 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67973BAB256C8AD8004AF6D4 /* ShapeType.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -59,7 +59,8 @@
 		6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignerPDF.swift; sourceTree = "<group>"; };
 		675C27E9251A7E070022359A /* PDFOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFOptionsView.swift; sourceTree = "<group>"; };
 		675C27ED251C21240022359A /* PDFOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFOptionsView.xib; sourceTree = "<group>"; };
-		67ACA14325476462003D4905 /* Documentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Documentation.swift; sourceTree = "<group>"; };
+		67973B80256B3CDD004AF6D4 /* Box DesignerHelp.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Box DesignerHelp.help"; sourceTree = BUILT_PRODUCTS_DIR; };
+		67973BAB256C8AD8004AF6D4 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +73,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		67973B7D256B3CDD004AF6D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C0E65E482478426D009D90F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -103,6 +111,7 @@
 			children = (
 				C0E65E4B2478426D009D90F1 /* Box Designer.app */,
 				C0E65E5B2478426E009D90F1 /* Box DesignerTests.xctest */,
+				67973B80256B3CDD004AF6D4 /* Box DesignerHelp.help */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,7 +119,6 @@
 		C0E65E4D2478426D009D90F1 /* Box Designer */ = {
 			isa = PBXGroup;
 			children = (
-				67ACA14325476462003D4905 /* Documentation.swift */,
 				C0E65E72247851C0009D90F1 /* Model */,
 				C0E65E6A247842D6009D90F1 /* View Controllers */,
 				C0E65E4E2478426D009D90F1 /* AppDelegate.swift */,
@@ -130,6 +138,7 @@
 				675C27E9251A7E070022359A /* PDFOptionsView.swift */,
 				675C27ED251C21240022359A /* PDFOptionsView.xib */,
 				23B37C7325110AEA00105D87 /* Line.swift */,
+				67973BAB256C8AD8004AF6D4 /* ShapeType.swift */,
 			);
 			path = "Box Designer";
 			sourceTree = "<group>";
@@ -165,6 +174,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		67973B7F256B3CDD004AF6D4 /* Box DesignerHelp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67973B83256B3CDD004AF6D4 /* Build configuration list for PBXNativeTarget "Box DesignerHelp" */;
+			buildPhases = (
+				67973B7C256B3CDD004AF6D4 /* Sources */,
+				67973B7D256B3CDD004AF6D4 /* Frameworks */,
+				67973B7E256B3CDD004AF6D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Box DesignerHelp";
+			productName = "Box DesignerHelp";
+			productReference = 67973B80256B3CDD004AF6D4 /* Box DesignerHelp.help */;
+			productType = "com.apple.product-type.bundle";
+		};
 		C0E65E4A2478426D009D90F1 /* Box Designer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0E65E642478426E009D90F1 /* Build configuration list for PBXNativeTarget "Box Designer" */;
@@ -210,6 +236,9 @@
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Hildreth Research Group";
 				TargetAttributes = {
+					67973B7F256B3CDD004AF6D4 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
 					C0E65E4A2478426D009D90F1 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
@@ -234,11 +263,19 @@
 			targets = (
 				C0E65E4A2478426D009D90F1 /* Box Designer */,
 				C0E65E5A2478426E009D90F1 /* Box DesignerTests */,
+				67973B7F256B3CDD004AF6D4 /* Box DesignerHelp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		67973B7E256B3CDD004AF6D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C0E65E492478426D009D90F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -259,6 +296,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		67973B7C256B3CDD004AF6D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C0E65E472478426D009D90F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,7 +310,6 @@
 				23283E08254749460067D20E /* Line.swift in Sources */,
 				23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */,
 				23B37C762511671800105D87 /* LineDrawing.swift in Sources */,
-				67ACA14425476462003D4905 /* Documentation.swift in Sources */,
 				02043C57248C789600F595A1 /* WallType.swift in Sources */,
 				02043C4F248C308400F595A1 /* BoxViewController.swift in Sources */,
 				675C27EA251A7E070022359A /* PDFOptionsView.swift in Sources */,
@@ -277,6 +320,7 @@
 				02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */,
 				02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */,
 				02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */,
+				67973BAC256C8AD8004AF6D4 /* ShapeType.swift in Sources */,
 				02043C55248C74EC00F595A1 /* WallModel.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
 				23283E06251D61920067D20E /* Ray.swift in Sources */,
@@ -314,6 +358,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		67973B84256B3CDD004AF6D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Box DesignerHelp/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HRG.Box-Designer.Box-DesignerHelp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = help;
+			};
+			name = Debug;
+		};
+		67973B85256B3CDD004AF6D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Box DesignerHelp/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.HRG.Box-Designer.Box-DesignerHelp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = help;
+			};
+			name = Release;
+		};
 		C0E65E622478426E009D90F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -512,6 +584,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		67973B83256B3CDD004AF6D4 /* Build configuration list for PBXNativeTarget "Box DesignerHelp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67973B84256B3CDD004AF6D4 /* Debug */,
+				67973B85256B3CDD004AF6D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C0E65E462478426D009D90F1 /* Build configuration list for PBXProject "Box Designer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

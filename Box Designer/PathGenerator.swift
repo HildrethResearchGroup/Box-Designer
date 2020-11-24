@@ -35,7 +35,7 @@ class PathGenerator {
         case JoinType.overlap:
             path = generateOverlapPath(width, length, materialThickness, wallType)
         case JoinType.tab:
-            path = generateTabPath(width, length, materialThickness, wallType, nTab: numberTabs!)
+            path = generateTabPath(width, length, materialThickness, wallType, numberTabs: numberTabs!)
         case JoinType.slot:
             path = generateSlotPath(width, length, materialThickness, wallType)
         }
@@ -83,21 +83,21 @@ class PathGenerator {
         - length: this is the user-inputted box model length
         - materialThickness: this is the user-inputted box model material thickness
         - wallType: this is the type of wall, which ensures that the walls on the same coordinate plane are drawn correctly
-        - nTab: this is the user-inputted number of tabs for the interlocking structure
+        - numberTabs: this is the user-inputted number of tabs for the interlocking structure
      - Returns:
         - NSBezierPath: this function returns a path that can be drawn in the scene -- it draws a single wall
      */
-    static func generateTabPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, nTab: Double) -> NSBezierPath {
+    static func generateTabPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, numberTabs: Double) -> NSBezierPath {
         
         var path = NSBezierPath()
-        // variable to address small corner tab generation separately from large and long corner
-        let smallCorner = (wallType == WallType.smallCorner)
         
-        if smallCorner {
-            path = generateTabSmallCornerPath(width, length, materialThickness, Int(nTab))
-        } else {
-            path = generateTabLargeLongCornerPath(wallType,width, length, materialThickness, Int(nTab))
+        switch (wallType) {
+        case WallType.smallCorner:
+            path = generateTabSmallCornerPath(width, length, materialThickness, Int(numberTabs))
+        case WallType.topSide,WallType.bottomSide,WallType.longCorner:
+            path = generateTabLargeLongCornerPath(wallType,width, length, materialThickness, Int(numberTabs))
         }
+
         return path
     }
     
@@ -218,21 +218,21 @@ class PathGenerator {
 
     static func createHandle(path: NSBezierPath, width: Double, length: Double, materialThickness: Double) {
         // Length and width of the handle in inches
-        let handleLength = 3.5
+        let handleLength = 2.0
         let handleWidth = 1.0
-        let startX = width/2.0 - handleWidth - 0.1
+        let startX = width/2.0 - handleWidth - 0.2
         let startY = length/2.0 - handleLength/2.0
-        // TODO: Adapt handle position to box dimensions
+        /// - TODO: Adapt handle position to box dimensions
         let handleShape1 = NSRect(x: startX, y: startY, width: handleWidth, height: handleLength)
-        let handleShape2 = NSRect(x: startX + handleWidth + 0.25, y: startY, width: handleWidth, height: handleLength)
-        
+        let handleShape2 = NSRect(x: startX + handleWidth + 0.4, y: startY, width: handleWidth, height: handleLength)
+    
         let handlePath = NSBezierPath()
         handlePath.appendRect(handleShape1)
         handlePath.appendRect(handleShape2)
         
         path.append(handlePath)
-        print(path)
         handlePath.setClip()
+        
     }
     /**
      This function alters an overlap-type path according to its inputs, which are dependent on wallType and decided in generateOverlapPath function. It does not return a path, simply alters the NSBezierPath that's passed in.
@@ -266,8 +266,15 @@ class PathGenerator {
         path.relativeLine(to: CGPoint(x: point4[0], y: point4[1]))
     }
     
-    //ADD DOCUMENTATION
-    //Slot Join path generation handler
+    /**
+     This function generates a slot join. It essentially interlocks adjacent sides by adding a half-slit that another wall can slide in to.
+     - Parameters:
+        - width: the width of the wall being drawn
+        - length: the length of the wall being drawn
+        - materialThickness: the materialThickness of the box
+        - wallType: the WallType of the wall bring drawn -- bottomSide and topSide had to be differentiated so that they didn't mirror each other
+     
+     */
     static func generateSlotPath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType) -> NSBezierPath {
         let path = NSBezierPath()
         switch(wallType) {
@@ -349,5 +356,22 @@ class PathGenerator {
 
         }
         return path
+    }
+    
+    static func generateShapePaths(_ path: NSBezierPath, _ shapes : Dictionary<ShapeType,[NSRect]>) {
+        for shapeType in shapes.keys {
+            if !shapes[shapeType]!.isEmpty {
+                for shape in shapes[shapeType]! {
+                    if shapeType == ShapeType.circle {
+                        path.appendOval(in: shape)
+                    } else if shapeType == ShapeType.rectangle {
+                        path.appendRect(shape)
+                    } else if shapeType == ShapeType.roundedRectangle {
+                        /// - TODO: figure out a way to get the radii information from this dictionary
+                        path.appendRoundedRect(shape, xRadius: 0.1, yRadius: 0.1)
+                    }
+                }
+            }
+        }
     }
 }

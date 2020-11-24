@@ -13,13 +13,6 @@ import Cocoa
 enum WallType : String, Codable {
     
     /**
-     case largeCorner: parallel to the x-z plane
-     if overlapping join, this corresponds to the wall that "covers" all of its side
-     if tabbed join, this corresponds to the wall whose corners have an outward tab in both directions
-     */
-    //case largeCorner
-    
-    /**
      case smallCorner: parallel to the x-y plane
      if overlapping join, this corresponds to the wall that is "inset" into its side
      if tabbed join, this corresponds to the wall whose corners have an inward tab in both directions
@@ -32,8 +25,12 @@ enum WallType : String, Codable {
      if tabbed join, this corresponds to the wall whose corners have an outward tab in one direction and an outward tab in the other direction
      */
     case longCorner = "longCorner"
-    
+    /**
+     The topSide WallType is parallel to the X-Z plane. It must be differentiated from the bottom to correctly draw and render slot joins. For overlap joins, this wall overlaps both longCorner and smallCorner wall types. This type used to be defined by "largeCorner," but was refactored by FS Fall 2020.
+     */
     case topSide = "topSide"
-    
+    /**
+     The bottomSide WallType is parallel to the X-Z plane. It must be differentiated from the top to correctly draw and render slot joins. For overlap joins, this wall overlaps both longCorner and smallCorner wall types. This type used to be defined by "largeCorner," but was refactored by FS Fall 2020.
+     */
     case bottomSide = "bottomSide"
 }

@@ -19,6 +19,10 @@ class WallModel : Equatable, Codable {
     */
     /// This variable is essentially the wall in multi-vector form.
     var path: NSBezierPath
+    /// This variable indicates whether the wall has shapes drawn on it.
+    var hasShapes = false
+    /// This variables is a dictionary that maps the type of shape on the wall with an array of the rectangles used to draw the shapes. This is to allow walls with shapes to conform to Codable, as NSBezierPaths do not.
+    var wallShapes = Dictionary<ShapeType,[NSRect]>()
     /// This variable is the material thickness, as indicated by the user. It is mainly necessary to correctly display the model in the app and to correctly draw the walls in a PDF.
     var materialThickness: Double {
         /// This updates the path if the material thickness changes.
@@ -153,7 +157,10 @@ class WallModel : Equatable, Codable {
         materialThickness = try container.decode(Double.self, forKey: .materialThickness)
         numberTabs = try container.decode(Double.self, forKey: .numberTabs)
         handle = try container.decode(Bool.self, forKey: .handle)
+        hasShapes = try container.decode(Bool.self, forKey: .hasShapes)
+        wallShapes = try container.decode(Dictionary.self, forKey: .wallShapes)
         path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: handle)
+        if hasShapes { PathGenerator.generateShapePaths(path,wallShapes) }
     }
     /**
      This function enables BoxModel to conform to Codable (specifically, the Encodable protocol). It outputs Data, which is then converted to a string and saved at specific location (see FileHandlingControl.swift).
@@ -171,6 +178,8 @@ class WallModel : Equatable, Codable {
         try container.encode(materialThickness,forKey: .materialThickness)
         try container.encode(numberTabs,forKey: .numberTabs)
         try container.encode(handle,forKey: .handle)
+        try container.encodeIfPresent(hasShapes, forKey: .hasShapes)
+        try container.encode(wallShapes, forKey: .wallShapes)
     }
     /**
      This enum allows WallModel to be encoded and decoded without needing to encode/decode all its variables -- specifically, the path variable does not need to be saved, as it would be a little harder to make an NSBezierPath conform to Codable, and it's not necessary anyway. The path is simply generated when all the inputs to PathGenerator.generatePath() are decoded. The "cases" are the variables you want to be encoded/decoded.
@@ -187,6 +196,8 @@ class WallModel : Equatable, Codable {
         case materialThickness
         case numberTabs
         case handle
+        case hasShapes
+        case wallShapes
     }
 }
 /**

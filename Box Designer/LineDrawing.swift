@@ -1,11 +1,3 @@
-//
-//  LineDrawing.swift
-//  Box Designer
-//
-//  Created by CSM Field Session Fall 2020 on 9/15/20.
-//  Copyright © 2020 Hildreth Research Group. All rights reserved.
-//
-
 import Foundation
 import SceneKit
 import Cocoa

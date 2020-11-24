@@ -125,7 +125,7 @@ class BoxDesignPDFPage : PDFPage {
         NSColor.black.set()
         path.lineWidth = CGFloat(fileHandlingControl.stroke)
         firstLineDrawn = true
-        path.flatness = 0.005
+        path.flatness = 0.001
         path.move(to: fromPoint)
         if !NSEqualPoints(controlPoint1, NSZeroPoint) && !NSEqualPoints(controlPoint2, NSZeroPoint) {
             path.curve(to: toPoint, controlPoint1: controlPoint1, controlPoint2: controlPoint2)

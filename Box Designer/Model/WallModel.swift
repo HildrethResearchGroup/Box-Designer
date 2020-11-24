@@ -19,10 +19,8 @@ class WallModel : Equatable, Codable {
     */
     /// This variable is essentially the wall in multi-vector form.
     var path: NSBezierPath
-    /// This variable indicates whether the wall has shapes drawn on it.
-    var hasShapes = false
-    /// This variables is a dictionary that maps the type of shape on the wall with an array of the rectangles used to draw the shapes. This is to allow walls with shapes to conform to Codable, as NSBezierPaths do not.
-    var wallShapes = Dictionary<ShapeType,[NSRect]>()
+    /// This variables is an array that contains all the cutout shapes on itself. This method allows walls with shapes to conform to Codable, as NSBezierPaths do not conform to Codable.
+    var wallShapes = [Shape]()
     /// This variable is the material thickness, as indicated by the user. It is mainly necessary to correctly display the model in the app and to correctly draw the walls in a PDF.
     var materialThickness: Double {
         /// This updates the path if the material thickness changes.
@@ -92,8 +90,8 @@ class WallModel : Equatable, Codable {
     }
     
     /// This function sets the wall's path from the return of PathGenerator's generatePath function, using its self-updating variables.
-    private func updatePath(){
-        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, numberTabs: self.numberTabs, handle: self.handle)
+    func updatePath(){
+        self.path = PathGenerator.generatePath(self.width, self.length, self.materialThickness, self.wallType, self.joinType, numberTabs: self.numberTabs, handle: self.handle,self.wallShapes)
     }
     
     /// This function returns the wall number of itself, as it's a private variable.
@@ -133,7 +131,7 @@ class WallModel : Equatable, Codable {
         self.numberTabs = numberTabs
         self.position = position
         self.handle = false
-        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: self.handle)
+        self.path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: self.handle,self.wallShapes)
         self.wallNumber = wallNumber
         self.innerWall = innerWall
         self.innerPlane = innerPlane
@@ -157,10 +155,22 @@ class WallModel : Equatable, Codable {
         materialThickness = try container.decode(Double.self, forKey: .materialThickness)
         numberTabs = try container.decode(Double.self, forKey: .numberTabs)
         handle = try container.decode(Bool.self, forKey: .handle)
-        hasShapes = try container.decode(Bool.self, forKey: .hasShapes)
-        wallShapes = try container.decode(Dictionary.self, forKey: .wallShapes)
-        path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: handle)
-        if hasShapes { PathGenerator.generateShapePaths(path,wallShapes) }
+        wallShapes = try container.decode(Array.self, forKey: .wallShapes)
+        /// necessary to instantiate the correct shape type so it draws correctly
+        var wallShapesWithType = [Shape]()
+        for shape in wallShapes {
+            switch shape.type {
+            case ShapeType.rectangle:
+                wallShapesWithType.append(Rectangle(shape.areaRectangle,shape.type))
+            case ShapeType.circle:
+                wallShapesWithType.append(Circle(shape.areaRectangle,shape.type))
+            case ShapeType.roundedRectangle:
+                wallShapesWithType.append(RoundedRectangle(shape.areaRectangle,shape.type,shape.xRadius,shape.yRadius))
+            }
+        }
+        wallShapes = wallShapesWithType
+        path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: handle,wallShapes)
+        
     }
     /**
      This function enables BoxModel to conform to Codable (specifically, the Encodable protocol). It outputs Data, which is then converted to a string and saved at specific location (see FileHandlingControl.swift).
@@ -178,7 +188,6 @@ class WallModel : Equatable, Codable {
         try container.encode(materialThickness,forKey: .materialThickness)
         try container.encode(numberTabs,forKey: .numberTabs)
         try container.encode(handle,forKey: .handle)
-        try container.encodeIfPresent(hasShapes, forKey: .hasShapes)
         try container.encode(wallShapes, forKey: .wallShapes)
     }
     /**
@@ -196,7 +205,6 @@ class WallModel : Equatable, Codable {
         case materialThickness
         case numberTabs
         case handle
-        case hasShapes
         case wallShapes
     }
 }

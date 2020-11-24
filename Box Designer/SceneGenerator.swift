@@ -57,7 +57,7 @@ class SceneGenerator {
         var wallNumber = 0
         for wall in boxModel.walls.values {
             /// create node from wall data
-            // wall.path.flatness = 0.01 use if want to properly extrude curved paths
+            wall.path.flatness = 0.001
             let newShape = SCNShape(path: wall.path, extrusionDepth: CGFloat(wall.materialThickness))
             let newNode = SCNNode(geometry: newShape)
             /// adjust position and rotation

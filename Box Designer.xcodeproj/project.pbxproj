@@ -24,7 +24,11 @@
 		6745F3FE250F323C001582A5 /* BoxDesignerPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */; };
 		675C27EA251A7E070022359A /* PDFOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675C27E9251A7E070022359A /* PDFOptionsView.swift */; };
 		675C27EE251C21250022359A /* PDFOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 675C27ED251C21240022359A /* PDFOptionsView.xib */; };
-		67973BAC256C8AD8004AF6D4 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67973BAB256C8AD8004AF6D4 /* ShapeType.swift */; };
+		676FB6DC256CBBA6005D89C9 /* ShapeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676FB6DB256CBBA6005D89C9 /* ShapeType.swift */; };
+		67973BBB256C98C1004AF6D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67973BBA256C98C1004AF6D4 /* Shape.swift */; };
+		67973BC1256C98E0004AF6D4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67973BC0256C98E0004AF6D4 /* Rectangle.swift */; };
+		67973BC6256C98ED004AF6D4 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67973BC5256C98ED004AF6D4 /* Circle.swift */; };
+		67973BCB256C98FB004AF6D4 /* RoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67973BCA256C98FB004AF6D4 /* RoundedRectangle.swift */; };
 		C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E65E4E2478426D009D90F1 /* AppDelegate.swift */; };
 		C0E65E512478426E009D90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E502478426E009D90F1 /* Assets.xcassets */; };
 		C0E65E542478426E009D90F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E65E522478426E009D90F1 /* MainMenu.xib */; };
@@ -59,8 +63,12 @@
 		6745F3FD250F323C001582A5 /* BoxDesignerPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxDesignerPDF.swift; sourceTree = "<group>"; };
 		675C27E9251A7E070022359A /* PDFOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFOptionsView.swift; sourceTree = "<group>"; };
 		675C27ED251C21240022359A /* PDFOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFOptionsView.xib; sourceTree = "<group>"; };
+		676FB6DB256CBBA6005D89C9 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
 		67973B80256B3CDD004AF6D4 /* Box DesignerHelp.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Box DesignerHelp.help"; sourceTree = BUILT_PRODUCTS_DIR; };
-		67973BAB256C8AD8004AF6D4 /* ShapeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeType.swift; sourceTree = "<group>"; };
+		67973BBA256C98C1004AF6D4 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		67973BC0256C98E0004AF6D4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
+		67973BC5256C98ED004AF6D4 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		67973BCA256C98FB004AF6D4 /* RoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangle.swift; sourceTree = "<group>"; };
 		C0E65E4B2478426D009D90F1 /* Box Designer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Box Designer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E65E4E2478426D009D90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0E65E502478426E009D90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,6 +105,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67973BBF256C98C7004AF6D4 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				67973BBA256C98C1004AF6D4 /* Shape.swift */,
+				67973BC0256C98E0004AF6D4 /* Rectangle.swift */,
+				67973BC5256C98ED004AF6D4 /* Circle.swift */,
+				67973BCA256C98FB004AF6D4 /* RoundedRectangle.swift */,
+				676FB6DB256CBBA6005D89C9 /* ShapeType.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		C0E65E422478426D009D90F1 = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +158,7 @@
 				675C27E9251A7E070022359A /* PDFOptionsView.swift */,
 				675C27ED251C21240022359A /* PDFOptionsView.xib */,
 				23B37C7325110AEA00105D87 /* Line.swift */,
-				67973BAB256C8AD8004AF6D4 /* ShapeType.swift */,
+				67973BBF256C98C7004AF6D4 /* Shapes */,
 			);
 			path = "Box Designer";
 			sourceTree = "<group>";
@@ -308,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23283E08254749460067D20E /* Line.swift in Sources */,
+				67973BBB256C98C1004AF6D4 /* Shape.swift in Sources */,
 				23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */,
 				23B37C762511671800105D87 /* LineDrawing.swift in Sources */,
 				02043C57248C789600F595A1 /* WallType.swift in Sources */,
@@ -320,9 +341,12 @@
 				02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */,
 				02043C53248C74DD00F595A1 /* BoxModel.swift in Sources */,
 				02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */,
-				67973BAC256C8AD8004AF6D4 /* ShapeType.swift in Sources */,
+				67973BC6256C98ED004AF6D4 /* Circle.swift in Sources */,
+				67973BC1256C98E0004AF6D4 /* Rectangle.swift in Sources */,
 				02043C55248C74EC00F595A1 /* WallModel.swift in Sources */,
+				676FB6DC256CBBA6005D89C9 /* ShapeType.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
+				67973BCB256C98FB004AF6D4 /* RoundedRectangle.swift in Sources */,
 				23283E06251D61920067D20E /* Ray.swift in Sources */,
 				02043C51248C310A00F595A1 /* InputViewController.swift in Sources */,
 			);

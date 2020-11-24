@@ -26,7 +26,7 @@ class PathGenerator {
      - Returns:
         - NSBezierPath: this function returns a path that can be drawn in the scene
      */
-    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, numberTabs: Double?, handle: Bool) -> NSBezierPath {
+    static func generatePath(_ width: Double, _ length: Double, _ materialThickness: Double, _ wallType: WallType, _ joinType: JoinType, numberTabs: Double?, handle: Bool, _ wallShapes : [Shape]) -> NSBezierPath {
         // instantiate a new path
         var path = NSBezierPath()
         
@@ -44,7 +44,7 @@ class PathGenerator {
         if (handle) {
             createHandle(path: path, width: width, length: length, materialThickness: materialThickness)
         }
-    
+        self.generateShapePaths(path, wallShapes)
         return path
     }
     
@@ -358,19 +358,10 @@ class PathGenerator {
         return path
     }
     
-    static func generateShapePaths(_ path: NSBezierPath, _ shapes : Dictionary<ShapeType,[NSRect]>) {
-        for shapeType in shapes.keys {
-            if !shapes[shapeType]!.isEmpty {
-                for shape in shapes[shapeType]! {
-                    if shapeType == ShapeType.circle {
-                        path.appendOval(in: shape)
-                    } else if shapeType == ShapeType.rectangle {
-                        path.appendRect(shape)
-                    } else if shapeType == ShapeType.roundedRectangle {
-                        /// - TODO: figure out a way to get the radii information from this dictionary
-                        path.appendRoundedRect(shape, xRadius: 0.1, yRadius: 0.1)
-                    }
-                }
+    static func generateShapePaths(_ path: NSBezierPath, _ shapes : [Shape]) {
+        if !shapes.isEmpty {
+            for shape in shapes {
+                shape.draw(path)
             }
         }
     }

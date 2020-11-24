@@ -25,7 +25,7 @@ class FileHandlingControl {
     /// This is the default PDF document padding (in inches) for the option menu when saving. It's the minimum distance between the components being drawn.
     var padding = 0.25
     /// This is the default PDF document stroke for the option menu when saving. It is the line thickness.
-    var stroke = 3.0
+    var stroke = 1.5
     
     /**
      This is the function that instantiates a save panel in the desired window so that the user can save to their desired directory.

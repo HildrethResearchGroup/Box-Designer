@@ -121,7 +121,6 @@ class SelectionHandling{
         var MasterPath = NSBezierPath()
         let currentCord = result.localCoordinates
         let lastCord = lastClick?.localCoordinates
-        print(currentCord, lastCord)
         
         if(drawingclicks == 1){
             
@@ -148,22 +147,22 @@ class SelectionHandling{
 
         }else if(drawingclicks > 1){
             drawingclicks = 0
-            let shapePath = (selectedNode?.geometry as! SCNShape).path
             
+            let curWall = curBoxModel.walls[Int((selectedNode?.name!)!)!]!
             
             if(shapeSelection == 0){
                 //rectangle
-                shapePath?.appendRect(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+                curWall.wallShapes.append(Rectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.rectangle))
             }else if(shapeSelection == 1){
                 //rounded rectangle
-                shapePath?.appendRoundedRect(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y), xRadius: roundedRadius, yRadius: roundedRadius)
+                curWall.wallShapes.append(RoundedRectangle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.roundedRectangle,roundedRadius,roundedRadius))
             }else if(shapeSelection == 2){
                 //circle
-                shapePath?.appendOval(in: NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y))
+                curWall.wallShapes.append(Circle(NSMakeRect(lastClick!.localCoordinates.x, lastClick!.localCoordinates.y,currentCord.x - lastCord!.x,currentCord.y - lastCord!.y),ShapeType.circle))
             }
-            shapePath?.flatness = 0.0001
-            curBoxModel.walls[Int((selectedNode?.name!)!)!]!.path = shapePath!
-            (selectedNode?.geometry as! SCNShape).path = shapePath
+            /// update wall's path after adding the shape
+            curWall.updatePath()
+            curBoxModel.sceneGenerator.generateScene(curBoxModel)
                 
         }
  

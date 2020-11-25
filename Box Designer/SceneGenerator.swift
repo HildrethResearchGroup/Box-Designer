@@ -19,7 +19,7 @@ class SceneGenerator {
     static let shared = SceneGenerator()
     /// This variable provides the coordinate space for the box template.
     let cameraOrbit = SCNNode()
-    /// This variable is from the custom delegate that's sole purpose is to properly update the scene if the user changes it.
+    /// This variable is from the custom delegate that's sole purpose is to properly update the scene if the user changes it. Note: not sure if this is neccesary, but FS2020 Fall ran out of time to refactor original code.
     var delegate: SceneGeneratorDelegate?
     /// This variable indicates how the user is viewing their design.
     var camera: SCNNode?

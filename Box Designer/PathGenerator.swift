@@ -13,7 +13,7 @@ class PathGenerator {
     
     /**
      This function uses the joinType and wallType parameters to select which function to use
-     for generating a path (as of now, the choices are overlap or tab joins).
+     for generating a path (as of now, the choices are overlap or tab joins). Additionally, it appends a handle or cut outs after the wall's path generation is finished.
      
      - Parameters:
         - width: this is the user-inputted box model width
@@ -44,6 +44,7 @@ class PathGenerator {
         if (handle) {
             createHandle(path: path, width: width, length: length, materialThickness: materialThickness)
         }
+        /// Adds cut outs after wall path is generated
         self.generateShapePaths(path, wallShapes)
         return path
     }
@@ -357,7 +358,12 @@ class PathGenerator {
         }
         return path
     }
-    
+    /**
+     This function iterates through the wall's cut outs and appends them on to it's path after being generated itself.
+     - Parameters:
+        - path : this is the wall's NSBezierPath that the cut outs will append themselves to
+        - shapes : this is the array of the wall's shapes that need to be appended.
+     */
     static func generateShapePaths(_ path: NSBezierPath, _ shapes : [Shape]) {
         if !shapes.isEmpty {
             for shape in shapes {

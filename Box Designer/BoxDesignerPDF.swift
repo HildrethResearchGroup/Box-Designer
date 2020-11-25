@@ -114,7 +114,7 @@ class BoxDesignerPDF {
             document.insert(pdfpage, at: index)
             
         }
-        // close context PDF and write to URL in context (targetURL)
+        // close context PDF and write to URL that "context" is instantiated with (see init() for this class)
         context?.closePDF()
 
     }

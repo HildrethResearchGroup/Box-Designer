@@ -17,7 +17,6 @@
 		02043C5B248C7BCC00F595A1 /* PathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5A248C7BCC00F595A1 /* PathGenerator.swift */; };
 		02043C5D248D72B400F595A1 /* SceneGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C5C248D72B400F595A1 /* SceneGenerator.swift */; };
 		02043C6124902CCF00F595A1 /* FileHandlingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02043C6024902CCF00F595A1 /* FileHandlingControl.swift */; };
-		23283E06251D61920067D20E /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23283E05251D61920067D20E /* Ray.swift */; };
 		23283E08254749460067D20E /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C7325110AEA00105D87 /* Line.swift */; };
 		23B37C2A25101CD900105D87 /* SelectionHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C2925101CD900105D87 /* SelectionHandling.swift */; };
 		23B37C762511671800105D87 /* LineDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B37C752511671800105D87 /* LineDrawing.swift */; };
@@ -56,7 +55,6 @@
 		02043C5A248C7BCC00F595A1 /* PathGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathGenerator.swift; sourceTree = "<group>"; };
 		02043C5C248D72B400F595A1 /* SceneGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneGenerator.swift; sourceTree = "<group>"; };
 		02043C6024902CCF00F595A1 /* FileHandlingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandlingControl.swift; sourceTree = "<group>"; };
-		23283E05251D61920067D20E /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		23B37C2925101CD900105D87 /* SelectionHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandling.swift; sourceTree = "<group>"; };
 		23B37C7325110AEA00105D87 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		23B37C752511671800105D87 /* LineDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawing.swift; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 			children = (
 				02043C52248C74DD00F595A1 /* BoxModel.swift */,
 				02043C54248C74EC00F595A1 /* WallModel.swift */,
-				23283E05251D61920067D20E /* Ray.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -347,7 +344,6 @@
 				676FB6DC256CBBA6005D89C9 /* ShapeType.swift in Sources */,
 				C0E65E4F2478426D009D90F1 /* AppDelegate.swift in Sources */,
 				67973BCB256C98FB004AF6D4 /* RoundedRectangle.swift in Sources */,
-				23283E06251D61920067D20E /* Ray.swift in Sources */,
 				02043C51248C310A00F595A1 /* InputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

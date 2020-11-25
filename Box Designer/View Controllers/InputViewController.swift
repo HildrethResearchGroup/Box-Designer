@@ -203,7 +203,7 @@ class InputViewController: NSViewController, NSTextDelegate {
         
         /// Only allow handles on walls that are large enough
         if (boxModel.boxHeight >= 4 && boxModel.boxWidth >= 4 && boxModel.boxLength >= 4) { handleCheckMark.isEnabled = true }
-        /// highlight selected wall if there's a hit on one click, otherwise go into "focus" view on the double-clicked wall
+        /// highlight selected wall if there's a hit on one click and the camera isn't locked. If one-click and the camera is locked, tell selectionHandling the user wants to draw, otherwise go into "focus" view on the double-clicked wall
         if(event.clickCount == 1 && !cameraLocked){
             selectionHandling.selectedNode = result.node
             selectionHandling.higlight()
@@ -285,26 +285,27 @@ class InputViewController: NSViewController, NSTextDelegate {
             }
             
         }else if(event.keyCode == 30){
-            //]
+            /// ]  keyCode
             selectionHandling.shapeSelection += 1
             if (result.count == 0){ return }
             selectionHandling.addClickPoint(result[0], false)
         }else if(event.keyCode == 33){
-            //[
+            /// [ keyCode
             selectionHandling.shapeSelection -= 1
             if (result.count == 0){ return }
             selectionHandling.addClickPoint(result[0], false)
         }else if(event.keyCode == 24){
-            //+
+            /// + keyCode
             selectionHandling.roundedRadius += CGFloat(0.05)
             if (result.count == 0){ return }
             selectionHandling.addClickPoint(result[0], false)
         }else if(event.keyCode == 27){
-            //-
+            /// - keyCode
             selectionHandling.roundedRadius -= CGFloat(0.05)
             if (result.count == 0){ return }
             selectionHandling.addClickPoint(result[0], false)
         }else if (event.keyCode == 51 && selectionHandling.selectedNode != nil && !cameraLocked) {
+            /// BackSpace keyCode
             deleteSelectedComponent(self)
         }
         
@@ -563,35 +564,7 @@ class InputViewController: NSViewController, NSTextDelegate {
             tabWidthControl.setEnabled(true, forSegment: 1)
         }
     }
-    
-//    @IBAction func numberTabChanged(_ sender: Any) {
-//        /// If the number of tabs is too low, display a warning dialog
-//        if numberTabTextField.doubleValue < minTabs {
-//            /// Default to the minimum number of tabs
-//            if tabDialog() {
-//                boxModel.numberTabs = minTabs
-//                numberTabTextField.doubleValue = minTabs
-//            }
-//            /// Cancel the tab operation, reseting the tab count to its previous number
-//            else {
-//                numberTabTextField.doubleValue = previousTabEntry
-//            }
-//        }
-//        else {
-//            boxModel.numberTabs = numberTabTextField.doubleValue
-//            previousTabEntry = numberTabTextField.doubleValue
-//        }
-//    }
-    /// This alert pops up if the user inputs fewer tabs than is allowed.
-    func tabDialog() -> Bool {
-        let tabAlert = NSAlert()
-        tabAlert.messageText = "Already At Maximum Width"
-        tabAlert.informativeText = "Press 'OK'" //\(Int(minTabs)), or press 'Cancel' to abort the operation."
-        tabAlert.alertStyle = .warning
-        tabAlert.addButton(withTitle: "OK")
-        //tabAlert.addButton(withTitle: "Cancel")
-        return tabAlert.runModal() == .alertFirstButtonReturn
-    }
+
     /**
      This recieves input from the app's menu that the user wants to open a box model into the session from a selected JSON file.
      - Parameters:

@@ -19,7 +19,7 @@ class WallModel : Equatable, Codable {
     */
     /// This variable is essentially the wall in multi-vector form.
     var path: NSBezierPath
-    /// This variables is an array that contains all the cutout shapes on itself. This method allows walls with shapes to conform to Codable, as NSBezierPaths do not conform to Codable.
+    /// This variable is an array that includes all the cut out shapes on itself (the wall). While there isn't functionality for deleting cutouts yet, this structure should make adding that functionality somewhat easy.
     var wallShapes = [Shape]()
     /// This variable is the material thickness, as indicated by the user. It is mainly necessary to correctly display the model in the app and to correctly draw the walls in a PDF.
     var materialThickness: Double {
@@ -164,7 +164,7 @@ class WallModel : Equatable, Codable {
         numberTabs = try container.decode(Double.self, forKey: .numberTabs)
         handle = try container.decode(Bool.self, forKey: .handle)
         wallShapes = try container.decode(Array.self, forKey: .wallShapes)
-        /// necessary to instantiate the correct shape type so it draws correctly
+        /// necessary to instantiate the correct shape type so it draws correctly (when the shapes are decoded, they're of type "Shape," but Shape.draw() is abstract. Thus, the array needs to house only Circle, Rectangle, or RoundedRectangle objects)
         var wallShapesWithType = [Shape]()
         for shape in wallShapes {
             switch shape.type {
@@ -177,6 +177,7 @@ class WallModel : Equatable, Codable {
             }
         }
         wallShapes = wallShapesWithType
+        /// Now generate the path, with the correct wallShapes array
         path = PathGenerator.generatePath(width, length, materialThickness, wallType, joinType, numberTabs: numberTabs, handle: handle,wallShapes)
         
     }

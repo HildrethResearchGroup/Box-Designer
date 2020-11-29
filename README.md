@@ -3,7 +3,7 @@ This is a box designer that is designed to be used with a Glowforge laser-cutter
 
 ### Versions
 
-* v0.3.0 : ????
+* v0.3.0 : 11/27/2020
 * v0.2.0 : 9/26/2020
 * v0.1.0 : 6/22/2020
 

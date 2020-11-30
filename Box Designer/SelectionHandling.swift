@@ -155,6 +155,7 @@ class SelectionHandling{
             let locNode = SCNNode(geometry: shape)
             locNode.geometry?.firstMaterial?.diffuse.contents = NSColor(calibratedHue: 0.8, saturation: 0.40, brightness: 1, alpha: 1.0)
             locNode.name = "click"
+            self.selectedNode = result.node
             self._addChild(locNode)
             lastDrawn = locNode
             
@@ -203,7 +204,7 @@ class SelectionHandling{
      - Parameters:
      - thickness: this is how thick the line appears in the view
      - insideSelection: this is whether the highlighted line is on the inner or outer face of the focused wall
-     - idvLines: unsure
+     - idvLines: this is a boolean that splits the lines into one path or individual lines
      */
     func highlightEdges(thickness: CGFloat = 0.1, insideSelection: Bool = false, idvLines: Bool = false){
         let path = ((selectedNode?.geometry as! SCNShape).path!)

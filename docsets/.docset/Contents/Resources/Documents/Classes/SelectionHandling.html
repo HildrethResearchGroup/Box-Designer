@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SelectionHandling Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/SelectionHandling" class="dashAnchor"></a>
+
+    <a title="SelectionHandling Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+           Docs
+        </a>
+         (74% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      SelectionHandling Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxDesignPDFPage.html">BoxDesignPDFPage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxDesignerPDF.html">BoxDesignerPDF</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxModel/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxViewController.html">BoxViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Circle.html">Circle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/FileHandlingControl.html">FileHandlingControl</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/InputViewController.html">InputViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Line.html">Line</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LineDrawing.html">LineDrawing</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PDFOptionsView.html">PDFOptionsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PathGenerator.html">PathGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Rectangle.html">Rectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RoundedRectangle.html">RoundedRectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SceneGenerator.html">SceneGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SelectionHandling.html">SelectionHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Shape.html">Shape</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/WallModel.html">WallModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/WallModel/CodingKeys.html">– CodingKeys</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/JoinType.html">JoinType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ShapeType.html">ShapeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/WallType.html">WallType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/linePos.html">linePos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SCNVector3.html">SCNVector3</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SceneGeneratorDelegate.html">SceneGeneratorDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>SelectionHandling</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">SelectionHandling</span></code></pre>
+
+                </div>
+              </div>
+            <p>This class handles the selection and highlighting of components that the user wants to interact with, as well as snap point and edge highlighting when user is in &ldquo;focus&rdquo; mode.</p>
+<div class="aside aside-todo">
+    <p class="aside-title">Todo</p>
+    documenting this class
+
+</div><div class="aside aside-authors">
+    <p class="aside-title">Authors</p>
+    CSM Field Session Fall 2020 and Dr. Owen Hildreth.
+
+</div><div class="aside aside-copyright">
+    <p class="aside-title">Copyright</p>
+    Copyright © 2020 Hildreth Research Group. All rights reserved.
+
+</div><div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    SelectionHandling.swift was created on 9/14/2020.
+
+</div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC6sharedACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/shared" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC6sharedACvpZ">shared</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable enables SelectionHandling to be a singleton.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span><span class="p">:</span> <span class="kt">SelectionHandling</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC8boxModelAA0aF0CSgvp"></a>
+                    <a name="//apple_ref/swift/Property/boxModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC8boxModelAA0aF0CSgvp">boxModel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">boxModel</span><span class="p">:</span> <span class="kt"><a href="../Classes/BoxModel.html">BoxModel</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC10shapeDepth12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/shapeDepth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC10shapeDepth12CoreGraphics7CGFloatVvp">shapeDepth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">shapeDepth</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC10MasterPathSo08NSBezierF0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/MasterPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC10MasterPathSo08NSBezierF0Cvp">MasterPath</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">MasterPath</span><span class="p">:</span> <span class="kt">NSBezierPath</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC6insideSbvp"></a>
+                    <a name="//apple_ref/swift/Property/inside" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC6insideSbvp">inside</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">inside</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC13roundedRadius12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/roundedRadius" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC13roundedRadius12CoreGraphics7CGFloatVvp">roundedRadius</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">roundedRadius</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC05shapeC0Sivp"></a>
+                    <a name="//apple_ref/swift/Property/shapeSelection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC05shapeC0Sivp">shapeSelection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">shapeSelection</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC13drawingclicks33_7E9A50A2C61208B568E96CC47CE5ADB4LLSivp"></a>
+                    <a name="//apple_ref/swift/Property/drawingclicks" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC13drawingclicks33_7E9A50A2C61208B568E96CC47CE5ADB4LLSivp">drawingclicks</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">drawingclicks</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC19indexOfSelectedWallSiSgvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/indexOfSelectedWall" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC19indexOfSelectedWallSiSgvpZ">indexOfSelectedWall</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">indexOfSelectedWall</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC9nodeColor33_7E9A50A2C61208B568E96CC47CE5ADB4LLSo7NSColorCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/nodeColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC9nodeColor33_7E9A50A2C61208B568E96CC47CE5ADB4LLSo7NSColorCSgvp">nodeColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the SCNNode&rsquo;s material color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">nodeColor</span><span class="p">:</span> <span class="kt">NSColor</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC9lastDrawn33_7E9A50A2C61208B568E96CC47CE5ADB4LLSo7SCNNodeCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/lastDrawn" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC9lastDrawn33_7E9A50A2C61208B568E96CC47CE5ADB4LLSo7SCNNodeCSgvp">lastDrawn</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">lastDrawn</span><span class="p">:</span> <span class="kt">SCNNode</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC9lastClick33_7E9A50A2C61208B568E96CC47CE5ADB4LLSo16SCNHitTestResultCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/lastClick" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC9lastClick33_7E9A50A2C61208B568E96CC47CE5ADB4LLSo16SCNHitTestResultCSgvp">lastClick</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">lastClick</span><span class="p">:</span> <span class="kt">SCNHitTestResult</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC12selectedNodeSo7SCNNodeCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/selectedNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC12selectedNodeSo7SCNNodeCSgvp">selectedNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the associated node of the selected wall from the user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">selectedNode</span><span class="p">:</span> <span class="kt">SCNNode</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC9hoverNodeSo7SCNNodeCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/hoverNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC9hoverNodeSo7SCNNodeCSgvp">hoverNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the snap point when the user is in double-click focus mode. Right now, there are snap points at endpoints and midway points.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">hoverNode</span><span class="p">:</span> <span class="kt">SCNNode</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC14hightlightFaceSo7SCNNodeCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/hightlightFace" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC14hightlightFaceSo7SCNNodeCSgvp">hightlightFace</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the highlighted wall.</p>
+<div class="aside aside-todo">
+    <p class="aside-title">Todo</p>
+    change spelling
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">hightlightFace</span><span class="p">:</span> <span class="kt">SCNNode</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC10deleteNodeyyF"></a>
+                    <a name="//apple_ref/swift/Method/deleteNode()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC10deleteNodeyyF">deleteNode()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteNode</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC8higlightyyF"></a>
+                    <a name="//apple_ref/swift/Method/higlight()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC8higlightyyF">higlight()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function highlights a whole selected node face.</p>
+<div class="aside aside-todo">
+    <p class="aside-title">Todo</p>
+    change spelling
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">higlight</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC13removeDrawingyyF"></a>
+                    <a name="//apple_ref/swift/Method/removeDrawing()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC13removeDrawingyyF">removeDrawing()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">removeDrawing</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC7drawingSbyF"></a>
+                    <a name="//apple_ref/swift/Method/drawing()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC7drawingSbyF">drawing()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">drawing</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC13addClickPointyySo16SCNHitTestResultC_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/addClickPoint(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC13addClickPointyySo16SCNHitTestResultC_SbtF">addClickPoint(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">addClickPoint</span><span class="p">(</span><span class="n">_</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">SCNHitTestResult</span><span class="p">,</span> <span class="n">_</span> <span class="nv">click</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC14highlightEdges9thickness06insideC08idvLinesy12CoreGraphics7CGFloatV_S2btF"></a>
+                    <a name="//apple_ref/swift/Method/highlightEdges(thickness:insideSelection:idvLines:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC14highlightEdges9thickness06insideC08idvLinesy12CoreGraphics7CGFloatV_S2btF">highlightEdges(thickness:<wbr>insideSelection:<wbr>idvLines:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function is to thinly highlight the edge of a wall when it is in double-click focus mode.</p>
+
+<ul>
+<li>thickness: this is how thick the line appears in the view</li>
+<li>insideSelection: this is whether the highlighted line is on the inner or outer face of the focused wall</li>
+<li>idvLines: this is a boolean that splits the lines into one path or individual lines</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">highlightEdges</span><span class="p">(</span><span class="nv">thickness</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nv">insideSelection</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">idvLines</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC13highlightSideyyF"></a>
+                    <a name="//apple_ref/swift/Method/highlightSide()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC13highlightSideyyF">highlightSide()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">highlightSide</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingC9_addChild33_7E9A50A2C61208B568E96CC47CE5ADB4LLyySo7SCNNodeCF"></a>
+                    <a name="//apple_ref/swift/Method/_addChild(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingC9_addChild33_7E9A50A2C61208B568E96CC47CE5ADB4LLyySo7SCNNodeCF">_addChild(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">_addChild</span><span class="p">(</span><span class="n">_</span> <span class="nv">node</span><span class="p">:</span> <span class="kt">SCNNode</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer17SelectionHandlingCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer17SelectionHandlingCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-12-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

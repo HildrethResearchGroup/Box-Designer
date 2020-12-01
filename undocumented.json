@@ -1,0 +1,579 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 9,
+      "symbol": "linePos.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 10,
+      "symbol": "linePos.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 11,
+      "symbol": "linePos.center",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 22,
+      "symbol": "Line",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 23,
+      "symbol": "Line.init(_:_:thickness:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 68,
+      "symbol": "Line.topPoint",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 69,
+      "symbol": "Line.bottomPoint",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 70,
+      "symbol": "Line.angle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 72,
+      "symbol": "Line.xIntercept",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 73,
+      "symbol": "Line.yIntercept",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 74,
+      "symbol": "Line.slope",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 76,
+      "symbol": "Line.A",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 77,
+      "symbol": "Line.B",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 80,
+      "symbol": "Line.C",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 82,
+      "symbol": "Line.thickness",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 84,
+      "symbol": "Line.intercept(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 94,
+      "symbol": "Line.perfect()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 103,
+      "symbol": "Line.horizontal()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 109,
+      "symbol": "Line.vertical()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 115,
+      "symbol": "Line.point()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 120,
+      "symbol": "Line.opposite(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 129,
+      "symbol": "Line.rectanglePath()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 142,
+      "symbol": "Line.midpoint()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Line.swift",
+      "line": 146,
+      "symbol": "Line.returnTestPoints(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 16,
+      "symbol": "LineDrawing.init(_:_:insideLine:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 25,
+      "symbol": "LineDrawing.insideLine",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 26,
+      "symbol": "LineDrawing.lineThickness",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 27,
+      "symbol": "LineDrawing.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 29,
+      "symbol": "LineDrawing.snapSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 30,
+      "symbol": "LineDrawing.shape",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 32,
+      "symbol": "LineDrawing.insidePath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 33,
+      "symbol": "LineDrawing.outsidePath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 34,
+      "symbol": "LineDrawing.grandPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 36,
+      "symbol": "LineDrawing.getLines(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 59,
+      "symbol": "LineDrawing.updatePaths(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 189,
+      "symbol": "LineDrawing.findClosedPath(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 244,
+      "symbol": "LineDrawing.currentPaths",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 246,
+      "symbol": "LineDrawing.recursiveSearch(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 260,
+      "symbol": "LineDrawing.removeDuplicates(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 278,
+      "symbol": "LineDrawing.isValidLoop(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 296,
+      "symbol": "LineDrawing.generateShape(shapeExtrusionDepth:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/LineDrawing.swift",
+      "line": 316,
+      "symbol": "LineDrawing.generateIndv()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 388,
+      "symbol": "BoxModel.CodingKeys.walls",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 389,
+      "symbol": "BoxModel.CodingKeys.intersectingWalls",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 390,
+      "symbol": "BoxModel.CodingKeys.boxWidth",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 391,
+      "symbol": "BoxModel.CodingKeys.boxLength",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 392,
+      "symbol": "BoxModel.CodingKeys.boxHeight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 393,
+      "symbol": "BoxModel.CodingKeys.materialThickness",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 394,
+      "symbol": "BoxModel.CodingKeys.numberTabs",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 395,
+      "symbol": "BoxModel.CodingKeys.innerDimensions",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 396,
+      "symbol": "BoxModel.CodingKeys.joinType",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/BoxModel.swift",
+      "line": 397,
+      "symbol": "BoxModel.CodingKeys.wallNumberStatic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 206,
+      "symbol": "WallModel.CodingKeys.width",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 207,
+      "symbol": "WallModel.CodingKeys.length",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 208,
+      "symbol": "WallModel.CodingKeys.wallType",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 209,
+      "symbol": "WallModel.CodingKeys.joinType",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 210,
+      "symbol": "WallModel.CodingKeys.position",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 211,
+      "symbol": "WallModel.CodingKeys.innerWall",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 212,
+      "symbol": "WallModel.CodingKeys.innerPlane",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 213,
+      "symbol": "WallModel.CodingKeys.wallNumber",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 214,
+      "symbol": "WallModel.CodingKeys.materialThickness",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 215,
+      "symbol": "WallModel.CodingKeys.numberTabs",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 216,
+      "symbol": "WallModel.CodingKeys.handle",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/Model/WallModel.swift",
+      "line": 217,
+      "symbol": "WallModel.CodingKeys.wallShapes",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/PathGenerator.swift",
+      "line": 220,
+      "symbol": "PathGenerator.createHandle(path:width:length:materialThickness:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 15,
+      "symbol": "SelectionHandling.boxModel",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 16,
+      "symbol": "SelectionHandling.shapeDepth",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 17,
+      "symbol": "SelectionHandling.MasterPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 18,
+      "symbol": "SelectionHandling.inside",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 19,
+      "symbol": "SelectionHandling.roundedRadius",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 26,
+      "symbol": "SelectionHandling.shapeSelection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 35,
+      "symbol": "SelectionHandling.drawingclicks",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 36,
+      "symbol": "SelectionHandling.indexOfSelectedWall",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 39,
+      "symbol": "SelectionHandling.lastDrawn",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 40,
+      "symbol": "SelectionHandling.lastClick",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 85,
+      "symbol": "SelectionHandling.deleteNode()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 94,
+      "symbol": "SelectionHandling.removeDrawing()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 102,
+      "symbol": "SelectionHandling.drawing()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 106,
+      "symbol": "SelectionHandling.addClickPoint(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 233,
+      "symbol": "SelectionHandling.highlightSide()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 242,
+      "symbol": "SelectionHandling._addChild(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Box-Designer/Box-Designer/Box Designer/SelectionHandling.swift",
+      "line": 268,
+      "symbol": "SelectionHandling.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/Box-Designer/Box-Designer"
+}

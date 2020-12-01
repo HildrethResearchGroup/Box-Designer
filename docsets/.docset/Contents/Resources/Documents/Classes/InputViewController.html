@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>InputViewController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/InputViewController" class="dashAnchor"></a>
+
+    <a title="InputViewController Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+           Docs
+        </a>
+         (74% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      InputViewController Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxDesignPDFPage.html">BoxDesignPDFPage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxDesignerPDF.html">BoxDesignerPDF</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxModel/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxViewController.html">BoxViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Circle.html">Circle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/FileHandlingControl.html">FileHandlingControl</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/InputViewController.html">InputViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Line.html">Line</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LineDrawing.html">LineDrawing</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PDFOptionsView.html">PDFOptionsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PathGenerator.html">PathGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Rectangle.html">Rectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RoundedRectangle.html">RoundedRectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SceneGenerator.html">SceneGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SelectionHandling.html">SelectionHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Shape.html">Shape</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/WallModel.html">WallModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/WallModel/CodingKeys.html">– CodingKeys</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/JoinType.html">JoinType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ShapeType.html">ShapeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/WallType.html">WallType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/linePos.html">linePos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SCNVector3.html">SCNVector3</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SceneGeneratorDelegate.html">SceneGeneratorDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>InputViewController</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">InputViewController</span> <span class="p">:</span> <span class="kt">NSViewController</span><span class="p">,</span> <span class="kt">NSTextDelegate</span></code></pre>
+
+                </div>
+              </div>
+            <p>This class handles all user interactions with the application.</p>
+<div class="aside aside-authors">
+    <p class="aside-title">Authors</p>
+    CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+
+</div><div class="aside aside-copyright">
+    <p class="aside-title">Copyright</p>
+    Copyright © 2020 Hildreth Research Group. All rights reserved.
+
+</div><div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    InputViewController.swift was created on 6/6/2020. Additonally, we could potentially refactor to multiple ViewController classes, as this one is very meaty..
+
+</div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC8boxModelAA0aG0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/boxModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC8boxModelAA0aG0Cvp">boxModel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable instantiates a new box model that will be updated by the user. It is instantiated with the default values found in BoxModel init().</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">boxModel</span><span class="p">:</span> <span class="kt"><a href="../Classes/BoxModel.html">BoxModel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC20unitConversionFactorSdvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/unitConversionFactor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC20unitConversionFactorSdvpZ">unitConversionFactor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the conversion factor from inches to millimeters, used for unit conversion.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">unitConversionFactor</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC7minTabsSdvp"></a>
+                    <a name="//apple_ref/swift/Property/minTabs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC7minTabsSdvp">minTabs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable determines the minimum number of tabs that can be made, as the path generation can only handle more than this number of tabs due to how path generation works.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">minTabs</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC16previousTabEntrySdvp"></a>
+                    <a name="//apple_ref/swift/Property/previousTabEntry" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC16previousTabEntrySdvp">previousTabEntry</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Records the previous amount of tabs entered by the user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">previousTabEntry</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC17selectionHandlingAA09SelectionG0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/selectionHandling" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC17selectionHandlingAA09SelectionG0Cvp">selectionHandling</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the selection handling singleton.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">selectionHandling</span><span class="p">:</span> <span class="kt"><a href="../Classes/SelectionHandling.html">SelectionHandling</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC19fileHandlingControlAA04FilegH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/fileHandlingControl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC19fileHandlingControlAA04FilegH0Cvp">fileHandlingControl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the file handling control singleton.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">fileHandlingControl</span><span class="p">:</span> <span class="kt"><a href="../Classes/FileHandlingControl.html">FileHandlingControl</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)boxView"></a>
+                    <a name="//apple_ref/swift/Property/boxView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)boxView">boxView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the view object that&rsquo;s displayed in the app.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">boxView</span><span class="p">:</span> <span class="kt">SCNView</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)pdfOptionsView"></a>
+                    <a name="//apple_ref/swift/Property/pdfOptionsView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)pdfOptionsView">pdfOptionsView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the accessory view object displayed in the save panel.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">pdfOptionsView</span><span class="p">:</span> <span class="kt"><a href="../Classes/PDFOptionsView.html">PDFOptionsView</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)mmMenu"></a>
+                    <a name="//apple_ref/swift/Property/mmMenu" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)mmMenu">mmMenu</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the millimeter option in the Taskbar -&gt; Format -&gt; Units.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">mmMenu</span><span class="p">:</span> <span class="kt">NSMenuItem</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)inchMenu"></a>
+                    <a name="//apple_ref/swift/Property/inchMenu" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)inchMenu">inchMenu</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the inches option in the Taskbar -&gt; Format -&gt; Units.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">inchMenu</span><span class="p">:</span> <span class="kt">NSMenuItem</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)lengthTextField"></a>
+                    <a name="//apple_ref/swift/Property/lengthTextField" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)lengthTextField">lengthTextField</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the textbox for box length that users can change in the main GUI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">lengthTextField</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)widthTextField"></a>
+                    <a name="//apple_ref/swift/Property/widthTextField" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)widthTextField">widthTextField</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the textbox for box width that users can change in the main GUI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">widthTextField</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)heightTextField"></a>
+                    <a name="//apple_ref/swift/Property/heightTextField" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)heightTextField">heightTextField</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the textbox for box height that users can change in the main GUI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">heightTextField</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)materialThicknessTextField"></a>
+                    <a name="//apple_ref/swift/Property/materialThicknessTextField" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)materialThicknessTextField">materialThicknessTextField</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the textbox for box material thickness that users can change in the main GUI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">materialThicknessTextField</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)innerOrOuterDimensionControl"></a>
+                    <a name="//apple_ref/swift/Property/innerOrOuterDimensionControl" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)innerOrOuterDimensionControl">innerOrOuterDimensionControl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable allows selection for the displayed dimensions to include (or not include) the walls themselves.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">innerOrOuterDimensionControl</span><span class="p">:</span> <span class="kt">NSSegmentedCell</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)joinTypeControl"></a>
+                    <a name="//apple_ref/swift/Property/joinTypeControl" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)joinTypeControl">joinTypeControl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable allows for selection of user&rsquo;s desired join type (tab, overlap, slotted).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">joinTypeControl</span><span class="p">:</span> <span class="kt">NSSegmentedControl</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)unitChoiceControl"></a>
+                    <a name="//apple_ref/swift/Property/unitChoiceControl" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)unitChoiceControl">unitChoiceControl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable allows for selection of dimension units (inches or millimeters).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">unitChoiceControl</span><span class="p">:</span> <span class="kt">NSSegmentedCell</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)numberTabTextField"></a>
+                    <a name="//apple_ref/swift/Property/numberTabTextField" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)numberTabTextField">numberTabTextField</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is the textbox for number of tabs (if &ldquo;Tab&rdquo; join type is selected) that users can change in main GUI.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">numberTabTextField</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)lengthLabel"></a>
+                    <a name="//apple_ref/swift/Property/lengthLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)lengthLabel">lengthLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the label for the box length textbox. It must be a variable for the units to be displayed (and the units can change).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">lengthLabel</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)widthLabel"></a>
+                    <a name="//apple_ref/swift/Property/widthLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)widthLabel">widthLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the label for the box width textbox. It must be a variable for the units to be displayed (and the units can change).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">widthLabel</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)heightLabel"></a>
+                    <a name="//apple_ref/swift/Property/heightLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)heightLabel">heightLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the label for the box height textbox. It must be a variable for the units to be displayed (and the units can change).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">heightLabel</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)thicknessLabel"></a>
+                    <a name="//apple_ref/swift/Property/thicknessLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)thicknessLabel">thicknessLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the label for the box material thickness textbox. It must be a variable for the units to be displayed (and the units can change).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">thicknessLabel</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)exportButton"></a>
+                    <a name="//apple_ref/swift/Property/exportButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)exportButton">exportButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable allows users to export their box template directly from the main GUI (they can also do this from the taskbar).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">exportButton</span><span class="p">:</span> <span class="kt">NSButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)addWallType"></a>
+                    <a name="//apple_ref/swift/Property/addWallType" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)addWallType">addWallType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates whether the added component should be an external wall or internal separator.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">addWallType</span><span class="p">:</span> <span class="kt">NSPopUpButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)selectedWallPlane"></a>
+                    <a name="//apple_ref/swift/Property/selectedWallPlane" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)selectedWallPlane">selectedWallPlane</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable outputs the plane that the selected wall is on and its placement.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">selectedWallPlane</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)addWallPlane"></a>
+                    <a name="//apple_ref/swift/Property/addWallPlane" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)addWallPlane">addWallPlane</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates the plane that the added wall component should align with. It changes when you select a wall, to indicate the plane the wall is oriented on.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">addWallPlane</span><span class="p">:</span> <span class="kt">NSPopUpButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)addPlacement"></a>
+                    <a name="//apple_ref/swift/Property/addPlacement" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)addPlacement">addPlacement</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates the placement of the internal separator along the axis.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">addPlacement</span><span class="p">:</span> <span class="kt">NSTextField</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)addWallButton"></a>
+                    <a name="//apple_ref/swift/Property/addWallButton" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)addWallButton">addWallButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable allows users to add a wall according to their selected specifications.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">addWallButton</span><span class="p">:</span> <span class="kt">NSButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)externalWallPlacement"></a>
+                    <a name="//apple_ref/swift/Property/externalWallPlacement" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)externalWallPlacement">externalWallPlacement</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable forces users to select only 0 or 1 for external wall placement, as fractions don&rsquo;t make sense for external walls.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">externalWallPlacement</span><span class="p">:</span> <span class="kt">NSSegmentedControl</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)deleteSelected"></a>
+                    <a name="//apple_ref/swift/Property/deleteSelected" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)deleteSelected">deleteSelected</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable allows users to delete the component that is selected in the view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">deleteSelected</span><span class="p">:</span> <span class="kt">NSButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)handleCheckMark"></a>
+                    <a name="//apple_ref/swift/Property/handleCheckMark" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)handleCheckMark">handleCheckMark</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable allows users to add a handle cutout on the selected wall.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">handleCheckMark</span><span class="p">:</span> <span class="kt">NSButton</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(py)tabWidthControl"></a>
+                    <a name="//apple_ref/swift/Property/tabWidthControl" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(py)tabWidthControl">tabWidthControl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable changes current tab width</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span>
+<span class="k">weak</span> <span class="k">var</span> <span class="nv">tabWidthControl</span><span class="p">:</span> <span class="kt">NSSegmentedControl</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC6mmInch33_511EADF7FB040D745311DDF862D59628LLSbvp"></a>
+                    <a name="//apple_ref/swift/Property/mmInch" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC6mmInch33_511EADF7FB040D745311DDF862D59628LLSbvp">mmInch</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates which unit the user wants.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    True indicates millimeters, false indicates inches.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">mmInch</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC10mmInchDict33_511EADF7FB040D745311DDF862D59628LLSDySbSdGvp"></a>
+                    <a name="//apple_ref/swift/Property/mmInchDict" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC10mmInchDict33_511EADF7FB040D745311DDF862D59628LLSDySbSdGvp">mmInchDict</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable maps the mmInch boolean to their conversion factor. Inches don&rsquo;t need to be changed converted, but millimeters need to be converted from inches.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">mmInchDict</span><span class="p">:</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)awakeFromNib"></a>
+                    <a name="//apple_ref/swift/Method/awakeFromNib()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)awakeFromNib">awakeFromNib()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function is inherited from NSViewController. It changes any settings that you want when the view initially loads, or a box model is loaded into the session from a JSON.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">awakeFromNib</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)viewDidLoad"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)viewDidLoad">viewDidLoad()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function is inherited from NSViewController.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC12cameraLockedSbvp"></a>
+                    <a name="//apple_ref/swift/Property/cameraLocked" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC12cameraLockedSbvp">cameraLocked</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates when the camera is locked onto a wall.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">cameraLocked</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC15moveSensitivity12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/moveSensitivity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC15moveSensitivity12CoreGraphics7CGFloatVvp">moveSensitivity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable gives wiggle room to the mouse event when clicking and dragging with right-click.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">moveSensitivity</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC17rotateSensitivity12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/rotateSensitivity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC17rotateSensitivity12CoreGraphics7CGFloatVvp">rotateSensitivity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable gives wiggle room to the mouse event when clicking and dragging with non-left and non-right clicks (like a side button).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">rotateSensitivity</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC15zoomSensitivity12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/zoomSensitivity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC15zoomSensitivity12CoreGraphics7CGFloatVvp">zoomSensitivity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable gives wiggle room to the mouse event when using the scroll bar.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">zoomSensitivity</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)otherMouseDragged:"></a>
+                    <a name="//apple_ref/swift/Method/otherMouseDragged(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)otherMouseDragged:">otherMouseDragged(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles mouse movement when dragging the camera view around &ndash; it rotates the box model. See [Apple Documentation - otherMouseDragged()]. (<a href="https://developer.apple.com/documentation/appkit/nsresponder/1529804-othermousedragged?language=objc">https://developer.apple.com/documentation/appkit/nsresponder/1529804-othermousedragged?language=objc</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">otherMouseDragged</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)mouseMoved:"></a>
+                    <a name="//apple_ref/swift/Method/mouseMoved(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)mouseMoved:">mouseMoved(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles snap points and edge highlighting appearance when user is in &ldquo;focused&rdquo; view and hovering their cursor above the correct spot &ndash; camera locked on wall. See [Apple Documentation - mouseMoved()]. (<a href="https://developer.apple.com/documentation/appkit/nsresponder/1525114-mousemoved">https://developer.apple.com/documentation/appkit/nsresponder/1525114-mousemoved</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">mouseMoved</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)rightMouseDragged:"></a>
+                    <a name="//apple_ref/swift/Method/rightMouseDragged(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)rightMouseDragged:">rightMouseDragged(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles right click events with the mouse or trackpad (right-click and drag moves the box model around). See [Apple Documentation - rightMouseDragged()]. <a href="https://developer.apple.com/documentation/appkit/nsresponder/1529135-rightmousedragged">https://developer.apple.com/documentation/appkit/nsresponder/1529135-rightmousedragged</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">rightMouseDragged</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)mouseUp:"></a>
+                    <a name="//apple_ref/swift/Method/mouseUp(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)mouseUp:">mouseUp(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles camera updates from clicks by either highlighting a wall (if one click on correct area), or focusing on a double-clicked wall for drawing. See [Apple Documentation - mouseUp()]. (<a href="https://developer.apple.com/documentation/swiftui/nshostingview/mouseup(with:)">https://developer.apple.com/documentation/swiftui/nshostingview/mouseup(with:)</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">mouseUp</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)keyUp:"></a>
+                    <a name="//apple_ref/swift/Method/keyUp(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)keyUp:">keyUp(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles key board input from user. See [Apple Documentation - keyUp()]. (<a href="https://developer.apple.com/documentation/appkit/nsgesturerecognizer/1526578-keyup">https://developer.apple.com/documentation/appkit/nsgesturerecognizer/1526578-keyup</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">keyUp</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)scrollWheel:"></a>
+                    <a name="//apple_ref/swift/Method/scrollWheel(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)scrollWheel:">scrollWheel(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles mouse scrolling to zoom in and out of the view. See [Apple Documentation - scrollWheel()]. (<a href="https://developer.apple.com/documentation/swiftui/nshostingview/scrollwheel(with:)">https://developer.apple.com/documentation/swiftui/nshostingview/scrollwheel(with:)</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">scrollWheel</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)magnifyWithEvent:"></a>
+                    <a name="//apple_ref/swift/Method/magnify(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)magnifyWithEvent:">magnify(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles trackpad zoom. See [Apple Documentation - magnify()]. (<a href="https://developer.apple.com/documentation/appkit/nsresponder/1525862-magnify">https://developer.apple.com/documentation/appkit/nsresponder/1525862-magnify</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">magnify</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)rotateWithEvent:"></a>
+                    <a name="//apple_ref/swift/Method/rotate(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)rotateWithEvent:">rotate(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function handles trackpad view rotation. See [Apple Documentation - rotate()]. (<a href="https://developer.apple.com/documentation/appkit/nsresponder/1525572-rotate">https://developer.apple.com/documentation/appkit/nsresponder/1525572-rotate</a>)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">with</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">NSEvent</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>event</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an event that occured in the application with the mouse</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC15manageMouseDragyy12CoreGraphics7CGFloatVzF"></a>
+                    <a name="//apple_ref/swift/Method/manageMouseDrag(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC15manageMouseDragyy12CoreGraphics7CGFloatVzF">manageMouseDrag(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function manages camera angles as the mouse drags the box around.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">manageMouseDrag</span><span class="p">(</span><span class="n">_</span> <span class="nv">direction</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC12changeLabelsyySbF"></a>
+                    <a name="//apple_ref/swift/Method/changeLabels(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC12changeLabelsyySbF">changeLabels(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function updates the label of any dimension in the view &ndash; inches or millimeters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">changeLabels</span><span class="p">(</span><span class="n">_</span> <span class="nv">unit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>unit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>this is a boolean indicating whether the user&rsquo;s desired unit is inches or millimeters</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)mmMenuClicked:"></a>
+                    <a name="//apple_ref/swift/Method/mmMenuClicked(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)mmMenuClicked:">mmMenuClicked(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s menu that the user wants millimeters as their unit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">mmMenuClicked</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)inchMenuClicked:"></a>
+                    <a name="//apple_ref/swift/Method/inchMenuClicked(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)inchMenuClicked:">inchMenuClicked(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s menu that the user wants inches as their unit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">inchMenuClicked</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)lengthTextFieldDidChange:"></a>
+                    <a name="//apple_ref/swift/Method/lengthTextFieldDidChange(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)lengthTextFieldDidChange:">lengthTextFieldDidChange(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s dimensions panel that the user wants a different box length.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">lengthTextFieldDidChange</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)unitSegmentedControl:"></a>
+                    <a name="//apple_ref/swift/Method/unitSegmentedControl(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)unitSegmentedControl:">unitSegmentedControl(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s dimensions panel that the user wants a specific unit (inch or mm).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">unitSegmentedControl</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)widthTextFieldDidChange:"></a>
+                    <a name="//apple_ref/swift/Method/widthTextFieldDidChange(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)widthTextFieldDidChange:">widthTextFieldDidChange(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s dimensions panel that the user wants a different box width.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">widthTextFieldDidChange</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)heightTextFieldDidChange:"></a>
+                    <a name="//apple_ref/swift/Method/heightTextFieldDidChange(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)heightTextFieldDidChange:">heightTextFieldDidChange(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s dimensions panel that the user wants a different box height.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">heightTextFieldDidChange</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)materialThicknessTextFieldDidChange:"></a>
+                    <a name="//apple_ref/swift/Method/materialThicknessTextFieldDidChange(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)materialThicknessTextFieldDidChange:">materialThicknessTextFieldDidChange(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s dimensions panel that the user wants a different box material thickness.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">materialThicknessTextFieldDidChange</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)innerOrOuterDimensionsSelected:"></a>
+                    <a name="//apple_ref/swift/Method/innerOrOuterDimensionsSelected(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)innerOrOuterDimensionsSelected:">innerOrOuterDimensionsSelected(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s dimensions panel that the user wants the dimensions to be either inner or outer (see BoxModel.innerDimension for description).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">innerOrOuterDimensionsSelected</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)joinTypeSelected:"></a>
+                    <a name="//apple_ref/swift/Method/joinTypeSelected(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)joinTypeSelected:">joinTypeSelected(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s join panel that the user wants a different box join type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">joinTypeSelected</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)tabWidthChanged:"></a>
+                    <a name="//apple_ref/swift/Method/tabWidthChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)tabWidthChanged:">tabWidthChanged(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s join panel that the user wants a different number of tabs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">tabWidthChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)menuFileOpenItemSelected:"></a>
+                    <a name="//apple_ref/swift/Method/menuFileOpenItemSelected(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)menuFileOpenItemSelected:">menuFileOpenItemSelected(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s menu that the user wants to open a box model into the session from a selected JSON file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">menuFileOpenItemSelected</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)saveModel:"></a>
+                    <a name="//apple_ref/swift/Method/saveModel(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)saveModel:">saveModel(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s menu and the export button in the view that the user wants to save their box model.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">saveModel</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC11updateModelyyAA0aG0CF"></a>
+                    <a name="//apple_ref/swift/Method/updateModel(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC11updateModelyyAA0aG0CF">updateModel(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This update the InputViewController&rsquo;s boxModel after changes were made.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateModel</span><span class="p">(</span><span class="n">_</span> <span class="nv">boxModel</span><span class="p">:</span> <span class="kt"><a href="../Classes/BoxModel.html">BoxModel</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>boxModel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the updated box model</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)wallTypeOrPlaneChanged:"></a>
+                    <a name="//apple_ref/swift/Method/wallTypeOrPlaneChanged(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)wallTypeOrPlaneChanged:">wallTypeOrPlaneChanged(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This recieves input from the app&rsquo;s add components panel that the user updated the wall type or the wall plane. It is used to make sure the correct placement input is not hidden, and hides the correct one. It also disables the add wall button unless something other than the default &ldquo;Type&rdquo; is selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">wallTypeOrPlaneChanged</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC24findMissingExternalWallsySaySdGAA8WallTypeOF"></a>
+                    <a name="//apple_ref/swift/Method/findMissingExternalWalls(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC24findMissingExternalWallsySaySdGAA8WallTypeOF">findMissingExternalWalls(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function finds the placements of the missing external walls in the box model, for user-friendly external wall adding.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">findMissingExternalWalls</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/WallType.html">WallType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the plane on which the missing walls should be searched for</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>This function returns an array of double/s that indicate the placement of a missing wall &ndash; it can have a max of two values, and values can only be 0.0 or 1.0</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)addWall:"></a>
+                    <a name="//apple_ref/swift/Method/addWall(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)addWall:">addWall(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function takes in user input about the orientation, placement, and type of wall they want to add, and then sends those parameters off to BoxModel for the wall to be added to the template.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    As of now, internal walls can only be added from the origin. This could be updated by accepting a negative number so BoxModel knows to draw from the boundary opposite the origin.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">addWall</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer19InputViewControllerC23updateSelectedWallPlaneyyF"></a>
+                    <a name="//apple_ref/swift/Method/updateSelectedWallPlane()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer19InputViewControllerC23updateSelectedWallPlaneyyF">updateSelectedWallPlane()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function is purely to make the Add Components more user friendly. All it does is update the label output in GUI to show the selected wall&rsquo;s (highlighted wall&rsquo;s) plane and placement, if one is selected. If adding walls is refactored, you probably won&rsquo;t need this. The other idea is to add a coordinate system that adjusts according to the camera.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateSelectedWallPlane</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)deleteSelectedComponent:"></a>
+                    <a name="//apple_ref/swift/Method/deleteSelectedComponent(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)deleteSelectedComponent:">deleteSelectedComponent(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function simply tells the box model to delete the wall that is selected by the user. It also updates the intersectingWalls dictionary if one of the keys or values is the wall that is deleted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">deleteSelectedComponent</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Box_Designer@objc(cs)InputViewController(im)createHandle:"></a>
+                    <a name="//apple_ref/swift/Method/createHandle(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Box_Designer@objc(cs)InputViewController(im)createHandle:">createHandle(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function creates a handle cutout on the selected component.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBAction</span>
+<span class="kd">func</span> <span class="nf">createHandle</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>typical @IBAction input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-12-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BoxModel Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/BoxModel" class="dashAnchor"></a>
+
+    <a title="BoxModel Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+           Docs
+        </a>
+         (74% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      BoxModel Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxDesignPDFPage.html">BoxDesignPDFPage</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxDesignerPDF.html">BoxDesignerPDF</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxModel.html">BoxModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxModel/CodingKeys.html">– CodingKeys</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BoxViewController.html">BoxViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Circle.html">Circle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/FileHandlingControl.html">FileHandlingControl</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/InputViewController.html">InputViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Line.html">Line</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LineDrawing.html">LineDrawing</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PDFOptionsView.html">PDFOptionsView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/PathGenerator.html">PathGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Rectangle.html">Rectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RoundedRectangle.html">RoundedRectangle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SceneGenerator.html">SceneGenerator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SelectionHandling.html">SelectionHandling</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Shape.html">Shape</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/WallModel.html">WallModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/WallModel/CodingKeys.html">– CodingKeys</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/JoinType.html">JoinType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/ShapeType.html">ShapeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/WallType.html">WallType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/linePos.html">linePos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/SCNVector3.html">SCNVector3</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SceneGeneratorDelegate.html">SceneGeneratorDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>BoxModel</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">BoxModel</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                </div>
+              </div>
+            <p>This class provides the structure for the complete box model. It can encode and decode itself in order to a save a box template and reopen it in the app, and it deals with all intersecting wall issues (as well as general maintenance when user changes features in the app).</p>
+<div class="aside aside-authors">
+    <p class="aside-title">Authors</p>
+    CSM Field Session Summer 2020, Fall 2020, and Dr. Owen Hildreth.
+
+</div><div class="aside aside-copyright">
+    <p class="aside-title">Copyright</p>
+    Copyright © 2020 Hildreth Research Group. All rights reserved.
+
+</div><div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    BoxModel.swift was created on 6/6/2020.
+
+</div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC14sceneGeneratorAA05SceneE0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/sceneGenerator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC14sceneGeneratorAA05SceneE0Cvp">sceneGenerator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable ensures the current box model has access to the scene, so that it can update the scene after updating its attributes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">sceneGenerator</span><span class="p">:</span> <span class="kt"><a href="../Classes/SceneGenerator.html">SceneGenerator</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC5wallsSDySiAA04WallC0CGvp"></a>
+                    <a name="//apple_ref/swift/Property/walls" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC5wallsSDySiAA04WallC0CGvp">walls</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable is a dictionary of all the current walls that make up the box model. Its key is the wall number (a global variable), and its value is the associated wall. This data structure helps associate user-selected nodes in the application and their associated walls, as the nodes have the same name as the wall they are made from (see SceneGenerator.swift).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">walls</span><span class="p">:</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt"><a href="../Classes/WallModel.html">WallModel</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC17intersectingWallsSDyAA04WallC0CSayAFGGvp"></a>
+                    <a name="//apple_ref/swift/Property/intersectingWalls" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC17intersectingWallsSDyAA04WallC0CSayAFGGvp">intersectingWalls</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable contains the pairs of intersecting walls in the box model (for internal separator dimension adjustments). The key is the wall that needs to adjust according to the walls in its value array. Put another way: the key is the intersecting wall, and its values are the walls it&rsquo;s intersecting. Note: intersecting wall handling is done in chronological order of when the user adds internal walls.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">intersectingWalls</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/WallModel.html">WallModel</a></span> <span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/WallModel.html">WallModel</a></span><span class="p">]]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC8boxWidthSdvp"></a>
+                    <a name="//apple_ref/swift/Property/boxWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC8boxWidthSdvp">boxWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable refers to the box dimension along the x-axis. Adjusting it changes the width of walls on the Y-Z and X-Z plane and the position of walls on the X-Y plane.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">boxWidth</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC9boxLengthSdvp"></a>
+                    <a name="//apple_ref/swift/Property/boxLength" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC9boxLengthSdvp">boxLength</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable refers to the box dimension along the z-axis. Adjusting it changes the length of walls on the X-Z and Y-Z planes and the position of walls on the X-Y plane.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">boxLength</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC9boxHeightSdvp"></a>
+                    <a name="//apple_ref/swift/Property/boxHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC9boxHeightSdvp">boxHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable refers to the  box dimension along the y-axis. Adjusting it changes the length of walls on the X-Y and Y-Z planes and the position of walls on the X-Z plane.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">boxHeight</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC17materialThicknessSdvp"></a>
+                    <a name="//apple_ref/swift/Property/materialThickness" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC17materialThicknessSdvp">materialThickness</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <pre class="highlight swift"><code>        <span class="kt">Update</span> <span class="n">the</span> <span class="n">dimensions</span> <span class="n">of</span> <span class="n">intersecting</span> <span class="n">walls</span> <span class="n">after</span> <span class="n">changing</span> <span class="n">box</span> <span class="n">height</span><span class="o">.</span> <span class="kt">Scene</span> <span class="k">is</span> <span class="n">generated</span> <span class="k">in</span> <span class="n">this</span> <span class="n">function</span> <span class="n">to</span> <span class="n">reflect</span> <span class="n">changes</span><span class="o">.</span>
+</code></pre>
+
+<p>This variable refers to the material thickness. The material thickness is necessary for drawing the components the correct size on the PDF, to ensure the components fit together without spaces or overhangs. Adjusting it changes the length or width of intersecting walls, which is dependent on what plane they are on and the plane of the intersected wall.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">materialThickness</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC15innerDimensionsSbvp"></a>
+                    <a name="//apple_ref/swift/Property/innerDimensions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC15innerDimensionsSbvp">innerDimensions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates whether the current width, height, and length of the box model should indicate 1) only the space between components (true) or 2) the space between components, along with the walls themselves (false).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">innerDimensions</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC8joinTypeAA04JoinE0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/joinType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC8joinTypeAA04JoinE0Ovp">joinType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates the join type between walls (tab, overlap, or slotted). Internal separators are always JoinType.overlap, which is dealt with in WallModel.swift, as well as the path generation for all walls when their JoinType changes..</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">joinType</span><span class="p">:</span> <span class="kt"><a href="../Enums/JoinType.html">JoinType</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC10numberTabsSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/numberTabs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC10numberTabsSdSgvp">numberTabs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This variable indicates the number of tabs that the user wants, if the join type is &ldquo;tab.&rdquo; The minimum is 3, due to how PathGeneration.swift generates tab paths.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">numberTabs</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC16wallNumberStaticSivpZ"></a>
+                    <a name="//apple_ref/swift/Variable/wallNumberStatic" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC16wallNumberStaticSivpZ">wallNumberStatic</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This global variable allows the walls and their nodes be associated without worrying about index changes after a wall is deleted from self.walls &ndash; the node is named the same as the wall when they are instantiated in SceneGenerator. This helps with organizing and deleting walls. It also associates the user&rsquo;s selection with the WallModel class. It is a global variable so that walls can get a unique identifier each time one is instantiated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">wallNumberStatic</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This initializer creates the default box model which is loaded whenever the application is launched.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC7addWall5inner4type9placementySb_AA0E4TypeOSdtF"></a>
+                    <a name="//apple_ref/swift/Method/addWall(inner:type:placement:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC7addWall5inner4type9placementySb_AA0E4TypeOSdtF">addWall(inner:<wbr>type:<wbr>placement:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function adds a wall to the box model according to type (internal or external wall), plane (X-Y, Y-Z, X-Z; these are synonmous with WallType), and placement (how far from the origin do you want the wall to be placed? This is a fraction. Note: for external walls, it only make sense for them to be 0 or 1 so that they get placed on the outside).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">addWall</span><span class="p">(</span><span class="nv">inner</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/WallType.html">WallType</a></span><span class="p">,</span> <span class="nv">placement</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inner</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>this is a boolean value that dictates whether the added wall should be an internal separator or an external wall.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>although this is WallType type, this indicates the plane the added wall should be oriented on.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>placement</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>this is a fraction that indicates where the wall should be positioned &ndash; the position is calculated by (placement)*(dimension corresponding to correct axis)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC23updateIntersectingWallsyyF"></a>
+                    <a name="//apple_ref/swift/Method/updateIntersectingWalls()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC23updateIntersectingWallsyyF">updateIntersectingWalls()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function deals with the situation where an intersected wall is deleted from the box model, so the intersectingWalls dictionary needs to be updated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">updateIntersectingWalls</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC21adjustForIntersection33_7E4A82DBEE503AFDDDE9110CE3C01D45LLyyAA04WallC0C_AGtF"></a>
+                    <a name="//apple_ref/swift/Method/adjustForIntersection(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC21adjustForIntersection33_7E4A82DBEE503AFDDDE9110CE3C01D45LLyyAA04WallC0C_AGtF">adjustForIntersection(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function adjusts two intersecting walls depending on 1) which one is being intersected and 2) which planes they are no (in order to correct the right dimension for the intersecting wall&rsquo;s plane).</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    There is probably a better, more dynamic way to deal with wall intersection. However, SCNHitTestResult does not find the intersecting between two nodes, unless they are SCNPhysicsBody objects (and I&rsquo;m not sure that would work, as our nodes don&rsquo;t have an associated physicsBody property). I also tried to use the hit test between a segment (vector) and a node, but I was never able to get a result from a hit test, even when I knew two walls were going to intersect. There&rsquo;s probably a way to do it, but we ran out of time.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">adjustForIntersection</span><span class="p">(</span><span class="n">_</span> <span class="nv">currentWall</span><span class="p">:</span> <span class="kt"><a href="../Classes/WallModel.html">WallModel</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">addedWall</span><span class="p">:</span> <span class="kt"><a href="../Classes/WallModel.html">WallModel</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>currentWall</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>This is the wall that was already in the box model and would be intersected by the new wall without dimension adjustment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>addedWall</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>This is the new wall that is being added to the box model and must adjust its dimensions according to the wall it would intersect.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC22adjustAllIntersections33_7E4A82DBEE503AFDDDE9110CE3C01D45LLyyF"></a>
+                    <a name="//apple_ref/swift/Method/adjustAllIntersections()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC22adjustAllIntersections33_7E4A82DBEE503AFDDDE9110CE3C01D45LLyyF">adjustAllIntersections()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function simply iterates through the intersectingWalls dictionary and adjusts dimensions accordingly &ndash; mainly used for when the box&rsquo;s attributes change from user input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">adjustAllIntersections</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC4fromACs7Decoder_p_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC4fromACs7Decoder_p_tKcfc">init(from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This initializer is used to decode the Data from a user-selected JSON by using its CodingKeys. It is necessary for BoxModel to conform to Codable (specifically, Decodable protocol).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>decoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>this will be the JSONDecoder() initialized in FileHandlingControl when user tries to open a saved BoxModel.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC6encode2toys7Encoder_p_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC6encode2toys7Encoder_p_tKF">encode(to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This function enables BoxModel to conform to Codable (specifically, the Encodable protocol). It outputs Data, which is then converted to a string and saved at specific location (see FileHandlingControl.swift).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12Box_Designer0A5ModelC10CodingKeysO"></a>
+                    <a name="//apple_ref/swift/Enum/CodingKeys" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12Box_Designer0A5ModelC10CodingKeysO">CodingKeys</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This enum allows BoxModel to be encoded and decoded without needing to encode/decode all its variables &ndash; specifically, the sceneGenerator variable does not need to be saved, as it would be a little harder to make SceneGenerator conform to Codable, and it&rsquo;s not necessary anyway. The &ldquo;cases&rdquo; are simply the variables you want to be encoded/decoded.</p>
+
+                        <a href="../Classes/BoxModel/CodingKeys.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">CodingKeys</span> <span class="p">:</span> <span class="kt">CodingKey</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-12-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

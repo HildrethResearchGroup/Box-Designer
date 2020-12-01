@@ -32,7 +32,7 @@ This document explains the camera and panel controls for the Box Designer macOS 
 
 * Translation: Using two fingers, drag the box around the view (no pinching).
 
-* Rotation: Similar to iPhones, using two fingers, move in circular motion to rotate the box.
+* Rotation: Similar to iPhones, using two fingers, move in circular motion to rotate the box. If using a trackpad, two finger click and drag also works.
 
 * Selection: One-finger single click selects a wall to highlight it.
 
